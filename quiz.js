@@ -1,32 +1,21 @@
-// quiz.js
 document.addEventListener('DOMContentLoaded', () => {
-    // Get the lesson file from the URL parameter
     const params = new URLSearchParams(window.location.search);
+    const subject = params.get('subject');
     const lessonFile = params.get('lesson');
 
-    // If no lesson is specified, redirect back to the hub
-    if (!lessonFile) {
+    if (!subject || !lessonFile) {
         window.location.href = 'index.html';
         return;
     }
 
-    // Dynamically create a script tag to load the lesson data
     const script = document.createElement('script');
-    script.src = `lessons/${lessonFile}.js`;
+    script.src = `lessons/${subject}/${lessonFile}.js`;
     document.head.appendChild(script);
 
-    // This function will run AFTER the lesson script has been loaded
-    script.onload = () => {
-        initializeQuiz();
-    };
-
-    script.onerror = () => {
-        // Handle cases where the lesson file doesn't exist
-        document.getElementById('lesson-title').textContent = 'Error: Lesson not found.';
-    };
+    script.onload = () => { initializeQuiz(); };
+    script.onerror = () => { document.getElementById('lesson-title').textContent = 'Error: Lesson not found.'; };
 
     function initializeQuiz() {
-        // --- All the previous quiz logic now goes inside here ---
         let currentQuestionIndex = 0;
         let score = 0;
         let streak = 0;
@@ -42,30 +31,48 @@ document.addEventListener('DOMContentLoaded', () => {
         const scoreStat = document.getElementById('score-stat');
         const streakStat = document.getElementById('streak-stat');
         
-        // Set lesson title from the file name (e.g., l1.html -> Lesson 1)
-        const lessonName = lessonFile.split('.')[0].replace('l', 'Lesson ').toUpperCase();
-        document.getElementById('lesson-title').textContent = `HTML: ${lessonName}`;
-
+        document.getElementById('lesson-title').textContent = lessonContent.title;
 
         function loadQuestion() {
             selectedAnswer = null;
             checkBtn.disabled = true;
             checkBtn.textContent = 'Check';
+            checkBtn.classList.remove('hidden');
+            optionsContainer.className = 'options-grid';
             feedbackContainer.className = 'feedback-container';
             feedbackMessage.classList.add('hidden');
             optionsContainer.innerHTML = '';
 
-            if (currentQuestionIndex >= lessonData.length) {
+            if (currentQuestionIndex >= lessonContent.questions.length) {
                 promptText.textContent = 'Lesson Complete!';
                 document.getElementById('quiz-header').querySelector('h2').textContent = 'Congratulations! 🎉';
-                checkBtn.textContent = 'Back to Hub';
-                checkBtn.disabled = false;
-                checkBtn.onclick = () => window.location.href = 'index.html';
                 optionsContainer.innerHTML = '';
+
+                const practiceBtn = document.createElement('a');
+                practiceBtn.className = 'level-btn';
+                practiceBtn.textContent = 'Start Practice Project';
+                practiceBtn.href = `practice.html?subject=${subject}&lesson=${lessonFile}`;
+
+                const gameBtn = document.createElement('a');
+                gameBtn.className = 'level-btn';
+                gameBtn.textContent = 'Play Mini-Game Challenge';
+                gameBtn.href = `minigame.html?subject=${subject}&lesson=${lessonFile}`;
+
+                const hubBtn = document.createElement('a');
+                hubBtn.className = 'level-btn';
+                hubBtn.textContent = 'Back to Subject Hub';
+                hubBtn.href = `${subject}.html`;
+                
+                optionsContainer.className = 'level-selection';
+                if(lessonContent.practice) optionsContainer.appendChild(practiceBtn);
+                if(lessonContent.minigame) optionsContainer.appendChild(gameBtn);
+                optionsContainer.appendChild(hubBtn);
+                
+                checkBtn.classList.add('hidden');
                 return;
             }
 
-            const question = lessonData[currentQuestionIndex];
+            const question = lessonContent.questions[currentQuestionIndex];
             promptText.innerHTML = question.prompt;
 
             question.options.forEach(option => {
@@ -86,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function checkAnswer() {
-            const question = lessonData[currentQuestionIndex];
+            const question = lessonContent.questions[currentQuestionIndex];
             const isCorrect = selectedAnswer === question.correctAnswer;
 
             feedbackMessage.classList.remove('hidden');
