@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+             <a href="index.html" class="back-link">&larr; Back to Lessons</a>
+            <div class="stats-container">
+                <div id="score-stat">Score: 0</div>
+                <div id="streak-stat">Streak: 0 🔥</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="quiz-container">
+        <div id="quiz-header">
+            <h2 id="lesson-title">Loading Lesson...</h2>
+        </div>
+        
+        <div id="prompt-container">
+            <p id="prompt-text"></p>
+        </div>
+
+        <div id="options-container" class="options-grid"></div>
+    </main>
+
+    <footer id="action-footer">
+        <div class="feedback-container">
+            <div id="feedback-message" class="hidden">
+                <p id="feedback-text"></p>
+                <p id="correct-answer-text"></p>
+            </div>
+        </div>
+        <button id="check-btn" disabled>Check</button>
+    </footer>
+
+    <!-- This script will dynamically load the correct lesson -->
+    <script src="quiz.js"></script>
+</body>
+</html>
