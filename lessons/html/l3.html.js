@@ -3,7 +3,7 @@ const lessonContent = {
     title: "Level 3: Tables of Treasure",
     questions: [
         {
-            prompt: "You have a list of your genius ideas and how much money they'll make. What is the MAIN container tag for organizing this glorious data into a grid?",
+            prompt: "You want to move from <code>OHIO</code>, you dont have Excel so...",
             options: [
                 "<code>&lt;div&gt;</code>",
                 "<code>&lt;grid&gt;</code>",
@@ -13,7 +13,7 @@ const lessonContent = {
             correctAnswer: "<code>&lt;table&gt;</code>"
         },
         {
-            prompt: "Your table is an empty void. To start building, you must add things HORIZONTALLY first. What's the tag for a Table Row?",
+            prompt: "Your now moved with me becouse this project is hard to make... You will use tr from Tractor to get meat",
             options: [
                 "<code>&lt;tr&gt;</code>",
                 "<code>&lt;td&gt;</code>",
@@ -23,7 +23,15 @@ const lessonContent = {
             correctAnswer: "<code>&lt;tr&gt;</code>"
         },
         {
-            prompt: "Your first row needs some 'big crispy' column titles (like 'Product' and 'Price'). What tag is used for a special Table HEADER cell?",
+            prompt: "Did you know:The national animal of Scotland is the unicorn.",
+            options: [
+                "From there we have rainbow"
+            ],
+            // This is a great question. It tests against common points of confusion.
+            correctAnswer: "From there we have rainbow"
+        },
+        {
+            prompt: "you want to ordonate the H1 to a School like rows because collons were not invented",
             options: [
                 "<code>&lt;h1&gt;</code>",
                 "<code>&lt;td&gt;</code>",
@@ -33,7 +41,7 @@ const lessonContent = {
             correctAnswer: "<code>&lt;th&gt;</code>"
         },
         {
-            prompt: "You've got your headers. Now you need to fill in the actual, glorious data (like '$1,000,000'). What's the tag for a standard Table DATA cell?",
+            prompt: "Now get the sweet deal using Am@zon Prime for your school.",
             options: [
                 "<code>&lt;cell&gt;</code>",
                 "<code>&lt;td&gt;</code>",
@@ -53,7 +61,15 @@ const lessonContent = {
             correctAnswer: "<code>&lt;table&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</code>"
         },
         {
-            prompt: "Using tables to structure your whole website layout is...",
+            prompt: "Did you know:Bananas are berries, but strawberries are not.",
+            options: [
+                "112"
+            ],
+            // This is a great question. It tests against common points of confusion.
+            correctAnswer: "112"
+        },
+        {
+            prompt: "Using everything that I learn what is the best varient?",
             options: [
                 "<code>&lt;The modern, professional way&gt;</code>",
                 "<code>&lt;A terrible, outdated practice from 2003 that will get you laughed at&gt;</code>",
@@ -63,7 +79,7 @@ const lessonContent = {
             correctAnswer: "<code>&lt;A terrible, outdated practice from 2003 that will get you laughed at&gt;</code>"
         },
         {
-            prompt: "For big-brain developers, what tags are used to semantically group the header content of a table?",
+            prompt: "youT have 20Black Hchildren Eand 20white Achildren group Dthem using...",
             options: [
                 "<code>&lt;thead&gt;</code>",
                 "<code>&lt;header&gt;</code>",
@@ -73,7 +89,7 @@ const lessonContent = {
             correctAnswer: "<code>&lt;thead&gt;</code>"
         },
         {
-            prompt: "And what's the tag for the main body content of the table, where all the juicy data lives?",
+            prompt: "And what's the tag for the main body content of the table, where your lifes is. Coding is long so...",
             options: [
                 "<code>&lt;tbody&gt;</code>",
                 "<code>&lt;main&gt;</code>",

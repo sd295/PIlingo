@@ -3,12 +3,12 @@ const lessonContent = {
     title: "Level 4: Forms of Money",
     questions: [
         {
-            prompt: "Why are HTML forms the most important part of a money-making site?",
+            prompt: "Why do you use internet?",
             options: ["<code>&lt;To get user data&gt;</code>", "<code>&lt;Data is the new oil&gt;</code>", "<code>&lt;To sell them stuff&gt;</code>", "<code>&lt;all of the above, obviously&gt;</code>"],
             correctAnswer: "<code>&lt;all of the above, obviously&gt;</code>"
         },
         {
-            prompt: "To start collecting data, you must wrap all your input fields in one giant, all-powerful container. This is the...",
+            prompt: "You need to pay taxes:)",
             options: [
                 "<code>&lt;form&gt;</code>",
                 "<code>&lt;div&gt;</code>",
@@ -18,7 +18,15 @@ const lessonContent = {
             correctAnswer: "<code>&lt;form&gt;</code>"
         },
         {
-            prompt: "The little box where the user types their precious email/username/password is called an...",
+            prompt: "Did you know:It's impossible for most people to lick their own elbow.",
+            options: [
+                "Yack"
+            ],
+            // This is a great question. It tests against common points of confusion.
+            correctAnswer: "Yack"
+        },
+        {
+            prompt: "Where the cash is...",
             options: [
                 "<code>&lt;input&gt;</code>",
                 "<code>&lt;textbox&gt;</code>",
@@ -28,7 +36,7 @@ const lessonContent = {
             correctAnswer: "<code>&lt;input&gt;</code>"
         },
         {
-            prompt: "An <code>&lt;input&gt;</code> is useless unless you tell it what KIND of data to grab. For a simple name or email, you use the attribute...",
+            prompt: "An <code>&lt;input&gt;</code> is nothing until you say what to grab like you and your boss",
             options: [
                 "<code>type='text'</code>",
                 "<code>kind='text'</code>",
@@ -38,7 +46,7 @@ const lessonContent = {
             correctAnswer: "<code>type='text'</code>"
         },
         {
-            prompt: "To make the text turn into secret little dots ●●●●● so no one can see their genius password 'cat123', you use...",
+            prompt: "●●●●●",
             options: [
                 "<code>type='password'</code>",
                 "<code>type='secret'</code>",
@@ -48,7 +56,7 @@ const lessonContent = {
             correctAnswer: "<code>type='password'</code>"
         },
         {
-            prompt: "Without this tag, users won't know if a box is for their 'email' or their 'deepest darkest secret'. It's the text connected to the input box.",
+            prompt: "A tag that is used for text:)",
             options: [
                 "<code>&lt;label&gt;</code>",
                 "<code>&lt;title&gt;</code>",
@@ -58,7 +66,7 @@ const lessonContent = {
             correctAnswer: "<code>&lt;label&gt;</code>"
         },
         {
-            prompt: "The final button the user smashes to send all their juicy data to you is the...",
+            prompt: "<<I AM your father>> you need to send this to your GF",
             options: [
                 "<code>&lt;input type='submit'&gt;</code>",
                 "<code>&lt;button type='send'&gt;</code>",
@@ -68,7 +76,7 @@ const lessonContent = {
             correctAnswer: "<code>&lt;input type='submit'&gt;</code>"
         },
         {
-            prompt: "What attribute creates the faint grey example text inside an input box that disappears when you click it? /// hint: it holds the place",
+            prompt: "what 10% of the world is...",
             options: [
                 "<code>placeholder</code>",
                 "<code>example</code>",
@@ -76,7 +84,15 @@ const lessonContent = {
                 "<code>ghost-text</code>"
             ],
             correctAnswer: "<code>placeholder</code>"
-        }
+        },
+        {
+            prompt: "Did you know:A shrimp's heart is in its head",
+            options: [
+                "So they have faster brains?"
+            ],
+            // This is a great question. It tests against common points of confusion.
+            correctAnswer: "So they have faster brains?"
+        },
     ],
     practice: {
         title: "Project: The Ultimate 'Sign Up' Form",

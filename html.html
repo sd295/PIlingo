@@ -9,6 +9,22 @@
 </head>
 <body>
     <!-- The data-subject attribute is CRITICAL -->
+     <header>
+    <div class="header-content">
+        <!-- This is a link back to the main subject selection -->
+        <a href="index.html" class="back-link">&larr; All Subjects</a>
+
+        <!-- 
+            NEW: User Profile Section
+            This will be hidden by default and shown by JavaScript when logged in.
+        -->
+        <div id="user-profile" class="hidden">
+            <span id="user-name"></span>
+            <img id="user-photo" src="default-avatar.png" alt="Profile Picture">
+            <button id="logout-btn" class="logout-btn-header">Logout</button>
+        </div>
+    </div>
+    </header>
     <main class="hub-container" data-subject="html">
         <a href="index.html" class="back-link">&larr; Back to Subjects</a>
         <h1>HTML Lessons</h1>
@@ -20,6 +36,7 @@
             <button class="level-btn" data-lesson="l4.html">Level 4: Forms of Money</button>
         </div>
     </main>
-    <script src="hub.js"></script>
+    <script type="module" src="hub.js"></script>
+    
 </body>
 </html>

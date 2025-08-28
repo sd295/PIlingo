@@ -1,0 +1,36 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sign in to Code Lingo</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- ... other head elements ... -->
+</head>
+<body>
+    <div class="login-container">
+        <h1>Create an Account or Sign In</h1>
+        
+        <!-- NEW GOOGLE BUTTON -->
+        <a id="google-btn" class="social-btn google-btn">
+            <svg viewBox="0 0 24 24">...</svg> <!-- SVG for Google icon -->
+            Sign in with Google
+        </a>
+
+        <a id="github-btn" class="social-btn github-btn">
+            <svg viewBox="0 0 24 24">...</svg> <!-- SVG for GitHub icon -->
+            Sign in with GitHub
+        </a>
+        
+        <div class="separator">or</div>
+        
+        <div class="manual-login">
+            <input type="email" id="email-input" placeholder="Enter your email">
+            <input type="password" id="password-input" placeholder="Enter your password">
+            <button id="login-btn">Login / Sign Up</button>
+            <p id="error-message" class="hidden"></p>
+        </div>
+    </div>
+
+    <script type="module" src="login.js"></script>
+</body>
+</html>

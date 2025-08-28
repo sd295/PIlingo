@@ -1,6 +1,6 @@
 // lessons/l1.html.js
 const lessonContent = {
-    title: "Level 1: The Big Crispy Basics",
+    title: "Level 1: H 123456",
     questions: [
         {
             prompt: "Okay, let's be real. Why are you *really* learning HTML?",
@@ -8,13 +8,21 @@ const lessonContent = {
                 "To structure content for websites",
                 "To make a lot of money",
                 "To hack the mainframe",
-                "To design cool animations"
+                "i dont know"
             ],
-            // The fact is wrapped in jokes. It's about structure.
-            correctAnswer: "To structure content for websites"
+            
+            correctAnswer: "I dont know"
         },
         {
-            prompt: "You need the BIG CRISPY main title for your page. The most important one. Which tag do you grab?",
+            prompt: "h1 is the main header used for titles",
+            options: [
+                "TRUE"
+            ],
+            // This is a great question. It tests against common points of confusion.
+            correctAnswer: "TRUE"
+        },
+        {
+            prompt: "You need the BIG SUA economy main title for your page. The most important one. Which tag do you grab?",
             options: [
                 "<code>&lt;h1&gt;</code>",
                 "<code>&lt;header&gt;</code>",
@@ -25,7 +33,23 @@ const lessonContent = {
             correctAnswer: "<code>&lt;h1&gt;</code>"
         },
         {
-            prompt: "After your big crispy header, you need a normal block of text. Which tag is your bread-and-butter for a simple paragraph?",
+            prompt: "Did you know:A group of flamingos is called a <code>flamboyance</code>. ",
+            options: [
+                "TRUE"
+            ],
+            // This is a great question. It tests against common points of confusion.
+            correctAnswer: "TRUE"
+        },
+        {
+            prompt: "p is used for texts like this, no ideea what I meant",
+            options: [
+                "TRUE"
+            ],
+            // This is a great question. It tests against common points of confusion.
+            correctAnswer: "TRUE"
+        },
+        {
+            prompt: "After your BIG as SUA economy header, you need a normal block of text. Which tag is your bread-and-butter for a simple paragraph?",
             options: [
                 "<code>&lt;p&gt;</code>",
                 "<code>&lt;span&gt;</code>",
@@ -36,7 +60,15 @@ const lessonContent = {
             correctAnswer: "<code>&lt;p&gt;</code>"
         },
         {
-            prompt: "You want to show a picture of your cat (or your profits). Which attribute tells the <code>&lt;img&gt;</code> tag WHERE to find the image file?",
+            prompt: "src is used......",
+            options: [
+                "TRUE"
+            ],
+            // This is a great question. It tests against common points of confusion.
+            correctAnswer: "TRUE"
+        },
+        {
+            prompt: "You want to show a picture of your wife to the internet. Which attribute tells the <code>&lt;img&gt;</code> tag WHERE to find the image file?",
             options: [
                 "<code>src</code>",
                 "<code>href</code>",
@@ -47,7 +79,7 @@ const lessonContent = {
             correctAnswer: "<code>src</code>"
         },
         {
-            prompt: "Oh no, your cat picture is broken! What attribute provides 'alternative text' for screen readers and proves to Google you're not a robot?",
+            prompt: "Oh nooooooooo, your Mom credit card image is broken! What key do you use when closing that... site so your mom will not notice?",
             options: [
                 "<code>alt</code>",
                 "<code>description</code>",
@@ -55,10 +87,19 @@ const lessonContent = {
                 "<code>backup-text</code>"
             ],
             // Teaches accessibility and a key attribute.
-            correctAnswer: "<code>alt</code>"
+            correctAnswer: "<code>alt</code>",
+            
         },
         {
-            prompt: "How do you create a link that sends people to your favorite money-making website?",
+            prompt: "Did you know:Honey never spoils. Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly edible... ",
+            options: [
+                "TRUE"
+            ],
+            // This is a great question. It tests against common points of confusion.
+            correctAnswer: "TRUE"
+        },
+        {
+            prompt: "How to redirect a person 2000 times so they forget that you own them 1M$?",
             options: [
                 "<code>&lt;a href='...'&gt;</code>",
                 "<code>&lt;link href='...'&gt;</code>",
@@ -69,7 +110,7 @@ const lessonContent = {
             correctAnswer: "<code>&lt;a href='...'&gt;</code>"
         },
         {
-            prompt: "Your <code>&lt;h6&gt;</code> tag is so tiny it's useless for showing off. What is its REAL purpose?",
+            prompt: "Your <code>&lt;h6&gt;</code> tag is so tiny it's useless for showing off. I think is used for insects or?",
             options: [
                 "To hide secret messages for spies",
                 "It has no purpose, it's a prank by developers",
@@ -80,7 +121,7 @@ const lessonContent = {
             correctAnswer: "For the LEAST important subheading in a document's structure"
         },
         {
-            prompt: "What is the correct, super-basic skeleton for ANY HTML page? Get this wrong and the whole thing falls apart.",
+            prompt: "The start of a page that everyone will CTRL-C CTRL-V",
             options: [
                 "<code>&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;</code>",
                 "<code>&lt;html&gt;&lt;body&gt;&lt;head&gt;&lt;/head&gt;&lt;/body&gt;&lt;/html&gt;</code>",
@@ -93,7 +134,7 @@ const lessonContent = {
     ],
     practice: {
         title: "Project: A Page About Your Moneymaker",
-        instructions: "Time to build. Create a web page about your favorite hobby (or business idea). It must have a 'big crispy' h1 heading, a paragraph describing it, and a picture. Add a link to a website about it.",
+        instructions: "Time to build. Create a web page about your favorite hobby (I know that you have). It must have a big  title, a paragraph describing it, and a picture. Add a link to a website about it.",
         defaultCode: `<!DOCTYPE html>
 <html>
 <head>
@@ -114,7 +155,7 @@ const lessonContent = {
     },
     minigame: {
         title: "Challenge: The Profile Card",
-        prompt: "A client wants a simple profile card. They said, 'I need my picture at the top, my name as a big crispy heading, and a short bio paragraph below that.' How do you build this?",
+        prompt: "A client wants a simple profile card. They said, 'I need my picture at the top, my name as a big...,., and a short bio paragraph below that.' How do you build this?",
         draggableTags: [
             "<code>&lt;h1&gt;Your Name&lt;/h1&gt;</code>",
             "<code>&lt;p&gt;About me...&lt;/p&gt;</code>",

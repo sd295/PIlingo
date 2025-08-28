@@ -8,6 +8,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <header>
+    <div class="header-content">
+        <!-- This is a link back to the main subject selection -->
+        <a href="index.html" class="back-link">&larr; All Subjects</a>
+
+        <!-- 
+            NEW: User Profile Section
+            This will be hidden by default and shown by JavaScript when logged in.
+        -->
+        <div id="user-profile" class="hidden">
+            <span id="user-name"></span>
+            <img id="user-photo" src="default-avatar.png" alt="Profile Picture">
+            <button id="logout-btn" class="logout-btn-header">Logout</button>
+        </div>
+    </div>
+    </header>
     <main class="practice-container">
         <div class="instructions-panel">
             <h1 id="project-title">Loading...</h1>
@@ -21,5 +37,53 @@
         </div>
     </main>
     <script src="practice.js"></script>
+    <script type="module">
+    // Import the Firebase services you need
+    import { auth } from './firebase-config.js';
+    import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+    // Get references to the HTML elements
+    const userProfile = document.getElementById('user-profile');
+    const userNameEl = document.getElementById('user-name');
+    const userPhotoEl = document.getElementById('user-photo');
+    const logoutBtn = document.getElementById('logout-btn');
+    const mainContent = document.querySelector('main');
+
+    // Hide main content until we know if the user is logged in
+    mainContent.style.display = 'none';
+
+    // This is the core Firebase function. It runs whenever the auth state changes.
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // --- USER IS SIGNED IN ---
+            mainContent.style.display = 'block'; // Show the main content
+            userProfile.classList.remove('hidden'); // Show the profile section
+
+            // 1. Set the user's name
+            // Use their display name if they have one (from Google/GitHub), otherwise use their email.
+            userNameEl.textContent = user.displayName || user.email;
+
+            // 2. Set the profile picture
+            // Use their photoURL if they have one, otherwise use our default avatar.
+            userPhotoEl.src = user.photoURL || 'default-avatar.png';
+
+            // 3. Set up the logout button
+            logoutBtn.addEventListener('click', () => {
+                signOut(auth).then(() => {
+                    // Sign-out successful.
+                    window.location.href = 'log.html';
+                }).catch((error) => {
+                    // An error happened.
+                    console.error("Logout Error:", error);
+                });
+            });
+
+        } else {
+            // --- USER IS SIGNED OUT ---
+            // Redirect them to the login page.
+            window.location.href = 'log.html';
+        }
+    });
+</script>
 </body>
 </html>

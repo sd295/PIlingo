@@ -1,0 +1,32 @@
+/* style.css */
+
+body {
+    /* Step 1: Add a dark background so our white circle is visible */
+    background-color: #2d3748; 
+}
+
+/* Note: I've corrected the class name from ".cicle" to ".circle" */
+.circle {
+    background-color: rgb(255, 255, 255); /* Your white color */
+    position: fixed; /* Your position property */
+    
+    /* --- Step 2: Give the circle a size and shape --- */
+    width: 80px;
+    height: 90px;
+    border-radius: 50%; /* This makes the square a circle */
+    left: 40%;
+    top: 20%;
+}
+.neck{
+    background-color: rgb(255, 255, 255); /* Your white color */
+    position: fixed; /* Your position property */
+    
+    /* --- Step 2: Give the circle a size and shape --- */
+    width: 80px;
+    height: 90px;
+    border-radius: 10%; /* This makes the square a circle */
+    left: 40%;
+    top: 20%;
+}
+
+
