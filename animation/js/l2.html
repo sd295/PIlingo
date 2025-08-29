@@ -2,40 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Norway Nature</title>
-  <meta http-equiv="refresh" content="4; url=../../html.html" />
+  <title>Sweden Nature</title>
+  <meta http-equiv="refresh" content="4; url=../../js.html" />
   <style>
-    
     body {
       margin: 0;
       height: 100vh;
       overflow: hidden;
-      background: linear-gradient(180deg, #00111a, #00334d, #005f73, #94d2bd, #e9d8a6);
+      background: linear-gradient(180deg, #00111a, #004466, #007788, #f5d07a, #3c8d0d);
       background-size: 200% 200%;
-      animation: aurora 4s ease-in-out infinite alternate;
+      animation: skyShift 4s ease-in-out infinite alternate;
     }
 
-    @keyframes aurora {
+    @keyframes skyShift {
       0% { background-position: 50% 0%; }
       100% { background-position: 50% 100%; }
     }
 
-    .mountain {
+    /* Forest silhouette */
+    .tree {
       position: absolute;
-      bottom: 0;
+      bottom: 120px;
       width: 0;
       height: 0;
-      border-left: 200px solid transparent;
-      border-right: 200px solid transparent;
-      border-bottom: 250px solid #0d1b2a;
-      opacity: 0.95;
+      border-left: 30px solid transparent;
+      border-right: 30px solid transparent;
+      border-bottom: 80px solid #0b3d0b;
     }
+    .tree:nth-child(1) { left: 10%; }
+    .tree:nth-child(2) { left: 25%; }
+    .tree:nth-child(3) { left: 40%; }
+    .tree:nth-child(4) { left: 60%; }
+    .tree:nth-child(5) { left: 75%; }
 
-    .mountain:nth-child(1) { left: 10%; bottom: 0; }
-    .mountain:nth-child(2) { left: 35%; bottom: 0; border-bottom-color: #1b263b; }
-    .mountain:nth-child(3) { left: 60%; bottom: 0; border-bottom-color: #415a77; }
-
-    .water {
+    /* Lake */
+    .lake {
       position: absolute;
       bottom: 0;
       width: 100%;
@@ -43,6 +44,7 @@
       background: linear-gradient(to top, #0077b6, #0096c7, #48cae4);
     }
 
+    /* Text message */
     .text {
       position: absolute;
       top: 30px;
@@ -65,13 +67,15 @@
   </style>
 </head>
 <body>
-  <div class="mountain"></div>
-  <div class="mountain"></div>
-  <div class="mountain"></div>
-  <div class="water"></div>
-  <div class="text">Norway – Land of Fjords 🇳🇴</div>
+  <div class="tree"></div>
+  <div class="tree"></div>
+  <div class="tree"></div>
+  <div class="tree"></div>
+  <div class="tree"></div>
+
+  <div class="lake"></div>
+  <div class="text">Sweden – Land of Forests & Lakes 🇸🇪</div>
 
   
-  </script>
 </body>
 </html>

@@ -1,72 +1,56 @@
-// quiz.js (Full, Final, with "Sorting Hat" Router Logic)
+// quiz.js (Final Version with Streak and UI Fixes)
 
-// --- IMPORTS ---
-// Import all the Firebase services we need from the start
 import { auth, db } from './firebase-config.js';
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 import { doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
-// --- GLOBAL VARIABLES ---
-// These are set once when the page loads
 let currentUser = null;
 const params = new URLSearchParams(window.location.search);
 const subject = params.get('subject');
 const lessonFile = params.get('lesson');
 
-// --- AUTHENTICATION CHECK ---
-// This is the master entry point for the entire script.
+function getFormattedDate(date) {
+    return date.toISOString().split('T')[0];
+}
+
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        // User is signed in. Store their info and proceed to the routing logic.
         currentUser = user;
         loadAndRouteLesson();
     } else {
-        // No user is signed in. Kick them back to the login page.
         window.location.href = 'login.html';
     }
 });
 
-// --- MASTER ROUTING FUNCTION ("THE SORTING HAT") ---
-// This function's only job is to figure out what kind of lesson this is and send the user to the right place.
 function loadAndRouteLesson() {
     if (!subject || !lessonFile) {
-        window.location.href = 'index.html'; // Safety check
+        window.location.href = 'index.html';
         return;
     }
-    // Dynamically create a <script> tag to load the lesson data
     const script = document.createElement('script');
     script.src = `lessons/${subject}/${lessonFile}.js`;
     document.head.appendChild(script);
 
-    // This runs AFTER the lesson file has been fully downloaded and read.
     script.onload = () => {
-        // Now that the 'lessonContent' variable exists, we can inspect it.
-        
         if (lessonContent.lessonType === 'interactive_discovery') {
-            // It's a special interactive lesson, so go to its custom URL.
             window.location.href = `${lessonContent.url}?subject=${subject}&lesson=${lessonFile}`;
-        
         } else if (!lessonContent.questions || lessonContent.questions.length === 0) {
-            // It's a project-only lesson (like the capstone), so go to the practice page.
             window.location.href = `practice.html?subject=${subject}&lesson=${lessonFile}`;
-        
         } else {
-            // If neither of the above is true, it must be a normal quiz.
-            // Proceed with initializing the quiz on THIS page.
             initializeQuiz();
         }
     };
-    
     script.onerror = () => { document.getElementById('lesson-title').textContent = 'Error: Lesson not found.'; };
 }
 
-// --- QUIZ LOGIC INITIALIZER ---
-// This function will now ONLY run if the router decides the lesson is a standard quiz.
 function initializeQuiz() {
-    // State variables
-    let currentQuestionIndex = 0, score = 0, streak = 0, streakFreezes = 0, selectedAnswer = null;
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let dailyStreak = 0;
+    let sessionStreak = 0; // A separate counter for the current session
+    let streakFreezes = 0;
+    let selectedAnswer = null;
 
-    // DOM references
     const promptText = document.getElementById('prompt-text'),
           optionsContainer = document.getElementById('options-container'),
           checkBtn = document.getElementById('check-btn'),
@@ -78,50 +62,92 @@ function initializeQuiz() {
           streakStat = document.getElementById('streak-stat'),
           rewardImage = document.getElementById('css-reward-image');
     
+    // --- FIX 1: Make sure the lesson title is always set ---
     document.getElementById('lesson-title').textContent = lessonContent.title;
 
-    // --- Firestore Functions ---
-    async function loadProgress() { /* ... see full function below ... */ }
-    async function saveProgress() { /* ... see full function below ... */ }
-    async function markLessonAsComplete() { /* ... see full function below ... */ }
-
-    // --- UI Functions ---
-    function loadQuestion() { /* ... see full function below ... */ }
-    function selectOption(button, option) { /* ... see full function below ... */ }
-    function checkAnswer() { /* ... see full function below ... */ }
-    function updateStats() { /* ... see full function below ... */ }
-
-    // --- Full Function Definitions ---
-    
     async function loadProgress() {
         const userDocRef = doc(db, "users", currentUser.uid);
         const docSnap = await getDoc(userDocRef);
+
         if (docSnap.exists() && docSnap.data()) {
             const userData = docSnap.data();
             score = userData.score || 0;
-            streak = userData.streak || 0;
+            dailyStreak = userData.streak || 0; // Load the REAL daily streak
             streakFreezes = userData.streakFreezes || 0;
-            updateStats();
+            const lastDate = userData.lastCompletedDate;
+            
+            const today = new Date();
+            const yesterday = new Date();
+            yesterday.setDate(today.getDate() - 1);
+            const todayStr = getFormattedDate(today);
+            const yesterdayStr = getFormattedDate(yesterday);
+            
+            if (lastDate && lastDate !== todayStr && lastDate !== yesterdayStr) {
+                if (streakFreezes > 0) {
+                    streakFreezes--;
+                    await saveStreakData(dailyStreak, yesterdayStr, streakFreezes); 
+                } else {
+                    dailyStreak = 0; // The daily streak is broken
+                }
+            }
         }
+        updateStats();
     }
     
-    async function saveProgress() {
+    // --- FIX 2: This function now ONLY saves the score ---
+    async function saveScore() {
         const userDocRef = doc(db, "users", currentUser.uid);
         await setDoc(userDocRef, { 
             score: score, 
-            streak: streak,
             displayName: currentUser.displayName || currentUser.email
         }, { merge: true });
+    }
+
+    async function saveStreakData(newStreak, newDate, newFreezes) {
+         const userDocRef = doc(db, "users", currentUser.uid);
+         await setDoc(userDocRef, {
+             streak: newStreak,
+             lastCompletedDate: newDate,
+             streakFreezes: newFreezes
+         }, { merge: true });
     }
 
     async function markLessonAsComplete() {
         const lessonId = `${subject}-${lessonFile}`;
         const userDocRef = doc(db, "users", currentUser.uid);
-        try {
-            await updateDoc(userDocRef, { [`completedLessons.${lessonId}`]: true });
-        } catch (error) {
-            await setDoc(userDocRef, { completedLessons: { [lessonId]: true } }, { merge: true });
+        
+        await setDoc(userDocRef, { completedLessons: { [lessonId]: true } }, { merge: true });
+
+        const todayStr = getFormattedDate(new Date());
+        
+        const docSnap = await getDoc(userDocRef);
+        let currentDailyStreak = 0, lastDate = null, currentFreezes = 0;
+
+        if (docSnap.exists() && docSnap.data()) {
+            const data = docSnap.data();
+            currentDailyStreak = data.streak || 0;
+            lastDate = data.lastCompletedDate;
+            currentFreezes = data.streakFreezes || 0;
         }
+
+        if (lastDate === todayStr) {
+            return; 
+        }
+
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        const yesterdayStr = getFormattedDate(yesterday);
+        
+        let newDailyStreak;
+        if (lastDate === yesterdayStr) {
+            newDailyStreak = currentDailyStreak + 1;
+        } else {
+            newDailyStreak = 1;
+        }
+        
+        dailyStreak = newDailyStreak; // Update the local variable
+        await saveStreakData(newDailyStreak, todayStr, currentFreezes);
+        updateStats();
     }
 
     function loadQuestion() {
@@ -191,19 +217,19 @@ function initializeQuiz() {
             feedbackText.textContent = 'You are correct!';
             correctAnswerText.innerHTML = '';
             score += 10;
-            streak++; // This is now a session streak, not the daily one.
+            sessionStreak++; // Only update the temporary session streak
             if (question.id === 'image_src_question' && rewardImage) {
                 rewardImage.classList.remove('hidden');
             }
         } else {
             feedbackText.textContent = 'Oops! That\'s not right.';
             correctAnswerText.innerHTML = `Correct answer: ${question.correctAnswer}`;
-            streak = 0;
+            sessionStreak = 0; // Reset session streak
         }
         
         feedbackContainer.className = isCorrect ? 'feedback-container correct' : 'feedback-container incorrect';
         updateStats();
-        saveProgress();
+        saveScore(); // Only save the score, not the streak
         
         checkBtn.textContent = 'Continue';
         checkBtn.onclick = () => {
@@ -215,10 +241,10 @@ function initializeQuiz() {
 
     function updateStats() {
         scoreStat.textContent = `Score: ${score}`;
-        streakStat.innerHTML = `Streak: ${streak} 🔥 <span class="streak-freeze"> | Freezes: ${streakFreezes} ❄️</span>`;
+        // The streak display now shows the REAL daily streak, not the session one.
+        streakStat.innerHTML = `Daily Streak: ${dailyStreak} 🔥 <span class="streak-freeze"> | Freezes: ${streakFreezes} ❄️</span>`;
     }
     
-    // --- INITIALIZATION ---
     checkBtn.onclick = checkAnswer;
     loadProgress().then(() => {
         loadQuestion();

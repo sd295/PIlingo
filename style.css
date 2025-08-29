@@ -37,7 +37,7 @@
     color:#ffffff;
     display: flex;
     align-items: center;
-    background-color: white;
+    background-color: rgb(47, 255, 0);
     border-color: #1b369e;
 }
 
@@ -49,6 +49,8 @@
     color: white;
     font-style: italic;
 }
+
+
 .level-btn:hover {
     font-size: 90%;
     align-items: top;
@@ -73,8 +75,8 @@
     --primary-dark: #4aa802;
     --secondary-color: #1cb0f6;
     --light-grey: #e5e5e5;
-    --medium-grey: #ffffff;
-    --dark-grey: #ffffff;
+    --medium-grey: #746e6e8c;
+    --dark-grey: #000000;
     --white: #ffffff;
     --red: #ff4b4b;
     --green: #58cc02;
@@ -91,7 +93,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 110vh;
+    min-height: 100vh;
     margin: 0;
     padding: 20px;
     box-sizing: border-box;
@@ -155,11 +157,16 @@ body {
 .subject-btn p { margin: 5px 0 0; font-size: 1.2rem; }
 .html-btn { background-color: #e44d26; border-color: #c13c1b; }
 .css-btn { background-color: #264de4; border-color: #1b369e; }
-.level-selection { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
+.js-btn { background-color: #ffdd00; border-color: #ffcc00; }
+.vue-btn { background-color: #ffc800; border-color: #ffa600; }
+.level-selection { display: grid;grid-template-columns: repeat(3, 1fr) ;grid-template-rows: repeat(6, 100px);gap: 15px; margin-top: 30px; }
 .level-btn { background-color: var(--white); border: 2px solid var(--light-grey); border-bottom: 4px solid var(--light-grey); border-radius: 12px; padding: 20px; font-size: 1.5rem; font-weight: 700; cursor: pointer; text-align: left; transition: all 0.2s ease; width: 100%; box-sizing: border-box;}
 .level-btn:hover { background-color: #f7f7f7; border-color: var(--secondary-color); }
 .level-btn:disabled { color: var(--medium-grey); cursor: not-allowed; background-color: #f9f9f9; }
 .level-btn:disabled:hover { border-color: var(--light-grey); }
+.levell-btn:hover { background-color: #f7f7f7; border-color: var(--secondary-color); }
+.levell-btn:disabled { color: var(--medium-grey); cursor: not-allowed; background-color: #f9f9f9; }
+.levell-btn:disabled:hover { border-color: var(--light-grey); }
 
 /* --- QUIZ PAGE STYLES --- */
 header { width: 100%; padding-bottom: 20px; border-bottom: 2px solid var(--light-grey); margin-bottom: auto;}
@@ -167,7 +174,7 @@ header { width: 100%; padding-bottom: 20px; border-bottom: 2px solid var(--light
 .back-link { color: var(--secondary-color); text-decoration: none; font-weight: 700; font-size: 1.1rem; }
 .stats-container { display: flex; gap: 20px; font-size: 1.2rem; font-weight: 700; color: var(--medium-grey); }
 .quiz-container { width: 100%; max-width: 600px; text-align: center; margin: auto;}
-#quiz-header h2 { font-size: 1.8rem; color: #0033ff; }
+#quiz-header h2 { font-size: 1.8rem; color: transparent; }
 #prompt-container { margin: 30px 0; font-size: 1.6rem; font-weight: 700; }
 .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
 .option-btn { background-color: var(--white); border: 2px solid var(--light-grey); border-radius: 12px; padding: 20px; font-size: 1.2rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; text-align: center; }
@@ -205,3 +212,16 @@ code { background-color: #eef0f1; padding: 3px 8px; border-radius: 6px; font-fam
 .dropzone.drag-over { background-color: #e8f7ff; border-style: solid; }
 .dropzone > * { padding: 8px; margin: 5px 0; border: 1px solid var(--light-grey); background-color: #f1f1f1; }
 #game-feedback { margin-top: 15px; font-size: 1.2rem; font-weight: 700; text-align: center; }
+.level-btn:disabled::after {
+    content: '🔒'; /* The lock emoji */
+    font-size: 1.5rem;
+    margin-left: auto; /* Pushes the lock to the far right */
+}
+
+/* Optional: Make disabled buttons look even more faded out */
+.level-btn:disabled {
+    color: var(--medium-grey);
+    cursor: not-allowed;
+    background-color: #f9f9f9;
+    opacity: 0.7;
+}

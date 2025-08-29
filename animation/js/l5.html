@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stockholm Sunset</title>
+  <meta http-equiv="refresh" content="7; url=../../js.html" />
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(180deg, #00111a, #004466, #f5a623, #f5d07a);
+      background-size: 200% 200%;
+      animation: skyShift 7s ease-in-out infinite alternate;
+    }
+
+    @keyframes skyShift {
+      0% { background-position: 50% 0%; }
+      100% { background-position: 50% 100%; }
+    }
+
+    /* Water */
+    .water {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 150px;
+      background: linear-gradient(to top, #0077b6, #0096c7, #48cae4);
+    }
+
+    /* Simple Stockholm skyline */
+    .building {
+      position: absolute;
+      bottom: 150px;
+      width: 50px;
+      background: #0b1d2a;
+    }
+    .building:nth-child(1) { left: 10%; height: 150px; }
+    .building:nth-child(2) { left: 20%; height: 180px; }
+    .building:nth-child(3) { left: 30%; height: 120px; }
+    .building:nth-child(4) { left: 40%; height: 200px; }
+    .building:nth-child(5) { left: 55%; height: 160px; }
+    .building:nth-child(6) { left: 65%; height: 140px; }
+    .building:nth-child(7) { left: 75%; height: 190px; }
+
+    /* City lights */
+    .lights {
+      position: absolute;
+      bottom: 150px;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+    .lights div {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: yellow;
+      animation: blink 2s infinite alternate;
+    }
+    @keyframes blink {
+      from { opacity: 0.3; }
+      to { opacity: 1; }
+    }
+
+    /* Text */
+    .text {
+      position: absolute;
+      top: 30px;
+      width: 100%;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 28px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 0 0 10px black;
+      animation: fadeText 7s ease-in-out;
+    }
+    @keyframes fadeText {
+      0% { opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Buildings -->
+  <div class="building"></div>
+  <div class="building"></div>
+  <div class="building"></div>
+  <div class="building"></div>
+  <div class="building"></div>
+  <div class="building"></div>
+  <div class="building"></div>
+
+  <!-- City lights -->
+  <div class="lights">
+    <div></div><div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div><div></div>
+  </div>
+
+  <!-- Water -->
+  <div class="water"></div>
+
+  <!-- Text -->
+  <div class="text">Stockholm – Venice of the North 🇸🇪</div>
+
+  
+</body>
+</html>

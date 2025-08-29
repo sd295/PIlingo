@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>A Day in Sweden - Animation</title>
+<meta http-equiv="refresh" content="40; url=../../js.html" />
+<style>
+  /* --- SETUP & VARIABLES --- */
+  :root {
+    --sky-dawn: #f5d07a;
+    --sky-day: #6db0d2;
+    --sky-dusk: #2e4372;
+    --sky-night: #0b1d3a;
+    --sun-color: #ffe066;
+    --moon-color: #f4f4f4;
+    --mountain-color: #415a77;
+    --tree-color: #0b3d0b;
+    --city-color: #0b1d2a;
+    --lake-color: #0077b6;
+    --animation-duration: 35s; /* Master duration for the whole cycle */
+  }
+
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--sky-night), var(--sky-dusk), var(--sky-day), var(--sky-dawn), var(--tree-color));
+    background-size: 100% 400%; /* Stretched vertically */
+    animation: skyShift var(--animation-duration) ease-in-out infinite alternate;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  @keyframes skyShift {
+    0% { background-position: 0% 0%; }   /* Night */
+    50% { background-position: 0% 50%; } /* Midday */
+    100% { background-position: 0% 100%; } /* Sunset/ground */
+  }
+
+  /* --- SUN & MOON --- */
+  .sun-moon-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150vh; /* A huge arc */
+    height: 150vh;
+    animation: rotateArc var(--animation-duration) linear infinite;
+  }
+  .sun, .moon {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+  }
+  .sun {
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, white, var(--sun-color));
+    box-shadow: 0 0 50px var(--sun-color);
+    animation: sunColor var(--animation-duration) ease-in-out infinite alternate;
+  }
+  .moon {
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, white, var(--moon-color));
+    box-shadow: 0 0 30px var(--moon-color);
+    opacity: 0;
+    animation: moonFade var(--animation-duration) ease-in-out infinite alternate;
+  }
+
+  @keyframes rotateArc { from { transform: rotate(0deg); } to { transform: rotate(180deg); } }
+  @keyframes sunColor {
+    0%, 100% { background-color: #f9c74f; box-shadow: 0 0 50px #f9c74f; } /* Sunrise/Sunset */
+    50% { background-color: #fffbeb; box-shadow: 0 0 80px #fffbeb; } /* Midday */
+  }
+  @keyframes moonFade {
+    0%, 15% { opacity: 1; } /* Visible at night */
+    35%, 100% { opacity: 0; } /* Invisible during day */
+  }
+  
+  /* --- STARS --- */
+  .stars {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow: 
+      -10vw 20vh 1px white, 80vw 30vh 2px white, 50vw 10vh 1px white,
+      15vw 80vh 1px white, 90vw 70vh 2px white, -30vw 50vh 1px white;
+    animation: moonFade var(--animation-duration) ease-in-out infinite alternate; /* Fades with the moon */
+  }
+
+  /* --- MOUNTAINS --- */
+  .mountain {
+    position: absolute;
+    bottom: 150px;
+    width: 600px;
+    height: 250px;
+    background: var(--mountain-color);
+    clip-path: polygon(0% 100%, 25% 40%, 40% 60%, 55% 20%, 75% 70%, 100% 100%);
+  }
+  .mountain.back { z-index: 1; left: 10%; opacity: 0.7; background: #283845; }
+  .mountain.front { z-index: 3; left: 40%; transform: scale(1.1); }
+
+  /* --- FOREST --- */
+  .forest-front {
+    position: absolute;
+    bottom: 120px;
+    width: 100%;
+    z-index: 5;
+  }
+  .tree {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 90px solid var(--tree-color);
+    margin: 0 2%;
+  }
+  
+  /* --- LAKE & REFLECTION --- */
+  .lake {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 150px;
+    background: rgba(0,0,0,0.2);
+    z-index: 4;
+    overflow: hidden;
+  }
+  .lake-reflection {
+    position: absolute;
+    top: -250px; /* Aligns reflection with sky */
+    left: 0;
+    width: 100%;
+    height: 400%; /* Matches body's stretched size */
+    background: inherit; /* Inherits the body's gradient */
+    animation: inherit; /* Inherits the body's animation */
+    transform: scaleY(-1); /* Flips it upside down */
+  }
+
+  /* --- CITY --- */
+  .city {
+    position: absolute;
+    bottom: 150px;
+    left: 30%;
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    z-index: 2;
+  }
+  .building {
+    width: 15px;
+    background: var(--city-color);
+  }
+  .building .window {
+    width: 60%;
+    height: 5px;
+    margin: 3px auto;
+    background: #4a5568;
+    animation: lightUp var(--animation-duration) ease-in-out infinite alternate;
+  }
+
+  @keyframes lightUp {
+    0%, 30% { background: #f5d07a; box-shadow: 0 0 3px #f5d07a; } /* Lights on at night */
+    60%, 100% { background: #4a5568; box-shadow: none; } /* Off during day */
+  }
+
+  /* --- BIRDS with flapping animation --- */
+  .bird-flock {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: flyAcross 15s linear infinite;
+    animation-delay: 5s; /* They appear during the day */
+  }
+  .bird {
+    position: absolute;
+  }
+  .bird::before, .bird::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 10px;
+    background: black;
+    border-radius: 50%;
+  }
+  .bird::before { animation: flap-left 0.3s infinite ease-in-out; }
+  .bird::after { left: 18px; animation: flap-right 0.3s infinite ease-in-out; }
+  
+  @keyframes flyAcross { from { left: -10%; } to { left: 110%; } }
+  @keyframes flap-left { 50% { transform: rotate(-20deg); } }
+  @keyframes flap-right { 50% { transform: rotate(20deg); } }
+  
+  /* --- TEXT --- */
+  .text {
+    position: absolute;
+    top: 5%;
+    width: 100%;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 15px black;
+    z-index: 10;
+    animation: fadeText var(--animation-duration) ease-in-out infinite alternate;
+  }
+  @keyframes fadeText {
+    0%, 100% { opacity: 0; transform: translateY(20px); }
+    10%, 90% { opacity: 1; transform: translateY(0); }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- Elements are ordered by their Z-depth for clarity -->
+<div class="sun-moon-container">
+  <div class="sun"></div>
+  <div class="moon"></div>
+</div>
+<div class="stars"></div>
+<div class="text">A Day in Sweden 🇸🇪</div>
+
+<div class="mountain back"></div>
+<div class="city">
+  <div class="building" style="height:40px;"><div class="window"></div><div class="window"></div></div>
+  <div class="building" style="height:60px;"><div class="window"></div><div class="window"></div><div class="window"></div></div>
+  <div class="building" style="height:50px;"><div class="window"></div></div>
+</div>
+<div class="mountain front"></div>
+
+<div class="bird-flock">
+  <div class="bird" style="top: 20%; left: 10%;"></div>
+  <div class="bird" style="top: 25%; left: 15%; animation-delay: 0.1s;"></div>
+  <div class="bird" style="top: 22%; left: 5%; animation-delay: 0.2s;"></div>
+</div>
+
+<div class="forest-front">
+  <div class="tree"></div>
+  <div class="tree" style="transform: scale(0.8);"></div>
+  <div class="tree" style="transform: scale(1.1);"></div>
+  <div class="tree"></div>
+</div>
+
+<div class="lake">
+  <div class="lake-reflection"></div>
+</div>
+
+
+
+</body>
+</html>

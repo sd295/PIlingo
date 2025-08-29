@@ -97,7 +97,7 @@ const lessonContent = {
         },
     ],
     // FIX 3: Removed the wrong cutscene. You can add one for L3 later!
-    cutsceneUrl: "animation/html/l2.html", 
+    cutsceneUrl: "animation/css/l2.html", 
     practice: {
         title: "Project: The Ultimate 'Sign Up' Form",
         instructions: "Time to build the most common thing on the internet. Create a form. Inside it, you need an input for a username (text), an input for a password, and a submit button. Don't forget to use labels for each input!",

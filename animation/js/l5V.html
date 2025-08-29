@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sweden Nature Complex</title>
+  <meta http-equiv="refresh" content="21; url=../../vue.html" />
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(180deg, #00111a, #004466, #f5d07a, #3c8d0d);
+      background-size: 200% 200%;
+      animation: skyShift 15s ease-in-out infinite alternate;
+      font-family: Arial, sans-serif;
+    }
+
+    @keyframes skyShift {
+      0% { background-position: 50% 0%; }
+      100% { background-position: 50% 100%; }
+    }
+
+    /* Mountains */
+    .mountain {
+      position: absolute;
+      bottom: 120px;
+      width: 0;
+      height: 0;
+      border-left: 300px solid transparent;
+      border-right: 300px solid transparent;
+      border-bottom: 200px solid #415a77;
+      opacity: 0.8;
+    }
+    .mountain:nth-child(2) {
+      left: 30%;
+      border-bottom-color: #283845;
+      transform: scale(0.9);
+    }
+    .mountain:nth-child(3) {
+      left: 60%;
+      border-bottom-color: #1b263b;
+      transform: scale(1);
+    }
+
+    /* Forest layers */
+    .forest-back, .forest-front {
+      position: absolute;
+      bottom: 100px;
+      display: flex;
+      width: 100%;
+      justify-content: space-around;
+    }
+
+    .tree {
+      width: 0;
+      height: 0;
+      border-left: 25px solid transparent;
+      border-right: 25px solid transparent;
+      border-bottom: 70px solid #0b3d0b;
+    }
+
+    .forest-back .tree {
+      border-bottom-color: #145214;
+      transform: scale(0.8);
+      opacity: 0.7;
+    }
+
+    .forest-front .tree {
+      border-bottom-color: #0b3d0b;
+      transform: scale(1);
+      opacity: 0.9;
+    }
+
+    /* Lake */
+    .lake {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 150px;
+      background: linear-gradient(to top, #0077b6, #0096c7, #48cae4);
+      box-shadow: inset 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    /* Mist/fog */
+    .fog {
+      position: absolute;
+      bottom: 120px;
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0));
+      animation: fogMove 15s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes fogMove {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* Sun */
+    .sun {
+      position: absolute;
+      top: 10%;
+      left: -80px;
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle, #ffe066, #f9c74f);
+      border-radius: 50%;
+      animation: moveSun 15s linear forwards;
+    }
+
+    @keyframes moveSun {
+      0% { left: -80px; top: 20%; }
+      50% { left: 50%; top: 5%; }
+      100% { left: 110%; top: 25%; }
+    }
+
+    /* Birds */
+    .bird {
+      position: absolute;
+      width: 20px;
+      height: 10px;
+      border-radius: 50%;
+      background: black;
+      animation: flyBird 7s linear infinite;
+    }
+    .bird:nth-child(1) { top: 20%; left: -50px; animation-delay: 0s; }
+    .bird:nth-child(2) { top: 25%; left: -80px; animation-delay: 2s; }
+    .bird:nth-child(3) { top: 15%; left: -100px; animation-delay: 4s; }
+
+    @keyframes flyBird {
+      0% { transform: translateX(0) translateY(0); }
+      50% { transform: translateX(50vw) translateY(-20px); }
+      100% { transform: translateX(100vw) translateY(0); }
+    }
+
+    /* Text */
+    .text {
+      position: absolute;
+      top: 30px;
+      width: 100%;
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 0 0 10px black;
+      animation: fadeText 15s ease-in-out;
+    }
+
+    @keyframes fadeText {
+      0% { opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Sun -->
+  <div class="sun"></div>
+
+  <!-- Mountains -->
+  <div class="mountain"></div>
+  <div class="mountain"></div>
+  <div class="mountain"></div>
+
+  <!-- Forest layers -->
+  <div class="forest-back">
+    <div class="tree"></div>
+    <div class="tree"></div>
+    <div class="tree"></div>
+    <div class="tree"></div>
+    <div class="tree"></div>
+  </div>
+
+  <div class="forest-front">
+    <div class="tree"></div>
+    <div class="tree"></div>
+    <div class="tree"></div>
+    <div class="tree"></div>
+    <div class="tree"></div>
+  </div>
+
+  <!-- Lake -->
+  <div class="lake"></div>
+
+  <!-- Mist/Fog -->
+  <div class="fog"></div>
+
+  <!-- Birds -->
+  <div class="bird"></div>
+  <div class="bird"></div>
+  <div class="bird"></div>
+
+  <!-- Text -->
+  <div class="text">Sweden – Forests, Lakes & Mountains 🌲🏞️</div>
+
+  
+</body>
+</html>

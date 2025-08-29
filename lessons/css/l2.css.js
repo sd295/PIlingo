@@ -83,6 +83,7 @@ const lessonContent = {
             correctAnswer: "<code>class</code> or <code>id</code>"
         }
     ],
+    
     practice: {
         title: "Project: The 'About Me' Box",
         instructions: "Create a layout. Make a main container `div` with an `id` of 'profile-card'. Inside it, add another `div` with a `class` of 'card-header' for your name, and a final `div` with a `class` of 'card-body' for your bio.",

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Helsinki Animation</title>
+
+  <!-- Redirect after 7 seconds -->
+  <meta http-equiv="refresh" content="7; url=../../css.html" />
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(180deg, #0b1d3a, #2e4372, #6db0d2, #f5d78a, #4f772d);
+      background-size: 200% 200%;
+      animation: skyShift 6s ease-in-out infinite alternate;
+    }
+
+    /* Sky animation */
+    @keyframes skyShift {
+      0% { background-position: 50% 0%; }
+      100% { background-position: 50% 100%; }
+    }
+
+    /* Sun/Moon */
+    .sun {
+      position: absolute;
+      top: 20%;
+      left: -100px;
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle, #ffe066, #f9c74f);
+      border-radius: 50%;
+      animation: moveSun 6s linear forwards;
+    }
+    @keyframes moveSun {
+      0% { left: -100px; top: 40%; }
+      50% { left: 40%; top: 10%; }
+      100% { left: 100%; top: 30%; }
+    }
+
+    /* Ground */
+    .ground {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 150px;
+      background: #1b3110;
+    }
+
+    /* Helsinki skyline (simplified) */
+    .building {
+      position: absolute;
+      bottom: 150px;
+      width: 80px;
+      background: #0d1a2b;
+    }
+    .building:nth-child(1) { left: 10%; height: 160px; }
+    .building:nth-child(2) { left: 25%; height: 200px; }
+    .building:nth-child(3) { left: 40%; height: 240px; }
+    .building:nth-child(4) { left: 60%; height: 180px; }
+    .building:nth-child(5) { left: 75%; height: 220px; }
+
+    /* Helsinki Cathedral dome */
+    .cathedral {
+      position: absolute;
+      bottom: 150px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 180px;
+      background: #0b2239;
+    }
+    .cathedral::before {
+      content: "";
+      position: absolute;
+      top: -40px;
+      left: 25px;
+      width: 50px;
+      height: 40px;
+      background: #0b2239;
+      border-radius: 50% 50% 0 0;
+    }
+    .cathedral::after {
+      content: "";
+      position: absolute;
+      top: -70px;
+      left: 45px;
+      width: 10px;
+      height: 30px;
+      background: #0b2239;
+    }
+
+    /* Text message */
+    .text {
+      position: absolute;
+      top: 30px;
+      width: 100%;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 28px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 0 0 10px black;
+      animation: fadeText 6s ease-in-out;
+    }
+    @keyframes fadeText {
+      0% { opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="sun"></div>
+  <div class="ground"></div>
+  
+  <!-- Helsinki skyline -->
+  <div class="building"></div>
+  <div class="building"></div>
+  <div class="building"></div>
+  <div class="building"></div>
+  <div class="building"></div>
+  <div class="cathedral"></div>
+  
+  <div class="text">Welcome to Helsinki 🌆</div>
+</body>
+</html>
