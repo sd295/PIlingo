@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A Journey Through Norway</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Cinzel:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #0d1b2a;
+        }
+
+        #animation-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .anim-element {
+            position: absolute;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        /* --- TIMELINE ---
+            0-4s:   Flag is painted.
+            4-10s:  Flag wipes away, revealing the fjord cliffs rising.
+            10-18s: Viking longship sails across the fjord as a Stave Church rises.
+            18-28s: Scene transitions to night, Aurora Borealis appears.
+            28-30s: Final text fades in.
+        */
+
+        /* --- SCENE 1: FLAG --- */
+        .flag-part { animation: wipe-away 1.5s ease-in-out 4s forwards; }
+        #flag-bg-red {
+            top: 0; left: 0; width: 100%; height: 100%; background-color: #ba0c2f;
+            transform: scaleX(0); transform-origin: left;
+            animation: paint-x 1.5s ease-out 0.5s forwards, wipe-away 1.5s ease-in-out 4s forwards;
+        }
+        #white-cross-h { top: 40%; left: 0; width: 100%; height: 20%; background-color: white; transform: scaleX(0); transform-origin: left; animation: paint-x 1.5s ease-out 1.5s forwards, wipe-away 1.5s ease-in-out 4s forwards; }
+        #white-cross-v { top: 0; left: 30%; width: 20%; height: 100%; background-color: white; transform: scaleY(0); transform-origin: top; animation: paint-y 1.5s ease-out 1.5s forwards, wipe-away 1.5s ease-in-out 4s forwards; }
+        #blue-cross-h { top: 45%; left: 0; width: 100%; height: 10%; background-color: #00205b; transform: scaleX(0); transform-origin: left; animation: paint-x 1.5s ease-out 2.5s forwards, wipe-away 1.5s ease-in-out 4s forwards; }
+        #blue-cross-v { top: 0; left: 35%; width: 10%; height: 100%; background-color: #00205b; transform: scaleY(0); transform-origin: top; animation: paint-y 1.5s ease-out 2.5s forwards, wipe-away 1.5s ease-in-out 4s forwards; }
+
+        @keyframes paint-x { to { opacity: 1; transform: scaleX(1); } }
+        @keyframes paint-y { to { opacity: 1; transform: scaleY(1); } }
+        @keyframes wipe-away { to { opacity: 0; transform: translateY(-100vh); } }
+
+        /* --- SCENE 2: FJORD REVEAL --- */
+        #fjord-water {
+            bottom: 0; left: 0; width: 100%; height: 50%;
+            background: linear-gradient(#2980B9, #2C3E50);
+            transform: translateY(100%);
+            animation: rise-up 2s ease-out 4.5s forwards;
+        }
+        .cliff {
+            bottom: 25%;
+            background-color: #34495e;
+            transform: translateY(100%);
+            animation: rise-up 3s ease-out forwards;
+        }
+        #cliff1 {
+            left: -5%; width: 40%; height: 60%;
+            clip-path: polygon(0 100%, 0 40%, 30% 15%, 50% 30%, 75% 5%, 100% 45%, 100% 100%);
+            animation-delay: 5s;
+        }
+        #cliff2 {
+            right: -5%; width: 45%; height: 75%;
+            background-color: #2c3e50;
+            clip-path: polygon(0 100%, 0 35%, 20% 5%, 45% 25%, 70% 0, 100% 50%, 100% 100%);
+            animation-delay: 5.5s;
+        }
+        #cliff3 {
+            left: 20%; width: 30%; height: 55%;
+            background-color: #566573;
+            clip-path: polygon(0 100%, 0 50%, 40% 20%, 80% 40%, 100% 25%, 100% 100%);
+            animation-delay: 5.2s;
+        }
+        @keyframes rise-up { to { opacity: 1; transform: translateY(0); } }
+
+        /* --- SCENE 3: VIKING AGE --- */
+        #viking-ship {
+            bottom: 30%;
+            width: 300px;
+            animation: sail-across 12s linear 10s forwards, bobbing 4s ease-in-out 10s infinite;
+        }
+        @keyframes sail-across {
+            from { opacity: 1; transform: translateX(-100%) scaleX(-1); } /* Start off-screen left, flipped */
+            to { opacity: 1; transform: translateX(calc(100vw + 100px)) scaleX(-1); } /* End off-screen right, flipped */
+        }
+        @keyframes bobbing {
+            0%, 100% { transform: translateY(0) rotate(-1deg) scaleX(-1); }
+            50% { transform: translateY(-15px) rotate(1deg) scaleX(-1); }
+        }
+        #stave-church {
+            bottom: 65%; left: 15%; width: 100px;
+            transform: translateY(100%);
+            animation: rise-up 3s ease-out 12s forwards;
+        }
+
+        /* --- SCENE 4: NIGHT & AURORA --- */
+        #night-sky {
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, #020111, #191970);
+            animation: fade-in 4s ease-out 18s forwards;
+        }
+        .aurora-container { animation: fade-in 3s ease-out 19s forwards; }
+        .aurora {
+            position: absolute; bottom: 0; width: 100%; height: 70%; border-radius: 50%; opacity: 0;
+            background: radial-gradient(ellipse at center, rgba(76, 224, 158, 0.6) 0%, rgba(50, 180, 220, 0.5) 40%, rgba(180, 50, 200, 0.4) 60%, transparent 80%);
+        }
+        .aurora-1 { animation: drift 10s infinite linear 19s; }
+        .aurora-2 { animation: drift 14s infinite linear 21s; transform: scale(0.8) skew(10deg); }
+        @keyframes fade-in { to { opacity: 1; } }
+        @keyframes drift {
+            0% { transform: translateY(50%) scale(1); opacity: 0; }
+            50% { transform: translateY(-50%) scale(1.5); opacity: 0.7; }
+            100% { transform: translateY(-150%) scale(1); opacity: 0; }
+        }
+
+        /* --- SCENE 5: FINAL TEXT --- */
+        #final-text {
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-family: 'Cinzel', serif;
+            font-size: 5.5vw;
+            letter-spacing: 5px;
+            text-shadow: 0 4px 15px #00d9ff;
+            animation: fade-in 4s ease-out 27s forwards;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="animation-container">
+        <!-- Background Elements (Always there, revealed over time) -->
+        <div id="fjord-water" class="anim-element"></div>
+        <div id="cliff1" class="cliff anim-element"></div>
+        <div id="cliff3" class="cliff anim-element"></div>
+        <div id="viking-ship" class="anim-element">
+            <!-- Embedded SVG of a Viking Longship -->
+            <svg viewBox="0 0 800 600" fill="#5D4037"><path d="M100 400 L150 300 L650 300 L700 400 Z"></path><rect x="390" y="50" width="20" height="300"></rect><polygon points="410,50 560,150 410,250" fill="#e74c3c"></polygon><polygon points="410,50 410,250 260,150" fill="white"></polygon></svg>
+        </div>
+        <div id="stave-church" class="anim-element">
+            <!-- Embedded SVG of a Stave Church -->
+             <svg viewBox="0 0 100 120" fill="#4E342E"><path d="M10 120 L10 80 L0 70 L50 20 L100 70 L90 80 L90 120 Z M20 80 L80 80 M20 70 L80 70 L50 40 Z M40 120 L40 80 M60 120 L60 80 M50 20 L50 0 L45 5 L55 5 Z"></path></svg>
+        </div>
+        <div id="cliff2" class="cliff anim-element"></div>
+        
+        <!-- Night and Aurora overlay -->
+        <div id="night-sky" class="anim-element"></div>
+        <div class="aurora-container anim-element">
+            <div class="aurora aurora-1"></div>
+            <div class="aurora aurora-2"></div>
+        </div>
+
+        <!-- Foreground Curtain: The Flag -->
+        <div id="flag-bg-red" class="anim-element flag-part"></div>
+        <div id="white-cross-h" class="anim-element flag-part"></div>
+        <div id="white-cross-v" class="anim-element flag-part"></div>
+        <div id="blue-cross-h" class="anim-element flag-part"></div>
+        <div id="blue-cross-v" class="anim-element flag-part"></div>
+
+        <!-- Final Text -->
+        <div id="final-text" class="anim-element">
+            OPPDAG NORGE
+        </div>
+    </div>
+
+</body>
+</html>

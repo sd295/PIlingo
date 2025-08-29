@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>An Ode to Sweden</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Nunito:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #0d1b2a; /* Dark blue background */
+        }
+
+        /* The main stage for our animation */
+        #animation-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Make all animated elements positioned absolutely within the stage */
+        .anim-element {
+            position: absolute;
+            opacity: 0; /* Start invisible */
+            animation-fill-mode: forwards; /* Stay in the final state */
+        }
+
+        /* --- TIMELINE & KEYFRAMES --- */
+        /*
+            TIMELINE:
+            0s - 4s:    Swedish Flag is painted.
+            4s - 11s:   Flag fades, reveals landscape (trees, Dala horse).
+            11s - 18s:  Cityscape of Gamla Stan rises.
+            18s - 26s:  Sky darkens, Aurora Borealis appears.
+            26s - 28s:  Final text fades in.
+        */
+
+        /* --- SCENE 1: THE FLAG --- */
+        #flag-bg {
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #006aa7; /* Swedish Blue */
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: paint-in 1.5s ease-out 0.5s forwards;
+        }
+        #flag-cross-h, #flag-cross-v {
+            background-color: #fecc00; /* Swedish Yellow */
+        }
+        #flag-cross-h {
+            top: 40%; left: 0; width: 100%; height: 20%;
+            transform: scaleX(0); transform-origin: left;
+            animation: paint-in 1.5s ease-out 1.5s forwards, fade-out 1s ease-out 4s forwards;
+        }
+        #flag-cross-v {
+            top: 0; left: 30%; width: 12%; height: 100%;
+            transform: scaleY(0); transform-origin: top;
+            animation: paint-in 1.5s ease-out 1.5s forwards, fade-out 1s ease-out 4s forwards;
+        }
+
+        @keyframes paint-in {
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes fade-out {
+            to { opacity: 0; }
+        }
+
+
+        /* --- SCENE 2: LANDSCAPE --- */
+        #landscape-bg {
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, #6DD5FA, #2980B9);
+            animation: fade-in 2s ease-out 4s forwards;
+        }
+        .ground {
+            bottom: 0; left: 0; width: 100%; height: 25%;
+            background: #27ae60;
+            animation: fade-in 2s ease-out 4s forwards;
+        }
+        .tree {
+            bottom: 25%;
+            width: 0; height: 0;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 120px solid #2c3e50; /* Dark green for pine */
+            transform: translateY(100%);
+            animation: rise-and-fade-in 1.5s ease-out forwards;
+        }
+        .tree::after {
+            content: '';
+            position: absolute;
+            bottom: -140px; left: -10px;
+            width: 20px; height: 20px;
+            background: #5D4037; /* Trunk */
+        }
+        #tree1 { left: 15%; animation-delay: 5s; }
+        #tree2 { left: 25%; transform: scale(0.8); animation-delay: 5.4s; }
+        #tree3 { left: 70%; animation-delay: 5.2s; }
+        #tree4 { left: 80%; transform: scale(0.9); animation-delay: 5.6s; }
+
+        #dala-horse {
+            bottom: 20%; left: 45%;
+            width: 150px;
+            transform: translateY(100%);
+            animation: rise-and-fade-in 2s ease-out 6s forwards;
+        }
+
+        @keyframes fade-in {
+            to { opacity: 1; }
+        }
+        @keyframes rise-and-fade-in {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+
+        /* --- SCENE 3: CITYSCAPE --- */
+        .building {
+            bottom: 25%;
+            height: 350px;
+            transform: translateY(100%);
+            animation: rise-up 2s ease-out forwards;
+        }
+        #building1 { left: 30%; width: 100px; background-color: #e74c3c; animation-delay: 11s; }
+        #building2 { left: calc(30% + 100px); width: 80px; height: 400px; background-color: #f1c40f; animation-delay: 11.4s; }
+        #building3 { left: calc(30% + 180px); width: 120px; height: 320px; background-color: #3498db; animation-delay: 11.2s; }
+        #building4 { left: calc(30% + 300px); width: 90px; height: 380px; background-color: #e67e22; animation-delay: 11.6s; }
+
+
+        @keyframes rise-up {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* --- SCENE 4: NIGHT & AURORA --- */
+        #night-sky {
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, #141E30, #243B55);
+            animation: fade-in 3s ease-out 18s forwards;
+        }
+
+        .aurora-container {
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            animation: fade-in 3s ease-out 19s forwards;
+        }
+        .aurora {
+            position: absolute; bottom: 0; width: 100%; height: 70%; border-radius: 50%;
+            opacity: 0;
+            background: radial-gradient(ellipse at center, rgba(76, 224, 158, 0.5) 0%, rgba(50, 180, 220, 0.4) 40%, rgba(180, 50, 200, 0.3) 60%, rgba(76, 224, 158, 0) 80%);
+        }
+        .aurora-1 { animation: drift 10s infinite linear 19s; }
+        .aurora-2 { animation: drift 14s infinite linear 21s; transform: scale(0.8) skew(10deg); }
+        
+        @keyframes drift {
+            0% { transform: translateY(50%) scale(1); opacity: 0; }
+            50% { transform: translateY(-50%) scale(1.5); opacity: 0.7; }
+            100% { transform: translateY(-150%) scale(1); opacity: 0; }
+        }
+
+        /* --- SCENE 5: FINAL TEXT --- */
+        #final-text {
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 5vw;
+            text-shadow: 0 4px 10px black;
+            animation: fade-in 3s ease-out 25s forwards;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="animation-container">
+        <!-- Scene 1 Elements -->
+        <div id="flag-bg" class="anim-element"></div>
+        <div id="flag-cross-h" class="anim-element"></div>
+        <div id="flag-cross-v" class="anim-element"></div>
+
+        <!-- Scene 2 Elements -->
+        <div id="landscape-bg" class="anim-element"></div>
+        <div class="ground anim-element"></div>
+        <div id="tree1" class="tree anim-element"></div>
+        <div id="tree2" class="tree anim-element"></div>
+        <div id="dala-horse" class="anim-element">
+            <!-- Embedded SVG for the Dala Horse -->
+            <svg viewBox="0 0 292.36 292.36" xml:space="preserve" fill="#c0392b"><path d="M292.36,93.43c0,16.5-13.43,29.93-29.93,29.93h-44.89l-22.45,29.93h-14.97v-14.97l-14.97,14.97v37.41l-22.45,22.45 h-29.93v-29.93H89.79l-22.45-22.45v-22.45H22.45L0,140.75v-44.89l22.45-22.45h44.89l22.45-22.45h44.89l22.45-22.45h14.97 l22.45,22.45h22.45l22.45,22.45h22.45C278.93,70.98,292.36,84.41,292.36,93.43z"/></svg>
+        </div>
+        <div id="tree3" class="tree anim-element"></div>
+        <div id="tree4" class="tree anim-element"></div>
+
+        <!-- Scene 3 Elements -->
+        <div id="building1" class="building anim-element"></div>
+        <div id="building2" class="building anim-element"></div>
+        <div id="building3" class="building anim-element"></div>
+        <div id="building4" class="building anim-element"></div>
+
+        <!-- Scene 4 Elements -->
+        <div id="night-sky" class="anim-element"></div>
+        <div class="aurora-container anim-element">
+            <div class="aurora aurora-1"></div>
+            <div class="aurora aurora-2"></div>
+        </div>
+
+        <!-- Scene 5 Element -->
+        <div id="final-text" class="anim-element">
+            Utforska Sverige
+        </div>
+    </div>
+
+</body>
+</html>
