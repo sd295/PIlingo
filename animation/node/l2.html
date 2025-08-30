@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Day in Germany</title>
+<meta http-equiv="refresh" content="24; url=../../node.html" />
+<style>
+    /* --- SETUP & MASTER TIMER --- */
+    :root {
+        --sky-dawn: #a2d2ff;
+        --sky-day: #bde0fe;
+        --sky-dusk: #ffafcc;
+        --sky-night: #03045e;
+        --sun-color: #ffc857;
+        --hill-green: #588157;
+        --forest-green: #3a5a40;
+        --castle-grey: #6c757d;
+        --animation-duration: 40s; /* A long, slow, and relaxing duration */
+    }
+
+    body {
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+        background: linear-gradient(180deg, var(--sky-night), var(--sky-dusk), var(--sky-day), var(--sky-dawn));
+        background-size: 100% 400%; /* Stretched vertically for smooth transitions */
+        animation: skyCycle var(--animation-duration) ease-in-out infinite alternate;
+        font-family: 'Garamond', 'Times New Roman', serif;
+    }
+
+    .scene-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    /* --- SUN & STARS --- */
+    .sun-path {
+        position: absolute;
+        width: 180vh; height: 180vh;
+        top: 50%; left: 50%;
+        animation: sunRotation var(--animation-duration) linear infinite;
+    }
+    .sun {
+        position: absolute;
+        top: -50px; left: calc(50% - 50px);
+        width: 100px; height: 100px;
+        background: radial-gradient(circle, white, var(--sun-color));
+        border-radius: 50%;
+        box-shadow: 0 0 60px var(--sun-color);
+    }
+    .stars {
+        position: absolute;
+        width: 2px; height: 2px;
+        background: transparent;
+        box-shadow: 
+            -15vw 25vh 1px white, 85vw 35vh 2px white, 55vw 15vh 1px white,
+            20vw 85vh 1px white, 95vw 75vh 2px white, -35vw 55vh 1px white;
+        animation: starFade var(--animation-duration) ease-in-out infinite alternate;
+    }
+
+    /* --- LANDSCAPE & SCENERY --- */
+    .hill {
+        position: absolute;
+        bottom: 0;
+        width: 120%;
+        height: 60vh;
+        background-color: var(--hill-green);
+        border-radius: 50% / 100% 100% 0 0;
+    }
+    .hill.far { z-index: 1; left: -20%; background-color: #344e41; opacity: 0.8; }
+    .hill.near { z-index: 3; right: -20%; height: 50vh; }
+
+    .forest {
+        position: absolute;
+        bottom: 45vh;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        z-index: 2;
+    }
+    .fir-tree {
+        width: 0; height: 0;
+        border-left: 30px solid transparent;
+        border-right: 30px solid transparent;
+        border-bottom: 90px solid var(--forest-green);
+    }
+    .fir-tree::before {
+        content: ''; position: absolute; top: 30px; left: -20px;
+        width: 0; height: 0; border-left: 20px solid transparent;
+        border-right: 20px solid transparent; border-bottom: 60px solid var(--forest-green);
+    }
+    .fir-tree.t2 { transform: scale(0.8); }
+    .fir-tree.t3 { transform: scale(1.1); }
+
+    /* --- ARCHITECTURE --- */
+    .castle {
+        position: absolute;
+        bottom: 55vh;
+        left: 15%;
+        z-index: 2;
+    }
+    .castle .tower { position: absolute; width: 40px; height: 100px; background-color: var(--castle-grey); }
+    .castle .tower.main { left: 40px; height: 120px; }
+    .castle .tower::before { /* The roof */
+        content: ''; position: absolute; top: -40px; left: -10px;
+        width: 0; height: 0; border-left: 30px solid transparent;
+        border-right: 30px solid transparent; border-bottom: 40px solid #495057;
+    }
+    .castle .wall { position: absolute; top: 60px; left: 0; width: 120px; height: 60px; background-color: #adb5bd; }
+
+    .village {
+        position: absolute;
+        bottom: 10vh;
+        right: 10%;
+        display: flex;
+        gap: 10px;
+        z-index: 4;
+    }
+    .house {
+        width: 80px;
+        height: 100px;
+        background-color: #f8f9fa;
+        position: relative;
+    }
+    .house::before { /* The roof */
+        content: ''; position: absolute; top: -40px; left: -10px;
+        width: 100px; height: 40px; background-color: #8B4513;
+        clip-path: polygon(0 100%, 50% 0, 100% 100%);
+    }
+    .house::after { /* The timber frame */
+        content: 'X'; font-size: 100px; color: rgba(0,0,0,0.7);
+        position: absolute; top: 10px; left: 0; width: 100%; height: 100%;
+        line-height: 0.8;
+    }
+    .house .window {
+        position: absolute;
+        top: 50px; left: 30px;
+        width: 20px; height: 20px;
+        background-color: #03045e;
+        animation: villageLights var(--animation-duration) ease-in-out infinite alternate;
+    }
+
+    /* --- MODERNITY (THE TRAIN) --- */
+    .train-track {
+        position: absolute;
+        bottom: 48vh;
+        width: 100%;
+        height: 4px;
+        background: #333;
+        z-index: 2;
+    }
+    .train {
+        position: absolute;
+        bottom: 48vh;
+        width: 200px;
+        height: 25px;
+        background: linear-gradient(to top, #e9ecef, white);
+        border-radius: 10px 10px 0 0;
+        z-index: 2;
+        animation: trainPass var(--animation-duration) ease-in-out infinite;
+    }
+    .train::before { /* The red stripe */
+        content: '';
+        position: absolute;
+        bottom: 5px;
+        width: 100%;
+        height: 5px;
+        background-color: #d62828;
+    }
+
+    /* --- FINAL TEXT --- */
+    .message {
+        position: absolute;
+        top: 8%;
+        width: 100%;
+        text-align: center;
+        font-size: 3rem;
+        font-weight: bold;
+        color: white;
+        text-shadow: 0 0 15px black;
+        z-index: 10;
+        opacity: 0;
+        animation: revealText calc(var(--animation-duration) / 2) ease-in-out forwards;
+    }
+
+    /* --- KEYFRAME DEFINITIONS --- */
+
+    @keyframes skyCycle {
+        0%, 100% { background-position: 0% 0%; }   /* Night */
+        50% { background-position: 0% 100%; }  /* Day */
+    }
+    @keyframes sunRotation {
+        from { transform: rotate(-90deg); }
+        to { transform: rotate(90deg); }
+    }
+    @keyframes starFade {
+        0%, 30% { opacity: 1; }
+        50%, 100% { opacity: 0; }
+    }
+    @keyframes trainPass {
+        0%, 30% { left: -250px; } /* Waits until daytime */
+        60% { left: 110%; } /* Crosses the screen during the day */
+        61%, 100% { left: 110%; } /* Stays off-screen */
+    }
+    @keyframes villageLights {
+        0%, 25% { background-color: #fbc22d; box-shadow: 0 0 8px #fbc22d; } /* On at night */
+        40%, 80% { background-color: #03045e; box-shadow: none; } /* Off during day */
+        95%, 100% { background-color: #fbc22d; box-shadow: 0 0 8px #fbc22d; } /* Turns back on at dusk */
+    }
+    @keyframes revealText {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+
+</style>
+</head>
+<body>
+
+<div class="scene-container">
+    <div class="sun-path">
+        <div class="sun"></div>
+    </div>
+    <div class="stars"></div>
+    <div class="message">Ein Tag in Deutschland</div>
+
+    <div class="hill far"></div>
+    <div class="castle">
+        <div class="wall"></div>
+        <div class="tower"></div>
+        <div class="tower main"></div>
+    </div>
+    
+    <div class="hill near"></div>
+    <div class="forest">
+        <div class="fir-tree t1"></div>
+        <div class="fir-tree t2"></div>
+        <div class="fir-tree t3"></div>
+        <div class="fir-tree t2"></div>
+    </div>
+    
+    <div class="train-track"></div>
+    <div class="train"></div>
+
+    <div class="village">
+        <div class="house"><div class="window"></div></div>
+        <div class="house" style="transform: scale(0.9);"><div class="window"></div></div>
+    </div>
+</div>
+
+</body>
+</html>

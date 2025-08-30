@@ -43,15 +43,10 @@ const lessonContent = {
         defaultCode: ``
     },
     minigame: {
-        title: "Hei, Alena",
-        prompt: "Your GF, Alena just come Home with a wine You|ll use .-.",
-        draggableTags: [
-            "t",
-            "k",
-            "a",
-            "k"
-        ],
-        // The user must know to use <textarea> for a larger message box.
-        solution: "takk"
-    }
+    gameType: 'code-typer',
+    title: "Challenge: Norwegian Email Input",
+    prompt: "Type the exact HTML code to create a label and input for 'E-post' (Email) in Norwegian.",
+    
+    solution: `<label for="epost">E-post:</label>\n<input type="email" id="epost" name="epost">`
+}
 };

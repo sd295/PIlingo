@@ -3,36 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Lingo - Mini-Game</title>
+    <title>Pi Nord</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <main class="minigame-container">
-        <!-- Left Panel: Instructions and Toolbox -->
+    <main class="minigame-container-simple">
+        <!-- Left Panel: Instructions -->
         <div class="instructions-panel">
-            <h1 id="game-title">Loading...</h1>
-            <p id="game-instructions"></p>
-            <div class="toolbox">
-                <h3>Toolbox</h3>
-                <div id="draggable-tags">
-                    <!-- Draggable tags will be added here by JS -->
-                </div>
+            <h2 id="game-title">Loading Challenge...</h2>
+            <p id="game-prompt"></p>
+            <div class="prompt-code-container">
+                <h3>Goal Code:</h3>
+                <pre><code id="prompt-code"></code></pre>
             </div>
-            <button id="check-game-btn">Check My Work</button>
-            <div id="game-feedback" class="hidden"></div>
-            <a href="index.html" class="back-link hub-link">Back to Hub</a>
+            <a id="hub-link" href="index.html" class="back-link hub-link">Back to Subject Hub</a>
         </div>
 
-        <!-- Right Panel: Builder and Preview -->
-        <div class="editor-panel">
-            <div class="builder-area">
-                <h3>Builder</h3>
-                <div id="dropzone" class="dropzone"></div>
-            </div>
-            <iframe id="live-preview" title="Live Preview"></iframe>
+        <!-- Right Panel: The Code Typer -->
+        <div class="challenge-area code-typer-container">
+            <h3>Your Code:</h3>
+            <!-- This is the pretty display that shows the user's progress -->
+            <div id="user-code-display" class="code-display"></div>
+            
+            <!-- This is the hidden, functional textarea where the user actually types -->
+            <textarea id="code-input" spellcheck="false" autofocus></textarea>
         </div>
     </main>
-    <script src="minigame.js"></script>
+    
+    <!-- Feedback Overlay -->
+    <div id="feedback-overlay" class="hidden">
+        <div id="feedback-box">
+            <h1 id="feedback-title"></h1>
+            <p id="feedback-text"></p>
+            <button id="next-step-btn"></button>
+        </div>
+    </div>
+
+    <script type="module" src="minigame.js"></script>
 </body>
 </html>

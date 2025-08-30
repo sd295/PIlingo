@@ -29,6 +29,20 @@ const lessonContent = {
         }
     ],
     practice: null, // Level 1 is just a quiz, no separate project
-    minigame: null,
-    cutsceneUrl: null
+    minigame: {
+            gameType: 'code-typer',
+            title: "Challenge 5: Good Night",
+            prompt: "Show 'God natt' (Good night). On click, text turns purple.",
+            solution: `<div id="app5">
+  <p @click="night" :style="{color: color}">God natt</p>
+</div>
+<script>
+createApp({
+  data() { return { color: "black" } },
+  methods: {
+    night() { this.color = "purple"; }
+  }
+}).mount("#app5");
+</script>`
+        }
 };

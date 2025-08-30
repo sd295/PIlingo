@@ -117,15 +117,9 @@ const lessonContent = {
 </html>`
     },
     minigame: {
-        title: "Challenge: Product Comparison",
-        prompt: "You're building a 'Our Product vs. Theirs' chart. It needs a header row with two titles ('Our Genius Product', 'Their Lame Product') and a data row below it with one feature for each. Build the structure.",
-        draggableTags: [
-            "<code>&lt;table&gt;&lt;/table&gt;</code>",
-            "<code>&lt;tr&gt;&lt;/tr&gt;</code>",
-            "<code>&lt;th&gt;Title&lt;/th&gt;</code>",
-            "<code>&lt;td&gt;Feature&lt;/td&gt;</code>"
-        ],
-        // The user must build a 2x2 table structure.
-        solution: "<table><tr><th></th><th></th></tr><tr><td></td><td></td></tr></table>"
-    }
+            gameType: 'code-typer',
+            title: "Challenge 3: Thank You",
+            prompt: "Type HTML for a div with text 'Kiitos' (Thank you) in blue.",
+            solution: `<div style="color:blue;">Kiitos</div>`
+        },
 };

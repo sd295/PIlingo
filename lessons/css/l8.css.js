@@ -44,15 +44,10 @@ const lessonContent = {
     defaultCode: `<!DOCTYPE html>\n<html>\n<head>\n  <title>Grocery List</title>\n</head>\n<body>\n\n  <!-- Add your heading here -->\n\n\n  <!-- Create the unordered list tag here -->\n\n    <!-- Add your first list item -->\n\n    <!-- Add your second list item -->\n\n    <!-- Add your third list item -->\n\n\n  <!-- End the unordered list tag -->\n\n</body>\n</html>`
     },
     minigame: {
-    title: "Challenge: The Recipe Steps",
-    prompt: "You're writing a recipe blog! You need to list the first three steps to make a sandwich. The list needs a title, 'Instructions', and the steps must be in the correct order. How do you build it?",
-    draggableTags: [
-        "<code>&lt;h2&gt;Instructions&lt;/h2&gt;</code>",
-        "<code>&lt;ol&gt;&lt;/ol&gt;</code>",
-        "<code>&lt;li&gt;Get two slices of bread&lt;/li&gt;</code>",
-        "<code>&lt;li&gt;Spread mayonnaise on both&lt;/li&gt;</code>",
-        "<code>&lt;li&gt;Add cheese and ham&lt;/li&gt;</code>"
-    ],
-    solution: "<h2></h2><ol><li></li><li></li><li></li></ol>"
-}
+            gameType: 'code-typer',
+            title: "Challenge 6: No",
+            prompt: "Type HTML for a button that says 'Ei' (No) with orange background.",
+            solution: `<button style="background-color:orange; color:white;">Ei</button>`
+        },
+
 };

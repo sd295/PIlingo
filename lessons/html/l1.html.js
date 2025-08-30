@@ -154,13 +154,13 @@ const lessonContent = {
 </html>`
     },
     minigame: {
-        title: "Challenge: The Profile Card",
-        prompt: "A client wants a simple profile card. They said, 'I need my picture at the top, my name as a big...,., and a short bio paragraph below that.' How do you build this?",
-        draggableTags: [
-            "<code>&lt;h1&gt;Your Name&lt;/h1&gt;</code>",
-            "<code>&lt;p&gt;About me...&lt;/p&gt;</code>",
-            "<code>&lt;img src='...' alt='photo'&gt;</code>"
-        ],
-        solution: "<img><h1></h1><p></p>"
-    }
+    // Keeps the same structure but with a new challenge
+    gameType: 'code-typer',
+    title: "Challenge: Add an Image",
+    prompt: "A webpage needs to display the Norwegian flag with alt text. Type the HTML exactly as shown below. Pay attention to spaces and quotation marks!",
+    
+    // Exact solution that the learner must type
+    solution: `<img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Norway.svg" alt="Norwegian Flag">`
+}
+
 };

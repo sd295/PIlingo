@@ -115,29 +115,11 @@ const lessonContent = {
 </html>`
     },
     minigame: {
-        title: "Challenge: Interactive Swedish Lakes Chart",
-        prompt: `
-1. Fetch a list of 10 Swedish lakes with their area.
-2. Filter only lakes over 100 km².
-3. Display them in a bar chart using Chart.js.
-4. Update the chart automatically every 5 seconds.
-5. Highlight the largest lake in a different color.
-`,
-        draggableTags: [
-            "fetch()",
-            "await",
-            "response.json()",
-            "filter()",
-            "map()",
-            "Math.max(...)",
-            "Chart.js",
-            "setInterval()",
-            "canvas",
-            "backgroundColor array"
-        ],
-        solution: `// Example solution: 
-// Fetch lake data, filter, map for labels and data, find max for color, draw Chart.js bar chart, update every 5 seconds.`
-    }
+            gameType: 'code-typer',
+            title: "Challenge 7: Yes",
+            prompt: "Make a button 'Ja' (Yes). When clicked, change background to green.",
+            solution: `<button onclick="this.style.background='green'">Ja</button>`
+        }
 };
 
 

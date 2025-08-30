@@ -1,72 +1,81 @@
 // lessons/css/l6.capstone.norwegian.js
 const lessonContent = {
-    title: "Level 6: Norwegian Greetings & Basic Vocabulary Quiz",
-    cutsceneUrl: null,
-    minigame: null,
+    title: "Level 2: Norwegian Greetings & Basic Vocabulary Quiz",
+    
 
-    // Questions array for the quiz
+    // prompts array for the quiz
     questions: [
         {
-            question: "How do you say 'Hello' in Norwegian?",
-            choices: ["Hei", "Hallo", "Hola", "Bonjour"],
-            answer: "Hei"
+            prompt: "How do you say 'Hello' in Norwegian?",
+            options: ["Hei", "Hallo", "Hola", "Bonjour"],
+            correctAnswer: "Hei"
         },
         {
-            question: "How do you say 'Good morning' in Norwegian?",
-            choices: ["God morgen", "Buenos días", "Bonjour", "Guten Morgen"],
-            answer: "God morgen"
+            prompt: "How do you say 'Good morning' in Norwegian?",
+            options: ["God morgen", "Buenos días", "Bonjour", "Guten Morgen"],
+            correctAnswer: "God morgen"
         },
         {
-            question: "How do you say 'Good night' in Norwegian?",
-            choices: ["God natt", "Bonne nuit", "Buenas noches", "Gute Nacht"],
-            answer: "God natt"
+            prompt: "How do you say 'Good night' in Norwegian?",
+            options: ["God natt", "Bonne nuit", "Buenas noches", "Gute Nacht"],
+            correctAnswer: "God natt"
         },
         {
-            question: "How do you say 'Thank you' in Norwegian?",
-            choices: ["Takk", "Merci", "Danke", "Grazie"],
-            answer: "Takk"
+            prompt: "How do you say 'Thank you' in Norwegian?",
+            options: ["Takk", "Merci", "Danke", "Grazie"],
+            correctAnswer: "Takk"
         },
         {
-            question: "How do you say 'Please' in Norwegian?",
-            choices: ["Vær så snill", "S'il vous plaît", "Bitte", "Per favore"],
-            answer: "Vær så snill"
+            prompt: "How do you say 'Please' in Norwegian?",
+            options: ["Vær så snill", "S'il vous plaît", "Bitte", "Per favore"],
+            correctAnswer: "Vær så snill"
         },
         {
-            question: "How do you say 'Yes' in Norwegian?",
-            choices: ["Ja", "Oui", "Si", "Ja!"],
-            answer: "Ja"
+            prompt: "How do you say 'Yes' in Norwegian?",
+            options: ["Ja", "Oui", "Si", "Ja!"],
+            correctAnswer: "Ja"
         },
         {
-            question: "How do you say 'No' in Norwegian?",
-            choices: ["Nei", "No", "Non", "Nein"],
-            answer: "Nei"
+            prompt: "How do you say 'No' in Norwegian?",
+            options: ["Nei", "No", "Non", "Nein"],
+            correctAnswer: "Nei"
         },
         {
-            question: "Which colors are on the Norwegian flag?",
-            choices: ["Red, White, Blue", "Blue, Yellow", "Green, White, Red", "Red, Yellow, Black"],
-            answer: "Red, White, Blue"
+            prompt: "Which colors are on the Norwegian flag?",
+            options: ["Red, White, Blue", "Blue, Yellow", "Green, White, Red", "Red, Yellow, Black"],
+            correctAnswer: "Red, White, Blue"
         },
         {
-            question: "Which symbol represents Norway in a fun way?",
-            choices: ["🇳🇴", "🇸🇪", "🇫🇮", "🇩🇰"],
-            answer: "🇳🇴"
+            prompt: "Which symbol represents Norway in a fun way?",
+            options: ["🇳🇴", "🇸🇪", "🇫🇮", "🇩🇰"],
+            correctAnswer: "🇳🇴"
         },
         {
-            question: "How do you say 'Friend' in Norwegian?",
-            choices: ["Venn", "Amigo", "Freund", "Ami"],
-            answer: "Venn"
+            prompt: "How do you say 'Friend' in Norwegian?",
+            options: ["Venn", "Amigo", "Freund", "Ami"],
+            correctAnswer: "Venn"
         },
         {
-            question: "How do you say 'Family' in Norwegian?",
-            choices: ["Familie", "Familia", "Famille", "Familj"],
-            answer: "Familie"
+            prompt: "How do you say 'Family' in Norwegian?",
+            options: ["Familie", "Familia", "Famille", "Familj"],
+            correctAnswer: "Familie"
         },
         {
-            question: "How do you say 'I love you' in Norwegian?",
-            choices: ["Jeg elsker deg", "Te quiero", "Je t'aime", "Ich liebe dich"],
-            answer: "Jeg elsker deg"
+            prompt: "How do you say 'I love you' in Norwegian?",
+            options: ["Jeg elsker deg", "Te quiero", "Je t'aime", "Ich liebe dich"],
+            correctAnswer: "Jeg elsker deg"
         }
     ],
+    practice: null,
+    minigame: {
+    gameType: 'code-typer',
+    title: "Challenge: Norwegian Greeting Label",
+    prompt: "Type the exact HTML code to display a label saying 'Navn' (Name) in Norwegian with an input field.",
+    
+    solution: `<label for="navn">Navn:</label>\n<input type="text" id="navn" name="navn">`
+}
+    
+    
 
-    practice: null // No separate practice; this level is a quiz
+    
 };

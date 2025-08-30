@@ -94,31 +94,11 @@ storedCities.forEach(city => {
 `
     },
     minigame: {
-        title: "Challenge: Interactive Sweden City Manager",
-        prompt: `
-Create an app that:
-1. Lets users add a new city using a form.
-2. Saves it to LocalStorage.
-3. Displays all cities in a list dynamically.
-4. Allows removal of cities from LocalStorage and the list.
-5. Bonus: Sort cities by population before displaying.
-`,
-        draggableTags: [
-            "class City {...}",
-            "new City(...)",
-            "localStorage.setItem()",
-            "localStorage.getItem()",
-            "JSON.stringify()",
-            "JSON.parse()",
-            "document.createElement()",
-            "appendChild()",
-            "addEventListener('click', ...)",
-            "removeItem()",
-            "sort((a,b)=>b.population-a.population)"
-        ],
-        solution: `// Example solution: 
-// Use the City class to create new cities, save to LocalStorage, parse them back, display in <ul>, handle add/remove buttons, sort by population.`
-    }
+            gameType: 'code-typer',
+            title: "Challenge 6: Please",
+            prompt: "Make a button 'Snälla' (Please). When clicked, alert 'Please in English!'.",
+            solution: `<button onclick="alert('Please in English!')">Snälla</button>`
+        },
 };
 
 

@@ -134,20 +134,11 @@ const lessonContent = {
 </html>`
     },
     minigame: {
-        title: "Mini-Quest: Style the Magic Scroll",
-        prompt: "Drag and drop the CSS properties to style this wizard form correctly:",
-        draggableTags: [
-            "<code>background-color: #001f3f;</code>",
-            "<code>color: #ffcc00;</code>",
-            "<code>text-align: center;</code>",
-            "<code>box-shadow: 0 0 10px #ffcc00;</code>",
-            "<code>padding: 10px;</code>",
-            "<code>border: 2px solid #ffcc00;</code>",
-            "<code>border-radius: 5px;</code>",
-            "<code>font-family: 'Mystic', serif;</code>"
-        ],
-        solution: `body { background-color: #001f3f; color: #ffcc00; font-family: 'Mystic', serif; }
-h1, h2 { text-align: center; }
-button { box-shadow: 0 0 10px #ffcc00; padding: 10px; border: 2px solid #ffcc00; border-radius: 5px; }`
-    }
+    gameType: 'code-typer',
+    title: "Challenge: Event Registration Form",
+    prompt: "Type the HTML for a simple event registration form. It should include: Full Name, Email, Age, a dropdown for 'Ticket Type' (Standard, VIP, Student), a checkbox for agreeing to terms, and a Submit button.",
+    
+    solution: `<form>\n  <label for="fullname">Full Name:</label>\n  <input type="text" id="fullname" name="fullname">\n  <br>\n  <label for="email">Email:</label>\n  <input type="email" id="email" name="email">\n  <br>\n  <label for="age">Age:</label>\n  <input type="number" id="age" name="age">\n  <br>\n  <label for="ticket">Ticket Type:</label>\n  <select id="ticket" name="ticket">\n    <option value="standard">Standard</option>\n    <option value="vip">VIP</option>\n    <option value="student">Student</option>\n  </select>\n  <br>\n  <input type="checkbox" id="terms" name="terms">\n  <label for="terms">I agree to the terms and conditions</label>\n  <br>\n  <button type="submit">Register</button>\n</form>`
+}
+
 };

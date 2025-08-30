@@ -83,30 +83,19 @@ Create a friendly Vue.js app:
 
     // Minigame: simple and fun
     minigame: {
-        title: "Mini Challenge: Friendly Counter",
-        prompt: `
-Create a Vue.js counter app:
-- Display a number starting at 0.
-- Add a button to increase the number by 1.
-- Add a button to decrease the number by 1.
-- Bonus: add a reset button.
-- Make it colorful and friendly!
-        `,
-        draggableTags: ["data()", "methods", "v-on:click", "v-model", "computed", "v-bind"],
-        solution: `const app = Vue.createApp({
-  data() {
-    return {
-      count: 0
-    }
-  },
+            gameType: 'code-typer',
+            title: "Challenge 8: No",
+            prompt: "Make 'Nej' (No). On click, background turns red.",
+            solution: `<div id="app8">
+  <button @click="stop" :style="{background: bg}">Nej</button>
+</div>
+<script>
+createApp({
+  data() { return { bg: "white" } },
   methods: {
-    increment() { this.count++ },
-    decrement() { this.count-- },
-    reset() { this.count = 0 }
+    stop() { this.bg = "red"; }
   }
-});
-app.mount('#app');`
-    },
-
-    cutsceneUrl: null
+}).mount("#app8");
+</script>`
+        }
 };

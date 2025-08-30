@@ -54,6 +54,20 @@ const lessonContent = {
         }
     ],
     practice: null, // pure quiz
-    minigame: null,
-    cutsceneUrl: null
+    minigame: {
+            gameType: 'code-typer',
+            title: "Challenge 3: Welcome",
+            prompt: "Show 'Välkommen' (Welcome). On click, text turns blue.",
+            solution: `<div id="app3">
+  <h2 @click="makeBlue" :style="{color: color}">Välkommen</h2>
+</div>
+<script>
+createApp({
+  data() { return { color: "black" } },
+  methods: {
+    makeBlue() { this.color = "blue"; }
+  }
+}).mount("#app3");
+</script>`
+        }
 };

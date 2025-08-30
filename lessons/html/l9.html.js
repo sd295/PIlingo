@@ -75,9 +75,9 @@ const lessonContent = {
         {
             prompt: "In northern Europe, fjords are everywhere. How is this related to forms?",
             options: [
-                "It’s not, just a geography bonus!"
+                "Its not, just a geography bonus!"
             ],
-            correctAnswer: "It’s not, just a geography bonus!"
+            correctAnswer: "Its not, just a geography bonus!"
         },
     ],
     practice: {
@@ -102,16 +102,12 @@ const lessonContent = {
 </html>`
     },
     minigame: {
-        title: "Mini-Quest: The Contact Scroll",
-        prompt: "A wizard wants a contact scroll: an email box, a message textarea, and a glowing 'Send Magic' button. Arrange the tags!",
-        draggableTags: [
-            "<code>&lt;form&gt;&lt;/form&gt;</code>",
-            "<code>&lt;label&gt;Your Email&lt;/label&gt;</code>",
-            "<code>&lt;input type='text'&gt;</code>",
-            "<code>&lt;label&gt;Your Message&lt;/label&gt;</code>",
-            "<code>&lt;textarea&gt;&lt;/textarea&gt;</code>",
-            "<code>&lt;button type='submit'&gt;Send Magic&lt;/button&gt;</code>"
-        ],
-        solution: "<form><label></label><input></input><label></label><textarea></textarea><button></button></form>"
-    }
+    gameType: 'code-typer',
+    title: "Challenge: Contact Email Input",
+    prompt: "Type the HTML for an email input field with a label. Make sure it matches exactly.",
+    
+    solution: `<label for="email">Email:</label>\n<input type="email" id="email" name="email">`
+}
+
+    
 };

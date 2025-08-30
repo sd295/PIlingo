@@ -207,32 +207,11 @@ Create a complete dashboard that includes:
 </html>`
     },
     minigame: {
-        title: "Challenge: Sweden Interactive Dashboard",
-        prompt: `
-1. Add real-time data for cities and lakes using mock APIs or JSON files.
-2. Include multiple chart types selectable by the user.
-3. Allow adding and removing cities dynamically, saved in LocalStorage.
-4. Highlight top city/lake in charts.
-5. Update charts automatically every 10 seconds.
-6. Bonus: Add interactive filters for population or lake area.
-`,
-        draggableTags: [
-            "class City {...}",
-            "new City(...)",
-            "localStorage.setItem()",
-            "localStorage.getItem()",
-            "fetch() / async / await",
-            "Chart.js",
-            "setInterval()",
-            "filter()",
-            "map()",
-            "addEventListener('change' or 'click')",
-            "document.createElement()",
-            "appendChild()"
-        ],
-        solution: `// Example solution: 
-// Combine all previous features: fetch or static data, class instances, LocalStorage, DOM updates, Chart.js charts, real-time updates, interactive buttons and filters.`
-    }
+            gameType: 'code-typer',
+            title: "Challenge 8: No",
+            prompt: "Make a button 'Nej' (No). When clicked, change background to red.",
+            solution: `<button onclick="this.style.background='red'">Nej</button>`
+        },
 };
 
 

@@ -32,5 +32,10 @@ const lessonContent = {
 </body>
 </html>`
     },
-    minigame: { /* ... can add later ... */ }
+    minigame: {
+        gameType: 'code-typer', // This property MUST exist
+        title: "Challenge: Type the Form Input",
+        prompt: "A client needs a simple login input for a username. Type the HTML exactly as shown below. Pay close attention to the syntax!",
+        solution: `<label for="username">Username:</label>\n<input type="text" id="username" name="username">`
+    }
 };

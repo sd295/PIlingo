@@ -106,16 +106,9 @@ const lessonContent = {
 </html>`
     },
     minigame: {
-        title: "Challenge: The Blog Post Snippet",
-        prompt: "A client wants a blog post layout. It needs a main container. Inside, put a heading. Below that, a paragraph. You need to highlight a single word inside the paragraph with a different style. And don't forget a secret note for the next developer!",
-        draggableTags: [
-            "<code>&lt;div class='post'&gt;&lt;/div&gt;</code>",
-            "<code>&lt;h2&gt;My Title&lt;/h2&gt;</code>",
-            "<code>&lt;p&gt;Some text...&lt;/p&gt;</code>",
-            "<code>&lt;span class='highlight'&gt;...&lt;/span&gt;</code>",
-            "<code>&lt;!-- TODO: Fix this later --&gt;</code>"
-        ],
-        // The structure should be a div containing the h2, p, and comment. The span must be inside the p.
-        solution: "<div><h2></h2><p><span></span></p><!-->"
-    }
+            gameType: 'code-typer',
+            title: "Challenge 2: Say Goodbye",
+            prompt: "Type HTML for a paragraph that says 'Näkemiin' (Goodbye) in italic.",
+            solution: `<p style="font-style:italic;">Näkemiin</p>`
+        },
 };

@@ -102,16 +102,12 @@ const lessonContent = {
         defaultCode: `<!DOCTYPE html>\n<html>\n<head>\n  <title>Sign Up Now!</title>\n</head>\n<body>\n  \n  <!-- The main form container goes here -->\n  \n    <!-- Label and Input for Username -->\n    \n    \n    <!-- Label and Input for Password -->\n    \n    \n    <!-- The submit button -->\n    \n  \n  <!-- End of the form -->\n\n</body>\n</html>`
     },
     minigame: {
-        title: "Challenge: The Contact Form",
-        prompt: "A client needs a simple contact form. They need a box for 'Your Email' and a LARGER box for 'Your Message'. Then a big button that says 'Send'. What's the structure?",
-        draggableTags: [
-            "<code>&lt;form&gt;&lt;/form&gt;</code>",
-            "<code>&lt;label&gt;Your Email&lt;/label&gt;</code>",
-            "<code>&lt;input type='text'&gt;</code>",
-            "<code>&lt;label&gt;Your Message&lt;/label&gt;</code>",
-            "<code>&lt;textarea&gt;&lt;/textarea&gt;</code>",
-            "<code>&lt;button type='submit'&gt;Send&lt;/button&gt;</code>"
-        ],
-        solution: "<form><label></label><input></input><label></label><textarea></textarea><button></button></form>"
-    }
+    gameType: 'code-typer',
+    title: "Challenge: Build a Small Registration Form",
+    prompt: "Write the HTML for a registration form with inputs for first name and last name, and a submit button. Type the code exactly as shown below.",
+    
+    solution: `<form>\n  <label for="firstname">First Name:</label>\n  <input type="text" id="firstname" name="firstname">\n\n  <label for="lastname">Last Name:</label>\n  <input type="text" id="lastname" name="lastname">\n\n  <button type="submit">Register</button>\n</form>`
+}
+
+    
 };

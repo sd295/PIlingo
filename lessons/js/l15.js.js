@@ -133,32 +133,11 @@ const lessonContent = {
 </html>`
     },
     minigame: {
-        title: "Challenge: Interactive Sweden Map Dashboard",
-        prompt: `
-1. Fetch a list of Swedish cities with coordinates and population.
-2. Display markers on the map using Leaflet.js.
-3. Show city info in popups.
-4. Display population chart with Chart.js.
-5. Add filtering and automatic updates every 10 seconds.
-6. Bonus: let users click a chart bar to highlight corresponding city on the map.
-7. Store user-selected cities or chart preferences in LocalStorage.
-`,
-        draggableTags: [
-            "fetch()",
-            "await",
-            "response.json()",
-            "filter()",
-            "map()",
-            "Chart.js",
-            "Leaflet.js",
-            "setInterval()",
-            "LocalStorage",
-            "addEventListener('click')",
-            "bindPopup()",
-            "document.createElement()"
-        ],
-        solution: `// Example solution: Combine fetch, async/await, Leaflet markers, Chart.js, filter, setInterval for updates, LocalStorage for preferences, interactive chart/map connection.`
-    }
+            gameType: 'code-typer',
+            title: "Challenge 9: Friend",
+            prompt: "Make a div 'Vän' (Friend). When clicked, it alerts 'Friend in English!'.",
+            solution: `<div onclick="alert('Friend in English!')">Vän</div>`
+        }
 };
 
-export default lessonContent;
+

@@ -54,6 +54,19 @@ const lessonContent = {
         }
     ],
     practice: null,
-    minigame: null,
-    cutsceneUrl: null
+    minigame: {
+            gameType: 'code-typer',
+            title: "Challenge 2: Thank You",
+            prompt: "Make a button with 'Tack' (Thank you). On click, alert 'Thank you!'.",
+            solution: `<div id="app2">
+  <button @click="sayThanks">Tack</button>
+</div>
+<script>
+createApp({
+  methods: {
+    sayThanks() { alert("Thank you!"); }
+  }
+}).mount("#app2");
+</script>`
+        }
 };

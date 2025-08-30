@@ -97,31 +97,11 @@ Create a small webpage with:
 </html>`
     },
     minigame: {
-        title: "Challenge: Lake List Interactive",
-        prompt: `
-Create an interactive `<ul>` list of 5 Swedish lakes.
-- Add a button that highlights all lakes starting with 'S'.
-- Clicking a lake toggles its color.
-- Clicking another button removes all lakes starting with 'M'.
-`,
-        draggableTags: [
-            "document.createElement('li')",
-            "addEventListener('click', ...)",
-            "appendChild()",
-            "element.classList.toggle('highlight')",
-            "element.remove()"
-        ],
-        solution: `// Example solution:
-const lakes = ['Siljan','Stora Le','Vänern','Vättern','Mälaren'];
-const ul = document.getElementById('lakeList');
-lakes.forEach(name => {
-  const li = document.createElement('li');
-  li.textContent = name;
-  li.addEventListener('click', () => li.classList.toggle('highlight'));
-  ul.appendChild(li);
-});
-// Add buttons with click events to highlight or remove as described`
-    }
+            gameType: 'code-typer',
+            title: "Challenge 3: Welcome",
+            prompt: "Make a heading that says 'Välkommen' (Welcome). When clicked, it turns blue using JS.",
+            solution: `<h2 id="welcome" onclick="this.style.color='blue'">Välkommen</h2>`
+        },
 };
 
 

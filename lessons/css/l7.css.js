@@ -43,17 +43,9 @@ const lessonContent = {
         defaultCode: ``
     },
     minigame: {
-        title: "Kiitos, Maria",
-        prompt: "Your GF, Maria just won a gold thing at Paris 2024,you need to thank her and How?",
-        draggableTags: [
-            "K",
-            "i",
-            "t",
-            "i",
-            "o",
-            "o"
-        ],
-        // The user must know to use <textarea> for a larger message box.
-        solution: "Kiitos"
-    }
+            gameType: 'code-typer',
+            title: "Challenge 5: Yes",
+            prompt: "Type HTML for a button that says 'Kyllä' (Yes) with green background.",
+            solution: `<button style="background-color:green; color:white;">Kyllä</button>`
+        },
 };

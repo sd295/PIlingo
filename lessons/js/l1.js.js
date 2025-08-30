@@ -69,15 +69,11 @@ cities.forEach(city => {
 });`
     },
     minigame: {
-        title: "Challenge: Sort Swedish Cities by Population",
-        prompt: "Reorder the cities so the largest population comes first. Log only the names in order.",
-        draggableTags: [
-            "cities.sort((a, b) => b.population - a.population)",
-            "cities.map(city => city.name)",
-            "console.log(...)"
-        ],
-        solution: "cities.sort((a, b) => b.population - a.population); console.log(cities.map(city => city.name));"
-    }
+            gameType: 'code-typer',
+            title: "Challenge 1: Hello",
+            prompt: "Make a button that says 'Hej' (Hello). When clicked, it shows an alert with 'Hello in English!'.",
+            solution: `<button onclick="alert('Hello in English!')">Hej</button>`
+        },
 };
 
 

@@ -101,56 +101,19 @@ Create a Vue 3 app that:
 
     // Minigame: Vue 3 lakes challenge
     minigame: {
-        title: "Challenge: Advanced Swedish Lakes Dashboard",
-        prompt: `
-Use Vue 3 to create an interactive lakes dashboard:
-- Display lake name, size, and fun fact.
-- Filter lakes by minimum size.
-- Highlight lakes starting with 'S'.
-- Clicking a lake shows its fun fact.
-- Use reactive state, computed properties, and methods.
-        `,
-        draggableTags: [
-            "reactive",
-            "ref",
-            "computed",
-            "watch",
-            "v-for",
-            "v-bind",
-            "v-model",
-            "v-if",
-            "methods",
-            "click event"
-        ],
-        solution: `// Example solution:
-const { createApp, reactive, computed } = Vue;
-
+            gameType: 'code-typer',
+            title: "Challenge 7: Yes",
+            prompt: "Make 'Ja' (Yes). On click, background turns green.",
+            solution: `<div id="app7">
+  <button @click="go" :style="{background: bg}">Ja</button>
+</div>
+<script>
 createApp({
-  setup() {
-    const state = reactive({
-      minSize: 0,
-      lakes: [
-        { name: 'Siljan', size: 290, fact: 'Famous for summer vacations.' },
-        { name: 'Storsjön', size: 464, fact: 'Has a legendary sea monster.' },
-        { name: 'Vättern', size: 1910, fact: 'Second largest lake in Sweden.' },
-        { name: 'Mälaren', size: 1140, fact: 'Located near Stockholm.' }
-      ]
-    });
-
-    const filteredLakes = computed(() =>
-      state.lakes
-        .filter(lake => lake.size >= state.minSize)
-        .sort((a,b) => b.size - a.size)
-    );
-
-    function showFact(lake) {
-      alert('Fun fact: ' + lake.fact);
-    }
-
-    return { ...state, filteredLakes, showFact };
+  data() { return { bg: "white" } },
+  methods: {
+    go() { this.bg = "green"; }
   }
-}).mount('#lakes-app');`
-    },
-
-    cutsceneUrl: null
+}).mount("#app7");
+</script>`
+        }
 };

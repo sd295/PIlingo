@@ -100,50 +100,18 @@ Create a Vue.js app using components:
 
     // Minigame: Component-based interactive list
     minigame: {
-        title: "Challenge: Favorite Movies List",
-        prompt: `
-Create a Vue.js app using components:
-- Parent component holds an array of favorite movies (title, year).
-- Child component displays movie title and year.
-- Clicking a movie triggers an event to show additional info.
-- Use slots to allow custom messages for each movie.
-- Bonus: Add a computed property to filter movies by year.
-        `,
-        draggableTags: ["props", "$emit", "v-for", "slots", "computed", "methods", "v-on:click"],
-        solution: `const app = Vue.createApp({
-  data() {
-    return {
-      movies: [
-        { title: 'Inception', year: 2010, info: 'Directed by Christopher Nolan' },
-        { title: 'The Matrix', year: 1999, info: 'Groundbreaking sci-fi' },
-        { title: 'Interstellar', year: 2014, info: 'Space exploration' }
-      ]
-    }
-  },
-  computed: {
-    recentMovies() {
-      return this.movies.filter(movie => movie.year >= 2000);
-    }
-  },
+            gameType: 'code-typer',
+            title: "Challenge 9: Friend",
+            prompt: "Make 'Vän' (Friend). On click, alert 'Friend in English!'.",
+            solution: `<div id="app9">
+  <div @click="friend">Vän</div>
+</div>
+<script>
+createApp({
   methods: {
-    showInfo(movie) {
-      alert('Info: ' + movie.info);
-    }
+    friend() { alert("Friend in English!"); }
   }
-});
-
-app.component('movie-item', {
-  props: ['movie'],
-  template: \`
-    <div @click="$emit('show-info', movie)" style="border:1px solid #ccc; margin:10px; padding:10px; cursor:pointer;">
-      <h3>{{ movie.title }} ({{ movie.year }})</h3>
-      <slot name="note"></slot>
-    </div>
-  \`
-});
-
-app.mount('#app');`
-    },
-
-    cutsceneUrl: null
+}).mount("#app9");
+</script>`
+        }
 };

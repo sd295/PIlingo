@@ -54,6 +54,20 @@ const lessonContent = {
         }
     ],
     practice: null, // pure quiz, no project
-    minigame: null,
-    cutsceneUrl: null
+    minigame: {
+            gameType: 'code-typer',
+            title: "Challenge 1: Hello",
+            prompt: "Use Vue to show a button with 'Hej' (Hello). On click, alert 'Hello in English!'.",
+            solution: `<div id="app1">
+  <button @click="sayHello">Hej</button>
+</div>
+<script>
+const { createApp } = Vue;
+createApp({
+  methods: {
+    sayHello() { alert("Hello in English!"); }
+  }
+}).mount("#app1");
+</script>`
+        },
 };

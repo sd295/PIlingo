@@ -91,53 +91,18 @@ Create an interactive page that:
 
     // MINIGAME: Fun interactive challenge
     minigame: {
-        title: "Challenge: Interactive Swedish Lakes Fetcher",
-        prompt: `
-Fetch a list of Swedish lakes from a mock API.
-- Sort them by size descending.
-- Display only lakes larger than 100 km².
-- Highlight lakes starting with 'S'.
-- Handle errors gracefully.
-- Bonus: let users click a lake to see a fun fact about it.
-        `,
-        draggableTags: [
-            "fetch()",
-            "await",
-            "response.json()",
-            "filter()",
-            "sort()",
-            "forEach()",
-            "try...catch",
-            "document.createElement()",
-            "appendChild()",
-            "classList.add()",
-            "addEventListener()"
-        ],
-        solution: `// Example solution:
-async function loadLakes() {
-  try {
-    const res = await fetch('lakes.json'); // mock API
-    const lakes = await res.json();
-    const list = document.getElementById('lakeList');
-
-    lakes
-      .filter(lake => lake.size > 100)
-      .sort((a,b) => b.size - a.size)
-      .forEach(lake => {
-        const li = document.createElement('li');
-        li.textContent = \`\${lake.name} - \${lake.size} km²\`;
-        if(lake.name.startsWith('S')) li.classList.add('highlight');
-
-        // Bonus: show fun fact on click
-        li.addEventListener('click', () => alert(\`Fun fact: \${lake.fact}\`));
-        list.appendChild(li);
-      });
-  } catch (e) {
-    console.error('Error fetching lakes', e);
+            gameType: 'code-typer',
+            title: "Challenge 4: Good Morning",
+            prompt: "Show 'God morgon' (Good morning). On click, alert 'Good morning!'.",
+            solution: `<div id="app4">
+  <p @click="greet">God morgon</p>
+</div>
+<script>
+createApp({
+  methods: {
+    greet() { alert("Good morning!"); }
   }
-}
-loadLakes();`
-    },
-
-    cutsceneUrl: null
+}).mount("#app4");
+</script>`
+        }
 };

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="refresh" content="21; url=../../react.html" />
+<title>The Four Seasons of the Forest</title>
+<style>
+    /* --- SETUP & MASTER TIMER --- */
+    :root {
+        --animation-duration: 40s; /* A long, slow, and relaxing duration */
+    }
+
+    body {
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+        /* The background animation is the master clock for the entire scene */
+        animation: cycleSeasons var(--animation-duration) linear infinite;
+    }
+
+    .scene-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    /* --- THE SUN --- */
+    .sun {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        transform-origin: 0 40vh; /* Pivots around a point far below */
+        animation: sunPath var(--animation-duration) linear infinite;
+    }
+
+    /* --- THE TREE (OUR PROTAGONIST) --- */
+    .tree {
+        position: absolute;
+        bottom: 15vh;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 300px;
+        height: 400px;
+    }
+    .trunk {
+        position: absolute;
+        bottom: 0;
+        left: 135px;
+        width: 30px;
+        height: 250px;
+        background-color: #5a3a22;
+        border-radius: 10px 10px 0 0;
+    }
+    .branch {
+        position: absolute;
+        top: 0;
+        left: 145px;
+        width: 15px;
+        height: 150px;
+        background-color: #5a3a22;
+        border-radius: 10px;
+        transform-origin: bottom center;
+    }
+    .branch.b1 { transform: rotate(-20deg) scale(1); }
+    .branch.b2 { transform: rotate(20deg) scale(0.9); top: 30px; }
+    .branch.b3 { transform: rotate(-40deg) scale(0.7); top: 50px; }
+    .branch.b4 { transform: rotate(40deg) scale(0.6); top: 70px; }
+
+    .leaf {
+        position: absolute;
+        width: 15px;
+        height: 20px;
+        background-color: #6b8e23; /* Starts as spring green */
+        border-radius: 50% 0;
+        transform-origin: bottom center;
+        /* The leaves will change based on the master season animation */
+        animation: changeLeafColor var(--animation-duration) linear infinite;
+    }
+
+    /* --- WEATHER EFFECTS --- */
+    .weather-container {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+    }
+    .raindrop, .snowflake, .falling-leaf {
+        position: absolute;
+        top: -20px;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+    .raindrop {
+        width: 2px;
+        height: 15px;
+        background: linear-gradient(to bottom, rgba(173, 216, 230, 0), rgba(173, 216, 230, 0.7));
+        animation-name: fall;
+    }
+    .snowflake {
+        width: 8px;
+        height: 8px;
+        background-color: white;
+        border-radius: 50%;
+        box-shadow: 0 0 5px white;
+        animation-name: fallWobble;
+    }
+    .falling-leaf {
+        width: 12px;
+        height: 18px;
+        background-color: #d95550;
+        border-radius: 50% 0;
+        animation-name: fallWobble;
+    }
+
+    /* --- THE GROUND --- */
+    .ground {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 15vh;
+        animation: cycleGround var(--animation-duration) linear infinite;
+    }
+
+    /* --- SEASON MESSAGES --- */
+    .season-text {
+        position: absolute;
+        top: 5%;
+        width: 100%;
+        text-align: center;
+        font-size: 3rem;
+        font-weight: bold;
+        color: white;
+        text-shadow: 0 0 15px rgba(0,0,0,0.6);
+        opacity: 0;
+        animation: cycleText var(--animation-duration) ease-in-out infinite;
+    }
+
+    /* --- KEYFRAME DEFINITIONS --- */
+
+    /* Master animations controlling the mood */
+    @keyframes cycleSeasons {
+        0% { background-color: #a8d5e5; } /* Spring */
+        25% { background-color: #87ceeb; } /* Summer */
+        50% { background-color: #e67e22; } /* Autumn */
+        75% { background-color: #2c3e50; } /* Winter */
+        100% { background-color: #a8d5e5; } /* Back to Spring */
+    }
+    @keyframes cycleGround {
+        0% { background-color: #556b2f; } /* Spring Green */
+        25% { background-color: #228b22; } /* Summer Green */
+        50% { background-color: #8b4513; } /* Autumn Brown */
+        75% { background-color: #f4f4f4; } /* Winter Snow */
+        100% { background-color: #556b2f; }
+    }
+    @keyframes sunPath {
+        0% { transform: rotate(-45deg); background: radial-gradient(circle, #fff, #fefae0); }
+        25% { transform: rotate(45deg); background: radial-gradient(circle, #fff, #ffd700); }
+        50% { transform: rotate(135deg); background: radial-gradient(circle, #fff, #f9c74f); }
+        75% { transform: rotate(225deg); background: radial-gradient(circle, #e0e0e0, #b0c4de); opacity: 0.5; }
+        100% { transform: rotate(315deg); background: radial-gradient(circle, #fff, #fefae0); }
+    }
+
+    /* Leaf life cycle animation */
+    @keyframes changeLeafColor {
+        0%, 100% { background-color: #90ee90; transform: scale(0.5); opacity: 0; } /* Budding */
+        10% { transform: scale(1); opacity: 1; } /* Spring */
+        25% { background-color: #2e8b57; } /* Summer */
+        50% { background-color: #d95550; } /* Autumn Red */
+        60% { background-color: #f4a261; } /* Autumn Orange */
+        70% { opacity: 0; } /* Fallen */
+        75%, 95% { opacity: 0; } /* Winter (gone) */
+    }
+
+    /* Weather animations */
+    @keyframes fall {
+        to { transform: translateY(100vh); }
+    }
+    @keyframes fallWobble {
+        0% { transform: translateY(0) translateX(0) rotate(0deg); }
+        100% { transform: translateY(100vh) translateX(50px) rotate(360deg); }
+    }
+
+    /* Text cycling animation */
+    @keyframes cycleText {
+        0% { opacity: 0; }
+        5% { opacity: 1; }
+        20% { opacity: 1; }
+        25% { opacity: 0; }
+        /* Repeats for each season */
+        25.01% { opacity: 0; } 30% { opacity: 1; } 45% { opacity: 1; } 50% { opacity: 0; }
+        50.01% { opacity: 0; } 55% { opacity: 1; } 70% { opacity: 1; } 75% { opacity: 0; }
+        75.01% { opacity: 0; } 80% { opacity: 1; } 95% { opacity: 1; } 100% { opacity: 0; }
+    }
+</style>
+</head>
+<body>
+
+<div class="scene-container">
+    <div class="sun"></div>
+
+    <div class="tree">
+        <div class="trunk"></div>
+        <div class="branch b1">
+            <div class="leaf" style="top: 20px; left: -5px;"></div>
+            <div class="leaf" style="top: 50px; left: 5px;"></div>
+            <div class="leaf" style="top: 80px; left: -10px;"></div>
+        </div>
+        <div class="branch b2">
+            <div class="leaf" style="top: 30px; left: 5px;"></div>
+            <div class="leaf" style="top: 60px; left: -5px;"></div>
+        </div>
+        <div class="branch b3">
+            <div class="leaf" style="top: 40px; left: 0px;"></div>
+        </div>
+        <div class="branch b4">
+            <div class="leaf" style="top: 25px; left: -5px;"></div>
+        </div>
+    </div>
+
+    <div class="ground"></div>
+
+    <div class="weather-container">
+        <!-- Weather will be added here by JavaScript for a more natural effect -->
+    </div>
+    
+    <div class="season-text" id="spring-text">Spring</div>
+    <div class="season-text" id="summer-text">Summer</div>
+    <div class="season-text" id="autumn-text">Autumn</div>
+    <div class="season-text" id="winter-text">Winter</div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const weatherContainer = document.querySelector('.weather-container');
+        
+        // --- Generate weather for a more natural look ---
+        // Rain for Spring
+        for (let i = 0; i < 50; i++) {
+            const drop = document.createElement('div');
+            drop.className = 'raindrop';
+            drop.style.left = `${Math.random() * 100}vw`;
+            drop.style.animationDuration = `${0.5 + Math.random() * 0.5}s`;
+            drop.style.animationDelay = `${Math.random() * (0.25 * 40)}s`; // Only in first quarter
+            weatherContainer.appendChild(drop);
+        }
+
+        // Falling Leaves for Autumn
+        for (let i = 0; i < 20; i++) {
+            const leaf = document.createElement('div');
+            leaf.className = 'falling-leaf';
+            leaf.style.left = `${Math.random() * 100}vw`;
+            leaf.style.animationDuration = `${5 + Math.random() * 5}s`;
+            leaf.style.animationDelay = `${(0.5 + Math.random() * 0.2) * 40}s`; // Only in third quarter
+            leaf.style.backgroundColor = Math.random() > 0.5 ? '#d95550' : '#f4a261';
+            weatherContainer.appendChild(leaf);
+        }
+
+        // Snow for Winter
+        for (let i = 0; i < 100; i++) {
+            const flake = document.createElement('div');
+            flake.className = 'snowflake';
+            flake.style.left = `${Math.random() * 100}vw`;
+            flake.style.animationDuration = `${8 + Math.random() * 10}s`;
+            flake.style.animationDelay = `${(0.75 + Math.random() * 0.25) * 40}s`; // Only in fourth quarter
+            flake.style.opacity = Math.random();
+            weatherContainer.appendChild(flake);
+        }
+        
+        // --- Sync the text animations to the seasons ---
+        const duration = 40; // Must match --animation-duration
+        document.getElementById('spring-text').style.animationDelay = `${duration * 0}s`;
+        document.getElementById('summer-text').style.animationDelay = `${duration * 0.25}s`;
+        document.getElementById('autumn-text').style.animationDelay = `${duration * 0.5}s`;
+        document.getElementById('winter-text').style.animationDelay = `${duration * 0.75}s`;
+    });
+</script>
+
+</body>
+</html>

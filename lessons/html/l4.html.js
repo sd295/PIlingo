@@ -121,17 +121,11 @@ const lessonContent = {
 </html>`
     },
     minigame: {
-        title: "Challenge: The Contact Form",
-        prompt: "A client needs a simple contact form. They need a box for 'Your Email' and a LARGER box for 'Your Message'. Then a big button that says 'Send'. What's the structure?",
-        draggableTags: [
-            "<code>&lt;form&gt;&lt;/form&gt;</code>",
-            "<code>&lt;label&gt;Your Email&lt;/label&gt;</code>",
-            "<code>&lt;input type='text'&gt;</code>",
-            "<code>&lt;label&gt;Your Message&lt;/label&gt;</code>",
-            "<code>&lt;textarea&gt;&lt;/textarea&gt;</code>",
-            "<code>&lt;button type='submit'&gt;Send&lt;/button&gt;</code>"
-        ],
-        // The user must know to use <textarea> for a larger message box.
-        solution: "<form><label></label><input></input><label></label><textarea></textarea><button></button></form>"
-    }
+    gameType: 'code-typer',
+    title: "Challenge: Create a Simple Form",
+    prompt: "Write the HTML for a contact form with one input for email and a submit button. Type the code exactly as shown below.",
+    
+    solution: `<form>\n  <label for="email">Email:</label>\n  <input type="email" id="email" name="email">\n  <button type="submit">Send</button>\n</form>`
+}
+
 };

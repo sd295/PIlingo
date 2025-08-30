@@ -4,67 +4,67 @@ const lessonContent = {
     cutsceneUrl: null,
     minigame: null,
 
-    // Expanded Questions array for the quiz
+    // Expanded prompts array for the quiz
     questions: [
         {
-            question: "How do you say 'Hello' in Swedish?",
-            choices: ["Hej", "Hallo", "Hola", "Bonjour"],
-            answer: "Hej"
+            prompt: "How do you say 'Hello' in Swedish?",
+            options: ["Hej", "Hallo", "Hola", "Bonjour"],
+            correctAnswer: "Hej"
         },
         {
-            question: "How do you say 'Good morning' in Swedish?",
-            choices: ["God morgon", "Buenos días", "Bonjour", "Guten Morgen"],
-            answer: "God morgon"
+            prompt: "How do you say 'Good morning' in Swedish?",
+            options: ["God morgon", "Buenos días", "Bonjour", "Guten Morgen"],
+            correctAnswer: "God morgon"
         },
         {
-            question: "How do you say 'Good night' in Swedish?",
-            choices: ["God natt", "Bonne nuit", "Buenas noches", "Gute Nacht"],
-            answer: "God natt"
+            prompt: "How do you say 'Good night' in Swedish?",
+            options: ["God natt", "Bonne nuit", "Buenas noches", "Gute Nacht"],
+            correctAnswer: "God natt"
         },
         {
-            question: "How do you say 'Thank you' in Swedish?",
-            choices: ["Tack", "Merci", "Danke", "Grazie"],
-            answer: "Tack"
+            prompt: "How do you say 'Thank you' in Swedish?",
+            options: ["Tack", "Merci", "Danke", "Grazie"],
+            correctAnswer: "Tack"
         },
         {
-            question: "How do you say 'Please' in Swedish?",
-            choices: ["Snälla", "S'il vous plaît", "Bitte", "Per favore"],
-            answer: "Snälla"
+            prompt: "How do you say 'Please' in Swedish?",
+            options: ["Snälla", "S'il vous plaît", "Bitte", "Per favore"],
+            correctAnswer: "Snälla"
         },
         {
-            question: "How do you say 'Yes' in Swedish?",
-            choices: ["Ja", "Oui", "Si", "Ja!"],
-            answer: "Ja"
+            prompt: "How do you say 'Yes' in Swedish?",
+            options: ["Ja", "Oui", "Si", "Ja!"],
+            correctAnswer: "Ja"
         },
         {
-            question: "How do you say 'No' in Swedish?",
-            choices: ["Nej", "No", "Non", "Nein"],
-            answer: "Nej"
+            prompt: "How do you say 'No' in Swedish?",
+            options: ["Nej", "No", "Non", "Nein"],
+            correctAnswer: "Nej"
         },
         {
-            question: "Which color is on the Swedish flag?",
-            choices: ["Red", "Blue", "Green", "Yellow"],
-            answer: "Blue"
+            prompt: "Which color is on the Swedish flag?",
+            options: ["Red", "Blue", "Green", "Yellow"],
+            correctAnswer: "Blue"
         },
         {
-            question: "Which symbol represents Sweden in a fun way?",
-            choices: ["🇸🇪", "🇳🇴", "🇫🇮", "🇩🇰"],
-            answer: "🇸🇪"
+            prompt: "Which symbol represents Sweden in a fun way?",
+            options: ["🇸🇪", "🇳🇴", "🇫🇮", "🇩🇰"],
+            correctAnswer: "🇸🇪"
         },
         {
-            question: "How do you say 'Friend' in Swedish?",
-            choices: ["Vän", "Amigo", "Freund", "Ami"],
-            answer: "Vän"
+            prompt: "How do you say 'Friend' in Swedish?",
+            options: ["Vän", "Amigo", "Freund", "Ami"],
+            correctAnswer: "Vän"
         },
         {
-            question: "How do you say 'Family' in Swedish?",
-            choices: ["Familj", "Familia", "Famille", "Familie"],
-            answer: "Familj"
+            prompt: "How do you say 'Family' in Swedish?",
+            options: ["Familj", "Familia", "Famille", "Familie"],
+            correctAnswer: "Familj"
         },
         {
-            question: "How do you say 'I love you' in Swedish?",
-            choices: ["Jag älskar dig", "Te quiero", "Je t'aime", "Ich liebe dich"],
-            answer: "Jag älskar dig"
+            prompt: "How do you say 'I love you' in Swedish?",
+            options: ["Jag älskar dig", "Te quiero", "Je t'aime", "Ich liebe dich"],
+            correctAnswer: "Jag älskar dig"
         }
     ],
 

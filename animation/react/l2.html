@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Story of Ukraine</title>
+<meta http-equiv="refresh" content="10; url=../../react.html" />
+<style>
+    /* --- SETUP & VARIABLES --- */
+    :root {
+        --sky-blue: #0057b7;
+        --field-yellow: #ffd700;
+        --storm-grey: #4b4b4b;
+        --sun-color: #ffdf00;
+        --sunflower-brown: #5a3a22;
+        --animation-duration: 15s; /* Master duration for the story */
+    }
+
+    body {
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+        /* The body itself doesn't need a background, the scene will cover it */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .scene-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    /* --- ACT 1: PEACE AND NATURE --- */
+    .sky, .field {
+        position: absolute;
+        width: 100%;
+        height: 50%;
+        left: 0;
+    }
+    .sky {
+        top: 0;
+        background-color: var(--sky-blue);
+        z-index: 1;
+        /* The sky will darken during the storm */
+        animation: darkenSky var(--animation-duration) ease-in-out forwards;
+    }
+    .field {
+        bottom: 0;
+        background-color: var(--field-yellow);
+        z-index: 2;
+    }
+
+    .sun {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 150px;
+        height: 150px;
+        background: radial-gradient(circle, white, var(--sun-color));
+        border-radius: 50%;
+        box-shadow: 0 0 80px var(--sun-color);
+        z-index: 3;
+        /* The sun rises into view */
+        animation: riseSun var(--animation-duration) ease-out forwards;
+    }
+
+    .sunflower {
+        position: absolute;
+        bottom: 10%;
+        z-index: 4;
+        width: 80px;
+        height: 80px;
+        /* The sunflower "grows" into view */
+        animation: growSunflower calc(var(--animation-duration) / 3) ease-out forwards;
+    }
+    .sunflower .center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 30px;
+        height: 30px;
+        background-color: var(--sunflower-brown);
+        border-radius: 50%;
+    }
+    .sunflower .petal {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform-origin: bottom center;
+        width: 20px;
+        height: 40px;
+        background-color: var(--field-yellow);
+        border-radius: 50%;
+    }
+
+    /* Position sunflowers and their petals */
+    .sunflower.left { left: 20%; animation-delay: 1.5s; }
+    .sunflower.right { right: 20%; animation-delay: 2.5s; }
+    .petal.p1 { transform: translateX(-50%) rotate(0deg); }
+    .petal.p2 { transform: translateX(-50%) rotate(45deg); }
+    .petal.p3 { transform: translateX(-50%) rotate(90deg); }
+    .petal.p4 { transform: translateX(-50%) rotate(135deg); }
+    .petal.p5 { transform: translateX(-50%) rotate(180deg); }
+    .petal.p6 { transform: translateX(-50%) rotate(225deg); }
+    .petal.p7 { transform: translateX(-50%) rotate(270deg); }
+    .petal.p8 { transform: translateX(-50%) rotate(315deg); }
+
+    /* --- ACT 2: THE STORM --- */
+    .storm-overlay {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        opacity: 0;
+        z-index: 5;
+        /* The storm flickers in and out */
+        animation: flickerStorm var(--animation-duration) ease-in-out forwards;
+    }
+    
+    /* --- ACT 3: RESILIENCE AND HOPE --- */
+    .tryzub-container {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60px; height: 90px;
+        z-index: 6;
+        opacity: 0;
+        /* The Tryzub appears after the storm */
+        animation: revealSymbol var(--animation-duration) ease-out forwards;
+    }
+    .tryzub-container div {
+        position: absolute;
+        background-color: var(--sky-blue);
+    }
+    .tryzub-base { bottom: 0; left: 25px; width: 10px; height: 60px; }
+    .tryzub-left { bottom: 50px; left: 0; width: 10px; height: 40px; border-radius: 10px 10px 0 0; }
+    .tryzub-right { bottom: 50px; right: 0; width: 10px; height: 40px; border-radius: 10px 10px 0 0; }
+    .tryzub-top { top: 0; left: 25px; width: 10px; height: 20px; }
+    .tryzub-cross { top: 20px; left: 15px; width: 30px; height: 10px; }
+    
+    .message {
+        position: absolute;
+        bottom: 5%;
+        width: 100%;
+        text-align: center;
+        font-size: 3rem;
+        font-weight: bold;
+        color: var(--sky-blue);
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+        z-index: 7;
+        opacity: 0;
+        /* The message appears at the very end */
+        animation: fadeText var(--animation-duration) ease-in-out forwards;
+    }
+    
+    /* --- KEYFRAME DEFINITIONS --- */
+
+    @keyframes riseSun {
+        0% { transform: translate(-50%, 100px); }
+        30%, 100% { transform: translate(-50%, -50%); }
+    }
+    @keyframes growSunflower {
+        from { transform: scale(0); }
+        to { transform: scale(1); }
+    }
+    @keyframes darkenSky {
+        0%, 30% { background-color: var(--sky-blue); }
+        50% { background-color: var(--storm-grey); }
+        70%, 100% { background-color: var(--sky-blue); }
+    }
+    @keyframes flickerStorm {
+        35% { opacity: 0; }
+        40% { opacity: 0.7; }
+        45% { opacity: 0.3; }
+        50% { opacity: 0.8; }
+        55% { opacity: 0.2; }
+        60% { opacity: 0.6; }
+        65%, 100% { opacity: 0; }
+    }
+    @keyframes revealSymbol {
+        0%, 65% { opacity: 0; transform: translate(-50%, -40%); }
+        80%, 100% { opacity: 1; transform: translate(-50%, -50%); }
+    }
+    @keyframes fadeText {
+        0%, 80% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+
+</style>
+</head>
+<body>
+
+<div class="scene-container">
+    <div class="sky"></div>
+    <div class="sun">
+        <div class="tryzub-container">
+            <div class="tryzub-base"></div>
+            <div class="tryzub-left"></div>
+            <div class="tryzub-right"></div>
+            <div class="tryzub-top"></div>
+            <div class="tryzub-cross"></div>
+        </div>
+    </div>
+    
+    <div class="field"></div>
+
+    <div class="sunflower left">
+        <div class="center"></div>
+        <div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div>
+        <div class="petal p5"></div><div class="petal p6"></div><div class="petal p7"></div><div class="petal p8"></div>
+    </div>
+
+    <div class="sunflower right">
+        <div class="center"></div>
+        <div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div>
+        <div class="petal p5"></div><div class="petal p6"></div><div class="petal p7"></div><div class="petal p8"></div>
+    </div>
+
+    <div class="storm-overlay"></div>
+    
+    <div class="message">Слава Україні!</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kyiv, The Unbreakable Heart</title>
+<meta http-equiv="refresh" content="10; url=../../react.html" />
+<style>
+    /* --- SETUP & VARIABLES --- */
+    :root {
+        --sky-dawn: #f6d365;
+        --sky-day: #0057b7;
+        --sky-dusk: #483d8b;
+        --sky-night: #0b1d3a;
+        --sun-color: #ffd700;
+        --dome-gold: #ffc72c;
+        --river-color: #4a90e2;
+        --hill-green: #2e6b34;
+        --animation-duration: 20s; /* Master duration for the story */
+    }
+
+    body {
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+        background: linear-gradient(180deg, var(--sky-night), var(--sky-dusk), var(--sky-day), var(--sky-dawn));
+        background-size: 100% 400%; /* Stretched vertically for smooth transitions */
+        animation: skyCycle var(--animation-duration) ease-in-out infinite alternate;
+        font-family: 'Georgia', serif;
+    }
+
+    .scene-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    /* --- ACT 1: DAWN OVER THE DNIPRO --- */
+
+    .sun-path {
+        position: absolute;
+        width: 150vw;
+        height: 150vw;
+        top: 50%;
+        left: 50%;
+        transform-origin: center center;
+        animation: sunRotation var(--animation-duration) linear infinite;
+    }
+    .sun {
+        position: absolute;
+        top: -75px; /* Half of its width */
+        left: calc(50% - 75px);
+        width: 150px;
+        height: 150px;
+        background: radial-gradient(circle, white, var(--sun-color));
+        border-radius: 50%;
+        box-shadow: 0 0 80px var(--sun-color);
+    }
+    
+    .river {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 25vh;
+        background: linear-gradient(to top, #2c3e50, var(--river-color));
+        z-index: 5;
+    }
+    .river-reflection {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: white;
+        mix-blend-mode: overlay;
+        opacity: 0.3;
+        animation: waterGlow var(--animation-duration) ease-in-out infinite alternate;
+    }
+
+    /* --- ACT 2: DAYLIGHT --- */
+
+    .hill {
+        position: absolute;
+        bottom: 20vh;
+        width: 120%;
+        height: 30vh;
+        background-color: var(--hill-green);
+        border-radius: 50% / 100% 100% 0 0;
+        z-index: 4;
+    }
+    .hill.left { left: -20%; }
+    .hill.right { right: -20%; width: 80%; background-color: #388e3c; }
+
+    .church {
+        position: absolute;
+        bottom: 35vh;
+        z-index: 6;
+    }
+    .church.main { left: 50%; transform: translateX(-50%) scale(1); }
+    .church.side { left: 35%; transform: scale(0.8); z-index: 3; bottom: 30vh;}
+
+    .church .building {
+        width: 80px;
+        height: 120px;
+        background-color: #f4f4f4;
+    }
+    .church .dome {
+        position: absolute;
+        top: -40px;
+        left: 15px;
+        width: 50px;
+        height: 50px;
+        background: radial-gradient(circle at 30% 30%, white, var(--dome-gold));
+        border-radius: 50%;
+        border: 2px solid #b18a2d;
+    }
+    .church .dome::before { /* The onion shape */
+        content: '';
+        position: absolute;
+        top: -15px;
+        left: 15px;
+        width: 20px;
+        height: 20px;
+        background: var(--dome-gold);
+        border-radius: 50%;
+    }
+    .church .dome::after { /* The cross */
+        content: '+';
+        font-size: 20px;
+        color: #b18a2d;
+        position: absolute;
+        top: -35px;
+        left: 19px;
+    }
+    
+    /* --- ACT 3: AN UNBREAKABLE EVENING --- */
+    
+    .city-buildings {
+        position: absolute;
+        bottom: 25vh;
+        left: 65%;
+        z-index: 3;
+        display: flex;
+        align-items: flex-end;
+        gap: 5px;
+    }
+    .building {
+        background-color: #3e4a5e;
+        width: 25px;
+    }
+    .building .window {
+        width: 60%;
+        height: 5px;
+        margin: 4px auto;
+        background-color: #2c3e50;
+        animation: lightUp var(--animation-duration) ease-in-out infinite alternate;
+    }
+
+    .message {
+        position: absolute;
+        top: 10%;
+        width: 100%;
+        text-align: center;
+        font-size: 3.5rem;
+        font-weight: bold;
+        color: white;
+        text-shadow: 0 0 15px black;
+        z-index: 10;
+        opacity: 0;
+        animation: revealText var(--animation-duration) ease-in-out forwards;
+    }
+
+    /* --- KEYFRAME DEFINITIONS --- */
+
+    @keyframes skyCycle {
+        0%, 100% { background-position: 0% 0%; }   /* Night */
+        50% { background-position: 0% 100%; }  /* Day */
+    }
+    @keyframes sunRotation {
+        from { transform: translate(-50%, -50%) rotate(-90deg); }
+        to { transform: translate(-50%, -50%) rotate(90deg); }
+    }
+    @keyframes waterGlow {
+        0%, 100% { opacity: 0.1; }
+        50% { opacity: 0.5; }
+    }
+    @keyframes lightUp {
+        0%, 30% { background-color: #ffd700; box-shadow: 0 0 5px #ffd700; } /* Lights on at night */
+        60%, 80% { background-color: #2c3e50; box-shadow: none; } /* Off during day */
+    }
+    @keyframes revealText {
+        0%, 70% { opacity: 0; transform: scale(0.9); }
+        90%, 100% { opacity: 1; transform: scale(1); }
+    }
+
+</style>
+</head>
+<body>
+
+<div class="scene-container">
+    <div class="sun-path">
+        <div class="sun"></div>
+    </div>
+
+    <div class="hill left"></div>
+    <div class="hill right"></div>
+    
+    <div class="city-buildings">
+        <div class="building" style="height: 80px;"><div class="window"></div><div class="window"></div></div>
+        <div class="building" style="height: 120px;"><div class="window"></div><div class="window"></div><div class="window"></div></div>
+        <div class="building" style="height: 90px;"><div class="window"></div></div>
+    </div>
+
+    <div class="church side">
+        <div class="building"></div>
+        <div class="dome"></div>
+    </div>
+    <div class="church main">
+        <div class="building"></div>
+        <div class="dome"></div>
+    </div>
+
+    <div class="river">
+        <div class="river-reflection"></div>
+    </div>
+
+    <div class="message">Київ, Незламне Серце</div>
+</div>
+
+</body>
+</html>

@@ -115,37 +115,19 @@ Create a Vue.js app that:
 
     // Minigame: interactive color counter
     minigame: {
-        title: "Challenge: Colorful Counter",
-        prompt: `
-Create a Vue.js counter app with:
-- A number starting at 0.
-- Buttons to increase or decrease the number.
-- Reactive background color changes based on the value.
-- Bonus: display a message if the number is above 10.
-        `,
-        draggableTags: ["v-model", "computed", "methods", "v-on:click", "v-bind:style", "data()"],
-        solution: `const app = Vue.createApp({
-  data() {
-    return { count: 0 }
-  },
-  computed: {
-    bgColor() {
-      if(this.count > 10) return 'lightgreen';
-      if(this.count < 0) return 'lightcoral';
-      return 'lightblue';
-    },
-    message() {
-      return this.count > 10 ? 'High number!' : '';
-    }
-  },
+            gameType: 'code-typer',
+            title: "Challenge 8: No",
+            prompt: "Make 'Nej' (No). On click, background turns red.",
+            solution: `<div id="app8">
+  <button @click="stop" :style="{background: bg}">Nej</button>
+</div>
+<script>
+createApp({
+  data() { return { bg: "white" } },
   methods: {
-    increment() { this.count++ },
-    decrement() { this.count-- },
-    reset() { this.count = 0 }
+    stop() { this.bg = "red"; }
   }
-});
-app.mount('#app');`
-    },
-
-    cutsceneUrl: null
+}).mount("#app8");
+</script>`
+        }
 };

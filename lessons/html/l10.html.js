@@ -126,22 +126,11 @@ const lessonContent = {
 </html>`
     },
     minigame: {
-        title: "Mini-Quest: The Interactive Wizard Scroll",
-        prompt: "Arrange the following tags correctly to make a fully functional wizard form:",
-        draggableTags: [
-            "<code>&lt;form&gt;&lt;/form&gt;</code>",
-            "<code>&lt;label&gt;Name&lt;/label&gt;</code>",
-            "<code>&lt;input type='text'&gt;</code>",
-            "<code>&lt;label&gt;Favorite Creature&lt;/label&gt;</code>",
-            "<code>&lt;input type='radio'&gt;</code>",
-            "<code>&lt;label&gt;Powers&lt;/label&gt;</code>",
-            "<code>&lt;input type='checkbox'&gt;</code>",
-            "<code>&lt;label&gt;Spell Scroll&lt;/label&gt;</code>",
-            "<code>&lt;input type='file'&gt;</code>",
-            "<code>&lt;label&gt;Comments&lt;/label&gt;</code>",
-            "<code>&lt;textarea&gt;&lt;/textarea&gt;</code>",
-            "<code>&lt;button type='submit'&gt;Send Magic&lt;/button&gt;</code>"
-        ],
-        solution: "<form><label></label><input></input><label></label><input></input><label></label><input></input><label></label><input></input><label></label><textarea></textarea><button></button></form>"
-    }
+    gameType: 'code-typer',
+    title: "Challenge: Feedback Form",
+    prompt: "Type the HTML for a feedback form with a name field and a textarea for the message.",
+    
+    solution: `<form>\n  <label for="name">Name:</label>\n  <input type="text" id="name" name="name">\n  <br>\n  <label for="message">Message:</label>\n  <textarea id="message" name="message"></textarea>\n</form>`
+}
+
 };

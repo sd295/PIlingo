@@ -106,46 +106,10 @@ Create an interactive page that:
 </html>`
     },
     minigame: {
-        title: "Challenge: Interactive Swedish Lakes Fetcher",
-        prompt: `
-Fetch a list of Swedish lakes from a mock API.
-- Sort them by size descending.
-- Display only lakes larger than 100 km².
-- Highlight lakes starting with 'S'.
-- Handle errors gracefully.
-`,
-        draggableTags: [
-            "fetch()",
-            "await",
-            "response.json()",
-            "filter()",
-            "sort()",
-            "forEach()",
-            "try...catch",
-            "document.createElement()",
-            "appendChild()",
-            "classList.add()"
-        ],
-        solution: `// Example solution:
-async function loadLakes() {
-  try {
-    const res = await fetch('lakes.json');
-    const lakes = await res.json();
-    const list = document.getElementById('lakeList');
-    lakes
-      .filter(lake => lake.size > 100)
-      .sort((a,b) => b.size - a.size)
-      .forEach(lake => {
-        const li = document.createElement('li');
-        li.textContent = \`\${lake.name} - \${lake.size} km²\`;
-        if(lake.name.startsWith('S')) li.classList.add('highlight');
-        list.appendChild(li);
-      });
-  } catch (e) {
-    console.error('Error fetching lakes', e);
-  }
-}
-loadLakes();`
-    }
+            gameType: 'code-typer',
+            title: "Challenge 4: Good Morning",
+            prompt: "Make a paragraph that says 'God morgon' (Good morning). When clicked, it alerts 'Good morning!'.",
+            solution: `<p onclick="alert('Good morning!')">God morgon</p>`
+        },
 };
 

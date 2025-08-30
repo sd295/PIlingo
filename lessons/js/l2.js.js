@@ -75,16 +75,10 @@ function bigFestivals(cityArray) {
 bigFestivals(cities);`
     },
     minigame: {
-        title: "Challenge: Sort and Filter Swedish Cities",
-        prompt: "Sort cities by visitor count descending, then log only the names of cities with over 100,000 visitors.",
-        draggableTags: [
-            "cities.sort((a,b) => b.visitors - a.visitors)",
-            "cities.filter(city => city.visitors > 100000)",
-            "cities.map(city => city.name)",
-            "console.log(...)"
-        ],
-        solution: "console.log(cities.sort((a,b) => b.visitors - a.visitors).filter(city => city.visitors > 100000).map(city => city.name));"
-    }
+            gameType: 'code-typer',
+            title: "Challenge 2: Thank You",
+            prompt: "Make a button that says 'Tack' (Thank you). On click, alert 'Thank you!'.",
+            solution: `<button onclick="alert('Thank you!')">Tack</button>`
+        },
 };
-
 

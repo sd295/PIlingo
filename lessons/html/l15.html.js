@@ -136,22 +136,11 @@ const lessonContent = {
 </html>`
     },
     minigame: {
-        title: "Mini-Quest: Animate the Magic Scroll",
-        prompt: "Drag and drop these JS actions to make the wizard form interactive:",
-        draggableTags: [
-            "<code>event.preventDefault()</code>",
-            "<code>alert('Welcome, Wizard!')</code>",
-            "<code>element.style.color = 'gold'</code>",
-            "<code>oninput</code>",
-            "<code>onmouseover</code>",
-            "<code>appendChild()</code>",
-            "<code>validate empty fields</code>"
-        ],
-        solution: `form.addEventListener('submit', function(event){
-  event.preventDefault();
-  if(name is empty || email is empty) { highlight fields }
-  else { alert('Welcome, Wizard!'); }
-});
-button.onmouseover = function(){ button.style.color = 'gold'; }`
-    }
+    gameType: 'code-typer',
+    title: "Challenge: Feedback Form",
+    prompt: "Type the HTML for a website feedback form. It should include: Name, Email, a set of radio buttons for satisfaction (Good, Average, Poor), a textarea for comments, and a Submit button.",
+    
+    solution: `<form>\n  <label for="name">Name:</label>\n  <input type="text" id="name" name="name">\n  <br>\n  <label for="email">Email:</label>\n  <input type="email" id="email" name="email">\n  <br>\n  <p>How satisfied are you with our website?</p>\n  <input type="radio" id="good" name="satisfaction" value="good">\n  <label for="good">Good</label>\n  <input type="radio" id="average" name="satisfaction" value="average">\n  <label for="average">Average</label>\n  <input type="radio" id="poor" name="satisfaction" value="poor">\n  <label for="poor">Poor</label>\n  <br>\n  <label for="comments">Your comments:</label>\n  <br>\n  <textarea id="comments" name="comments" rows="4" cols="40"></textarea>\n  <br>\n  <button type="submit">Send Feedback</button>\n</form>`
+}
+
 };

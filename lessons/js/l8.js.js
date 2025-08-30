@@ -7,25 +7,25 @@ const lessonContent = {
     // Questions array for the quiz
     questions: [
         {
-            question: "How do you say 'Hello' in Swedish?",
-            choices: ["Hej", "Hallo", "Hola", "Bonjour"],
-            answer: "Hej"
+            prompt: "How do you say 'Hej=Hallo' in Swedish?",
+            options: ["Hej", "Hallo", "Hola", "Bonjour"],
+            correctAnswer: "Hej"
         },
         {
-            question: "How do you say 'Thank you' in Swedish?",
-            choices: ["Tack", "Merci", "Danke", "Grazie"],
-            answer: "Tack"
+            prompt: "How do you say 'Thank you=Tack' in Swedish?",
+            options: ["Tack", "Merci", "Danke", "Grazie"],
+            correctAnswer: "Tack"
         },
         {
-            question: "Which color is on the Swedish flag?",
-            choices: ["Red", "Blue", "Green", "Yellow"],
-            answer: "Blue"
+            prompt: "How do you say 'Thank you' in Swedish?",
+            options: ["Tack", "Merci", "Danke", "Grazie"],
+            correctAnswer: "Tack"
         },
         {
-            question: "Which emoji represents Sweden in a fun way?",
-            choices: ["🇸🇪", "🇳🇴", "🇫🇮", "🇩🇰"],
-            answer: "🇸🇪"
-        }
+            prompt: "How do you say 'Hallo' in Swedish?",
+            options: ["Hej", "Hallo", "Hola", "Bonjour"],
+            correctAnswer: "Hej"
+        },
     ],
 
     practice: null // No separate practice; this level is a quiz

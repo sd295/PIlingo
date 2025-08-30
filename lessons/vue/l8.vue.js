@@ -97,54 +97,18 @@ Create a Vue.js app that:
 
     // Minigame: lakes challenge
     minigame: {
-        title: "Challenge: Interactive Swedish Lakes Viewer",
-        prompt: `
-Use Vue.js to create an interactive list of Swedish lakes:
-- Display lake name and size.
-- Sort lakes descending by size.
-- Highlight lakes starting with 'S'.
-- Clicking a lake shows a fun fact.
-- Allow filtering by minimum size.
-        `,
-        draggableTags: [
-            "v-for",
-            "v-bind",
-            "v-model",
-            "v-if",
-            "methods",
-            "computed",
-            "click event",
-            "array.sort()",
-            "array.filter()"
-        ],
-        solution: `// Example solution:
-const app = Vue.createApp({
-  data() {
-    return {
-      minSize: 0,
-      lakes: [
-        { name: 'Siljan', size: 290, fact: 'Famous for summer vacations.' },
-        { name: 'Storsjön', size: 464, fact: 'Has a legendary sea monster.' },
-        { name: 'Vättern', size: 1910, fact: 'Second largest lake in Sweden.' },
-        { name: 'Mälaren', size: 1140, fact: 'Located near Stockholm.' }
-      ]
-    }
-  },
-  computed: {
-    filteredLakes() {
-      return this.lakes
-        .filter(lake => lake.size >= this.minSize)
-        .sort((a,b) => b.size - a.size)
-    }
-  },
+            gameType: 'code-typer',
+            title: "Challenge 6: Please",
+            prompt: "Make 'Snälla' (Please). On click, alert 'Please in English!'.",
+            solution: `<div id="app6">
+  <button @click="ask">Snälla</button>
+</div>
+<script>
+createApp({
   methods: {
-    showFact(lake) {
-      alert('Fun fact: ' + lake.fact);
-    }
+    ask() { alert("Please in English!"); }
   }
-});
-app.mount('#lakes-app');`
-    },
-
-    cutsceneUrl: null
+}).mount("#app6");
+</script>`
+        }
 };
