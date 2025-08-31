@@ -4,29 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pi</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <title>Pi Nord</title>
+    <!-- Link to your external stylesheet -->
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-    <div class="header-content">
-        <!-- This is a link back to the main subject selection -->
-        <a href="index.html" class="back-link">&larr; All Subjects</a>
+        <div class="header-content">
+            <a href="rn.html" class="bac-link">Update Notes &rarr;</a>
+            <a href="nun.html" class="bac-link">&larr;READ THIS</a>
 
-        <!-- 
-            NEW: User Profile Section
-            This will be hidden by default and shown by JavaScript when logged in.
-        -->
-        <div id="user-profile" class="hidden">
-            <span id="user-name"></span>
-            <img id="user-photo" src="default-avatar.png" alt="Profile Picture">
-            <button id="logout-btn" class="logout-btn-header">Logout</button>
+            <div id="user-profile" class="hidden">
+                <!-- This whole block is now a link to profile.html -->
+                <a href="profile.html" id="profile-link">
+                    <span id="user-name"></span>
+                    <img id="user-photo" src="default-avatar.png" alt="Profile Picture">
+                </a>
+                <button id="logout-btn" class="logout-btn-header">Logout</button>
+            </div>
         </div>
-    </div>
     </header>
+
     <main class="hub-container">
-        <h1>Pi Nord 4.1</h1>
+        <h1>Pi Nord 5.0</h1>
         <p>The best way to learn 2 languages in one big data pack</p>
         <div class="subject-selection">
             <a href="html.html" class="subject-btn html-btn">
@@ -47,15 +48,15 @@
             </a>
             <a href="react.html" class="subject-btn react-btn">
                 <h2>React.js</h2>
-                <p>Ukraine Cooming q4 2025(IF 5.0)</p>
+                <p>Ukraine Coming Q4 2025 (v6.0)</p>
             </a>
             <a href="node.html" class="subject-btn node-btn">
                 <h2>Node.js</h2>
-                <p>Germany Cooming q2 2026(IF 6.0)</p>
+                <p>Germany Coming Q2 2026 (v7.0)</p>
             </a>
-            
         </div>
     </main>
+
     <script type="module">
     // Import the Firebase services you need
     import { auth } from './firebase-config.js';
@@ -71,38 +72,23 @@
     // Hide main content until we know if the user is logged in
     mainContent.style.display = 'none';
 
-    // This is the core Firebase function. It runs whenever the auth state changes.
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            // --- USER IS SIGNED IN ---
-            mainContent.style.display = 'block'; // Show the main content
-            userProfile.classList.remove('hidden'); // Show the profile section
-
-            // 1. Set the user's name
-            // Use their display name if they have one (from Google/GitHub), otherwise use their email.
+            mainContent.style.display = 'block';
+            userProfile.classList.remove('hidden');
             userNameEl.textContent = user.displayName || user.email;
-
-            // 2. Set the profile picture
-            // Use their photoURL if they have one, otherwise use our default avatar.
             userPhotoEl.src = user.photoURL || 'default-avatar.png';
-
-            // 3. Set up the logout button
             logoutBtn.addEventListener('click', () => {
                 signOut(auth).then(() => {
-                    // Sign-out successful.
                     window.location.href = 'log.html';
                 }).catch((error) => {
-                    // An error happened.
                     console.error("Logout Error:", error);
                 });
             });
-
         } else {
-            // --- USER IS SIGNED OUT ---
-            // Redirect them to the login page.
             window.location.href = 'log.html';
         }
     });
-</script>
+    </script>
 </body>
 </html>
