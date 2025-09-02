@@ -42,7 +42,7 @@ body {
     justify-content: center;
     min-height: 100vh;
     margin: 0;
-    padding: 20px;
+    padding: 40px;
     box-sizing: border-box;
     background: linear-gradient(181deg, rgb(16, 20, 35),rgb(40, 50, 90),rgb(133, 137, 94),rgb(255, 215, 100),rgb(255, 245, 63));
     /* Key for animated background */

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="7; url=../../css.html" />
+    <title>Winter in Suomi</title>
+    <style>
+        /* --- CSS for Styling and Animation --- */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #002f6c, #0d3b80); /* Dark blue gradient */
+            font-family: 'Trebuchet MS', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #snow-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .scene-container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            animation: fadeIn 3s ease-out, float 6s ease-in-out infinite;
+        }
+
+        .finland-flag {
+            width: 120px;
+            height: auto;
+            border: 3px solid white;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 3.5rem;
+            margin-top: 15px;
+            letter-spacing: 0.8rem;
+            text-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            text-transform: uppercase;
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Canvas for the JavaScript snow effect -->
+    <canvas id="snow-canvas"></canvas>
+
+    <!-- HTML Content for the scene -->
+    <div class="scene-container">
+        <!-- SVG of the Finnish flag embedded directly -->
+        <svg class="finland-flag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 11">
+            <rect width="18" height="11" fill="#fff"/>
+            <rect width="18" height="3" y="4" fill="#002f6c"/>
+            <rect width="3" height="11" x="5" fill="#002f6c"/>
+        </svg>
+        <h1>Suomi</h1>
+    </div>
+
+    <script>
+        // --- JavaScript for Dynamic Snowfall ---
+
+        const canvas = document.getElementById('snow-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Set canvas to fill the screen
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let snowflakes = [];
+        const snowflakeCount = 200;
+
+        // Create snowflakes with random properties
+        for (let i = 0; i < snowflakeCount; i++) {
+            snowflakes.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 3 + 1, // radius between 1 and 4
+                density: Math.random() * 0.5 + 0.2 // determines fall speed and sway
+            });
+        }
+
+        function drawSnowflakes() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.beginPath();
+            
+            for (let flake of snowflakes) {
+                ctx.moveTo(flake.x, flake.y);
+                ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2, true);
+            }
+            
+            ctx.fill();
+            updateSnowflakes();
+        }
+
+        let angle = 0;
+        function updateSnowflakes() {
+            angle += 0.01;
+            for (let flake of snowflakes) {
+                // Update position
+                flake.y += Math.pow(flake.density, 2) + 1;
+                flake.x += Math.sin(angle + flake.density * 10) * 1; // Gentle sway
+
+                // If snowflake reaches the bottom, reset to top
+                if (flake.y > canvas.height) {
+                    flake.x = Math.random() * canvas.width;
+                    flake.y = -10;
+                }
+            }
+        }
+
+        // Animation loop
+        function animate() {
+            drawSnowflakes();
+            requestAnimationFrame(animate);
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Start the animation
+        animate();
+    </script>
+
+</body>
+</html>
