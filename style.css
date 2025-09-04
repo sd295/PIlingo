@@ -22,7 +22,7 @@
     --secondary-color: #1cb0f6;
     --light-grey: #d1d1d1;
     --medium-grey: #8989898c;
-    --dark-grey: #333; /* Darkened for better contrast */
+    --dark-grey: #ececed; /* Darkened for better contrast */
     --white: #ffffff;
     --red: #ff4b4b; /* Softened red for better UI */
     --green: #58cc02;
@@ -42,12 +42,14 @@ body {
     justify-content: center;
     min-height: 100vh;
     margin: 0;
-    padding: 40px;
+    padding: 20px;
     box-sizing: border-box;
-    background: linear-gradient(181deg, rgb(16, 20, 35),rgb(40, 50, 90),rgb(133, 137, 94),rgb(255, 215, 100),rgb(255, 245, 63));
+    background: linear-gradient(15deg, black, rgb(55, 6, 103),black,black, rgb(55, 6, 103),black),rgb(55, 6, 103);
+
     /* Key for animated background */
     background-size: 400% 400%;
     animation: pan-background 30s ease-in-out infinite alternate;
+    font-family: Asimovian;
 }
 
 /* --- USER PROFILE & HEADER ANIMATION --- */
@@ -105,7 +107,7 @@ body {
     display: flex; /* Use flex for alignment */
     align-items: center;
     justify-content: space-between; /* Pushes checkmark to the right */
-    background: linear-gradient(181deg, rgb(16, 20, 35),rgb(40, 50, 90),rgb(133, 137, 94),rgb(255, 215, 100),rgb(255, 245, 63));
+    background: linear-gradient(0deg, black, rgb(55, 6, 103),black,black, rgb(55, 6, 103),black),rgb(55, 6, 103);
     border: 2px solid rgba(255, 255, 255, 0.5);
     border-bottom: 4px solid rgba(0,0,0,0.2);
     color: white;
@@ -303,6 +305,12 @@ body {
 .vue-btn  { background-color: #4FC08D; border-color: #3aa872; }
 .react-btn{ background-color: #61DAFB; color: #20232A; border-color: #37b1d1; }
 .node-btn { background-color: #8CC84B; border-color: #6a9c33; }
+.html-btn:hover { border-color: #e44d26; background-color: #c13c1b; }
+.css-btn:hover  { border-color: #0e39e2; background-color: #1f389c; }
+.js-btn:hover   { border-color: #f5de19; color: #323330; background-color: #d4bf0d; } /* Adjusted for better readability */
+.vue-btn:hover  { border-color: #4FC08D; background-color: #3aa872; }
+.react-btn:hover{ border-color: #61DAFB; color: #20232A; background-color: #37b1d1; }
+.node-btn:hover { border-color: #8CC84B; background-color: #6a9c33; }
 
 
 .level-selection {
@@ -916,7 +924,7 @@ code {
     /* Animate changes when dragging over */
     transition: background-color 0.3s ease, border-style 0.3s ease, transform 0.3s ease;
 }
-
+h1
 .dropzone.drag-over {
     background-color: #e8f7ff;
     border-style: solid;
