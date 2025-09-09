@@ -11,6 +11,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Asimovian&display=swap" rel="stylesheet">
 
     <style>
+        /* --- ANIMATION KEYFRAMES --- */
+        @keyframes pan-background {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        } 
         /* RESET & BASE */
         * {
             box-sizing: border-box;
@@ -26,6 +31,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            animation: pan-background 5s ease-in-out infinite alternate;
         }
 
         /* LOGIN CONTAINER */
@@ -167,7 +173,10 @@
     </style>
 </head>
 <body>
+    
+    
     <div class="login-container">
+        
         <h1>Create an Account or Sign In</h1>
         
         <!-- Google Button -->
@@ -182,7 +191,9 @@
             Sign in with GitHub
         </a>
         
+        
         <div class="separator">or</div>
+        
         
         <div class="manual-login">
             <input type="email" id="email-input" placeholder="Enter your email">
@@ -193,5 +204,9 @@
     </div>
 
     <script type="module" src="login.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    
+    <script src="l.js"></script>
 </body>
 </html>

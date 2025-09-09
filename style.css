@@ -13,6 +13,23 @@
     from { opacity: 0; transform: scale(0.8); }
     to { opacity: 1; transform: scale(1); }
 }
+.protest {
+    position: fixed;      /* Sticks to viewport */
+    bottom: 10px;         /* 10px from bottom */
+    right: 10px;          /* 10px from right */
+    background: rgb(208, 159, 159);     /* Red background for visibility */
+    color: #fff;          /* White text */
+    padding: 10px 20px;   /* Some padding */
+    border-radius: 5px;   /* Rounded corners */
+    text-decoration: none;/* Remove underline */
+    font-weight: bold;
+    z-index: 1000;        /* Make sure it’s on top */
+    transition: background 0.3s;
+}
+
+.protest:hover {
+    background: #c00;     /* Darker on hover */
+}
 
 
 /* --- ROOT VARIABLES --- */
@@ -20,9 +37,9 @@
     --primary-color: #58cc02;
     --primary-dark: #4aa802;
     --secondary-color: #1cb0f6;
-    --light-grey: #d1d1d1;
+    --light-grey: #d8d8d8;
     --medium-grey: #8989898c;
-    --dark-grey: #ececed; /* Darkened for better contrast */
+    --dark-grey: #7c7c7c; /* Darkened for better contrast */
     --white: #ffffff;
     --red: #ff4b4b; /* Softened red for better UI */
     --green: #58cc02;
@@ -69,14 +86,23 @@ body {
 #user-profile.hidden {
     display: none;
 }
-
+.particles-js{
+    height: -500px;
+}
 #user-name {
     font-weight: 700;
     font-size: 1.1rem;
     color: var(--white);
     text-shadow: 0 1px 3px rgba(0,0,0,0.5); /* Add shadow for readability */
 }
-
+#particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
 #user-photo {
     width: 40px;
     height: 40px;
