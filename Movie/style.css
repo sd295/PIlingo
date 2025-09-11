@@ -13,92 +13,22 @@
     from { opacity: 0; transform: scale(0.8); }
     to { opacity: 1; transform: scale(1); }
 }
-.protest {
-    position: fixed;      /* Sticks to viewport */
-    bottom: 10px;         /* 10px from bottom */
-    right: 10px;          /* 10px from right */
-    background: rgb(208, 159, 159);     /* Red background for visibility */
-    color: #ffffff;          /* White text */
-    padding: 10px 20px;   /* Some padding */
-    border-radius: 5px;   /* Rounded corners */
-    text-decoration: none;/* Remove underline */
-    font-weight: bold;
-    z-index: 1000;        /* Make sure it’s on top */
-    transition: background 0.3s;
-}
-.romania-btn {
-    background: linear-gradient(to right, #002b7f 33.33%, #fcd116 33.33% 66.66%, #ce1126 66.66%);
-    border-color: #20232A;
-  }
-.romania-btn:hover {
-    background: linear-gradient(to right, #002b7f 33.33%, #fcd116 33.33% 66.66%, #ce1126 66.66%);
-    transform: scale(1.05);
-    
-    
-} 
-.huub-container{
-    color:#0055ff;
-    font-size: 2em;
-}
-.huub-container:hover{
-    text-decoration: dashed;
-    
-}
-.geo{
-    color:#28a745
-}
-.protest:hover {
-    background: #c00;     /* Darker on hover */
-}
-.subjeect-btn {
-    padding: 10px 20px;
-    border: none;
-    font-size: 16px;
-    color: #ffffff;
-    cursor: pointer;
-    border-radius: 5px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: Arial, sans-serif;
-    transition: transform 0.2s;
-    text-decoration: none;
-  }
-.subjeect-btn:hover {
-    padding: 10px 20px;
-    border: none;
-    font-size: 16px;
-    color: #ff0000;
-    cursor: pointer;
-    border-radius: 5px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: Arial, sans-serif;
-    transition: transform 0.2s;
-    text-decoration: dashed;
-  }
-.movie{
-    color:#151961;
-    text-decoration: none;
-    font-size: 50px;
-    margin-top: 30px;
 
-}
+
 /* --- ROOT VARIABLES --- */
 :root {
     --primary-color: #58cc02;
     --primary-dark: #4aa802;
     --secondary-color: #1cb0f6;
-    --light-grey: #d8d8d8;
-    --medium-grey: #8989898c;
-    --dark-grey: #7c7c7c; /* Darkened for better contrast */
+    --light-grey: #c4c4c4;
+    --medium-grey: #6868688c;
+    --dark-grey: #2b2b2b; /* Darkened for better contrast */
     --white: #ffffff;
     --red: #ff4b4b; /* Softened red for better UI */
     --green: #58cc02;
     --font-family: 'Nunito', sans-serif;
     --code-font-family: 'Courier New', Courier, monospace;
-    --blue: #007bff;
+    --blue: #000dff;
     --transparent: transparent;
 }
 
@@ -146,7 +76,8 @@ body {
     font-weight: 700;
     font-size: 1.1rem;
     color: var(--white);
-    text-shadow: 0 1px 3px rgba(0,0,0,0.5); /* Add shadow for readability */
+    text-shadow: 0 1px 3px rgba(0,0,0); /* Add shadow for readability */
+    
 }
 #particles-js {
   position: fixed;
@@ -715,7 +646,7 @@ header {
     animation: pulseGreen 0.8s ease-out forwards;
 }
 .option-btn.incorrect {
-    background-color: #f8d7da;
+    background-color: #ffd3d7;
     border-color: #dc3545;
     animation: shake 0.5s ease-out forwards;
 }
@@ -788,8 +719,8 @@ code {
     --primary-dark: #4aa302;
     --secondary-color: #1cb0f6;
     --white: #ffffff;
-    --light-grey: #e5e5e5;
-    --medium-grey: #fffff3;
+    --light-grey: #a4a4a4;
+    --medium-grey: #555555;
     --code-font-family: 'Courier New', monospace;
 }
 
@@ -1041,6 +972,23 @@ h1
     opacity: 0.7;
 }
 /* style.css */
+.protest {
+    position: fixed;      /* Sticks to viewport */
+    bottom: 10px;         /* 10px from bottom */
+    right: 10px;          /* 10px from right */
+    background: rgb(174, 133, 133);     /* Red background for visibility */
+    color: #fff;          /* White text */
+    padding: 10px 20px;   /* Some padding */
+    border-radius: 5px;   /* Rounded corners */
+    text-decoration: none;/* Remove underline */
+    font-weight: bold;
+    z-index: 1000;        /* Make sure it’s on top */
+    transition: background 0.3s;
+}
+
+.protest:hover {
+    background: #c00;     /* Darker on hover */
+}
 
 /* style.css */
 
@@ -1050,8 +998,8 @@ h1
     position: relative; /* For positioning the hidden textarea */
     height: 100%;
     padding: 20px;
-    background-color: #2d2d2d; /* Dark editor theme */
-    color: white;
+    background-color: #3a3a3a; /* Dark editor theme */
+    color: rgb(139, 54, 54);
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     font-family: var(--code-font-family);
@@ -1142,7 +1090,7 @@ h1
 .render-preview label {
     font-size: 1.2rem;
     font-weight: 700;
-    color: #333;
+    color: #7b7b7b;
     margin-bottom: 10px;
 }
 .render-preview input {

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AES Link Generator</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    input, button, textarea { width: 100%; margin: 10px 0; padding: 8px; }
+    textarea { height: 80px; }
+  </style>
+</head>
+<body>
+  <h1>Encrypt Your Stream Link (AES)</h1>
+
+  <label>Real Link (m3u8 or any URL):</label>
+  <input type="text" id="realLink" placeholder="https://luminaplus.hu/en/player/proxy.php?url=https://tmstr3.shadowlandschronicles.com/pl/H4sIAAAAAAAAAwXB0ZKCIBQA0F8ClCb30dLS1rvjDUF4Q9HcInMmZyu.fs8hjLFkE1s2kjHmY9wlGxbF203fbzvuxuSrb0tliUfMGobNjbpoeVZkeg63S6gDzrUo0UlJLDW8mtNcHFbeKViQ0QV9RpCA7YP7fH9WqOWCMsrbEykYHEuDNH8bjy2o4m9QzlS.3NXEFBjVL3vEusr4r7ymAlrPh7mnWsWxo3iFjOvBL.euydX5Phkl5FsTf6joI8DxwoWSlSBYNSJNh_sEgoACWYJWsDMHYPaz7l3w5.GKbNinxY_irQ6ukSJflchTy0xkZ5x0uFHZmIcI00uw8qTmybisf2khWX2HRyNI8g_gNJA8QQEAAA--/b76c5bd1a308aa60f71b75a91904bf13/index.m3u8">
+
+  <label>Secret Key:</label>
+  <input type="text" id="secretKey" placeholder="Enter your secret key">
+
+  <button id="encryptBtn">Generate Encrypted Link</button>
+
+  <label>Encrypted Output:</label>
+  <textarea id="encryptedOutput" readonly></textarea>
+
+  <script>
+    const encryptBtn = document.getElementById("encryptBtn");
+    encryptBtn.addEventListener("click", () => {
+      const link = document.getElementById("realLink").value.trim();
+      const key = document.getElementById("secretKey").value.trim();
+      if(!link || !key){
+        alert("Please enter both link and key!");
+        return;
+      }
+      const encrypted = CryptoJS.AES.encrypt(link, key).toString();
+      document.getElementById("encryptedOutput").value = encrypted;
+    });
+  </script>
+</body>
+</html>
+

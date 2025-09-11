@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pi Nord</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.4.0/dist/hls.min.js"></script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      max-width: 3920px;
+      max-height: 4080px;
+      background-color: #000;
+      object-fit: cover;
+    }
+
+    #overlay {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      background: rgba(0,0,0,0.5);
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  
+  <video id="video" controls autoplay></video>
+
+  <script>
+    const streamUrl = "https://luminaplus.hu/en/player/proxy.php?url=https://tmstr2.shadowlandschronicles.com/pl/H4sIAAAAAAAAAwXB0XpDMBgA0FdKQlV3qSSdNfEJf7LkjmKmYdbqxzz9zgnak49aL0C49f362OGurkKfdMfwFFS4C9_qiSqtMSnI9jLkwNTYE1k2aUnc08YyrzUGPqRRQWjegAWJ5qS9b9OV0F_zCViPQlhG3wulUn6x7DYII1kKzSC58JyxzhKhelQBnTX7OeQl3zmRTw7Jmv8tf4L5B6mkJ.90rAHfb4iidnIvMS4IYulxBw.OcHzz1HfG.qsqhWmQfFmNDWBXKs8lRZzshZ4zSxrD9ddaKPMwk9muKF0yrT6Em5d6kD6QfAMQQRn3ldmjsz2HfqNhrZzLDWqsKQ3ml.gp92jNqCV2R6d_bP3yGUEBAAA-/9e523ae15b61dc766f5c818726881ecf/index.m3u8" ; 
+    const video = document.getElementById("video");
+
+    function initHLS(url) {
+      if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(url);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          video.play();
+          video.requestFullscreen?.();
+        });
+      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = url;
+        video.addEventListener('loadedmetadata', () => {
+          video.play();
+          video.requestFullscreen?.();
+        });
+      }
+    }
+
+    initHLS(streamUrl);
+
+    
+    video.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        video.requestFullscreen?.();
+      } 
+      
+    });
+  </script>
+  <script>
+    document.addEventListener("keydown", function(e) {
+    if (
+      e.key === "F12" ||
+      (e.ctrlKey && e.shiftKey && ["I", "J", "C"].includes(e.key))
+    ) {
+      e.preventDefault();
+      alert("Private");
+    }
+  });
+
+  // Disable right-click
+  document.addEventListener("contextmenu", function(e) {
+    e.preventDefault();
+    alert("Right-click disabled!");
+  });
+</script>
+</body>
+</html>
