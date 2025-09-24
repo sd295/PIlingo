@@ -36,6 +36,110 @@
     
     
 } 
+.iframe-overlay {
+    display: none; /* This is the most important line */
+    position: fixed; /* Makes it float over everything */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    place-items: center; /* This helps center the iframe container */
+    z-index: 1000; /* Ensures it's on top of other content */
+    
+    /* Optional: Add these lines back for the "liquid glass" effect */
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px); /* For Safari */
+}
+
+/* 2. This rule SHOWS the overlay when JavaScript adds the '.show' class */
+.iframe-overlay.show {
+    display: grid; /* This overrides 'display: none' and makes it visible */
+}
+/* Add this to your style.css if it's not already there */
+
+/* Hides the overlay by default */
+.iframe-overlay {
+    visibility: hidden;
+    opacity: 0;
+    /* ... other styles like position, background, etc. */
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+/* Shows the overlay when the 'show' class is added */
+.iframe-overlay.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Prevents the main page from scrolling when the overlay is open */
+.no-scroll {
+    overflow: hidden;
+}
+/* 3. Basic styling for the box that holds the iframe */
+.iframe-container {
+    position: relative;
+    width: 90%;
+    height: 85%;
+    max-width: 800px;
+    max-height: 700px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    overflow: hidden; 
+}
+
+.iframe-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* 4. Styling for the close button */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+    background-color: rgba(255, 255, 255, 0.3);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    line-height: 35px;
+    text-align: center;
+    z-index: 1001; 
+}
+.ai{
+    position: fixed;      /* Sticks to viewport */
+    bottom: 10px;         /* 10px from bottom */
+    right: 120px;          /* 10px from right */
+    background: rgb(38, 0, 255);     /* Red background for visibility */
+    color: #ffffff;          /* White text */
+    padding: 10px 20px;   /* Some padding */
+    border-radius: 5px;   /* Rounded corners */
+    text-decoration: none;/* Remove underline */
+    font-weight: bold;
+    z-index: 1000;        /* Make sure it’s on top */
+    transition: background 0.3s;
+}
+.ai:hover{
+    position: fixed;      /* Sticks to viewport */
+    bottom: 10px;         /* 10px from bottom */
+    right: 125px;          /* 10px from right */
+    background: rgb(136, 0, 255);     /* Red background for visibility */
+    color: #ffffff;          /* White text */
+    padding: 10px 20px;   /* Some padding */
+    border-radius: 5px;   /* Rounded corners */
+    text-decoration: none;/* Remove underline */
+    font-weight: bold;
+    z-index: 1000;        /* Make sure it’s on top */
+    transition: background 0.3s, right 0.3s, bottom 0.3s;
+
+    
+}
 .huub-container{
     color:#0055ff;
     font-size: 2em;
@@ -49,6 +153,9 @@
 }
 .protest:hover {
     background: #c00;     /* Darker on hover */
+    transition: background 0.3s, right 0.3s, bottom 0.3s;
+    bottom: 10px;         /* 10px from bottom */
+    right: 5px;          /* 10px from right */
 }
 .subjeect-btn {
     padding: 10px 20px;
@@ -64,6 +171,35 @@
     transition: transform 0.2s;
     text-decoration: none;
   }
+/* Add this to style.css if it's not already there */
+
+/* This hides the overlay by default */
+.iframe-overlay {
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* This class is added by JavaScript to show the overlay */
+.iframe-overlay.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* This class is added by JavaScript to stop the main page from scrolling */
+.no-scroll {
+    overflow: hidden;
+}
 .subjeect-btn:hover {
     padding: 10px 20px;
     border: none;
