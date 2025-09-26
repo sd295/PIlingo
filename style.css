@@ -47,7 +47,7 @@
     z-index: 1000; /* Ensures it's on top of other content */
     
     /* Optional: Add these lines back for the "liquid glass" effect */
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px); /* For Safari */
 }
@@ -79,14 +79,14 @@
 /* 3. Basic styling for the box that holds the iframe */
 .iframe-container {
     position: relative;
-    width: 90%;
-    height: 85%;
-    max-width: 800px;
-    max-height: 700px;
+    
+    width: 90vw;
+    height: 80vh;
     border-radius: 15px;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    box-shadow: 0 8px 32px 0 rgba(52, 2, 74, 0.37);
     overflow: hidden; 
+    text-decoration: none;
 }
 
 .iframe-container iframe {
@@ -111,6 +111,14 @@
     line-height: 35px;
     text-align: center;
     z-index: 1001; 
+}
+.close-btn:hover{
+    width: 36px;
+    height: 36px;
+    right: 16px;
+    top: 16px;
+    background-color: red;
+    transition:  width 0.1s ease-in-out, height 0.1s ease-in-out, right 0.1s ease-in-out, top 0.1s ease-in-out;
 }
 .ai{
     position: fixed;      /* Sticks to viewport */
