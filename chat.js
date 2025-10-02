@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentModel = 'pli6lte'; // 'pli6lte' or 'gemma3'
     // Ensure pliApiUrl ends with a slash if your Python server expects it: '/r/'
     const pliApiUrl = 'https://fhf567456745.pythonanywhere.com/r/';
-    const gemmaApiKey = 'AIzaSyBJUT4CXEmbVyw7l0oEiFhZjfm4DLwV7ug'; // <-- PASTE YOUR GOOGLE AI API KEY HERE
+    const gemmaApiKey = 'AIzaSyCE_M4RAxmxpihamBObxP22WS6o20RqcIw'; // <-- PASTE YOUR GOOGLE AI API KEY HERE
     const gemmaApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lite-latest:generateContent?key=${gemmaApiKey}`;
 
 
@@ -270,3 +270,4 @@ document.addEventListener('DOMContentLoaded', () => {
     switchModel(currentModel);
 
 });
+
