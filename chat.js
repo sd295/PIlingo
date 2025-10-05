@@ -76,10 +76,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (chatBox) chatBox.innerHTML = ''; // Clear chatbox for a fresh start
 
         if (model === 'pli6lte') {
-            if (modelTitle) modelTitle.textContent = 'PLI 6.X5LTE (Fallback Ready)';
+            if (modelTitle) modelTitle.textContent = 'PLI 6.X7LTE (Fallback Ready)';
             if (pliBtn) pliBtn.classList.add('active');
             if (gemmaBtn) gemmaBtn.classList.remove('active');
-            addMessageToChatbox('PLI6.X5', '_-_This is the LTE model_-_');
+            addMessageToChatbox('PLI6.X7', '_-_This is the LTE model_-_');
         } else {
             if (modelTitle) modelTitle.textContent = 'Gemma 3 (Direct)';
             if (gemmaBtn) gemmaBtn.classList.add('active');
@@ -148,6 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (pliResponse === null) {
                 // Case 1: Server/network error or invalid response.
                 needsFallback = true;
+                
                 console.log("PLI6LTE failed (server/network error/invalid response). Falling back to Gemma.");
             } else {
                 // Case 2: We got a response, but check if it's unhelpful content.
@@ -166,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 // If no fallback was needed, the PLI response was successful and helpful.
                 finalResponse = pliResponse;
-                finalSender = 'PLI6.X5';
+                finalSender = 'PLI6.X7';
             }
 
         } else {
@@ -268,6 +269,4 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initial setup to ensure model is set on load
     switchModel(currentModel);
-
 });
-

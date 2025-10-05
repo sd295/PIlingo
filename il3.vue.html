@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exploring Swedish Culture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS STYLES --- */
+        :root {
+            --light-blue: #f0f8ff; /* A very light, airy blue */
+            --brand-blue: #005293; /* Swedish Flag Blue */
+            --brand-yellow: #ffc72c; /* Swedish Flag Yellow */
+            --text-dark: #333;
+            --white: #ffffff;
+            --correct-green: #2e8b57; /* Sea green */
+            --incorrect-red: #d9534f;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-blue);
+            overflow: hidden;
+        }
+
+        /* --- Scene Management --- */
+        .scene {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            box-sizing: border-box;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out, visibility 0.5s;
+        }
+
+        .scene.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        /* --- General Content Styling --- */
+        h1 {
+            color: var(--brand-blue);
+            font-size: 2.4rem;
+            margin-bottom: 1rem;
+        }
+
+        p.description {
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            max-width: 680px;
+            line-height: 1.6;
+        }
+
+        .feedback {
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            min-height: 50px;
+            max-width: 650px;
+            transition: color 0.3s;
+        }
+
+        .feedback.correct { color: var(--correct-green); }
+        .feedback.incorrect { color: var(--incorrect-red); }
+        
+        /* --- Options & Button Styling --- */
+        .options-container {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .option-btn {
+            padding: 0.9rem 2.2rem;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            border-radius: 8px;
+            border: 2px solid var(--brand-blue);
+            background-color: var(--white);
+            color: var(--brand-blue);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option-btn:hover {
+            background-color: var(--brand-blue);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 82, 147, 0.2);
+        }
+
+        .option-btn.selected {
+            background-color: var(--brand-blue);
+            color: var(--white);
+        }
+        
+        /* --- Start and Final Scene --- */
+        #start-btn, #restart-btn {
+            margin-top: 2rem;
+            background-color: var(--brand-yellow);
+            color: var(--brand-blue);
+            border-color: var(--brand-yellow);
+            font-size: 1.2rem;
+        }
+        #start-btn:hover, #restart-btn:hover {
+            background-color: #ffb700;
+            border-color: #ffb700;
+            color: var(--brand-blue);
+        }
+
+        #scene-final .icon-animation {
+            font-size: 4rem;
+            animation: bounce-in 1.5s ease-out;
+        }
+        
+        @keyframes bounce-in {
+            0% { transform: scale(0.5); opacity: 0; }
+            70% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- SCENE 0: Introduction -->
+    <div id="scene-intro" class="scene active">
+        <h1>Hej! Welcome to Swedish Culture</h1>
+        <p class="description">
+            Sweden's culture is rich with unique traditions and philosophies that shape its way of life. In this short lesson, we'll explore three famous concepts that are central to the Swedish identity. Let's begin our cultural journey!
+        </p>
+        <button id="start-btn" class="option-btn">Start Learning</button>
+    </div>
+
+    <!-- SCENE 1: Fika -->
+    <div id="scene-fika" class="scene">
+        <h1>Question 1: What is "Fika"?</h1>
+        <p class="description">
+            This is one of the most cherished Swedish customs. It's both a noun and a verb, and it's a huge part of the daily schedule for most Swedes, at work and at home. But what does it really mean?
+        </p>
+        <div class="options-container">
+            <button class="option-btn" data-answer="incorrect" data-feedback="Not quite! While Swedes love their holidays, Fika is a much more frequent, often daily, ritual.">A big annual holiday</button>
+            <button class="option-btn" data-answer="correct" data-feedback="Correct! Fika is a social coffee break, often with a pastry like a cinnamon bun. It's about pausing your day to connect with others.">A social coffee break</button>
+            <button class="option-btn" data-answer="incorrect" data-feedback="That's a good guess, as it sounds similar! However, Fika is about relaxation, not exercise.">A type of folk dance</button>
+        </div>
+        <p class="feedback"></p>
+    </div>
+
+    <!-- SCENE 2: Lagom -->
+    <div id="scene-lagom" class="scene">
+        <h1>Question 2: The philosophy of "Lagom"</h1>
+        <p class="description">
+            The word "Lagom" doesn't have a direct English translation, but it represents a core part of the Swedish mindset. It guides decisions about everything from food and work-life balance to home decor. What is the best description of Lagom?
+        </p>
+        <div class="options-container">
+            <button class="option-btn" data-answer="correct" data-feedback="Exactly! Lagom means 'just the right amount.' It’s the art of finding a happy, balanced medium without excess.">Not too much, not too little</button>
+            <button class="option-btn" data-answer="incorrect" data-feedback="While coziness is important (especially in winter!), that concept is more aligned with the Danish 'hygge'. Lagom is about balance.">A feeling of extreme coziness</button>
+            <button class="option-btn" data-answer="incorrect" data-feedback="This is the opposite of Lagom. The Swedish culture generally avoids boasting and showing off.">Striving to have more than others</button>
+        </div>
+        <p class="feedback"></p>
+    </div>
+
+    <!-- SCENE 3: Midsummer -->
+    <div id="scene-midsummer" class="scene">
+        <h1>Question 3: Celebrating Midsummer</h1>
+        <p class="description">
+            Midsummer (Midsommar) is arguably the most important holiday in Sweden, celebrating the longest day of the year. Friends and family gather in the countryside for a day of festivities. What is a key tradition during this celebration?
+        </p>
+        <div class="options-container">
+            <button class="option-btn" data-answer="incorrect" data-feedback="That's a tradition for a different holiday! Midsummer is all about celebrating the light and nature of summertime.">Lighting candles in the dark</button>
+            <button class="option-btn" data-answer="incorrect" data-feedback="While delicious, large roasts are more common for other celebrations like Christmas. Midsummer food is typically lighter.">Eating a large turkey dinner</button>
+            <button class="option-btn" data-answer="correct" data-feedback="You got it! Decorating and dancing around a maypole is the centerpiece of the celebration, along with wearing flower crowns.">Dancing around a maypole</button>
+        </div>
+        <p class="feedback"></p>
+    </div>
+    
+    <!-- SCENE 4: Lesson Complete -->
+    <div id="scene-final" class="scene">
+        <div class="icon-animation">💙💛</div>
+        <h1>Lesson Complete!</h1>
+        <p class="description">Great job! You've just explored some of the essential ingredients of Swedish culture. Now you're ready to Fika like a Swede and find a little more Lagom in your life. Bra jobbat (Good job)!</p>
+        <button id="restart-btn" class="option-btn">Learn Again</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const scenes = {
+                intro: document.getElementById('scene-intro'),
+                fika: document.getElementById('scene-fika'),
+                lagom: document.getElementById('scene-lagom'),
+                midsummer: document.getElementById('scene-midsummer'),
+                final: document.getElementById('scene-final'),
+            };
+
+            function switchScene(currentScene, nextScene) {
+                currentScene.classList.remove('active');
+                setTimeout(() => nextScene.classList.add('active'), 500); // Sync with CSS transition
+            }
+            
+            // --- Intro & Final Scene Logic ---
+            document.getElementById('start-btn').addEventListener('click', () => {
+                switchScene(scenes.intro, scenes.fika);
+            });
+             document.getElementById('restart-btn').addEventListener('click', () => {
+                switchScene(scenes.final, scenes.intro);
+            });
+
+            // --- Reusable Quiz Scene Logic ---
+            function setupQuizScene(scene, nextScene) {
+                const options = scene.querySelectorAll('.option-btn');
+                const feedbackEl = scene.querySelector('.feedback');
+                let answeredCorrectly = false;
+
+                options.forEach(button => {
+                    button.addEventListener('click', () => {
+                        if (answeredCorrectly) return;
+
+                        // Clear selected style from all buttons in this scene
+                        options.forEach(btn => btn.classList.remove('selected'));
+                        // Add selected style to the clicked button
+                        button.classList.add('selected');
+
+                        const isCorrect = button.dataset.answer === 'correct';
+                        feedbackEl.textContent = button.dataset.feedback;
+
+                        if (isCorrect) {
+                            answeredCorrectly = true;
+                            feedbackEl.className = 'feedback correct';
+                            
+                            setTimeout(() => {
+                                switchScene(scene, nextScene);
+                                // Reset for next time the lesson is taken
+                                answeredCorrectly = false;
+                                feedbackEl.textContent = '';
+                                button.classList.remove('selected');
+                            }, 2500); // Wait a bit longer on correct answer
+                        } else {
+                            feedbackEl.className = 'feedback incorrect';
+                        }
+                    });
+                });
+            }
+
+            // --- Initialize All Quiz Scenes ---
+            setupQuizScene(scenes.fika, scenes.lagom);
+            setupQuizScene(scenes.lagom, scenes.midsummer);
+            setupQuizScene(scenes.midsummer, scenes.final);
+        });
+    </script>
+
+</body>
+</html>
