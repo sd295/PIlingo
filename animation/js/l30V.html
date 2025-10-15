@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mountain Landscape 2025</title>
+<style>
+  :root {
+    --sky-top: #4a90e2;
+    --sky-bottom: #87ceeb;
+    --mountain-dark: #4a5568;
+    --mountain-mid: #718096;
+    --mountain-light: #a0aec0;
+    --mountain-snow: #f7fafc;
+    --tree-trunk: #5d4037;
+    --tree-dark: #1b5e20;
+    --tree-light: #2e7d32;
+    --water: #1e88e5;
+    --water-deep: #1565c0;
+    --sun-core: #fff59d;
+    --sun-glow: #ffeb3b;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bottom) 60%, #c8e6c9 100%);
+    position: relative;
+  }
+
+  .scene {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    animation: dayNight 30s infinite;
+  }
+
+  @keyframes dayNight {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.2); }
+  }
+
+  /* Sun */
+  .sun {
+    position: absolute;
+    top: 10%;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, var(--sun-core) 0%, var(--sun-glow) 70%);
+    border-radius: 50%;
+    box-shadow: 0 0 50px var(--sun-glow),
+                0 0 100px rgba(255, 235, 59, 0.5);
+    animation: sunPath 20s ease-in-out infinite;
+  }
+
+  @keyframes sunPath {
+    0% { 
+      left: -80px; 
+      top: 20%;
+    }
+    50% { 
+      left: 50%; 
+      top: 5%;
+      transform: translateX(-50%);
+    }
+    100% { 
+      left: calc(100% + 80px); 
+      top: 20%;
+    }
+  }
+
+  /* Clouds */
+  .clouds {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .cloud {
+    position: absolute;
+    background: white;
+    border-radius: 100px;
+    opacity: 0.7;
+  }
+
+  .cloud::before,
+  .cloud::after {
+    content: '';
+    position: absolute;
+    background: white;
+    border-radius: 100px;
+  }
+
+  .cloud1 {
+    width: 100px;
+    height: 40px;
+    top: 15%;
+    left: 20%;
+    animation: float 25s infinite ease-in-out;
+  }
+
+  .cloud1::before {
+    width: 50px;
+    height: 50px;
+    top: -25px;
+    left: 10px;
+  }
+
+  .cloud1::after {
+    width: 60px;
+    height: 40px;
+    top: -15px;
+    right: 10px;
+  }
+
+  .cloud2 {
+    width: 80px;
+    height: 35px;
+    top: 10%;
+    right: 30%;
+    animation: float 30s infinite ease-in-out reverse;
+  }
+
+  .cloud2::before {
+    width: 40px;
+    height: 40px;
+    top: -20px;
+    left: 15px;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateX(0) translateY(0); }
+    25% { transform: translateX(20px) translateY(-10px); }
+    50% { transform: translateX(-10px) translateY(5px); }
+    75% { transform: translateX(15px) translateY(-5px); }
+  }
+
+  /* Mountains */
+  .mountains {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 70%;
+  }
+
+  .mountain {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .mountain-back {
+    left: 60%;
+    transform: translateX(-50%);
+    border-left: 300px solid transparent;
+    border-right: 300px solid transparent;
+    border-bottom: 400px solid var(--mountain-light);
+    filter: blur(2px);
+    opacity: 0.7;
+  }
+
+  .mountain-back::after {
+    content: '';
+    position: absolute;
+    left: -75px;
+    top: 100px;
+    width: 0;
+    height: 0;
+    border-left: 75px solid transparent;
+    border-right: 75px solid transparent;
+    border-bottom: 100px solid var(--mountain-snow);
+  }
+
+  .mountain-mid {
+    left: 25%;
+    transform: translateX(-50%);
+    border-left: 250px solid transparent;
+    border-right: 250px solid transparent;
+    border-bottom: 350px solid var(--mountain-mid);
+    filter: blur(1px);
+  }
+
+  .mountain-mid::after {
+    content: '';
+    position: absolute;
+    left: -65px;
+    top: 85px;
+    width: 0;
+    height: 0;
+    border-left: 65px solid transparent;
+    border-right: 65px solid transparent;
+    border-bottom: 90px solid var(--mountain-snow);
+  }
+
+  .mountain-front {
+    left: 75%;
+    transform: translateX(-50%);
+    border-left: 200px solid transparent;
+    border-right: 200px solid transparent;
+    border-bottom: 280px solid var(--mountain-dark);
+  }
+
+  .mountain-front::after {
+    content: '';
+    position: absolute;
+    left: -50px;
+    top: 70px;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 70px solid var(--mountain-snow);
+  }
+
+  /* Water */
+  .water {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(180deg, 
+      rgba(30, 136, 229, 0.6) 0%,
+      rgba(21, 101, 192, 0.8) 100%);
+    animation: waves 3s ease-in-out infinite;
+  }
+
+  .water::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 10px,
+      rgba(255, 255, 255, 0.1) 10px,
+      rgba(255, 255, 255, 0.1) 20px
+    );
+    animation: waveMove 2s linear infinite;
+  }
+
+  @keyframes waves {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  @keyframes waveMove {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(20px); }
+  }
+
+  /* Forest */
+  .forest {
+    position: absolute;
+    bottom: 60px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+  }
+
+  .tree-group {
+    display: flex;
+    gap: 15px;
+  }
+
+  .tree {
+    position: relative;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+  }
+
+  .tree-trunk {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 25px;
+    background: linear-gradient(90deg, var(--tree-trunk) 0%, #3e2723 100%);
+    border-radius: 0 0 2px 2px;
+  }
+
+  .tree-foliage {
+    position: relative;
+    width: 0;
+    height: 0;
+  }
+
+  .tree-layer {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+  }
+
+  .tree-layer-1 {
+    bottom: 20px;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 35px solid var(--tree-dark);
+  }
+
+  .tree-layer-2 {
+    bottom: 35px;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 30px solid var(--tree-light);
+  }
+
+  .tree-layer-3 {
+    bottom: 50px;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 25px solid var(--tree-dark);
+  }
+
+  /* Birds */
+  .birds {
+    position: absolute;
+    top: 20%;
+    width: 100%;
+    height: 200px;
+  }
+
+  .bird {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    animation: fly 15s linear infinite;
+  }
+
+  .bird::before,
+  .bird::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 10px;
+    height: 2px;
+    background: #333;
+    border-radius: 2px;
+  }
+
+  .bird::before {
+    left: 0;
+    transform: rotate(-30deg);
+    animation: flap 0.5s infinite alternate;
+  }
+
+  .bird::after {
+    right: 0;
+    transform: rotate(30deg);
+    animation: flap 0.5s infinite alternate-reverse;
+  }
+
+  @keyframes fly {
+    0% { left: -30px; }
+    100% { left: calc(100% + 30px); }
+  }
+
+  @keyframes flap {
+    0% { transform: rotate(-30deg) translateY(0); }
+    100% { transform: rotate(-45deg) translateY(-2px); }
+  }
+
+  .bird1 { top: 10%; animation-delay: 0s; }
+  .bird2 { top: 30%; animation-delay: 5s; }
+  .bird3 { top: 50%; animation-delay: 10s; }
+
+  /* Info Panel */
+  .info-panel {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+
+  .info-panel:hover {
+    background: rgba(0, 0, 0, 0.85);
+    transform: translateX(-50%) translateY(-5px);
+  }
+
+  .info-panel h1 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: var(--sun-glow);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .mountain-back,
+    .mountain-mid,
+    .mountain-front {
+      transform: translateX(-50%) scale(0.7);
+    }
+    
+    .info-panel {
+      font-size: 12px;
+      padding: 10px 15px;
+    }
+    
+    .info-panel h1 {
+      font-size: 16px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="scene">
+  <!-- Sky elements -->
+  <div class="sun"></div>
+  
+  <div class="clouds">
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+  </div>
+  
+  <!-- Birds -->
+  <div class="birds">
+    <div class="bird bird1"></div>
+    <div class="bird bird2"></div>
+    <div class="bird bird3"></div>
+  </div>
+  
+  <!-- Mountains -->
+  <div class="mountains">
+    <div class="mountain mountain-back"></div>
+    <div class="mountain mountain-mid"></div>
+    <div class="mountain mountain-front"></div>
+  </div>
+  
+  <!-- Forest -->
+  <div class="forest">
+    <div class="tree-group">
+      <div class="tree">
+        <div class="tree-trunk"></div>
+        <div class="tree-foliage">
+          <div class="tree-layer tree-layer-1"></div>
+          <div class="tree-layer tree-layer-2"></div>
+          <div class="tree-layer tree-layer-3"></div>
+        </div>
+      </div>
+      <div class="tree">
+        <div class="tree-trunk"></div>
+        <div class="tree-foliage">
+          <div class="tree-layer tree-layer-1"></div>
+          <div class="tree-layer tree-layer-2"></div>
+          <div class="tree-layer tree-layer-3"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="tree-group">
+      <div class="tree">
+        <div class="tree-trunk"></div>
+        <div class="tree-foliage">
+          <div class="tree-layer tree-layer-1"></div>
+          <div class="tree-layer tree-layer-2"></div>
+          <div class="tree-layer tree-layer-3"></div>
+        </div>
+      </div>
+      <div class="tree">
+        <div class="tree-trunk"></div>
+        <div class="tree-foliage">
+          <div class="tree-layer tree-layer-1"></div>
+          <div class="tree-layer tree-layer-2"></div>
+          <div class="tree-layer tree-layer-3"></div>
+        </div>
+      </div>
+      <div class="tree">
+        <div class="tree-trunk"></div>
+        <div class="tree-foliage">
+          <div class="tree-layer tree-layer-1"></div>
+          <div class="tree-layer tree-layer-2"></div>
+          <div class="tree-layer tree-layer-3"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="tree-group">
+      <div class="tree">
+        <div class="tree-trunk"></div>
+        <div class="tree-foliage">
+          <div class="tree-layer tree-layer-1"></div>
+          <div class="tree-layer tree-layer-2"></div>
+          <div class="tree-layer tree-layer-3"></div>
+        </div>
+      </div>
+      <div class="tree">
+        <div class="tree-trunk"></div>
+        <div class="tree-foliage">
+          <div class="tree-layer tree-layer-1"></div>
+          <div class="tree-layer tree-layer-2"></div>
+          <div class="tree-layer tree-layer-3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Water -->
+  <div class="water"></div>
+  
+  <!-- Info Panel -->
+  <div class="info-panel">
+    <h1>vision =)</h1>
+    <p>(= reality</p>
+  </div>
+</div>
+
+</body>
+</html>
