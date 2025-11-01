@@ -32,11 +32,6 @@ const lessonContent = {
         "node run index.js"
       ],
       correctAnswer: "node index.js"
-    },
-    {
-      prompt: "Tip",
-      options: "Keep your first server simple; start by sending plain text before adding HTML.",
-      correctAnswer: "Keep your first server simple; start by sending plain text before adding HTML."
     }
   ],
 
@@ -91,3 +86,4 @@ server.listen(3000, () => {
 });`
   }
 };
+
