@@ -528,6 +528,41 @@ body {
 .vue-btn  { background-color: #4FC08D; border-color: #3aa872; }
 .react-btn{ background-color: #61DAFB; color: #20232A; border-color: #37b1d1; }
 .node-btn { background-color: #8CC84B; border-color: #6a9c33; }
+.php-btn { background-color: #1e5fb8; border-color: #6a9c33; }
+.php-btn:hover { background-color: #6a9c33; color: #1e5fb8; }
+
+.python-btn { background-color: #306998; border-color: #FFD43B; }
+.python-btn:hover { background-color: #FFD43B; color: #306998; }
+
+.java-btn { background-color: #f89820; border-color: #007396; }
+.java-btn:hover { background-color: #007396; color: #f89820; }
+
+.cs-btn { background-color: #68217a; border-color: #00bcf2; }
+.cs-btn:hover { background-color: #00bcf2; color: #68217a; }
+
+.ruby-btn { background-color: #cc342d; border-color: #ffffff; }
+.ruby-btn:hover { background-color: #ffffff; color: #cc342d; }
+
+.go-btn { background-color: #00ADD8; border-color: #f2f2f2; }
+.go-btn:hover { background-color: #f2f2f2; color: #00ADD8; }
+
+.rust-btn { background-color: #dea584; border-color: #000000; }
+.rust-btn:hover { background-color: #000000; color: #dea584; }
+
+.swift-btn { background-color: #fa7343; border-color: #ffffff; }
+.swift-btn:hover { background-color: #ffffff; color: #fa7343; }
+
+.kotlin-btn { background-color: #0095D5; border-color: #F36C21; }
+.kotlin-btn:hover { background-color: #F36C21; color: #0095D5; }
+
+.ts-btn { background-color: #3178c6; border-color: #007acc; }
+.ts-btn:hover { background-color: #007acc; color: #3178c6; }
+
+.dart-btn { background-color: #00B4AB; border-color: #02569B; }
+.dart-btn:hover { background-color: #02569B; color: #00B4AB; }
+
+.cs-btn { background-color: #4479A1; border-color: #f29111; }
+.cs-btn:hover { background-color: #f29111; color: #4479A1; }
 .html-btn:hover { border-color: #e44d26; background-color: #c13c1b; }
 .css-btn:hover  { border-color: #0e39e2; background-color: #1f389c; }
 .js-btn:hover   { border-color: #f5de19; color: #323330; background-color: #d4bf0d; } /* Adjusted for better readability */

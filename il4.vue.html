@@ -1,0 +1,94 @@
+<body>
+    <!-- INTRO -->
+    <div id="scene-intro" class="scene active">
+        <h1>Discover Swedish Cities</h1>
+        <p class="description">
+            Sweden is home to vibrant cities full of history, nature, and innovation.
+            Explore some of its most iconic places.
+        </p>
+        <button id="start-btn" class="option-btn">Start Exploring</button>
+    </div>
+
+    <!-- CITY: STOCKHOLM -->
+    <div id="scene-stockholm" class="scene">
+        <h1>Stockholm</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Stockholm_Skyline_2020.jpg"
+             alt="Stockholm" style="max-width:80%; border-radius:10px; margin-bottom:1rem;">
+        <p class="description">
+            Sweden’s capital, built on 14 islands. Known for Gamla Stan (Old Town),
+            modern design, and stunning waterfront views.
+        </p>
+        <button class="option-btn next-btn" data-next="scene-gothenburg">Next City</button>
+    </div>
+
+    <!-- CITY: GOTHENBURG -->
+    <div id="scene-gothenburg" class="scene">
+        <h1>Gothenburg (Göteborg)</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Magasingatan_G%C3%B6teborg_2020.jpg"
+             alt="Gothenburg" style="max-width:80%; border-radius:10px; margin-bottom:1rem;">
+        <p class="description">
+            A friendly harbor city famous for seafood, cozy cafés,
+            and the beautiful archipelago just offshore.
+        </p>
+        <button class="option-btn next-btn" data-next="scene-malmo">Next City</button>
+    </div>
+
+    <!-- CITY: MALMO -->
+    <div id="scene-malmo" class="scene">
+        <h1>Malmö</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Turning_Torso_2012.jpg"
+             alt="Malmö" style="max-width:80%; border-radius:10px; margin-bottom:1rem;">
+        <p class="description">
+            A diverse, modern city known for the Turning Torso tower,
+            green spaces, and the Öresund Bridge connecting to Denmark.
+        </p>
+        <button class="option-btn next-btn" data-next="scene-uppsala">Next City</button>
+    </div>
+
+    <!-- CITY: UPPSALA -->
+    <div id="scene-uppsala" class="scene">
+        <h1>Uppsala</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/52/Uppsala_domkyrka_2019.jpg"
+             alt="Uppsala" style="max-width:80%; border-radius:10px; margin-bottom:1rem;">
+        <p class="description">
+            A historic university city famous for Uppsala Cathedral,
+            botanist Carl Linnaeus, and academic culture.
+        </p>
+        <button class="option-btn next-btn" data-next="scene-final">Finish</button>
+    </div>
+
+    <!-- FINISH -->
+    <div id="scene-final" class="scene">
+        <div class="icon-animation">🗺️🇸🇪</div>
+        <h1>End of the Journey</h1>
+        <p class="description">
+            You explored some of Sweden’s most iconic cities.
+            Ready to travel for real someday?
+        </p>
+        <button id="restart-btn" class="option-btn">Explore Again</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const scenes = document.querySelectorAll('.scene');
+            function showScene(id) {
+                scenes.forEach(s => s.classList.remove('active'));
+                document.getElementById(id).classList.add('active');
+            }
+
+            document.getElementById('start-btn').addEventListener('click', () => {
+                showScene('scene-stockholm');
+            });
+            document.getElementById('restart-btn').addEventListener('click', () => {
+                showScene('scene-intro');
+            });
+
+            const nextButtons = document.querySelectorAll('.next-btn');
+            nextButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    showScene(btn.dataset.next);
+                });
+            });
+        });
+    </script>
+</body>

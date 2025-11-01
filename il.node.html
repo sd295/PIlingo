@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Discovery: Germany</title>
+    <meta http-equiv="refresh" content="90; url=../../html.html" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-image: linear-gradient(rgba(13,27,42,0.85), rgba(13,27,42,0.85)), url(https://images.unsplash.com/photo-1551415925-df05f99d0a65?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80);
+            background-size: cover;
+            background-position: center;
+            color: white;
+            font-family: 'Nunito', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .scene {
+            display: none;
+            width: 90%;
+            max-width: 600px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .scene.active {
+            display: block;
+            animation: fadeIn 1s forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 { font-size: 2.5rem; }
+        p { font-size: 1.2rem; }
+
+        /* FLAG CHALLENGE */
+        .flag-container {
+            border: 2px solid white;
+            padding: 10px;
+            margin: 20px auto;
+            display: inline-block;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+        .flag-background {
+            position: relative;
+            width: 330px;
+            height: 180px; /* 11:6 ratio for Germany flag */
+            background-color: #ccc;
+            cursor: pointer;
+        }
+        .flag-stripe {
+            position: absolute;
+            width: 100%;
+            height: 33.33%;
+            left: 0;
+            cursor: pointer;
+        }
+        .stripe-black { top: 0; background-color: #000; }
+        .stripe-red { top: 33.33%; background-color: #000; }
+        .stripe-gold { top: 66.66%; background-color: #000; }
+
+        .palette { margin-top: 20px; }
+        .color-btn {
+            width: 50px; height: 50px; border-radius: 50%; border: 3px solid white;
+            cursor: pointer; margin: 0 10px; box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+        .color-btn:hover { transform: scale(1.1); }
+        .color-btn[data-color="#000000"] { background-color: #000; }
+        .color-btn[data-color="#DD0000"] { background-color: #DD0000; }
+        .color-btn[data-color="#FFCC00"] { background-color: #FFCC00; }
+
+        /* CAPITAL CHALLENGE */
+        #capital-input {
+            font-size: 1.5rem; padding: 10px; border-radius: 8px;
+            border: none; text-align: center; margin-top: 20px;
+        }
+
+        /* REWARD SCENE */
+        .reward-container {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; overflow: hidden;
+        }
+        .brandenburg {
+            position: absolute;
+            bottom: -10%; left: 50%;
+            transform: translateX(-50%);
+            width: 60%; height: auto;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Brandenburger_Tor_abends.jpg/640px-Brandenburger_Tor_abends.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 12px;
+            opacity: 0;
+            animation: rise 3s forwards;
+        }
+        @keyframes rise {
+            from { opacity: 0; transform: translate(-50%, 50%); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+
+        button {
+            font-family: 'Nunito', sans-serif; font-size: 1.2rem; padding: 10px 20px;
+            border-radius: 8px; border: none; cursor: pointer; background-color: #58cc02;
+            color: white; margin-top: 20px; transition: background-color 0.2s;
+        }
+        button:hover { background-color: #70e000; }
+        .feedback { min-height: 24px; font-weight: bold; margin-top: 15px; font-size: 1.1rem; }
+        .feedback.correct { color: #58cc02; }
+        .feedback.incorrect { color: #ff4b4b; }
+    </style>
+</head>
+<body>
+
+    <audio id="correct-sound" src="https://www.soundjay.com/buttons/sounds/button-3.mp3" preload="auto"></audio>
+    <audio id="reward-music" src="https://upload.wikimedia.org/wikipedia/commons/3/30/Bach_-_Toccata_und_Fuge_d-moll_BWV_565.ogg" preload="auto"></audio>
+
+    <!-- SCENE 1: FLAG -->
+    <div id="scene-flag" class="scene active">
+        <h1>Willkommen! (Welcome!)</h1>
+        <p>Build the German flag. Select a color and paint each stripe in order.</p>
+        <div class="flag-container">
+            <div class="flag-background">
+                <div class="flag-stripe stripe-black"></div>
+                <div class="flag-stripe stripe-red"></div>
+                <div class="flag-stripe stripe-gold"></div>
+            </div>
+        </div>
+        <div class="palette">
+            <button class="color-btn" data-color="#000000"></button>
+            <button class="color-btn" data-color="#DD0000"></button>
+            <button class="color-btn" data-color="#FFCC00"></button>
+        </div>
+        <p class="feedback"></p>
+        <button id="check-flag-btn">Check Flag</button>
+    </div>
+
+    <!-- SCENE 2: CAPITAL -->
+    <div id="scene-capital" class="scene">
+        <h1>Challenge 2: Capital City</h1>
+        <p>Germany's capital is known for its history and culture. What is its name?</p>
+        <input type="text" id="capital-input" placeholder="Type here...">
+        <p class="feedback"></p>
+        <button id="check-capital-btn">Check Answer</button>
+    </div>
+
+    <!-- SCENE 3: REWARD -->
+    <div id="scene-reward" class="scene">
+        <div class="reward-container">
+            <div class="brandenburg"></div>
+        </div>
+        <h1>Glückwunsch! (Congratulations!)</h1>
+        <p>You built the flag and identified the capital. Enjoy the view of Brandenburg Gate!</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const correctSound = document.getElementById('correct-sound');
+            const rewardMusic = document.getElementById('reward-music');
+
+            const scenes = document.querySelectorAll('.scene');
+            let currentScene = 0;
+
+            function switchScene() {
+                scenes[currentScene].classList.remove('active');
+                currentScene++;
+                if(scenes[currentScene]) {
+                    scenes[currentScene].classList.add('active');
+                    if(currentScene === scenes.length - 1) {
+                        rewardMusic.volume = 0.5;
+                        rewardMusic.play();
+                    }
+                }
+            }
+
+            // --- FLAG SCENE ---
+            const checkFlagBtn = document.getElementById('check-flag-btn');
+            const flagFeedback = document.querySelector('#scene-flag .feedback');
+            const stripes = {
+                black: document.querySelector('.stripe-black'),
+                red: document.querySelector('.stripe-red'),
+                gold: document.querySelector('.stripe-gold')
+            };
+            const colorButtons = document.querySelectorAll('.color-btn');
+            let selectedColor = null;
+
+            colorButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    selectedColor = btn.dataset.color;
+                    colorButtons.forEach(b => b.style.border='3px solid white');
+                    btn.style.border='3px solid #58cc02';
+                });
+            });
+
+            Object.values(stripes).forEach(stripe => {
+                stripe.addEventListener('click', () => {
+                    if(selectedColor) stripe.style.backgroundColor = selectedColor;
+                    else {
+                        flagFeedback.textContent = "Select a color first!";
+                        flagFeedback.className = "feedback incorrect";
+                    }
+                });
+            });
+
+            checkFlagBtn.addEventListener('click', () => {
+                const normalize = color => {
+                    const ctx = document.createElement('canvas').getContext('2d');
+                    ctx.fillStyle = color; return ctx.fillStyle;
+                };
+                const correct = {
+                    black: normalize('#000000'),
+                    red: normalize('#DD0000'),
+                    gold: normalize('#FFCC00')
+                };
+                const isCorrect = normalize(stripes.black.style.backgroundColor) === correct.black &&
+                                  normalize(stripes.red.style.backgroundColor) === correct.red &&
+                                  normalize(stripes.gold.style.backgroundColor) === correct.gold;
+                if(isCorrect){
+                    flagFeedback.textContent = "Perfekt!";
+                    flagFeedback.className = "feedback correct";
+                    correctSound.currentTime = 0; correctSound.play();
+                    setTimeout(switchScene,1500);
+                } else {
+                    flagFeedback.textContent = "Not quite right. Check colors and order.";
+                    flagFeedback.className = "feedback incorrect";
+                }
+            });
+
+            // --- CAPITAL SCENE ---
+            const checkCapitalBtn = document.getElementById('check-capital-btn');
+            const capitalInput = document.getElementById('capital-input');
+            const capitalFeedback = document.querySelector('#scene-capital .feedback');
+
+            capitalInput.addEventListener('keyup', e => { if(e.key==="Enter") checkCapitalBtn.click(); });
+
+            checkCapitalBtn.addEventListener('click', () => {
+                const answer = capitalInput.value.trim().toLowerCase();
+                if(answer === 'berlin'){
+                    capitalFeedback.textContent = "Correct! Berlin it is.";
+                    capitalFeedback.className = "feedback correct";
+                    correctSound.currentTime=0; correctSound.play();
+                    setTimeout(switchScene,1500);
+                } else {
+                    capitalFeedback.textContent = "Not correct. Hint: It starts with 'B'.";
+                    capitalFeedback.className = "feedback incorrect";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
