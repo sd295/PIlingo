@@ -12,11 +12,6 @@ const lessonContent = {
       prompt: "True or False: You can fetch JSON data from Wikipedia using its REST API.",
       options: ["True", "False"],
       correctAnswer: "True"
-    },
-    {
-      prompt: "Tip",
-      options: "Start by fetching data from Wikipedia in JSON, then render it in HTML for the user.",
-      correctAnswer: "Start by fetching data from Wikipedia in JSON, then render it in HTML for the user."
     }
   ],
 

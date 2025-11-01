@@ -12,11 +12,6 @@ const lessonContent = {
       prompt: "True or False: You can take user input from the URL path to dynamically fetch data.",
       options: ["True", "False"],
       correctAnswer: "True"
-    },
-    {
-      prompt: "Tip",
-      options: "Use req.url to read the requested city name, then fetch live data for it.",
-      correctAnswer: "Use req.url to read the requested city name, then fetch live data for it."
     }
   ],
 

@@ -22,11 +22,6 @@ const lessonContent = {
       prompt: "True or False: You can have multiple routes in Node.js HTTP server.",
       options: ["True", "False"],
       correctAnswer: "True"
-    },
-    {
-      prompt: "Tip",
-      options: "Start simple: serve HTML first, then add multiple routes and images.",
-      correctAnswer: "Start simple: serve HTML first, then add multiple routes and images."
     }
   ],
 

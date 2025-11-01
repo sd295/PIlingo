@@ -22,12 +22,8 @@ const lessonContent = {
       prompt: "True or False: Node.js can dynamically fetch facts about cities from APIs.",
       options: ["True", "False"],
       correctAnswer: "True"
-    },
-    {
-      prompt: "Tip",
-      options: "You can use arrays of objects with city names, flags, and fun facts to dynamically render cards in Node.js.",
-      correctAnswer: true
     }
+    
   ],
 
   minigame: {

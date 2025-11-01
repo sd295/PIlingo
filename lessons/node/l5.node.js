@@ -17,11 +17,6 @@ const lessonContent = {
       prompt: "True or False: Node.js can fetch and display multiple API responses on a single HTML page.",
       options: ["True", "False"],
       correctAnswer: "True"
-    },
-    {
-      prompt: "Tip",
-      options: "Use Promise.all() or async/await to fetch multiple Wikipedia summaries efficiently.",
-      correctAnswer: "Use Promise.all() or async/await to fetch multiple Wikipedia summaries efficiently."
     }
   ],
 
