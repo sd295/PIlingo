@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animation of the Netherlands</title>
+<meta http-equiv="refresh" content="24; url=../../python.html" />
+<style>
+  body {
+    background-color: #87CEEB;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .scene {
+    position: relative;
+    width: 800px;
+    height: 600px;
+  }
+
+  .ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 150px;
+    background-color: #8B4513;
+  }
+
+  .canal {
+    position: absolute;
+    bottom: 50px;
+    width: 100%;
+    height: 100px;
+    background-color: #4682B4;
+  }
+
+  .canal-houses {
+    position: absolute;
+    bottom: 150px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .house {
+    width: 80px;
+    height: 150px;
+    background-color: #D2691E;
+    position: relative;
+    border: 2px solid #654321;
+  }
+
+  .house::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 42px solid transparent;
+    border-right: 42px solid transparent;
+    border-bottom: 50px solid #A0522D;
+  }
+
+  .house .window {
+    width: 20px;
+    height: 30px;
+    background-color: #ADD8E6;
+    position: absolute;
+    top: 20px;
+    left: 10px;
+  }
+
+  .house .door {
+    width: 30px;
+    height: 50px;
+    background-color: #654321;
+    position: absolute;
+    bottom: 0;
+    left: 25px;
+  }
+
+  .windmill-container {
+    position: absolute;
+    bottom: 150px;
+    left: 50px;
+  }
+
+  .windmill-base {
+    width: 60px;
+    height: 120px;
+    background-color: #A0522D;
+    position: relative;
+  }
+
+  .windmill-top {
+    width: 0;
+    height: 0;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-bottom: 40px solid #8B4513;
+    position: absolute;
+    top: -40px;
+    left: -10px;
+  }
+
+  .windmill-blades {
+    position: absolute;
+    top: -60px;
+    left: 20px;
+    width: 20px;
+    height: 20px;
+    animation: rotate 4s linear infinite;
+  }
+
+  .blade {
+    position: absolute;
+    width: 10px;
+    height: 80px;
+    background-color: #D3D3D3;
+    transform-origin: 5px 75px;
+  }
+
+  .blade1 { transform: rotate(0deg); }
+  .blade2 { transform: rotate(90deg); }
+  .blade3 { transform: rotate(180deg); }
+  .blade4 { transform: rotate(270deg); }
+
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .tulips {
+    position: absolute;
+    bottom: 100px;
+    right: 50px;
+    display: flex;
+  }
+
+  .tulip {
+    width: 20px;
+    height: 0;
+    background-color: red;
+    border-radius: 10px 10px 0 0;
+    position: relative;
+    margin: 0 5px;
+    animation: grow 5s ease-in-out infinite;
+  }
+
+  .tulip::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 50px;
+    background-color: green;
+  }
+
+  .tulip:nth-child(2) {
+    background-color: yellow;
+    animation-delay: 1s;
+  }
+
+  .tulip:nth-child(3) {
+    background-color: purple;
+    animation-delay: 2s;
+  }
+
+  @keyframes grow {
+    0%, 100% { height: 0; }
+    50% { height: 40px; }
+  }
+
+  .bicycle {
+    position: absolute;
+    bottom: 70px;
+    left: -100px;
+    animation: ride 10s linear infinite;
+  }
+
+  .wheel {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #333;
+    border-radius: 50%;
+    position: absolute;
+  }
+
+  .wheel.front {
+    right: -70px;
+  }
+
+  .frame {
+    width: 80px;
+    height: 40px;
+    border-top: 5px solid #555;
+    position: absolute;
+    left: 25px;
+    top: -20px;
+  }
+
+  @keyframes ride {
+    from { left: -100px; }
+    to { left: 100%; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="scene">
+  <div class="ground"></div>
+  <div class="canal"></div>
+
+  <div class="canal-houses">
+    <div class="house">
+      <div class="window"></div>
+      <div class="door"></div>
+    </div>
+    <div class="house" style="height: 180px; background-color: #C2B280;">
+      <div class="window" style="top: 30px; left: 15px;"></div>
+      <div class="door" style="bottom: 0; left: 30px;"></div>
+    </div>
+    <div class="house" style="height: 160px; background-color: #BDB76B;">
+      <div class="window" style="top: 25px; left: 10px;"></div>
+      <div class="door" style="bottom: 0; left: 25px;"></div>
+    </div>
+  </div>
+
+  <div class="windmill-container">
+    <div class="windmill-base"></div>
+    <div class="windmill-top"></div>
+    <div class="windmill-blades">
+      <div class="blade blade1"></div>
+      <div class="blade blade2"></div>
+      <div class="blade blade3"></div>
+      <div class="blade blade4"></div>
+    </div>
+  </div>
+
+  <div class="tulips">
+    <div class="tulip"></div>
+    <div class="tulip"></div>
+    <div class="tulip"></div>
+  </div>
+
+  <div class="bicycle">
+    <div class="wheel back"></div>
+    <div class="wheel front"></div>
+    <div class="frame"></div>
+  </div>
+</div>
+
+</body>
+</html>

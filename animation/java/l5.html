@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animation of California</title>
+<meta http-equiv="refresh" content="24; url=../../java.html" />
+<style>
+  body {
+    background: linear-gradient(to bottom, #87CEEB 0%, #FFD700 100%);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .scene {
+    position: relative;
+    width: 800px;
+    height: 600px;
+  }
+
+  .ocean {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(to bottom, #00BFFF 0%, #1E90FF 100%);
+  }
+
+  .sand {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #F0E68C;
+  }
+
+  .road {
+    position: absolute;
+    bottom: 50px;
+    width: 100%;
+    height: 60px;
+    background-color: #696969;
+  }
+  
+  .road-line {
+    position: absolute;
+    bottom: 80px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: repeating-linear-gradient(
+      90deg,
+      #FFD700,
+      #FFD700 20px,
+      transparent 20px,
+      transparent 40px
+    );
+    animation: move-line 2s linear infinite;
+  }
+
+  @keyframes move-line {
+    from { background-position: 0 0; }
+    to { background-position: -40px 0; }
+  }
+
+  .hills {
+    position: absolute;
+    bottom: 110px;
+    width: 100%;
+    height: 200px;
+  }
+
+  .hill {
+    position: absolute;
+    bottom: 0;
+    width: 300px;
+    height: 150px;
+    background-color: #8B4513;
+    border-radius: 150px 150px 0 0;
+  }
+
+  .hill1 {
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #A0522D;
+    height: 200px;
+  }
+  
+  .hill2 {
+    left: 20%;
+  }
+  
+  .hill3 {
+    right: 20%;
+  }
+
+  .hollywood-sign {
+    position: absolute;
+    bottom: 250px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 24px;
+    font-family: sans-serif;
+    font-weight: bold;
+    letter-spacing: 2px;
+  }
+
+  .golden-gate-bridge {
+    position: absolute;
+    bottom: 110px;
+    left: 10%;
+    width: 300px;
+    height: 150px;
+  }
+  
+  .tower {
+    position: absolute;
+    bottom: 0;
+    width: 20px;
+    height: 100px;
+    background-color: #DC143C;
+  }
+  
+  .tower1 {
+    left: 50px;
+  }
+
+  .tower2 {
+    right: 50px;
+  }
+
+  .cables {
+    position: absolute;
+    bottom: 80px;
+    left: 70px;
+    width: 160px;
+    height: 50px;
+    border-top: 5px solid #DC143C;
+    border-radius: 50%;
+  }
+
+
+  .woody-wagon {
+    position: absolute;
+    bottom: 90px;
+    left: -200px;
+    width: 150px;
+    height: 70px;
+    animation: drive-by 15s linear infinite;
+  }
+  
+  .car-body {
+    width: 150px;
+    height: 50px;
+    background-color: #8B4513;
+    border-radius: 10px 10px 0 0;
+  }
+  
+  .car-top {
+    width: 100px;
+    height: 30px;
+    background-color: #DEB887;
+    position: absolute;
+    top: -10px;
+    left: 25px;
+    border-radius: 10px 10px 0 0;
+  }
+  
+  .car-window {
+    width: 30px;
+    height: 20px;
+    background-color: #ADD8E6;
+    position: absolute;
+    top: -5px;
+    left: 35px;
+  }
+
+  .car-wheel {
+    position: absolute;
+    bottom: -10px;
+    width: 30px;
+    height: 30px;
+    background-color: #333;
+    border-radius: 50%;
+  }
+  
+  .wheel-front {
+    right: 15px;
+  }
+  
+  .wheel-rear {
+    left: 15px;
+  }
+
+  @keyframes drive-by {
+    from { left: -200px; }
+    to { left: 100%; }
+  }
+  
+  .surfboard {
+    position: absolute;
+    bottom: 20px;
+    right: 50px;
+    width: 30px;
+    height: 100px;
+    background-color: #FF6347;
+    border: 3px solid #333;
+    border-radius: 15px 15px 5px 5px;
+    transform: rotate(20deg);
+  }
+  
+  .fin {
+    position: absolute;
+    bottom: 10px;
+    left: -10px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid #333;
+    transform: rotate(-20deg);
+  }
+
+</style>
+</head>
+<body>
+
+<div class="scene">
+  <div class="ocean"></div>
+  <div class="sand"></div>
+  <div class="road"></div>
+  <div class="road-line"></div>
+  
+  <div class="hills">
+    <div class="hill hill2"></div>
+    <div class="hill hill3"></div>
+    <div class="hill hill1"></div>
+    <div class="hollywood-sign">HOLLYWOOD</div>
+  </div>
+
+  <div class="golden-gate-bridge">
+    <div class="tower tower1"></div>
+    <div class="tower tower2"></div>
+    <div class="cables"></div>
+  </div>
+
+  <div class="woody-wagon">
+    <div class="car-top">
+      <div class="car-window"></div>
+    </div>
+    <div class="car-body"></div>
+    <div class="car-wheel wheel-rear"></div>
+    <div class="car-wheel wheel-front"></div>
+  </div>
+  
+  <div class="surfboard">
+    <div class="fin"></div>
+  </div>
+
+</div>
+
+</body>
+</html>

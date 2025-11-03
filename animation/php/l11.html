@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>United Kingdom Animation</title>
+    <meta http-equiv="refresh" content="24; url=../../php.html" />
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background: linear-gradient(to bottom, #8B95A7 0%, #B0C4DE 50%, #4A5568 100%);
+            height: 100vh;
+            font-family: 'Georgia', serif;
+        }
+
+        /* Title */
+        .title {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            z-index: 100;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .subtitle {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2em;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            z-index: 100;
+        }
+
+        /* Rain */
+        .rain {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .raindrop {
+            position: absolute;
+            width: 2px;
+            height: 20px;
+            background: linear-gradient(transparent, rgba(255,255,255,0.3));
+            animation: fall linear infinite;
+        }
+
+        .raindrop:nth-child(1) { left: 10%; animation-duration: 1s; }
+        .raindrop:nth-child(2) { left: 20%; animation-duration: 1.2s; animation-delay: 0.2s; }
+        .raindrop:nth-child(3) { left: 30%; animation-duration: 0.9s; animation-delay: 0.4s; }
+        .raindrop:nth-child(4) { left: 40%; animation-duration: 1.1s; animation-delay: 0.1s; }
+        .raindrop:nth-child(5) { left: 50%; animation-duration: 1s; animation-delay: 0.3s; }
+        .raindrop:nth-child(6) { left: 60%; animation-duration: 1.3s; animation-delay: 0.5s; }
+        .raindrop:nth-child(7) { left: 70%; animation-duration: 0.8s; animation-delay: 0.2s; }
+        .raindrop:nth-child(8) { left: 80%; animation-duration: 1.2s; animation-delay: 0.6s; }
+        .raindrop:nth-child(9) { left: 90%; animation-duration: 1s; animation-delay: 0.4s; }
+
+        @keyframes fall {
+            from { top: -20px; }
+            to { top: 100%; }
+        }
+
+        /* Big Ben */
+        .big-ben {
+            position: absolute;
+            bottom: 50px;
+            left: 100px;
+        }
+
+        .tower-base {
+            width: 80px;
+            height: 200px;
+            background: linear-gradient(to bottom, #8B7355, #A0826D);
+            position: relative;
+        }
+
+        .clock-face {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background: #FFF8DC;
+            border-radius: 50%;
+            border: 4px solid #8B7355;
+        }
+
+        .clock-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background: #333;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .hour-hand {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 2px;
+            height: 20px;
+            background: #333;
+            transform-origin: bottom center;
+            transform: translate(-50%, -100%) rotate(30deg);
+            animation: tick 120s linear infinite;
+        }
+
+        .minute-hand {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 2px;
+            height: 25px;
+            background: #333;
+            transform-origin: bottom center;
+            transform: translate(-50%, -100%) rotate(180deg);
+            animation: tick 10s linear infinite;
+        }
+
+        .tower-top {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 40px solid transparent;
+            border-right: 40px solid transparent;
+            border-bottom: 40px solid #8B7355;
+        }
+
+        /* Double Decker Bus */
+        .bus {
+            position: absolute;
+            bottom: 60px;
+            right: -250px;
+            animation: drive 20s linear infinite;
+        }
+
+        .bus-body {
+            width: 150px;
+            height: 80px;
+            background: #DC143C;
+            position: relative;
+            border-radius: 5px;
+        }
+
+        .bus-floor {
+            position: absolute;
+            top: 40px;
+            width: 100%;
+            height: 2px;
+            background: #FFF;
+        }
+
+        .bus-window {
+            position: absolute;
+            background: #87CEEB;
+            border: 2px solid #8B0000;
+        }
+
+        .window1 { width: 25px; height: 20px; top: 10px; left: 10px; }
+        .window2 { width: 25px; height: 20px; top: 10px; left: 40px; }
+        .window3 { width: 25px; height: 20px; top: 10px; left: 70px; }
+        .window4 { width: 25px; height: 20px; top: 10px; left: 100px; }
+        .window5 { width: 25px; height: 20px; top: 50px; left: 10px; }
+        .window6 { width: 25px; height: 20px; top: 50px; left: 40px; }
+        .window7 { width: 25px; height: 20px; top: 50px; left: 70px; }
+        .window8 { width: 25px; height: 20px; top: 50px; left: 100px; }
+
+        .bus-wheel {
+            position: absolute;
+            bottom: -15px;
+            width: 25px;
+            height: 25px;
+            background: #333;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .wheel-front { left: 20px; }
+        .wheel-back { right: 20px; }
+
+        @keyframes drive {
+            from { right: -250px; }
+            to { right: 110%; }
+        }
+
+        /* Phone Box */
+        .phone-box {
+            position: absolute;
+            bottom: 50px;
+            left: 300px;
+            width: 50px;
+            height: 100px;
+            background: #DC143C;
+            border: 3px solid #8B0000;
+        }
+
+        .phone-box-top {
+            position: absolute;
+            top: -15px;
+            left: -3px;
+            width: 56px;
+            height: 15px;
+            background: #8B0000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 8px;
+            font-weight: bold;
+        }
+
+        .phone-box-window {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35px;
+            height: 30px;
+            background: rgba(135, 206, 235, 0.5);
+            border: 2px solid #8B0000;
+        }
+
+        /* Union Jack Flag */
+        .flag {
+            position: absolute;
+            top: 150px;
+            right: 100px;
+            width: 120px;
+            height: 72px;
+            background: #012169;
+            position: relative;
+            animation: wave 3s ease-in-out infinite;
+            transform-origin: left center;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .flag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(to bottom, transparent 45%, white 45%, white 55%, transparent 55%),
+                linear-gradient(to right, transparent 45%, white 45%, white 55%, transparent 55%);
+        }
+
+        .flag::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(to bottom, transparent 48%, #C8102E 48%, #C8102E 52%, transparent 52%),
+                linear-gradient(to right, transparent 48%, #C8102E 48%, #C8102E 52%, transparent 52%);
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleX(1) skewY(0); }
+            50% { transform: scaleX(0.95) skewY(2deg); }
+        }
+
+        /* Tea Cup */
+        .teacup {
+            position: absolute;
+            bottom: 150px;
+            right: 300px;
+            animation: bob 2s ease-in-out infinite;
+        }
+
+        .cup {
+            width: 60px;
+            height: 40px;
+            background: white;
+            border-radius: 0 0 30px 30px;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .cup-handle {
+            position: absolute;
+            right: -15px;
+            top: 5px;
+            width: 20px;
+            height: 25px;
+            border: 3px solid white;
+            border-left: none;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .steam {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .steam-particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            animation: rise 2s ease-out infinite;
+        }
+
+        .steam-particle:nth-child(1) { animation-delay: 0s; left: -5px; }
+        .steam-particle:nth-child(2) { animation-delay: 0.5s; left: 0; }
+        .steam-particle:nth-child(3) { animation-delay: 1s; left: 5px; }
+
+        @keyframes rise {
+            0% { transform: translateY(0) scale(1); opacity: 0.7; }
+            100% { transform: translateY(-30px) scale(1.5); opacity: 0; }
+        }
+
+        @keyframes bob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Royal Guard */
+        .guard {
+            position: absolute;
+            bottom: 50px;
+            left: 450px;
+        }
+
+        .guard-hat {
+            width: 40px;
+            height: 50px;
+            background: #1C1C1C;
+            border-radius: 5px 5px 0 0;
+            position: relative;
+        }
+
+        .guard-face {
+            width: 30px;
+            height: 30px;
+            background: #FDBCB4;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .guard-body {
+            width: 40px;
+            height: 50px;
+            background: #DC143C;
+            position: relative;
+        }
+
+        .guard-body::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 30px;
+            background: gold;
+        }
+
+        .guard-legs {
+            width: 40px;
+            height: 30px;
+            background: #1C1C1C;
+        }
+
+        /* London Eye */
+        .london-eye {
+            position: absolute;
+            bottom: 100px;
+            right: 500px;
+            width: 150px;
+            height: 150px;
+            animation: rotate 30s linear infinite;
+        }
+
+        .wheel-rim {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border: 3px solid #4A5568;
+            border-radius: 50%;
+        }
+
+        .spoke {
+            position: absolute;
+            width: 2px;
+            height: 150px;
+            background: #4A5568;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .spoke:nth-child(2) { transform: translateX(-50%) rotate(45deg); }
+        .spoke:nth-child(3) { transform: translateX(-50%) rotate(90deg); }
+        .spoke:nth-child(4) { transform: translateX(-50%) rotate(135deg); }
+
+        .capsule {
+            position: absolute;
+            width: 15px;
+            height: 20px;
+            background: #87CEEB;
+            border: 2px solid #4A5568;
+            border-radius: 3px;
+            animation: counter-rotate 30s linear infinite;
+        }
+
+        .capsule1 { top: -10px; left: calc(50% - 7.5px); }
+        .capsule2 { top: calc(50% - 10px); right: -10px; }
+        .capsule3 { bottom: -10px; left: calc(50% - 7.5px); }
+        .capsule4 { top: calc(50% - 10px); left: -10px; }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes counter-rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes tick {
+            from { transform: translate(-50%, -100%) rotate(0deg); }
+            to { transform: translate(-50%, -100%) rotate(360deg); }
+        }
+
+        /* Thames River */
+        .thames {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(180deg, rgba(70,130,180,0.6) 0%, rgba(25,25,112,0.6) 100%);
+            animation: flow 4s ease-in-out infinite;
+        }
+
+        @keyframes flow {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">🇬🇧 United Kingdom 🇬🇧</h1>
+    <p class="subtitle">God Save the King!</p>
+
+    <!-- Rain -->
+    <div class="rain">
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+    </div>
+
+    <!-- Big Ben -->
+    <div class="big-ben">
+        <div class="tower-top"></div>
+        <div class="tower-base">
+            <div class="clock-face">
+                <div class="hour-hand"></div>
+                <div class="minute-hand"></div>
+                <div class="clock-center"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Phone Box -->
+    <div class="phone-box">
+        <div class="phone-box-top">PHONE</div>
+        <div class="phone-box-window"></div>
+    </div>
+
+    <!-- Royal Guard -->
+    <div class="guard">
+        <div class="guard-hat"></div>
+        <div class="guard-face"></div>
+        <div class="guard-body"></div>
+        <div class="guard-legs"></div>
+    </div>
+
+    <!-- Tea Cup -->
+    <div class="teacup">
+        <div class="steam">
+            <div class="steam-particle"></div>
+            <div class="steam-particle"></div>
+            <div class="steam-particle"></div>
+        </div>
+        <div class="cup">
+            <div class="cup-handle"></div>
+        </div>
+    </div>
+
+    <!-- Union Jack Flag -->
+    <div class="flag"></div>
+
+    <!-- London Eye -->
+    <div class="london-eye">
+        <div class="wheel-rim"></div>
+        <div class="spoke"></div>
+        <div class="spoke"></div>
+        <div class="spoke"></div>
+        <div class="spoke"></div>
+        <div class="capsule capsule1"></div>
+        <div class="capsule capsule2"></div>
+        <div class="capsule capsule3"></div>
+        <div class="capsule capsule4"></div>
+    </div>
+
+    <!-- Double Decker Bus -->
+    <div class="bus">
+        <div class="bus-body">
+            <div class="bus-floor"></div>
+            <div class="bus-window window1"></div>
+            <div class="bus-window window2"></div>
+            <div class="bus-window window3"></div>
+            <div class="bus-window window4"></div>
+            <div class="bus-window window5"></div>
+            <div class="bus-window window6"></div>
+            <div class="bus-window window7"></div>
+            <div class="bus-window window8"></div>
+            <div class="bus-wheel wheel-front"></div>
+            <div class="bus-wheel wheel-back"></div>
+        </div>
+    </div>
+
+    <!-- Thames River -->
+    <div class="thames"></div>
+</body>
+</html>

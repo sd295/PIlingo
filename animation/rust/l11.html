@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pakistan Animation</title>
+    <meta http-equiv="refresh" content="24; url=../../rust.html" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background: linear-gradient(to bottom, #01411C 0%, #4A9B5C 30%, #87CEEB 60%, #D2B48C 100%);
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Title */
+        .title {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3em;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            z-index: 100;
+            animation: glow 3s ease-in-out infinite;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.3em;
+            color: #01411C;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+            z-index: 100;
+            font-weight: bold;
+        }
+
+        .urdu-text {
+            position: absolute;
+            top: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            z-index: 100;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 3px 3px 6px rgba(0,0,0,0.5); }
+            50% { text-shadow: 3px 3px 6px rgba(0,0,0,0.5), 0 0 30px rgba(255,255,255,0.8); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* Pakistani Flag */
+        .flag {
+            position: absolute;
+            top: 180px;
+            left: 50px;
+            width: 140px;
+            height: 100px;
+            animation: wave 3s ease-in-out infinite;
+            transform-origin: left center;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            display: flex;
+        }
+
+        .flag-white {
+            width: 25%;
+            height: 100%;
+            background: white;
+        }
+
+        .flag-green {
+            width: 75%;
+            height: 100%;
+            background: #01411C;
+            position: relative;
+        }
+
+        .crescent {
+            position: absolute;
+            top: 50%;
+            left: 40%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            box-shadow: 8px 0 0 0 white;
+        }
+
+        .star {
+            position: absolute;
+            top: 50%;
+            left: 65%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 20px;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleX(1) skewY(0); }
+            50% { transform: scaleX(0.95) skewY(2deg); }
+        }
+
+        /* Sun */
+        .sun {
+            position: absolute;
+            top: 100px;
+            right: 120px;
+            width: 90px;
+            height: 90px;
+            background: #FFD700;
+            border-radius: 50%;
+            box-shadow: 0 0 60px #FFD700;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Mountains (K2/Karakoram) */
+        .mountains {
+            position: absolute;
+            bottom: 100px;
+            left: 0;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .mountain {
+            position: absolute;
+            width: 0;
+            height: 0;
+        }
+
+        .mountain1 {
+            left: 50px;
+            border-left: 120px solid transparent;
+            border-right: 120px solid transparent;
+            border-bottom: 180px solid #6B6B6B;
+        }
+
+        .mountain1::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: -120px;
+            width: 0;
+            height: 0;
+            border-left: 120px solid transparent;
+            border-right: 120px solid transparent;
+            border-bottom: 150px solid white;
+            opacity: 0.9;
+        }
+
+        .mountain2 {
+            left: 200px;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 150px solid #4A4A4A;
+        }
+
+        .mountain2::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: -100px;
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 130px solid white;
+            opacity: 0.85;
+        }
+
+        /* Minar-e-Pakistan */
+        .minar {
+            position: absolute;
+            bottom: 50px;
+            right: 150px;
+            z-index: 5;
+        }
+
+        .minar-base {
+            width: 80px;
+            height: 40px;
+            background: #F5DEB3;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .minar-tower {
+            width: 30px;
+            height: 180px;
+            background: linear-gradient(to bottom, #D2691E, #F5DEB3);
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .minar-top {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-bottom: 30px solid #01411C;
+        }
+
+        .minar-crescent {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #FFD700;
+            font-size: 20px;
+        }
+
+        /* Decorated Truck (Truck Art) */
+        .truck {
+            position: absolute;
+            bottom: 50px;
+            right: -300px;
+            animation: drive 20s linear infinite;
+        }
+
+        .truck-cabin {
+            width: 70px;
+            height: 60px;
+            background: linear-gradient(45deg, #FF6B6B 25%, #4ECDC4 25%, #4ECDC4 50%, #FFD93D 50%, #FFD93D 75%, #FF6B6B 75%);
+            background-size: 20px 20px;
+            border-radius: 5px 5px 0 0;
+            position: relative;
+            border: 3px solid #FFD700;
+        }
+
+        .truck-container {
+            position: absolute;
+            top: 0;
+            left: 70px;
+            width: 120px;
+            height: 60px;
+            background: linear-gradient(90deg, #E74C3C 0%, #3498DB 50%, #2ECC71 100%);
+            border: 3px solid #FFD700;
+        }
+
+        .truck-decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.3) 10px,
+                rgba(255,255,255,0.3) 20px
+            );
+        }
+
+        .truck-wheel {
+            position: absolute;
+            bottom: -15px;
+            width: 25px;
+            height: 25px;
+            background: #333;
+            border-radius: 50%;
+            border: 3px solid #FFD700;
+            animation: spin 1s linear infinite;
+        }
+
+        .wheel1 { left: 10px; }
+        .wheel2 { left: 90px; }
+        .wheel3 { left: 165px; }
+
+        @keyframes drive {
+            from { right: -300px; }
+            to { right: 110%; }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Auto Rickshaw */
+        .rickshaw {
+            position: absolute;
+            bottom: 50px;
+            left: -200px;
+            animation: ride 18s linear infinite;
+        }
+
+        .rickshaw-body {
+            width: 80px;
+            height: 50px;
+            background: #FFD700;
+            border-radius: 20px 20px 5px 5px;
+            position: relative;
+            border: 2px solid #000;
+        }
+
+        .rickshaw-roof {
+            position: absolute;
+            top: -20px;
+            left: -5px;
+            width: 90px;
+            height: 25px;
+            background: #01411C;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .rickshaw-window {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            width: 50px;
+            height: 20px;
+            background: rgba(135, 206, 235, 0.6);
+            border: 1px solid #000;
+        }
+
+        .rickshaw-wheel {
+            position: absolute;
+            bottom: -15px;
+            width: 20px;
+            height: 20px;
+            background: #333;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        .r-wheel1 { left: 5px; }
+        .r-wheel2 { right: 5px; }
+
+        @keyframes ride {
+            from { left: -200px; }
+            to { left: 110%; }
+        }
+
+        /* Cricket */
+        .cricket {
+            position: absolute;
+            top: 300px;
+            right: 400px;
+        }
+
+        .cricket-bat {
+            width: 15px;
+            height: 80px;
+            background: linear-gradient(to bottom, #8B4513, #D2691E);
+            border-radius: 7px 7px 0 0;
+            position: relative;
+            animation: swing 2s ease-in-out infinite;
+            transform-origin: top center;
+        }
+
+        .cricket-ball {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #DC143C;
+            border-radius: 50%;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .ball-seam {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        @keyframes swing {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-30deg); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { top: -30px; }
+            50% { top: -60px; }
+        }
+
+        /* Chai (Tea) */
+        .chai {
+            position: absolute;
+            top: 250px;
+            left: 300px;
+            animation: steam-float 3s ease-in-out infinite;
+        }
+
+        .chai-cup {
+            width: 50px;
+            height: 40px;
+            background: white;
+            border-radius: 0 0 25px 25px;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            border: 2px solid #8B4513;
+        }
+
+        .chai-tea {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 40px;
+            height: 30px;
+            background: #D2691E;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .chai-handle {
+            position: absolute;
+            right: -15px;
+            top: 10px;
+            width: 20px;
+            height: 25px;
+            border: 3px solid white;
+            border-left: none;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .steam {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .steam-particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 50%;
+            animation: rise 2s ease-out infinite;
+        }
+
+        .steam-particle:nth-child(1) { animation-delay: 0s; left: -5px; }
+        .steam-particle:nth-child(2) { animation-delay: 0.5s; left: 0; }
+        .steam-particle:nth-child(3) { animation-delay: 1s; left: 5px; }
+
+        @keyframes rise {
+            0% { transform: translateY(0) scale(0.5); opacity: 0.8; }
+            100% { transform: translateY(-40px) scale(1.5); opacity: 0; }
+        }
+
+        @keyframes steam-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Mango */
+        .mango {
+            position: absolute;
+            top: 350px;
+            right: 250px;
+            animation: swing-mango 3s ease-in-out infinite;
+            transform-origin: top center;
+        }
+
+        .mango-stem {
+            width: 3px;
+            height: 20px;
+            background: #654321;
+            margin: 0 auto;
+        }
+
+        .mango-fruit {
+            width: 40px;
+            height: 50px;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
+            border-radius: 50% 40% 60% 40%;
+            position: relative;
+        }
+
+        .mango-leaf {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            width: 20px;
+            height: 10px;
+            background: #228B22;
+            border-radius: 0 100% 0 100%;
+            transform: rotate(45deg);
+        }
+
+        @keyframes swing-mango {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        /* Kite (Basant) */
+        .kite {
+            position: absolute;
+            top: 200px;
+            left: 500px;
+            animation: fly-kite 4s ease-in-out infinite;
+        }
+
+        .kite-body {
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-top: 40px solid #E74C3C;
+            position: relative;
+        }
+
+        .kite-body::after {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: -30px;
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 40px solid #3498DB;
+        }
+
+        .kite-string {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 2px;
+            height: 100px;
+            background: #333;
+        }
+
+        .kite-tail {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 5px;
+            height: 60px;
+            background: repeating-linear-gradient(
+                to bottom,
+                #FF6B6B 0px,
+                #FF6B6B 10px,
+                #4ECDC4 10px,
+                #4ECDC4 20px
+            );
+        }
+
+        @keyframes fly-kite {
+            0%, 100% { transform: translate(0, 0) rotate(-5deg); }
+            50% { transform: translate(20px, -30px) rotate(5deg); }
+        }
+
+        /* Samosa */
+        .samosa {
+            position: absolute;
+            bottom: 150px;
+            left: 450px;
+            animation: float-samosa 3s ease-in-out infinite;
+        }
+
+        .samosa-body {
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 50px solid #DAA520;
+            position: relative;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .samosa-texture {
+            position: absolute;
+            top: 10px;
+            left: -25px;
+            width: 50px;
+            height: 40px;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 5px,
+                rgba(139, 69, 19, 0.2) 5px,
+                rgba(139, 69, 19, 0.2) 10px
+            );
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+
+        @keyframes float-samosa {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        /* Mosque Dome */
+        .mosque {
+            position: absolute;
+            bottom: 50px;
+            left: 650px;
+        }
+
+        .dome {
+            width: 80px;
+            height: 40px;
+            background: #01411C;
+            border-radius: 50% 50% 0 0;
+            position: relative;
+        }
+
+        .dome-top {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 20px;
+            background: #FFD700;
+        }
+
+        .dome-crescent {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #FFD700;
+            font-size: 18px;
+        }
+
+        .minaret {
+            position: absolute;
+            bottom: 0;
+            width: 15px;
+            height: 100px;
+            background: linear-gradient(to bottom, #F5DEB3, #D2691E);
+        }
+
+        .minaret-left { left: -20px; }
+        .minaret-right { right: -20px; }
+
+        .minaret-top {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 15px solid #01411C;
+        }
+
+        /* Stars */
+        .star-icon {
+            position: absolute;
+            color: white;
+            font-size: 20px;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        .star1 { top: 150px; left: 150px; animation-delay: 0s; }
+        .star2 { top: 180px; left: 250px; animation-delay: 0.5s; }
+        .star3 { top: 160px; left: 400px; animation-delay: 1s; }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        /* Ground */
+        .ground {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(to bottom, #8B7355, #A0826D);
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">🇵🇰 PAKISTAN 🇵🇰</h1>
+    <p class="subtitle">پاکستان زندہ باد</p>
+    <p class="urdu-text">خوش آمدید</p>
+
+    <!-- Sun -->
+    <div class="sun"></div>
+
+    <!-- Stars -->
+    <div class="star-icon star1">⭐</div>
+    <div class="star-icon star2">⭐</div>
+    <div class="star-icon star3">⭐</div>
+
+    <!-- Pakistani Flag -->
+    <div class="flag">
+        <div class="flag-white"></div>
+        <div class="flag-green">
+            <div class="crescent"></div>
+            <div class="star">⭐</div>
+        </div>
+    </div>
+
+    <!-- Mountains -->
+    <div class="mountains">
+        <div class="mountain mountain1"></div>
+        <div class="mountain mountain2"></div>
+    </div>
+
+    <!-- Minar-e-Pakistan -->
+    <div class="minar">
+        <div class="minar-crescent">☪️</div>
+        <div class="minar-top"></div>
+        <div class="minar-tower"></div>
+        <div class="minar-base"></div>
+    </div>
+
+    <!-- Mosque -->
+    <div class="mosque">
+        <div class="minaret minaret-left">
+            <div class="minaret-top"></div>
+        </div>
+        <div class="dome">
+            <div class="dome-crescent">☪️</div>
+            <div class="dome-top"></div>
+        </div>
+        <div class="minaret minaret-right">
+            <div class="minaret-top"></div>
+        </div>
+    </div>
+
+    <!-- Truck Art -->
+    <div class="truck">
+        <div class="truck-cabin">
+            <div class="truck-decoration"></div>
+        </div>
+        <div class="truck-container">
+            <div class="truck-decoration"></div>
+        </div>
+        <div class="truck-wheel wheel1"></div>
+        <div class="truck-wheel wheel2"></div>
+        <div class="truck-wheel wheel3"></div>
+    </div>
+
+    <!-- Auto Rickshaw -->
+    <div class="rickshaw">
+        <div class="rickshaw-roof"></div>
+        <div class="rickshaw-body">
+            <div class="rickshaw-window"></div>
+            <div class="rickshaw-wheel r-wheel1"></div>
+            <div class="rickshaw-wheel r-wheel2"></div>
+        </div>
+    </div>
+
+    <!-- Cricket -->
+    <div class="cricket">
+        <div class="cricket-ball">
+            <div class="ball-seam"></div>
+        </div>
+        <div class="cricket-bat"></div>
+    </div>
+
+    <!-- Chai -->
+    <div class="chai">
+        <div class="steam">
+            <div class="steam-particle"></div>
+            <div class="steam-particle"></div>
+            <div class="steam-particle"></div>
+        </div>
+        <div class="chai-cup">
+            <div class="chai-tea"></div>
+            <div class="chai-handle"></div>
+        </div>
+    </div>
+
+    <!-- Mango -->
+    <div class="mango">
+        <div class="mango-stem"></div>
+        <div class="mango-fruit">
+            <div class="mango-leaf"></div>
+        </div>
+    </div>
+
+    <!-- Kite -->
+    <div class="kite">
+        <div class="kite-body">
+            <div class="kite-tail"></div>
+        </div>
+        <div class="kite-string"></div>
+    </div>
+
+    <!-- Samosa -->
+    <div class="samosa">
+        <div class="samosa-body">
+            <div class="samosa-texture"></div>
+        </div>
+    </div>
+
+    <!-- Ground -->
+    <div class="ground"></div>
+</body>
+</html>

@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Italy Animation</title>
+    <meta http-equiv="refresh" content="24; url=../../go.html" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background: linear-gradient(to bottom, #87CEEB 0%, #B0E0E6 50%, #DEB887 100%);
+            height: 100vh;
+            font-family: 'Georgia', serif;
+        }
+
+        /* Title */
+        .title {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3em;
+            color: #008C45;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            z-index: 100;
+            animation: glow 3s ease-in-out infinite;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .subtitle {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.3em;
+            color: #CD212A;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            z-index: 100;
+            font-style: italic;
+        }
+
+        .italian-text {
+            position: absolute;
+            top: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            z-index: 100;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 3px 3px 6px rgba(0,0,0,0.4); }
+            50% { text-shadow: 3px 3px 6px rgba(0,0,0,0.4), 0 0 30px rgba(0,140,69,0.5); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* Italian Flag */
+        .flag {
+            position: absolute;
+            top: 180px;
+            left: 50px;
+            width: 120px;
+            height: 80px;
+            animation: wave 3s ease-in-out infinite;
+            transform-origin: left center;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .flag-stripe {
+            height: 100%;
+            width: 33.33%;
+            float: left;
+        }
+
+        .green { background: #008C45; }
+        .white { background: white; }
+        .red { background: #CD212A; }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleX(1) skewY(0); }
+            50% { transform: scaleX(0.95) skewY(2deg); }
+        }
+
+        /* Sun */
+        .sun {
+            position: absolute;
+            top: 80px;
+            right: 100px;
+            width: 80px;
+            height: 80px;
+            background: #FFD700;
+            border-radius: 50%;
+            box-shadow: 0 0 50px #FFD700;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 50px #FFD700; }
+            50% { transform: scale(1.1); box-shadow: 0 0 70px #FFD700; }
+        }
+
+        /* Leaning Tower of Pisa */
+        .pisa-tower {
+            position: absolute;
+            bottom: 80px;
+            left: 100px;
+            width: 60px;
+            height: 200px;
+            background: linear-gradient(to bottom, #F5DEB3, #DEB887);
+            transform: rotate(4deg);
+            transform-origin: bottom center;
+            border-radius: 30px 30px 10px 10px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .tower-level {
+            position: absolute;
+            width: 100%;
+            height: 30px;
+            border: 2px solid #D2691E;
+            border-radius: 50%;
+        }
+
+        .level1 { bottom: 10px; }
+        .level2 { bottom: 45px; }
+        .level3 { bottom: 80px; }
+        .level4 { bottom: 115px; }
+        .level5 { bottom: 150px; }
+
+        .tower-top {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 20px;
+            background: #F5DEB3;
+            border-radius: 50%;
+            border: 2px solid #D2691E;
+        }
+
+        /* Colosseum */
+        .colosseum {
+            position: absolute;
+            bottom: 80px;
+            right: 150px;
+            width: 200px;
+            height: 120px;
+            background: linear-gradient(to bottom, #D2691E, #8B4513);
+            border-radius: 50% 50% 0 0;
+            position: relative;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .arch {
+            position: absolute;
+            bottom: 0;
+            width: 25px;
+            height: 40px;
+            background: #4A4A4A;
+            border-radius: 50% 50% 0 0;
+        }
+
+        .arch1 { left: 10px; }
+        .arch2 { left: 40px; }
+        .arch3 { left: 70px; }
+        .arch4 { left: 100px; }
+        .arch5 { left: 130px; }
+        .arch6 { left: 160px; }
+
+        .colosseum-level {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: #654321;
+        }
+
+        .c-level1 { bottom: 40px; }
+        .c-level2 { bottom: 80px; }
+
+        /* Gondola */
+        .gondola {
+            position: absolute;
+            bottom: 30px;
+            left: -200px;
+            animation: sail 25s linear infinite;
+        }
+
+        .gondola-body {
+            width: 120px;
+            height: 30px;
+            background: #1C1C1C;
+            border-radius: 60% 10% 10% 60%;
+            position: relative;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .gondola-pole {
+            position: absolute;
+            left: 10px;
+            bottom: 30px;
+            width: 3px;
+            height: 80px;
+            background: #8B4513;
+        }
+
+        .gondolier {
+            position: absolute;
+            left: 15px;
+            bottom: 30px;
+            width: 15px;
+            height: 30px;
+            background: #000080;
+            border-radius: 50% 50% 0 0;
+        }
+
+        .gondolier-head {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            background: #FDBCB4;
+            border-radius: 50%;
+        }
+
+        .gondolier-hat {
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 5px;
+            background: #1C1C1C;
+            border-radius: 50%;
+        }
+
+        @keyframes sail {
+            from { left: -200px; }
+            to { left: 110%; }
+        }
+
+        /* Vespa Scooter */
+        .vespa {
+            position: absolute;
+            bottom: 80px;
+            right: -200px;
+            animation: ride 18s linear infinite;
+        }
+
+        .vespa-body {
+            width: 70px;
+            height: 40px;
+            background: #98D8C8;
+            border-radius: 20px 20px 10px 10px;
+            position: relative;
+        }
+
+        .vespa-seat {
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            width: 30px;
+            height: 15px;
+            background: #654321;
+            border-radius: 10px;
+        }
+
+        .vespa-handlebar {
+            position: absolute;
+            top: -15px;
+            left: -10px;
+            width: 25px;
+            height: 3px;
+            background: #333;
+            transform: rotate(-30deg);
+        }
+
+        .vespa-wheel {
+            position: absolute;
+            bottom: -15px;
+            width: 20px;
+            height: 20px;
+            background: #333;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .wheel-front { left: 5px; }
+        .wheel-back { right: 5px; }
+
+        @keyframes ride {
+            from { right: -200px; }
+            to { right: 110%; }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Pizza */
+        .pizza {
+            position: absolute;
+            top: 250px;
+            right: 200px;
+            animation: spin-pizza 8s linear infinite;
+        }
+
+        .pizza-base {
+            width: 80px;
+            height: 80px;
+            background: #FFD700;
+            border-radius: 50%;
+            position: relative;
+            border: 5px solid #DAA520;
+        }
+
+        .pizza-slice {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 40%;
+            height: 2px;
+            background: #8B4513;
+            transform-origin: left center;
+        }
+
+        .slice1 { transform: rotate(0deg); }
+        .slice2 { transform: rotate(45deg); }
+        .slice3 { transform: rotate(90deg); }
+        .slice4 { transform: rotate(135deg); }
+        .slice5 { transform: rotate(180deg); }
+        .slice6 { transform: rotate(225deg); }
+        .slice7 { transform: rotate(270deg); }
+        .slice8 { transform: rotate(315deg); }
+
+        .pepperoni {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #CD5C5C;
+            border-radius: 50%;
+        }
+
+        .pep1 { top: 15px; left: 25px; }
+        .pep2 { top: 30px; left: 45px; }
+        .pep3 { top: 45px; left: 25px; }
+        .pep4 { top: 25px; left: 10px; }
+
+        @keyframes spin-pizza {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Pasta */
+        .pasta {
+            position: absolute;
+            top: 300px;
+            left: 250px;
+            animation: wiggle-pasta 2s ease-in-out infinite;
+        }
+
+        .pasta-strand {
+            width: 80px;
+            height: 3px;
+            background: #FFE4B5;
+            border-radius: 50%;
+            position: relative;
+            margin: 5px 0;
+        }
+
+        .strand1 { transform: rotate(-10deg); }
+        .strand2 { transform: rotate(5deg); }
+        .strand3 { transform: rotate(-15deg); }
+        .strand4 { transform: rotate(8deg); }
+
+        @keyframes wiggle-pasta {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(5deg); }
+        }
+
+        /* Wine Bottle */
+        .wine-bottle {
+            position: absolute;
+            bottom: 150px;
+            left: 400px;
+            animation: bob 3s ease-in-out infinite;
+        }
+
+        .bottle {
+            width: 30px;
+            height: 80px;
+            background: linear-gradient(to bottom, #8B4513 0%, #8B4513 15%, #4B0000 15%, #4B0000 100%);
+            border-radius: 5px 5px 10px 10px;
+            position: relative;
+        }
+
+        .bottle-neck {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 20px;
+            background: #4B0000;
+        }
+
+        .wine-label {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 25px;
+            height: 20px;
+            background: #F5DEB3;
+            font-size: 8px;
+            text-align: center;
+            line-height: 20px;
+            color: #8B0000;
+        }
+
+        @keyframes bob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Gelato */
+        .gelato {
+            position: absolute;
+            top: 350px;
+            right: 350px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .cone {
+            width: 0;
+            height: 0;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-top: 60px solid #DAA520;
+            position: relative;
+        }
+
+        .cone::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            left: -25px;
+            width: 50px;
+            height: 60px;
+            background: repeating-linear-gradient(
+                45deg,
+                #DAA520,
+                #DAA520 5px,
+                #B8860B 5px,
+                #B8860B 10px
+            );
+            clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+        }
+
+        .scoop {
+            position: absolute;
+            top: -80px;
+            left: -25px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .scoop-bottom {
+            background: #F4A460;
+        }
+
+        .scoop-middle {
+            background: #FFB6C1;
+            top: -100px;
+        }
+
+        .scoop-top {
+            background: #98FB98;
+            top: -120px;
+        }
+
+        /* Roman Column */
+        .column {
+            position: absolute;
+            bottom: 80px;
+            left: 300px;
+        }
+
+        .column-base {
+            width: 40px;
+            height: 120px;
+            background: linear-gradient(to right, #D3D3D3, #F5F5F5, #D3D3D3);
+            position: relative;
+        }
+
+        .column-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: #A9A9A9;
+        }
+
+        .c-line1 { top: 20px; }
+        .c-line2 { top: 40px; }
+        .c-line3 { top: 60px; }
+        .c-line4 { top: 80px; }
+        .c-line5 { top: 100px; }
+
+        .column-top {
+            position: absolute;
+            top: -15px;
+            left: -5px;
+            width: 50px;
+            height: 15px;
+            background: #F5F5F5;
+            border-radius: 5px;
+        }
+
+        .column-bottom {
+            position: absolute;
+            bottom: -10px;
+            left: -5px;
+            width: 50px;
+            height: 10px;
+            background: #F5F5F5;
+        }
+
+        /* Italian Hand Gesture */
+        .hand {
+            position: absolute;
+            bottom: 200px;
+            right: 400px;
+            font-size: 60px;
+            animation: gesture 2s ease-in-out infinite;
+        }
+
+        @keyframes gesture {
+            0%, 100% { transform: translateY(0) rotate(-10deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        /* Grapes */
+        .grapes {
+            position: absolute;
+            top: 200px;
+            left: 200px;
+        }
+
+        .grape {
+            width: 15px;
+            height: 15px;
+            background: #8B008B;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .g1 { top: 0; left: 10px; }
+        .g2 { top: 10px; left: 5px; }
+        .g3 { top: 10px; left: 15px; }
+        .g4 { top: 20px; left: 0; }
+        .g5 { top: 20px; left: 10px; }
+        .g6 { top: 20px; left: 20px; }
+
+        /* Mediterranean Sea */
+        .water {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(180deg, rgba(30,144,255,0.7) 0%, rgba(0,0,139,0.8) 100%);
+            animation: waves 4s ease-in-out infinite;
+        }
+
+        @keyframes waves {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-20px); }
+        }
+
+        /* Birds */
+        .bird {
+            position: absolute;
+            font-size: 25px;
+            animation: fly 15s linear infinite;
+        }
+
+        .bird1 { top: 150px; animation-duration: 12s; }
+        .bird2 { top: 200px; animation-duration: 18s; animation-delay: 3s; }
+
+        @keyframes fly {
+            from { left: -50px; }
+            to { left: 110%; }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">🇮🇹 ITALIA 🇮🇹</h1>
+    <p class="subtitle">La Bella Italia!</p>
+    <p class="italian-text">Benvenuti in Italia! 🍕🍝🍷</p>
+
+    <!-- Sun -->
+    <div class="sun"></div>
+
+    <!-- Italian Flag -->
+    <div class="flag">
+        <div class="flag-stripe green"></div>
+        <div class="flag-stripe white"></div>
+        <div class="flag-stripe red"></div>
+    </div>
+
+    <!-- Leaning Tower of Pisa -->
+    <div class="pisa-tower">
+        <div class="tower-top"></div>
+        <div class="tower-level level1"></div>
+        <div class="tower-level level2"></div>
+        <div class="tower-level level3"></div>
+        <div class="tower-level level4"></div>
+        <div class="tower-level level5"></div>
+    </div>
+
+    <!-- Roman Column -->
+    <div class="column">
+        <div class="column-top"></div>
+        <div class="column-base">
+            <div class="column-line c-line1"></div>
+            <div class="column-line c-line2"></div>
+            <div class="column-line c-line3"></div>
+            <div class="column-line c-line4"></div>
+            <div class="column-line c-line5"></div>
+        </div>
+        <div class="column-bottom"></div>
+    </div>
+
+    <!-- Colosseum -->
+    <div class="colosseum">
+        <div class="colosseum-level c-level1"></div>
+        <div class="colosseum-level c-level2"></div>
+        <div class="arch arch1"></div>
+        <div class="arch arch2"></div>
+        <div class="arch arch3"></div>
+        <div class="arch arch4"></div>
+        <div class="arch arch5"></div>
+        <div class="arch arch6"></div>
+    </div>
+
+    <!-- Gondola -->
+    <div class="gondola">
+        <div class="gondola-body">
+            <div class="gondola-pole"></div>
+            <div class="gondolier">
+                <div class="gondolier-head"></div>
+                <div class="gondolier-hat"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vespa -->
+    <div class="vespa">
+        <div class="vespa-body">
+            <div class="vespa-seat"></div>
+            <div class="vespa-handlebar"></div>
+            <div class="vespa-wheel wheel-front"></div>
+            <div class="vespa-wheel wheel-back"></div>
+        </div>
+    </div>
+
+    <!-- Pizza -->
+    <div class="pizza">
+        <div class="pizza-base">
+            <div class="pizza-slice slice1"></div>
+            <div class="pizza-slice slice2"></div>
+            <div class="pizza-slice slice3"></div>
+            <div class="pizza-slice slice4"></div>
+            <div class="pizza-slice slice5"></div>
+            <div class="pizza-slice slice6"></div>
+            <div class="pizza-slice slice7"></div>
+            <div class="pizza-slice slice8"></div>
+            <div class="pepperoni pep1"></div>
+            <div class="pepperoni pep2"></div>
+            <div class="pepperoni pep3"></div>
+            <div class="pepperoni pep4"></div>
+        </div>
+    </div>
+
+    <!-- Pasta -->
+    <div class="pasta">
+        <div class="pasta-strand strand1"></div>
+        <div class="pasta-strand strand2"></div>
+        <div class="pasta-strand strand3"></div>
+        <div class="pasta-strand strand4"></div>
+    </div>
+
+    <!-- Wine Bottle -->
+    <div class="wine-bottle">
+        <div class="bottle">
+            <div class="bottle-neck"></div>
+            <div class="wine-label">VINO</div>
+        </div>
+    </div>
+
+    <!-- Gelato -->
+    <div class="gelato">
+        <div class="scoop scoop-top"></div>
+        <div class="scoop scoop-middle"></div>
+        <div class="scoop scoop-bottom"></div>
+        <div class="cone"></div>
+    </div>
+
+    <!-- Italian Hand Gesture -->
+    <div class="hand">🤌</div>
+
+    <!-- Grapes -->
+    <div class="grapes">
+        <div class="grape g1"></div>
+        <div class="grape g2"></div>
+        <div class="grape g3"></div>
+        <div class="grape g4"></div>
+        <div class="grape g5"></div>
+        <div class="grape g6"></div>
+    </div>
+
+    <!-- Birds -->
+    <div class="bird bird1">🕊️</div>
+    <div class="bird bird2">🕊️</div>
+
+    <!-- Mediterranean Sea -->
+    <div class="water"></div>
+</body>
+</html>

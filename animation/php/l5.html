@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animation of the UK</title>
+<meta http-equiv="refresh" content="24; url=../../php.html" />
+<style>
+  body {
+    background-color: #d3d3d3;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .scene {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    background-color: #87ceeb;
+  }
+
+  .road {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background-color: #333;
+  }
+
+  .road-markings {
+    position: absolute;
+    bottom: 48px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .marking {
+    width: 50px;
+    height: 4px;
+    background-color: white;
+  }
+
+  .big-ben {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 400px;
+    background-color: #deb887;
+    border: 2px solid #8b4513;
+  }
+
+  .clock-face {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    width: 60px;
+    height: 60px;
+    background-color: white;
+    border-radius: 50%;
+    border: 2px solid #333;
+  }
+
+  .hour-hand {
+    position: absolute;
+    top: 30px;
+    left: 28px;
+    width: 4px;
+    height: 20px;
+    background-color: #333;
+    transform-origin: 50% 100%;
+    animation: tick 12s linear infinite;
+  }
+
+  .minute-hand {
+    position: absolute;
+    top: 30px;
+    left: 28px;
+    width: 2px;
+    height: 28px;
+    background-color: #333;
+    transform-origin: 50% 100%;
+    animation: tick 1s linear infinite;
+  }
+
+  @keyframes tick {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .bus {
+    position: absolute;
+    bottom: 80px;
+    left: -200px;
+    width: 180px;
+    height: 100px;
+    background-color: #c80000;
+    border: 2px solid #a52a2a;
+    border-radius: 10px;
+    animation: drive 10s linear infinite;
+  }
+
+  .bus-window {
+    width: 30px;
+    height: 30px;
+    background-color: #add8e6;
+    position: absolute;
+    top: 10px;
+  }
+
+  .window1 { left: 10px; }
+  .window2 { left: 50px; }
+  .window3 { left: 90px; }
+  .window4 { left: 130px; }
+
+  .wheel {
+    width: 40px;
+    height: 40px;
+    background-color: #333;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -20px;
+  }
+
+  .wheel1 { left: 20px; }
+  .wheel2 { right: 20px; }
+
+  @keyframes drive {
+    from { left: -200px; }
+    to { left: 100%; }
+  }
+
+  .teapot-container {
+      position: absolute;
+      top: 50px;
+      right: 50px;
+      transform: rotate(-20deg);
+      animation: pour 5s ease-in-out infinite;
+  }
+
+  .teapot {
+      width: 100px;
+      height: 80px;
+      background-color: #f5f5dc;
+      border-radius: 50% 50% 0 0;
+      position: relative;
+      border: 3px solid #a0522d;
+  }
+
+  .teapot-handle {
+      width: 20px;
+      height: 50px;
+      border: 5px solid #a0522d;
+      border-right: none;
+      border-radius: 20px 0 0 20px;
+      position: absolute;
+      right: -25px;
+      top: 10px;
+  }
+
+  .teapot-spout {
+      width: 40px;
+      height: 20px;
+      background-color: #f5f5dc;
+      border-radius: 0 10px 10px 0;
+      position: absolute;
+      left: -40px;
+      top: 20px;
+      border: 3px solid #a0522d;
+  }
+
+  .tea-stream {
+      width: 5px;
+      height: 0px;
+      background-color: #8b4513;
+      position: absolute;
+      left: -45px;
+      top: 30px;
+      animation: pour-stream 5s ease-in-out infinite;
+  }
+
+  .teacup {
+      position: absolute;
+      top: 150px;
+      right: 120px;
+      width: 50px;
+      height: 30px;
+      background-color: #f5f5dc;
+      border: 3px solid #a0522d;
+      border-radius: 0 0 15px 15px;
+  }
+
+
+  @keyframes pour {
+      0%, 100% { transform: rotate(-20deg); }
+      50% { transform: rotate(20deg); }
+  }
+
+  @keyframes pour-stream {
+      0%, 40%, 100% { height: 0; }
+      60%, 90% { height: 80px; }
+  }
+
+
+</style>
+</head>
+<body>
+
+<div class="scene">
+  <div class="road">
+    <div class="road-markings">
+      <div class="marking"></div>
+      <div class="marking"></div>
+      <div class="marking"></div>
+      <div class="marking"></div>
+      <div class="marking"></div>
+    </div>
+  </div>
+
+  <div class="big-ben">
+    <div class="clock-face">
+      <div class="hour-hand"></div>
+      <div class="minute-hand"></div>
+    </div>
+  </div>
+
+  <div class="bus">
+    <div class="bus-window window1"></div>
+    <div class="bus-window window2"></div>
+    <div class="bus-window window3"></div>
+    <div class="bus-window window4"></div>
+    <div class="wheel wheel1"></div>
+    <div class="wheel wheel2"></div>
+  </div>
+
+    <div class="teapot-container">
+        <div class="teapot">
+            <div class="teapot-handle"></div>
+            <div class="teapot-spout"></div>
+            <div class="tea-stream"></div>
+        </div>
+    </div>
+    <div class="teacup"></div>
+
+</div>
+
+</body>
+</html>

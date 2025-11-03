@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>California Animation</title>
+    <meta http-equiv="refresh" content="24; url=../../java.html" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background: linear-gradient(to bottom, #FF6B35 0%, #FFB347 30%, #87CEEB 50%, #4A90E2 100%);
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Title */
+        .title {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3em;
+            color: #FFD700;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            z-index: 100;
+            animation: glow 2s ease-in-out infinite;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.3em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            z-index: 100;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 3px 3px 6px rgba(0,0,0,0.4), 0 0 20px rgba(255,215,0,0.5); }
+            50% { text-shadow: 3px 3px 6px rgba(0,0,0,0.4), 0 0 30px rgba(255,215,0,0.8); }
+        }
+
+        /* Sun */
+        .sun {
+            position: absolute;
+            top: 100px;
+            right: 100px;
+            width: 100px;
+            height: 100px;
+            background: #FFD700;
+            border-radius: 50%;
+            box-shadow: 0 0 60px #FFD700, 0 0 100px #FFA500;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .sun::before {
+            content: '😎';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 60px #FFD700, 0 0 100px #FFA500; }
+            50% { transform: scale(1.1); box-shadow: 0 0 80px #FFD700, 0 0 120px #FFA500; }
+        }
+
+        /* Hollywood Sign */
+        .hollywood-sign {
+            position: absolute;
+            top: 200px;
+            left: 50px;
+            font-size: 2.5em;
+            font-weight: bold;
+            color: white;
+            letter-spacing: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            transform: perspective(300px) rotateY(20deg);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.9; }
+            50% { opacity: 1; text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 10px rgba(255,255,255,0.5); }
+        }
+
+        /* Golden Gate Bridge */
+        .golden-gate {
+            position: absolute;
+            bottom: 200px;
+            left: 100px;
+            width: 300px;
+            height: 150px;
+        }
+
+        .bridge-tower {
+            position: absolute;
+            width: 20px;
+            height: 150px;
+            background: #C0362C;
+            bottom: 0;
+        }
+
+        .tower-left { left: 50px; }
+        .tower-right { right: 50px; }
+
+        .bridge-cable {
+            position: absolute;
+            bottom: 100px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #C0362C;
+        }
+
+        .bridge-cable::before,
+        .bridge-cable::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: #C0362C;
+        }
+
+        .bridge-cable::before { bottom: -20px; }
+        .bridge-cable::after { bottom: 20px; }
+
+        .bridge-deck {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: #8B4513;
+        }
+
+        .vertical-cable {
+            position: absolute;
+            width: 1px;
+            height: 70px;
+            background: #C0362C;
+            bottom: 30px;
+        }
+
+        .vertical-cable:nth-child(6) { left: 80px; }
+        .vertical-cable:nth-child(7) { left: 120px; }
+        .vertical-cable:nth-child(8) { left: 160px; }
+        .vertical-cable:nth-child(9) { left: 200px; }
+        .vertical-cable:nth-child(10) { left: 240px; }
+
+        /* Palm Trees */
+        .palm-tree {
+            position: absolute;
+            bottom: 50px;
+        }
+
+        .trunk {
+            width: 20px;
+            height: 120px;
+            background: linear-gradient(to bottom, #8B4513, #A0522D);
+            position: relative;
+            transform-origin: bottom center;
+            animation: sway 4s ease-in-out infinite;
+        }
+
+        .leaves {
+            position: absolute;
+            top: -40px;
+            left: -30px;
+        }
+
+        .leaf {
+            position: absolute;
+            width: 60px;
+            height: 15px;
+            background: #228B22;
+            border-radius: 50% 0;
+            transform-origin: bottom left;
+        }
+
+        .leaf:nth-child(1) { transform: rotate(-45deg); }
+        .leaf:nth-child(2) { transform: rotate(-15deg); }
+        .leaf:nth-child(3) { transform: rotate(15deg); }
+        .leaf:nth-child(4) { transform: rotate(45deg); }
+        .leaf:nth-child(5) { transform: rotate(75deg); left: 10px; }
+        .leaf:nth-child(6) { transform: rotate(105deg); left: 10px; }
+
+        .palm1 { right: 100px; }
+        .palm2 { right: 200px; animation-delay: 1s; }
+        .palm3 { right: 300px; animation-delay: 2s; }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        /* Surfer */
+        .surfer {
+            position: absolute;
+            bottom: 120px;
+            left: -200px;
+            animation: surf 15s linear infinite;
+        }
+
+        .surfboard {
+            width: 80px;
+            height: 20px;
+            background: linear-gradient(90deg, #FFD700, #FFA500, #FF6347);
+            border-radius: 40px;
+            position: relative;
+            transform: rotate(-10deg);
+        }
+
+        .surfer-body {
+            position: absolute;
+            bottom: 20px;
+            left: 30px;
+            width: 20px;
+            height: 40px;
+            background: #8B7355;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .surfer-arm {
+            position: absolute;
+            top: 5px;
+            width: 25px;
+            height: 4px;
+            background: #8B7355;
+            transform-origin: left center;
+        }
+
+        .arm-left {
+            left: -20px;
+            transform: rotate(-45deg);
+        }
+
+        .arm-right {
+            right: -20px;
+            transform: rotate(45deg);
+            transform-origin: right center;
+        }
+
+        @keyframes surf {
+            from { left: -200px; }
+            to { left: 110%; }
+        }
+
+        /* Ocean Waves */
+        .ocean {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, rgba(70,130,180,0.8) 0%, rgba(25,25,112,0.9) 100%);
+            overflow: hidden;
+        }
+
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 100px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%234A90E2' opacity='0.3'/%3E%3C/svg%3E");
+            animation: wave 5s linear infinite;
+        }
+
+        .wave:nth-child(2) {
+            bottom: 10px;
+            opacity: 0.5;
+            animation-delay: 1s;
+        }
+
+        .wave:nth-child(3) {
+            bottom: 20px;
+            opacity: 0.3;
+            animation-delay: 2s;
+        }
+
+        @keyframes wave {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* Convertible Car */
+        .convertible {
+            position: absolute;
+            bottom: 50px;
+            right: -200px;
+            animation: drive 18s linear infinite;
+        }
+
+        .car-body {
+            width: 100px;
+            height: 30px;
+            background: #FF1493;
+            border-radius: 20px 10px 5px 10px;
+            position: relative;
+        }
+
+        .windshield {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            width: 30px;
+            height: 20px;
+            background: rgba(135,206,235,0.6);
+            transform: skew(-20deg);
+            border: 2px solid #C71585;
+        }
+
+        .car-wheel {
+            position: absolute;
+            bottom: -10px;
+            width: 20px;
+            height: 20px;
+            background: #333;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .wheel-front { right: 10px; }
+        .wheel-back { left: 10px; }
+
+        .driver {
+            position: absolute;
+            top: -25px;
+            left: 30px;
+            width: 15px;
+            height: 15px;
+            background: #8B7355;
+            border-radius: 50%;
+        }
+
+        .driver::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -2px;
+            width: 20px;
+            height: 10px;
+            background: #FFD700;
+            transform: rotate(-10deg);
+            border-radius: 50%;
+        }
+
+        @keyframes drive {
+            from { right: -200px; }
+            to { right: 110%; }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* California Bear */
+        .cali-bear {
+            position: absolute;
+            bottom: 160px;
+            left: 500px;
+            animation: walk 20s linear infinite;
+        }
+
+        .bear-body {
+            width: 60px;
+            height: 40px;
+            background: #8B4513;
+            border-radius: 30px 30px 20px 20px;
+            position: relative;
+        }
+
+        .bear-head {
+            position: absolute;
+            top: -15px;
+            left: -10px;
+            width: 30px;
+            height: 30px;
+            background: #8B4513;
+            border-radius: 50%;
+        }
+
+        .bear-ear {
+            position: absolute;
+            top: -5px;
+            width: 10px;
+            height: 10px;
+            background: #8B4513;
+            border-radius: 50%;
+        }
+
+        .ear-left { left: 2px; }
+        .ear-right { right: 2px; }
+
+        .bear-leg {
+            position: absolute;
+            bottom: -10px;
+            width: 12px;
+            height: 15px;
+            background: #8B4513;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .leg1 { left: 5px; animation: step 1s infinite; }
+        .leg2 { left: 20px; animation: step 1s infinite 0.5s; }
+        .leg3 { right: 20px; animation: step 1s infinite 0.25s; }
+        .leg4 { right: 5px; animation: step 1s infinite 0.75s; }
+
+        @keyframes walk {
+            from { left: 500px; }
+            to { left: -100px; }
+        }
+
+        @keyframes step {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        /* Tech Elements (Silicon Valley) */
+        .tech-icon {
+            position: absolute;
+            top: 250px;
+            right: 200px;
+            font-size: 30px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .tech1 { right: 200px; animation-delay: 0s; }
+        .tech2 { right: 250px; animation-delay: 1s; }
+        .tech3 { right: 300px; animation-delay: 2s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Beach Volleyball */
+        .volleyball {
+            position: absolute;
+            bottom: 200px;
+            right: 400px;
+            width: 30px;
+            height: 30px;
+            background: white;
+            border-radius: 50%;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .volleyball::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #333;
+        }
+
+        .volleyball::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: #333;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-50px) rotate(180deg); }
+        }
+
+        /* California Flag Star */
+        .cali-star {
+            position: absolute;
+            top: 150px;
+            left: 250px;
+            font-size: 40px;
+            color: #C8102E;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(0.9); }
+        }
+
+        /* Seagulls */
+        .seagull {
+            position: absolute;
+            color: white;
+            font-size: 20px;
+            animation: fly 10s linear infinite;
+        }
+
+        .seagull1 { top: 150px; animation-duration: 12s; }
+        .seagull2 { top: 200px; animation-duration: 15s; animation-delay: 3s; }
+
+        @keyframes fly {
+            from { left: -50px; }
+            to { left: 110%; }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">☀️ CALIFORNIA ☀️</h1>
+    <p class="subtitle">The Golden State - Surf, Sun & Silicon Valley!</p>
+
+    <!-- Sun with Sunglasses -->
+    <div class="sun"></div>
+
+    <!-- Hollywood Sign -->
+    <div class="hollywood-sign">HOLLYWOOD</div>
+
+    <!-- California Star -->
+    <div class="cali-star">⭐</div>
+
+    <!-- Golden Gate Bridge -->
+    <div class="golden-gate">
+        <div class="bridge-tower tower-left"></div>
+        <div class="bridge-tower tower-right"></div>
+        <div class="bridge-cable"></div>
+        <div class="bridge-deck"></div>
+        <div class="vertical-cable"></div>
+        <div class="vertical-cable"></div>
+        <div class="vertical-cable"></div>
+        <div class="vertical-cable"></div>
+        <div class="vertical-cable"></div>
+    </div>
+
+    <!-- Palm Trees -->
+    <div class="palm-tree palm1">
+        <div class="trunk">
+            <div class="leaves">
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+            </div>
+        </div>
+    </div>
+    <div class="palm-tree palm2">
+        <div class="trunk">
+            <div class="leaves">
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+            </div>
+        </div>
+    </div>
+    <div class="palm-tree palm3">
+        <div class="trunk">
+            <div class="leaves">
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Surfer -->
+    <div class="surfer">
+        <div class="surfboard"></div>
+        <div class="surfer-body">
+            <div class="surfer-arm arm-left"></div>
+            <div class="surfer-arm arm-right"></div>
+        </div>
+    </div>
+
+    <!-- Convertible Car -->
+    <div class="convertible">
+        <div class="car-body">
+            <div class="windshield"></div>
+            <div class="driver"></div>
+            <div class="car-wheel wheel-front"></div>
+            <div class="car-wheel wheel-back"></div>
+        </div>
+    </div>
+
+    <!-- California Bear -->
+    <div class="cali-bear">
+        <div class="bear-body">
+            <div class="bear-head">
+                <div class="bear-ear ear-left"></div>
+                <div class="bear-ear ear-right"></div>
+            </div>
+            <div class="bear-leg leg1"></div>
+            <div class="bear-leg leg2"></div>
+            <div class="bear-leg leg3"></div>
+            <div class="bear-leg leg4"></div>
+        </div>
+    </div>
+
+    <!-- Tech Icons -->
+    <div class="tech-icon tech1">💻</div>
+    <div class="tech-icon tech2">📱</div>
+    <div class="tech-icon tech3">🚀</div>
+
+    <!-- Beach Volleyball -->
+    <div class="volleyball"></div>
+
+    <!-- Seagulls -->
+    <div class="seagull seagull1">🦅</div>
+    <div class="seagull seagull2">🦅</div>
+
+    <!-- Ocean Waves -->
+    <div class="ocean">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+</body>
+</html>

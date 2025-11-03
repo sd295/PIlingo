@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animation of Pakistan</title>
+<meta http-equiv="refresh" content="24; url=../../rust.html" />
+<style>
+  body {
+    background: #f0e68c;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .scene {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    background: linear-gradient(to bottom, #87ceeb 0%, #f0e68c 100%);
+  }
+  
+  .sky-elements {
+    position: absolute;
+    top: 50px;
+    right: 100px;
+    width: 100px;
+    height: 100px;
+  }
+  
+  .crescent {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    box-shadow: 15px 15px 0 0 white;
+    transform: rotate(45deg);
+  }
+
+  .star {
+    position: absolute;
+    top: 25px;
+    left: 60px;
+    font-size: 30px;
+    color: white;
+    animation: twinkle 2s ease-in-out infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  .mountains {
+    position: absolute;
+    bottom: 100px;
+    width: 100%;
+    height: 300px;
+  }
+
+  .mountain {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+
+  .mountain1 {
+    border-width: 0 250px 250px 250px;
+    border-color: transparent transparent #a0522d transparent;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .mountain-snow1 {
+    position: absolute;
+    top: 100px;
+    left: -50px;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 80px solid white;
+  }
+  
+  .mountain2 {
+    border-width: 0 200px 200px 200px;
+    border-color: transparent transparent #8b4513 transparent;
+    left: 10%;
+  }
+
+  .mountain3 {
+    border-width: 0 180px 180px 180px;
+    border-color: transparent transparent #a0522d transparent;
+    right: 5%;
+  }
+  
+  .ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to bottom, #8b5e34 0%, #a0785a 100%);
+  }
+
+  .faisal-mosque {
+    position: absolute;
+    bottom: 100px;
+    left: 80px;
+    width: 250px;
+    height: 120px;
+  }
+  
+  .mosque-hall {
+    position: absolute;
+    bottom: 0;
+    left: 45px;
+    width: 0;
+    height: 0;
+    border-left: 80px solid transparent;
+    border-right: 80px solid transparent;
+    border-bottom: 80px solid #f5f5dc;
+  }
+
+  .minaret {
+    position: absolute;
+    bottom: 0;
+    width: 10px;
+    height: 120px;
+    background-color: #f5f5dc;
+  }
+  .minaret-top {
+    position: absolute;
+    top: -10px;
+    left: -2px;
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 10px solid #d4af37;
+  }
+  .min1 { left: 0; }
+  .min2 { left: 30px; }
+  .min3 { left: 210px; }
+  .min4 { left: 240px; }
+
+  .lahore-fort-gate {
+    position: absolute;
+    bottom: 100px;
+    right: 80px;
+    width: 150px;
+    height: 120px;
+    background-color: #cd5c5c;
+    border: 3px solid #8b0000;
+  }
+  
+  .gate-arch {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 80px;
+    background: #8b5e34;
+    border-radius: 30px 30px 0 0;
+  }
+  
+  .gate-tower {
+    position: absolute;
+    top: -20px;
+    width: 30px;
+    height: 40px;
+    background-color: #cd5c5c;
+    border: 3px solid #8b0000;
+  }
+  .tower-left { left: -15px; }
+  .tower-right { right: -15px; }
+
+
+  .road {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #696969;
+  }
+
+  .decorated-truck {
+    position: absolute;
+    bottom: 40px;
+    left: -200px;
+    width: 180px;
+    height: 100px;
+    animation: drive 15s linear infinite;
+  }
+  
+  .truck-cab {
+    width: 60px;
+    height: 70px;
+    background: #006400;
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    border: 2px solid #ffd700;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .cab-window {
+    width: 40px;
+    height: 30px;
+    background: #87ceeb;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+  
+  .truck-trailer {
+    width: 120px;
+    height: 90px;
+    background-color: #dc143c;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border: 2px solid #000;
+    background-image:
+        repeating_linear_gradient(45deg, #ffd700, #ffd700 5px, transparent 5px, transparent 10px),
+        repeating_linear_gradient(-45deg, #006400, #006400 5px, transparent 5px, transparent 10px);
+  }
+
+  .truck-wheel {
+    width: 30px;
+    height: 30px;
+    background-color: #333;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -10px;
+  }
+
+  .wheel-front { left: 15px; }
+  .wheel-rear1 { right: 80px; }
+  .wheel-rear2 { right: 20px; }
+
+
+  @keyframes drive {
+    from { left: -200px; }
+    to { left: 100%; }
+  }
+
+
+</style>
+</head>
+<body>
+
+<div class="scene">
+  <div class="sky-elements">
+    <div class="crescent"></div>
+    <div class="star">★</div>
+  </div>
+
+  <div class="mountains">
+    <div class="mountain mountain3"></div>
+    <div class="mountain mountain2"></div>
+    <div class="mountain mountain1">
+      <div class="mountain-snow1"></div>
+    </div>
+  </div>
+  
+  <div class="ground"></div>
+
+  <div class="faisal-mosque">
+    <div class="minaret min1"><div class="minaret-top"></div></div>
+    <div class="minaret min2"><div class="minaret-top"></div></div>
+    <div class="mosque-hall"></div>
+    <div class="minaret min3"><div class="minaret-top"></div></div>
+    <div class="minaret min4"><div class="minaret-top"></div></div>
+  </div>
+
+  <div class="lahore-fort-gate">
+    <div class="gate-tower tower-left"></div>
+    <div class="gate-tower tower-right"></div>
+    <div class="gate-arch"></div>
+  </div>
+
+  <div class="road"></div>
+  
+  <div class="decorated-truck">
+    <div class="truck-cab"><div class="cab-window"></div></div>
+    <div class="truck-trailer"></div>
+    <div class="truck-wheel wheel-front"></div>
+    <div class="truck-wheel wheel-rear1"></div>
+    <div class="truck-wheel wheel-rear2"></div>
+  </div>
+
+</div>
+
+</body>
+</html>

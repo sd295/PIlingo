@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>California Animation</title>
+<meta http-equiv="refresh" content="24; url=../../java.html" />
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    background: linear-gradient(to top, #ffcc99 0%, #87ceeb 70%);
+    font-family: sans-serif;
+  }
+
+  /* Sun */
+  .sun {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, #FFD700, #FFA500);
+    border-radius: 50%;
+    top: 80%;
+    left: -100px;
+    animation: sunMove 5s linear forwards;
+  }
+
+  @keyframes sunMove {
+    0% { left: -100px; top: 80%; }
+    50% { left: 50%; top: 40%; }
+    100% { left: 110%; top: 80%; }
+  }
+
+  /* Mountains */
+  .mountain {
+    position: absolute;
+    bottom: 20%;
+    width: 0;
+    height: 0;
+    border-left: 80px solid transparent;
+    border-right: 80px solid transparent;
+    border-bottom: 100px solid #556B2F;
+  }
+
+  .mountain:nth-child(1) { left: 10%; border-bottom-color: #6B8E23; }
+  .mountain:nth-child(2) { left: 40%; border-bottom-color: #556B2F; }
+  .mountain:nth-child(3) { left: 70%; border-bottom-color: #6B8E23; }
+
+  /* Palm Tree */
+  .palm {
+    position: absolute;
+    bottom: 20%;
+    left: 80%;
+    width: 10px;
+    height: 80px;
+    background: #8B4513;
+    border-radius: 5px;
+  }
+
+  .leaf {
+    position: absolute;
+    width: 60px;
+    height: 5px;
+    background: #228B22;
+    top: 10px;
+    left: -25px;
+    transform-origin: right center;
+    transform: rotate(45deg);
+  }
+
+  .leaf:nth-child(2) { transform: rotate(-45deg); top: 20px; }
+  .leaf:nth-child(3) { transform: rotate(60deg); top: 30px; }
+  .leaf:nth-child(4) { transform: rotate(-60deg); top: 40px; }
+
+  /* Waves */
+  .wave {
+    position: absolute;
+    bottom: 0;
+    width: 200%;
+    height: 60px;
+    background: rgba(0,191,255,0.5);
+    border-radius: 50%;
+    animation: waveMove 2s linear infinite alternate;
+  }
+
+  .wave:nth-child(2) {
+    bottom: 10px;
+    background: rgba(0,191,255,0.3);
+    animation-duration: 3s;
+  }
+
+  @keyframes waveMove {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+</style>
+</head>
+<body>
+
+<div class="sun"></div>
+
+<!-- Mountains -->
+<div class="mountain"></div>
+<div class="mountain"></div>
+<div class="mountain"></div>
+
+<!-- Palm Tree -->
+<div class="palm">
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+</div>
+
+<!-- Waves -->
+<div class="wave"></div>
+<div class="wave"></div>
+
+<script>
+  // Optional: Add animated clouds
+  for(let i=0;i<5;i++){
+    const cloud = document.createElement('div');
+    cloud.style.position='absolute';
+    cloud.style.width=(60+Math.random()*40)+'px';
+    cloud.style.height=(30+Math.random()*20)+'px';
+    cloud.style.background='#fff';
+    cloud.style.borderRadius='50%';
+    cloud.style.top=(10+Math.random()*30)+'%';
+    cloud.style.left='-'+(50+Math.random()*100)+'px';
+    document.body.appendChild(cloud);
+
+    cloud.animate([
+      {transform:'translateX(0)'},
+      {transform:'translateX(120vw)'}
+    ], {duration:5000+Math.random()*2000, iterations:1, easing:'linear'});
+  }
+</script>
+
+</body>
+</html>

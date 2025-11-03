@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Netherlands Animation</title>
+<meta http-equiv="refresh" content="24; url=../../python.html" />
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    background: linear-gradient(to top, #87ceeb 0%, #f0f8ff 100%);
+    font-family: sans-serif;
+  }
+
+  /* Sun */
+  .sun {
+    position: absolute;
+    top: 10%;
+    left: -100px;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, #FFD700, #FFA500);
+    border-radius: 50%;
+    animation: moveSun 5s linear forwards;
+  }
+
+  @keyframes moveSun {
+    0% { left: -100px; top: 10%; }
+    50% { left: 50%; top: 5%; }
+    100% { left: 110%; top: 15%; }
+  }
+
+  /* Ground */
+  .ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 25%;
+    background: linear-gradient(to top, #228B22 0%, #32CD32 100%);
+  }
+
+  /* Windmill */
+  .windmill {
+    position: absolute;
+    bottom: 25%;
+    left: 20%;
+    width: 20px;
+    height: 120px;
+    background: #8B4513;
+  }
+
+  .blades {
+    position: absolute;
+    top: -40px;
+    left: -40px;
+    width: 100px;
+    height: 100px;
+    transform-origin: 50% 50%;
+    animation: spin 5s linear forwards;
+  }
+
+  .blade {
+    position: absolute;
+    width: 10px;
+    height: 50px;
+    background: #FFF;
+    top: 25px;
+    left: 45px;
+  }
+
+  .blade:nth-child(2) { transform: rotate(90deg); }
+  .blade:nth-child(3) { transform: rotate(180deg); }
+  .blade:nth-child(4) { transform: rotate(270deg); }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Tulips */
+  .tulip {
+    position: absolute;
+    bottom: 25%;
+    width: 10px;
+    height: 40px;
+    background: #006400;
+    border-radius: 2px;
+  }
+
+  .flower {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: red;
+    border-radius: 50%;
+    top: -20px;
+    left: -5px;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="sun"></div>
+<div class="ground"></div>
+
+<!-- Windmill -->
+<div class="windmill">
+  <div class="blades">
+    <div class="blade"></div>
+    <div class="blade"></div>
+    <div class="blade"></div>
+    <div class="blade"></div>
+  </div>
+</div>
+
+<!-- Tulips -->
+<div id="tulips"></div>
+
+<script>
+  // Create multiple tulips
+  const tulipsContainer = document.getElementById('tulips');
+  for (let i = 0; i < 10; i++) {
+    const tulip = document.createElement('div');
+    tulip.classList.add('tulip');
+    tulip.style.left = (i * 9 + 10) + '%';
+    
+    const flower = document.createElement('div');
+    flower.classList.add('flower');
+    tulip.appendChild(flower);
+    
+    tulipsContainer.appendChild(tulip);
+  }
+
+  // Optional: Animate tulips swaying
+  const tulipElements = document.querySelectorAll('.tulip');
+  tulipElements.forEach((t, idx) => {
+    t.style.animation = `sway 5s ease-in-out infinite alternate ${idx*0.1}s`;
+  });
+
+</script>
+
+<style>
+  @keyframes sway {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(10deg); }
+    100% { transform: rotate(-10deg); }
+  }
+</style>
+
+</body>
+</html>

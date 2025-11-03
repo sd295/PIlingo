@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animation of Estonia</title>
+<meta http-equiv="refresh" content="24; url=../../kotlin.html" />
+<style>
+  body {
+    background: linear-gradient(to bottom, #87CEEB 0%, #E0FFFF 100%);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+  }
+
+  .scene {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    background-color: #f0fff0;
+  }
+
+  .ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(to bottom, #3CB371 0%, #2E8B57 100%);
+  }
+
+  /* Tallinn Skyline */
+  .skyline {
+    position: absolute;
+    bottom: 150px;
+    width: 100%;
+    height: 150px;
+    opacity: 0.3;
+  }
+
+  .building {
+    position: absolute;
+    bottom: 0;
+    background-color: #2F4F4F;
+  }
+
+  .roof {
+    position: absolute;
+    top: -50px;
+    left: -5px;
+    width: 0;
+    height: 0;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-bottom: 50px solid #A0522D;
+  }
+
+  .town-hall {
+    left: 45%;
+    width: 70px;
+    height: 80px;
+  }
+
+  .st-olafs-church {
+    left: 60%;
+    width: 30px;
+    height: 150px;
+  }
+
+  .spire {
+    position: absolute;
+    top: -100px;
+    left: -10px;
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 100px solid #2E8B57;
+  }
+
+  .house1 { left: 30%; width: 50px; height: 60px; }
+  .house2 { left: 75%; width: 60px; height: 70px; }
+
+  /* Forest */
+  .forest {
+    position: absolute;
+    bottom: 150px;
+    width: 100%;
+  }
+
+  .pine-tree {
+    position: absolute;
+    bottom: 0;
+    width: 10px;
+    height: 50px;
+    background-color: #8B4513;
+  }
+  
+  .foliage {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 50px solid #006400;
+  }
+
+  .foliage1 { top: -20px; left: -20px; }
+  .foliage2 { top: -40px; left: -20px; transform: scale(0.9); }
+  .foliage3 { top: -60px; left: -20px; transform: scale(0.8); }
+
+  .tree1 { left: 5%; height: 80px; }
+  .tree2 { left: 15%; height: 100px; transform: scale(1.2); }
+  .tree3 { left: 85%; height: 90px; }
+  .tree4 { left: 95%; height: 70px; transform: scale(0.8); }
+
+  /* Windmill */
+  .windmill {
+    position: absolute;
+    bottom: 120px;
+    left: 150px;
+  }
+
+  .windmill-base {
+    width: 20px;
+    height: 80px;
+    background-color: #8B4513;
+    transform: rotate(15deg);
+  }
+  
+  .windmill-base::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 80px;
+    background-color: #8B4513;
+    transform: rotate(-30deg);
+    left: 35px;
+  }
+
+  .windmill-body {
+    position: absolute;
+    bottom: 60px;
+    left: -20px;
+    width: 100px;
+    height: 100px;
+    background-color: #D2B48C;
+    clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+  }
+
+  .windmill-blades {
+    position: absolute;
+    bottom: 110px;
+    left: 30px;
+    animation: rotate-blades 10s linear infinite;
+  }
+  
+  .blade {
+    position: absolute;
+    width: 10px;
+    height: 70px;
+    background-color: #A0522D;
+    transform-origin: 5px 65px;
+  }
+
+  .blade1 { transform: rotate(0deg); }
+  .blade2 { transform: rotate(90deg); }
+  .blade3 { transform: rotate(180deg); }
+  .blade4 { transform: rotate(270deg); }
+
+  @keyframes rotate-blades {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Stork Nest */
+  .stork-nest-pole {
+    position: absolute;
+    bottom: 150px;
+    right: 150px;
+    width: 10px;
+    height: 120px;
+    background-color: #8B4513;
+  }
+
+  .stork-nest {
+    position: absolute;
+    top: -20px;
+    left: -45px;
+    width: 100px;
+    height: 30px;
+    background-color: #A0522D;
+    border-radius: 50% / 15px;
+    border: 3px solid #8B4513;
+  }
+  
+  .stork {
+    position: absolute;
+    top: -50px;
+    left: -10px;
+    animation: move-head 5s ease-in-out infinite;
+  }
+  
+  .stork-body {
+    width: 25px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50% 50% 0 0;
+  }
+
+  .stork-neck {
+    width: 5px;
+    height: 20px;
+    background-color: white;
+    position: absolute;
+    top: -15px;
+    left: 10px;
+  }
+  
+  .stork-head {
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: -22px;
+    left: 8px;
+  }
+  
+  .stork-beak {
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 20px solid #FF4500;
+    position: absolute;
+    top: -22px;
+    left: -12px;
+  }
+
+  @keyframes move-head {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-15deg); }
+  }
+
+  /* Flag */
+  .flagpole {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    width: 5px;
+    height: 150px;
+    background-color: #C0C0C0;
+  }
+  
+  .flag {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    width: 90px;
+    height: 60px;
+    animation: wave 3s linear infinite;
+    transform-origin: 0 0;
+  }
+  
+  .stripe { height: 20px; }
+  .stripe-blue { background-color: #0072CE; }
+  .stripe-black { background-color: #000000; }
+  .stripe-white { background-color: #FFFFFF; }
+  
+  @keyframes wave {
+    0% { transform: scaleX(1); }
+    50% { transform: scaleX(0.95) skewY(5deg); }
+    100% { transform: scaleX(1); }
+  }
+
+
+</style>
+</head>
+<body>
+
+<div class="scene">
+  <div class="skyline">
+    <div class="building house1"><div class="roof" style="border-bottom-color: #CD5C5C;"></div></div>
+    <div class="building town-hall"><div class="roof"></div></div>
+    <div class="building st-olafs-church"><div class="spire"></div></div>
+    <div class="building house2"><div class="roof" style="border-bottom-color: #B8860B;"></div></div>
+  </div>
+
+  <div class="forest">
+    <div class="pine-tree tree1">
+      <div class="foliage foliage1"></div><div class="foliage foliage2"></div><div class="foliage foliage3"></div>
+    </div>
+    <div class="pine-tree tree2">
+      <div class="foliage foliage1"></div><div class="foliage foliage2"></div><div class="foliage foliage3"></div>
+    </div>
+    <div class="pine-tree tree3">
+      <div class="foliage foliage1"></div><div class="foliage foliage2"></div><div class="foliage foliage3"></div>
+    </div>
+     <div class="pine-tree tree4">
+      <div class="foliage foliage1"></div><div class="foliage foliage2"></div>
+    </div>
+  </div>
+
+  <div class="ground"></div>
+
+  <div class="windmill">
+    <div class="windmill-base"></div>
+    <div class="windmill-body"></div>
+    <div class="windmill-blades">
+      <div class="blade blade1"></div>
+      <div class="blade blade2"></div>
+      <div class="blade blade3"></div>
+      <div class="blade blade4"></div>
+    </div>
+  </div>
+
+  <div class="stork-nest-pole">
+    <div class="stork-nest"></div>
+    <div class="stork">
+      <div class="stork-neck"></div>
+      <div class="stork-head"></div>
+      <div class="stork-beak"></div>
+      <div class="stork-body"></div>
+    </div>
+  </div>
+
+  <div class="flagpole">
+    <div class="flag">
+      <div class="stripe stripe-blue"></div>
+      <div class="stripe stripe-black"></div>
+      <div class="stripe stripe-white"></div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -32,11 +32,6 @@ const lessonContent = {
       prompt: "Germany Fact: What is the tallest church in the world located in Germany?",
       options: ["Cologne Cathedral", "St. Peter's Basilica", "Berlin Cathedral", "Munich Frauenkirche"],
       correctAnswer: "Cologne Cathedral"
-    },
-    {
-      prompt: "Tip",
-      options: "Remember to push new city objects into the array on POST and filter the array on GET using query parameters.",
-      correctAnswer: true
     }
   ],
 

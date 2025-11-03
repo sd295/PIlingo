@@ -6,7 +6,7 @@
     <title>My Profile - Pi Nord</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* --- Base, Variables & Animated Background --- */
+        
         :root {
             --dark-blue: #0a192f;
             --light-slate: #ccd6f6;
@@ -143,6 +143,14 @@
                         <span id="vue-count" class="progress-number">0</span>
                         <p class="progress-label">Vue.js</p>
                     </div>
+                    <div class="progress-box">
+                        <span id="react-count" class="progress-number">0</span>
+                        <p class="progress-label">React</p>
+                    </div>
+                    <div class="progress-box">
+                        <span id="node-count" class="progress-number">0</span>
+                        <p class="progress-label">Node.js</p>
+                    </div>
                 </div>
             </div>
 
@@ -177,6 +185,8 @@
         const cssCountEl = document.getElementById('css-count');
         const jsCountEl = document.getElementById('js-count');
         const vueCountEl = document.getElementById('vue-count');
+        const nodeCountEl = document.getElementById('node-count');
+        const reactCountEl = document.getElementById('react-count');
 
         // This function runs whenever the user's login state changes
         onAuthStateChanged(auth, async (user) => {
@@ -218,6 +228,8 @@
                                 else if (key.startsWith('css')) cssCount++;
                                 else if (key.startsWith('js')) jsCount++;
                                 else if (key.startsWith('vue')) vueCount++;
+                                else if (key.startsWith('node')) vueCount++;
+                                else if (key.startsWith('react')) vueCount++;
                             });
                             
                             htmlCountEl.textContent = htmlCount;

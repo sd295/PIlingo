@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animation of France</title>
+<meta http-equiv="refresh" content="24; url=../../swift.html" />
+<style>
+  body {
+    background: linear-gradient(to bottom, #87CEEB 0%, #F0E68C 100%);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+  }
+
+  .scene {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    background-color: #f0f8ff;
+  }
+
+  .paris-skyline {
+    position: absolute;
+    bottom: 100px;
+    width: 100%;
+    height: 300px;
+  }
+
+  .eiffel-tower {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 350px;
+  }
+
+  .tower-base {
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    width: 100px;
+    height: 20px;
+    background-color: #8B4513;
+  }
+
+  .tower-legs {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    height: 100px;
+  }
+
+  .leg {
+    position: absolute;
+    bottom: 0;
+    width: 15px;
+    height: 100px;
+    background-color: #A0522D;
+  }
+
+  .leg1 { left: 20px; transform: skewX(-15deg); }
+  .leg2 { right: 20px; transform: skewX(15deg); }
+
+  .tower-middle {
+    position: absolute;
+    bottom: 120px;
+    left: 30px;
+    width: 60px;
+    height: 150px;
+    background-color: #A0522D;
+  }
+
+  .tower-top {
+    position: absolute;
+    bottom: 270px;
+    left: 45px;
+    width: 30px;
+    height: 80px;
+    background-color: #8B4513;
+  }
+
+  .louvre-pyramid {
+    position: absolute;
+    bottom: 0;
+    left: 100px;
+    width: 0;
+    height: 0;
+    border-left: 75px solid transparent;
+    border-right: 75px solid transparent;
+    border-bottom: 100px solid rgba(173, 216, 230, 0.7);
+  }
+
+  .road {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background-color: #696969;
+  }
+  
+  .sidewalk {
+    position: absolute;
+    bottom: 100px;
+    width: 100%;
+    height: 20px;
+    background-color: #D2B48C;
+  }
+
+  .citroen-2cv {
+    position: absolute;
+    bottom: 80px;
+    left: -200px;
+    width: 150px;
+    height: 80px;
+    animation: drive-across 14s linear infinite;
+  }
+
+  .car-body {
+    width: 140px;
+    height: 60px;
+    background-color: #4682B4;
+    border-radius: 30px 30px 0 0;
+  }
+  
+  .car-roof {
+    width: 80px;
+    height: 50px;
+    background-color: #F5F5DC;
+    position: absolute;
+    top: -10px;
+    left: 30px;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .car-window {
+    width: 30px;
+    height: 25px;
+    background-color: #ADD8E6;
+    position: absolute;
+    top: 0;
+    left: 35px;
+  }
+
+  .car-wheel {
+    position: absolute;
+    bottom: -10px;
+    width: 30px;
+    height: 30px;
+    background-color: #333;
+    border-radius: 50%;
+  }
+  
+  .wheel-front { right: 10px; }
+  .wheel-rear { left: 10px; }
+
+  @keyframes drive-across {
+    from { left: -200px; }
+    to { left: 100%; }
+  }
+
+  .cafe-scene {
+    position: absolute;
+    bottom: 120px;
+    right: 50px;
+  }
+
+  .cafe-table {
+    width: 120px;
+    height: 5px;
+    background-color: #8B4513;
+    position: absolute;
+    bottom: 30px;
+  }
+
+  .table-leg {
+    width: 5px;
+    height: 30px;
+    background-color: #8B4513;
+    position: absolute;
+    bottom: 0;
+    left: 57.5px;
+  }
+  
+  .croissant {
+    position: absolute;
+    bottom: 35px;
+    left: 10px;
+    width: 40px;
+    height: 20px;
+    background-color: #D2691E;
+    border-radius: 50% / 100% 100% 0 0;
+    transform: rotate(-15deg);
+  }
+
+  .coffee-cup {
+    position: absolute;
+    bottom: 35px;
+    right: 10px;
+    width: 30px;
+    height: 25px;
+    background-color: white;
+    border: 2px solid #696969;
+    border-radius: 0 0 10px 10px;
+  }
+  
+  .coffee {
+    width: 100%;
+    height: 10px;
+    background-color: #6F4E37;
+  }
+
+  .steam {
+    position: absolute;
+    bottom: 60px;
+    right: 20px;
+    width: 2px;
+    height: 15px;
+    background-color: #D3D3D3;
+    border-radius: 50%;
+    opacity: 0;
+    animation: steam-rise 3s ease-out infinite;
+  }
+
+  .steam2 { animation-delay: 1.5s; right: 30px; }
+
+  @keyframes steam-rise {
+    0% { transform: translateY(0); opacity: 0; }
+    50% { opacity: 0.8; }
+    100% { transform: translateY(-20px); opacity: 0; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="scene">
+  <div class="paris-skyline">
+    <div class="eiffel-tower">
+      <div class="tower-base"></div>
+      <div class="tower-legs">
+        <div class="leg leg1"></div>
+        <div class="leg leg2"></div>
+      </div>
+      <div class="tower-middle"></div>
+      <div class="tower-top"></div>
+    </div>
+    <div class="louvre-pyramid"></div>
+  </div>
+  
+  <div class="road"></div>
+  <div class="sidewalk"></div>
+
+  <div class="citroen-2cv">
+    <div class="car-roof">
+      <div class="car-window"></div>
+    </div>
+    <div class="car-body"></div>
+    <div class="car-wheel wheel-rear"></div>
+    <div class="car-wheel wheel-front"></div>
+  </div>
+
+  <div class="cafe-scene">
+    <div class="cafe-table"></div>
+    <div class="table-leg"></div>
+    <div class="croissant"></div>
+    <div class="coffee-cup">
+      <div class="coffee"></div>
+    </div>
+    <div class="steam steam1"></div>
+    <div class="steam steam2"></div>
+  </div>
+</div>
+
+</body>
+</html>

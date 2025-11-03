@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animation of Japan</title>
+<meta http-equiv="refresh" content="24; url=../../ruby.html" />
+<style>
+  body {
+    background: linear-gradient(to bottom, #87CEEB 0%, #ADD8E6 100%);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .scene {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    background-color: #f0f8ff;
+  }
+
+  .ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background-color: #228B22;
+  }
+  
+  .sun {
+    position: absolute;
+    top: 50px;
+    right: 100px;
+    width: 100px;
+    height: 100px;
+    background-color: #FF4500;
+    border-radius: 50%;
+  }
+
+  .mount-fuji {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 200px solid transparent;
+    border-right: 200px solid transparent;
+    border-bottom: 300px solid #696969;
+  }
+
+  .fuji-snow {
+    position: absolute;
+    top: 150px;
+    left: -50px;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 80px solid white;
+  }
+
+  .torii-gate {
+    position: absolute;
+    bottom: 80px;
+    right: 100px;
+    width: 150px;
+    height: 120px;
+  }
+  
+  .torii-post {
+    position: absolute;
+    bottom: 0;
+    width: 15px;
+    height: 100px;
+    background-color: #DC143C;
+  }
+  
+  .torii-post-left {
+    left: 10px;
+  }
+  
+  .torii-post-right {
+    right: 10px;
+  }
+  
+  .torii-lintel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 15px;
+    background-color: #DC143C;
+    border-radius: 5px;
+  }
+  
+  .torii-lintel-top {
+    top: -15px;
+    width: 180px;
+    left: -15px;
+  }
+
+  .cherry-blossom-tree {
+    position: absolute;
+    bottom: 90px;
+    left: 100px;
+  }
+  
+  .trunk {
+    width: 20px;
+    height: 150px;
+    background-color: #8B4513;
+  }
+  
+  .leaves {
+    position: absolute;
+    top: -80px;
+    left: -40px;
+    width: 100px;
+    height: 100px;
+    background-color: #FFB6C1;
+    border-radius: 50%;
+  }
+  
+  .petal {
+    position: absolute;
+    background-color: #FFC0CB;
+    width: 10px;
+    height: 10px;
+    border-radius: 0 50% 0 50%;
+    animation: fall 5s linear infinite;
+  }
+  
+  .petal1 { top: 20px; left: 20px; animation-delay: 0s; }
+  .petal2 { top: 40px; left: 50px; animation-delay: 1s; }
+  .petal3 { top: 10px; left: 80px; animation-delay: 2.5s; }
+  .petal4 { top: 60px; left: 10px; animation-delay: 4s; }
+
+
+  @keyframes fall {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(200px) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  .shinkansen-track {
+    position: absolute;
+    bottom: 80px;
+    width: 100%;
+    height: 10px;
+    background-color: #A9A9A9;
+  }
+  
+  .shinkansen {
+    position: absolute;
+    bottom: 90px;
+    left: -250px;
+    animation: zoom-past 8s linear infinite;
+  }
+  
+  .train-car {
+    width: 120px;
+    height: 40px;
+    background-color: #F5F5F5;
+    border: 2px solid #00008B;
+    border-radius: 10px;
+    position: relative;
+    float: left;
+    margin-right: 5px;
+  }
+  
+  .train-nose {
+    border-radius: 20px 0 0 20px;
+  }
+  
+  .train-window {
+    position: absolute;
+    top: 10px;
+    width: 100px;
+    height: 15px;
+    background-color: #87CEFA;
+    left: 10px;
+  }
+
+  @keyframes zoom-past {
+    from { left: -250px; }
+    to { left: 100%; }
+  }
+
+
+</style>
+</head>
+<body>
+
+<div class="scene">
+  <div class="sun"></div>
+  <div class="mount-fuji">
+    <div class="fuji-snow"></div>
+  </div>
+  <div class="ground"></div>
+  
+  <div class="cherry-blossom-tree">
+    <div class="trunk"></div>
+    <div class="leaves">
+      <div class="petal petal1"></div>
+      <div class="petal petal2"></div>
+      <div class="petal petal3"></div>
+      <div class="petal petal4"></div>
+    </div>
+  </div>
+
+  <div class="torii-gate">
+    <div class="torii-post torii-post-left"></div>
+    <div class="torii-post torii-post-right"></div>
+    <div class="torii-lintel"></div>
+    <div class="torii-lintel torii-lintel-top"></div>
+  </div>
+  
+  <div class="shinkansen-track"></div>
+  <div class="shinkansen">
+    <div class="train-car train-nose">
+      <div class="train-window"></div>
+    </div>
+    <div class="train-car">
+      <div class="train-window"></div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

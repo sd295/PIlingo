@@ -1,4 +1,4 @@
-// script.js
+// <!--seridarivus-->
 document.addEventListener('DOMContentLoaded', () => {
     // State variables
     let currentQuestionIndex = 0;

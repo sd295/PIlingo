@@ -12,11 +12,6 @@ const lessonContent = {
       prompt: "True or False: Node.js can handle form submissions and dynamically update the page content.",
       options: ["True", "False"],
       correctAnswer: "True"
-    },
-    {
-      prompt: "Tip",
-      options: "Use an array to store city objects and push new submissions to that array. Refresh the page to see updates.",
-      correctAnswer: "Use an array to store city objects and push new submissions to that array. Refresh the page to see updates."
     }
   ],
 

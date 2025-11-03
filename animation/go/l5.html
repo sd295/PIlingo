@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animation of Italy</title>
+<meta http-equiv="refresh" content="24; url=../../go.html" />
+<style>
+  body {
+    background: linear-gradient(to bottom, #87CEEB 0%, #F0E68C 100%);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .scene {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    background-color: #f0f8ff;
+  }
+
+  .sun {
+    position: absolute;
+    top: 50px;
+    left: 80px;
+    width: 80px;
+    height: 80px;
+    background-color: #FFD700;
+    border-radius: 50%;
+  }
+
+  .hills {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 250px;
+  }
+
+  .hill {
+    position: absolute;
+    bottom: 0;
+    background-color: #90EE90;
+    border-radius: 50% 50% 0 0;
+  }
+
+  .hill1 {
+    width: 500px;
+    height: 200px;
+    left: -100px;
+    background-color: #3CB371;
+  }
+
+  .hill2 {
+    width: 600px;
+    height: 250px;
+    right: -150px;
+  }
+
+  .cypress-tree {
+    position: absolute;
+    bottom: 200px;
+    transform-origin: bottom center;
+  }
+  
+  .trunk {
+    width: 10px;
+    height: 40px;
+    background-color: #8B4513;
+  }
+  
+  .foliage {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 100px solid #006400;
+    position: absolute;
+    bottom: 40px;
+    left: -15px;
+  }
+
+  .tree1 { left: 200px; }
+  .tree2 { left: 550px; bottom: 220px; }
+  .tree3 { left: 650px; transform: scale(0.8); }
+
+  .colosseum {
+    position: absolute;
+    bottom: 80px;
+    left: 80px;
+    width: 250px;
+    height: 100px;
+    background-color: #DEB887;
+    border-radius: 50% / 30%;
+    border: 5px solid #8B4513;
+  }
+
+  .arch {
+    position: absolute;
+    bottom: 5px;
+    width: 20px;
+    height: 40px;
+    background: #f0f8ff;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .arch1 { left: 50px; }
+  .arch2 { left: 110px; }
+  .arch3 { left: 170px; }
+  
+  .leaning-tower {
+    position: absolute;
+    bottom: 80px;
+    right: 150px;
+    width: 50px;
+    height: 180px;
+    background-color: #F5F5DC;
+    border: 2px solid #A9A9A9;
+    transform-origin: bottom center;
+    animation: lean 8s ease-in-out infinite;
+  }
+
+  .tower-tier {
+    width: 100%;
+    height: 20px;
+    border-bottom: 2px solid #A9A9A9;
+  }
+  
+  .tower-top {
+    position: absolute;
+    top: -10px;
+    left: -5px;
+    width: 60px;
+    height: 10px;
+    background-color: #F5F5DC;
+    border: 2px solid #A9A9A9;
+    border-radius: 2px;
+  }
+
+  @keyframes lean {
+    0%, 100% { transform: rotate(3deg); }
+    50% { transform: rotate(-1deg); }
+  }
+
+  .road {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    background-color: #D2B48C;
+  }
+
+  .vespa {
+    position: absolute;
+    bottom: 60px;
+    left: -150px;
+    animation: drive 12s linear infinite;
+  }
+
+  .vespa-body {
+    width: 100px;
+    height: 50px;
+    background-color: #CD5C5C;
+    border-radius: 10px 40px 10px 10px;
+  }
+  
+  .vespa-seat {
+    width: 40px;
+    height: 15px;
+    background-color: #A0522D;
+    position: absolute;
+    top: -10px;
+    left: 40px;
+    border-radius: 5px;
+  }
+
+  .vespa-handlebar {
+    width: 5px;
+    height: 30px;
+    background-color: #C0C0C0;
+    position: absolute;
+    top: -25px;
+    left: 15px;
+  }
+  
+  .vespa-wheel {
+    width: 25px;
+    height: 25px;
+    background-color: #333;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -5px;
+  }
+  
+  .wheel1 { left: 10px; }
+  .wheel2 { right: 10px; }
+
+  @keyframes drive {
+    from { left: -150px; }
+    to { left: 100%; }
+  }
+  
+  .pasta-plate {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    width: 100px;
+    height: 20px;
+    background-color: white;
+    border-radius: 0 0 50px 50px;
+    border: 3px solid #696969;
+  }
+  
+  .spaghetti {
+    position: absolute;
+    bottom: 20px;
+    right: 35px;
+    width: 70px;
+    height: 30px;
+    background-color: #FFD700;
+    border-radius: 50% 50% 0 0;
+  }
+
+  .sauce {
+    position: absolute;
+    top: 5px;
+    left: 15px;
+    width: 40px;
+    height: 20px;
+    background-color: #B22222;
+    border-radius: 50%;
+  }
+
+  .steam {
+    position: absolute;
+    bottom: 50px;
+    right: 60px;
+    width: 2px;
+    height: 15px;
+    background-color: #D3D3D3;
+    border-radius: 50%;
+    opacity: 0;
+    animation: rise 3s ease-out infinite;
+  }
+
+  .steam2 { animation-delay: 1s; right: 75px; }
+  .steam3 { animation-delay: 2s; right: 90px; }
+  
+  @keyframes rise {
+    0% { transform: translateY(0); opacity: 0; }
+    50% { opacity: 0.8; }
+    100% { transform: translateY(-30px); opacity: 0; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="scene">
+  <div class="sun"></div>
+  <div class="hills">
+    <div class="hill hill1"></div>
+    <div class="hill hill2"></div>
+  </div>
+
+  <div class="cypress-tree tree1">
+    <div class="trunk"></div>
+    <div class="foliage"></div>
+  </div>
+  <div class="cypress-tree tree2">
+    <div class="trunk"></div>
+    <div class="foliage"></div>
+  </div>
+   <div class="cypress-tree tree3">
+    <div class="trunk"></div>
+    <div class="foliage"></div>
+  </div>
+
+  <div class="colosseum">
+    <div class="arch arch1"></div>
+    <div class="arch arch2"></div>
+    <div class="arch arch3"></div>
+  </div>
+  
+  <div class="leaning-tower">
+    <div class="tower-tier"></div>
+    <div class="tower-tier"></div>
+    <div class="tower-tier"></div>
+    <div class="tower-tier"></div>
+    <div class="tower-tier"></div>
+    <div class="tower-tier"></div>
+    <div class="tower-tier"></div>
+    <div class="tower-tier"></div>
+    <div class="tower-top"></div>
+  </div>
+  
+  <div class="road"></div>
+  
+  <div class="vespa">
+    <div class="vespa-body"></div>
+    <div class="vespa-seat"></div>
+    <div class="vespa-handlebar"></div>
+    <div class="vespa-wheel wheel1"></div>
+    <div class="vespa-wheel wheel2"></div>
+  </div>
+  
+  <div class="pasta-plate"></div>
+  <div class="spaghetti">
+      <div class="sauce"></div>
+  </div>
+  <div class="steam steam1"></div>
+  <div class="steam steam2"></div>
+  <div class="steam steam3"></div>
+
+</div>
+
+</body>
+</html>

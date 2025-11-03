@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japan Animation</title>
+    <meta http-equiv="refresh" content="24; url=../../ruby.html" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background: linear-gradient(to bottom, #FFB6C1 0%, #FFC0CB 30%, #87CEEB 60%, #E6E6FA 100%);
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Title */
+        .title {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3em;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            z-index: 100;
+            animation: glow 3s ease-in-out infinite;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.3em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            z-index: 100;
+        }
+
+        .japanese-text {
+            position: absolute;
+            top: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2em;
+            color: #DC143C;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            z-index: 100;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 3px 3px 6px rgba(0,0,0,0.4); }
+            50% { text-shadow: 3px 3px 6px rgba(0,0,0,0.4), 0 0 20px rgba(255,255,255,0.5); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* Rising Sun */
+        .sun {
+            position: absolute;
+            top: 150px;
+            right: 150px;
+            width: 120px;
+            height: 120px;
+            background: #DC143C;
+            border-radius: 50%;
+            box-shadow: 0 0 60px #DC143C, 0 0 100px #FF6347;
+            animation: rise 20s ease-in-out infinite;
+        }
+
+        @keyframes rise {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+        }
+
+        /* Mount Fuji */
+        .fuji {
+            position: absolute;
+            bottom: 100px;
+            left: 100px;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-bottom: 200px solid #4B4B4D;
+            z-index: 2;
+        }
+
+        .fuji::before {
+            content: '';
+            position: absolute;
+            top: 60px;
+            left: -150px;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-bottom: 140px solid white;
+            opacity: 0.9;
+        }
+
+        /* Cherry Blossom Tree */
+        .sakura-tree {
+            position: absolute;
+            bottom: 50px;
+            right: 300px;
+            z-index: 5;
+        }
+
+        .tree-trunk {
+            width: 30px;
+            height: 100px;
+            background: linear-gradient(to bottom, #654321, #8B4513);
+            position: relative;
+        }
+
+        .branches {
+            position: absolute;
+            top: -80px;
+            left: -60px;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(255,182,193,0.8) 30%, transparent 70%);
+            border-radius: 50%;
+            overflow: visible;
+        }
+
+        .petal {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #FFB6C1;
+            border-radius: 0 50% 50% 50%;
+            transform: rotate(45deg);
+            animation: fall 5s linear infinite;
+        }
+
+        .petal:nth-child(1) { top: 10px; left: 20px; animation-delay: 0s; }
+        .petal:nth-child(2) { top: 30px; left: 50px; animation-delay: 1s; }
+        .petal:nth-child(3) { top: 20px; left: 80px; animation-delay: 2s; }
+        .petal:nth-child(4) { top: 40px; left: 30px; animation-delay: 3s; }
+        .petal:nth-child(5) { top: 10px; left: 100px; animation-delay: 4s; }
+
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+            100% { transform: translateY(200px) rotate(180deg); opacity: 0; }
+        }
+
+        /* Torii Gate */
+        .torii {
+            position: absolute;
+            bottom: 50px;
+            left: 450px;
+            z-index: 3;
+        }
+
+        .torii-pillar {
+            position: absolute;
+            width: 15px;
+            height: 120px;
+            background: #DC143C;
+            bottom: 0;
+        }
+
+        .pillar-left { left: 0; }
+        .pillar-right { left: 80px; }
+
+        .torii-top {
+            position: absolute;
+            top: -10px;
+            left: -20px;
+            width: 135px;
+            height: 20px;
+            background: #DC143C;
+            box-shadow: 0 -10px 0 #DC143C;
+        }
+
+        .torii-top::before {
+            content: '';
+            position: absolute;
+            top: -25px;
+            left: -10px;
+            width: 155px;
+            height: 15px;
+            background: #DC143C;
+        }
+
+        /* Bullet Train */
+        .shinkansen {
+            position: absolute;
+            bottom: 150px;
+            right: -300px;
+            animation: zoom 8s linear infinite;
+        }
+
+        .train-body {
+            width: 200px;
+            height: 40px;
+            background: white;
+            border-radius: 100px 20px 20px 100px;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .train-nose {
+            position: absolute;
+            left: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+            border-right: 30px solid white;
+        }
+
+        .train-window {
+            position: absolute;
+            top: 10px;
+            height: 10px;
+            background: #4169E1;
+        }
+
+        .window1 { left: 20px; width: 30px; }
+        .window2 { left: 60px; width: 30px; }
+        .window3 { left: 100px; width: 30px; }
+        .window4 { left: 140px; width: 30px; }
+
+        .train-stripe {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            height: 3px;
+            background: #4169E1;
+        }
+
+        @keyframes zoom {
+            from { right: -300px; }
+            to { right: 110%; }
+        }
+
+        /* Pagoda */
+        .pagoda {
+            position: absolute;
+            bottom: 50px;
+            left: 650px;
+            z-index: 4;
+        }
+
+        .pagoda-floor {
+            width: 80px;
+            height: 25px;
+            background: #8B4513;
+            margin: 0 auto;
+            position: relative;
+            border-top: 3px solid #DC143C;
+        }
+
+        .pagoda-roof {
+            width: 100px;
+            height: 15px;
+            background: #DC143C;
+            margin: 0 auto;
+            position: relative;
+            transform: translateX(-10px);
+            clip-path: polygon(10% 100%, 90% 100%, 100% 0%, 50% 30%, 0% 0%);
+        }
+
+        .floor1 { bottom: 0; }
+        .floor2 { bottom: 25px; width: 70px; margin-left: 5px; }
+        .floor3 { bottom: 50px; width: 60px; margin-left: 10px; }
+        .floor4 { bottom: 75px; width: 50px; margin-left: 15px; }
+
+        .roof1 { bottom: 20px; }
+        .roof2 { bottom: 45px; width: 90px; transform: translateX(-10px); }
+        .roof3 { bottom: 70px; width: 80px; transform: translateX(-10px); }
+        .roof4 { bottom: 95px; width: 70px; transform: translateX(-10px); }
+
+        /* Sushi */
+        .sushi {
+            position: absolute;
+            top: 250px;
+            right: 400px;
+            animation: rotate 4s linear infinite;
+        }
+
+        .sushi-rice {
+            width: 40px;
+            height: 30px;
+            background: white;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .sushi-fish {
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35px;
+            height: 15px;
+            background: #FA8072;
+            border-radius: 5px;
+        }
+
+        .sushi-nori {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 45px;
+            height: 5px;
+            background: #2F4F2F;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Koi Fish */
+        .koi {
+            position: absolute;
+            bottom: 20px;
+            left: -100px;
+            animation: swim 20s linear infinite;
+        }
+
+        .koi-body {
+            width: 60px;
+            height: 25px;
+            background: linear-gradient(90deg, #FF6347 0%, white 50%, #FF6347 100%);
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .koi-tail {
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 20px solid #FF6347;
+            animation: wiggle 0.5s ease-in-out infinite;
+        }
+
+        .koi-eye {
+            position: absolute;
+            left: 10px;
+            top: 8px;
+            width: 5px;
+            height: 5px;
+            background: black;
+            border-radius: 50%;
+        }
+
+        @keyframes swim {
+            from { left: -100px; }
+            to { left: 110%; }
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: translateY(-50%) rotate(0deg); }
+            50% { transform: translateY(-50%) rotate(10deg); }
+        }
+
+        /* Lanterns */
+        .lantern {
+            position: absolute;
+            width: 30px;
+            height: 40px;
+            background: #DC143C;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(220,20,60,0.5);
+            animation: hang 3s ease-in-out infinite;
+        }
+
+        .lantern::before {
+            content: '福';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: gold;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .lantern1 { top: 200px; left: 50px; animation-delay: 0s; }
+        .lantern2 { top: 180px; left: 150px; animation-delay: 1s; }
+        .lantern3 { top: 220px; left: 250px; animation-delay: 2s; }
+
+        @keyframes hang {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+
+        /* Origami Crane */
+        .crane {
+            position: absolute;
+            top: 300px;
+            left: 350px;
+            animation: fly 10s linear infinite;
+        }
+
+        .crane-body {
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 30px solid white;
+            position: relative;
+            transform: rotate(45deg);
+        }
+
+        .crane-wing {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 20px solid white;
+        }
+
+        .wing-left {
+            left: -25px;
+            top: 10px;
+            transform: rotate(-45deg);
+        }
+
+        .wing-right {
+            right: -25px;
+            top: 10px;
+            transform: rotate(45deg);
+        }
+
+        @keyframes fly {
+            0% { left: 350px; top: 300px; }
+            25% { left: 450px; top: 250px; }
+            50% { left: 550px; top: 300px; }
+            75% { left: 450px; top: 350px; }
+            100% { left: 350px; top: 300px; }
+        }
+
+        /* Bamboo */
+        .bamboo {
+            position: absolute;
+            bottom: 50px;
+            right: 50px;
+        }
+
+        .bamboo-stick {
+            width: 15px;
+            height: 150px;
+            background: linear-gradient(to bottom, #228B22 0%, #228B22 20%, #90EE90 20%, #90EE90 40%, #228B22 40%, #228B22 60%, #90EE90 60%, #90EE90 80%, #228B22 80%);
+            position: absolute;
+        }
+
+        .stick1 { left: 0; height: 150px; }
+        .stick2 { left: 20px; height: 130px; }
+        .stick3 { left: 40px; height: 160px; }
+
+        /* Water */
+        .water {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(180deg, rgba(70,130,180,0.6) 0%, rgba(25,25,112,0.7) 100%);
+            animation: waves 4s ease-in-out infinite;
+        }
+
+        @keyframes waves {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-20px); }
+        }
+
+        /* Anime Character */
+        .anime-character {
+            position: absolute;
+            bottom: 60px;
+            right: 150px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .character-head {
+            width: 40px;
+            height: 40px;
+            background: #FDBCB4;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .character-eye {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: black;
+            border-radius: 50%;
+            top: 12px;
+        }
+
+        .eye-left { left: 8px; }
+        .eye-right { right: 8px; }
+
+        .character-eye::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+        }
+
+        .character-hair {
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            width: 50px;
+            height: 25px;
+            background: #FF69B4;
+            border-radius: 50% 50% 0 0;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">🗾 JAPAN 🗾</h1>
+    <p class="subtitle">Land of the Rising Sun</p>
+    <p class="japanese-text">日本へようこそ</p>
+
+    <!-- Rising Sun -->
+    <div class="sun"></div>
+
+    <!-- Mount Fuji -->
+    <div class="fuji"></div>
+
+    <!-- Torii Gate -->
+    <div class="torii">
+        <div class="torii-pillar pillar-left"></div>
+        <div class="torii-pillar pillar-right"></div>
+        <div class="torii-top"></div>
+    </div>
+
+    <!-- Pagoda -->
+    <div class="pagoda">
+        <div class="pagoda-floor floor1"></div>
+        <div class="pagoda-roof roof1"></div>
+        <div class="pagoda-floor floor2"></div>
+        <div class="pagoda-roof roof2"></div>
+        <div class="pagoda-floor floor3"></div>
+        <div class="pagoda-roof roof3"></div>
+        <div class="pagoda-floor floor4"></div>
+        <div class="pagoda-roof roof4"></div>
+    </div>
+
+    <!-- Cherry Blossom Tree -->
+    <div class="sakura-tree">
+        <div class="tree-trunk"></div>
+        <div class="branches">
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+        </div>
+    </div>
+
+    <!-- Bullet Train -->
+    <div class="shinkansen">
+        <div class="train-body">
+            <div class="train-nose"></div>
+            <div class="train-window window1"></div>
+            <div class="train-window window2"></div>
+            <div class="train-window window3"></div>
+            <div class="train-window window4"></div>
+            <div class="train-stripe"></div>
+        </div>
+    </div>
+
+    <!-- Sushi -->
+    <div class="sushi">
+        <div class="sushi-rice"></div>
+        <div class="sushi-fish"></div>
+        <div class="sushi-nori"></div>
+    </div>
+
+    <!-- Koi Fish -->
+    <div class="koi">
+        <div class="koi-body">
+            <div class="koi-eye"></div>
+            <div class="koi-tail"></div>
+        </div>
+    </div>
+
+    <!-- Lanterns -->
+    <div class="lantern lantern1"></div>
+    <div class="lantern lantern2"></div>
+    <div class="lantern lantern3"></div>
+
+    <!-- Origami Crane -->
+    <div class="crane">
+        <div class="crane-body">
+            <div class="crane-wing wing-left"></div>
+            <div class="crane-wing wing-right"></div>
+        </div>
+    </div>
+
+    <!-- Bamboo -->
+    <div class="bamboo">
+        <div class="bamboo-stick stick1"></div>
+        <div class="bamboo-stick stick2"></div>
+        <div class="bamboo-stick stick3"></div>
+    </div>
+
+    <!-- Anime Character -->
+    <div class="anime-character">
+        <div class="character-head">
+            <div class="character-hair"></div>
+            <div class="character-eye eye-left"></div>
+            <div class="character-eye eye-right"></div>
+        </div>
+    </div>
+
+    <!-- Water -->
+    <div class="water"></div>
+</body>
+</html>

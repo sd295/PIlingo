@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estonia Animation</title>
+    <meta http-equiv="refresh" content="24; url=../../kotlin.html" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background: linear-gradient(to bottom, #0072CE 0%, #4A9CD6 40%, #87CEEB 60%, #228B22 100%);
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Title */
+        .title {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3em;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            z-index: 100;
+            animation: glow 3s ease-in-out infinite;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.3em;
+            color: #000;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+            z-index: 100;
+            font-weight: bold;
+        }
+
+        .estonian-text {
+            position: absolute;
+            top: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            z-index: 100;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 3px 3px 6px rgba(0,0,0,0.5); }
+            50% { text-shadow: 3px 3px 6px rgba(0,0,0,0.5), 0 0 30px rgba(255,255,255,0.8); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* Estonian Flag */
+        .flag {
+            position: absolute;
+            top: 180px;
+            left: 50px;
+            width: 140px;
+            height: 90px;
+            animation: wave 3s ease-in-out infinite;
+            transform-origin: left center;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .flag-stripe {
+            width: 100%;
+            height: 33.33%;
+        }
+
+        .flag-blue { background: #0072CE; }
+        .flag-black { background: #000000; }
+        .flag-white { background: #FFFFFF; }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleX(1) skewY(0); }
+            50% { transform: scaleX(0.95) skewY(2deg); }
+        }
+
+        /* Sun */
+        .sun {
+            position: absolute;
+            top: 100px;
+            right: 120px;
+            width: 80px;
+            height: 80px;
+            background: #FFD700;
+            border-radius: 50%;
+            box-shadow: 0 0 50px #FFD700;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Tallinn Old Town Towers */
+        .old-town {
+            position: absolute;
+            bottom: 50px;
+            left: 100px;
+            z-index: 5;
+        }
+
+        .tower {
+            position: absolute;
+            width: 50px;
+            height: 150px;
+            background: linear-gradient(to bottom, #8B4513, #654321);
+            border-radius: 3px;
+        }
+
+        .tower1 { left: 0; }
+        .tower2 { left: 80px; height: 130px; }
+        .tower3 { left: 160px; height: 140px; }
+
+        .tower-roof {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 40px solid #DC143C;
+        }
+
+        .tower-top {
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 10px;
+            background: #FFD700;
+        }
+
+        .tower-window {
+            position: absolute;
+            width: 15px;
+            height: 20px;
+            background: #FFD700;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 0 0 5px 5px;
+        }
+
+        .window1 { top: 30px; }
+        .window2 { top: 70px; }
+
+        .city-wall {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 230px;
+            height: 40px;
+            background: #A0826D;
+        }
+
+        /* E-Estonia Symbol */
+        .e-estonia {
+            position: absolute;
+            top: 250px;
+            right: 150px;
+            font-size: 60px;
+            animation: digital-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes digital-pulse {
+            0%, 100% { 
+                transform: scale(1);
+                filter: drop-shadow(0 0 10px rgba(0,114,206,0.5));
+            }
+            50% { 
+                transform: scale(1.1);
+                filter: drop-shadow(0 0 20px rgba(0,114,206,0.8));
+            }
+        }
+
+        /* Forest Trees */
+        .tree {
+            position: absolute;
+            bottom: 50px;
+        }
+
+        .tree-trunk {
+            width: 15px;
+            height: 40px;
+            background: #654321;
+            margin: 0 auto;
+        }
+
+        .tree-foliage {
+            width: 0;
+            height: 0;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-bottom: 60px solid #0F4C0F;
+            position: relative;
+        }
+
+        .tree-foliage::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: -20px;
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 40px solid #0F4C0F;
+        }
+
+        .tree1 { right: 300px; }
+        .tree2 { right: 350px; transform: scale(0.9); }
+        .tree3 { right: 400px; transform: scale(1.1); }
+        .tree4 { right: 460px; transform: scale(0.85); }
+
+        /* Stork */
+        .stork {
+            position: absolute;
+            top: 200px;
+            left: -100px;
+            animation: fly-stork 20s linear infinite;
+        }
+
+        .stork-body {
+            width: 40px;
+            height: 30px;
+            background: white;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .stork-head {
+            position: absolute;
+            top: -15px;
+            left: -10px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .stork-beak {
+            position: absolute;
+            top: 5px;
+            left: -15px;
+            width: 20px;
+            height: 3px;
+            background: #FF6347;
+        }
+
+        .stork-wing {
+            position: absolute;
+            top: 5px;
+            right: -30px;
+            width: 35px;
+            height: 15px;
+            background: white;
+            border-radius: 50%;
+            animation: flap 1s ease-in-out infinite;
+        }
+
+        @keyframes flap {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-20deg); }
+        }
+
+        @keyframes fly-stork {
+            from { left: -100px; }
+            to { left: 110%; }
+        }
+
+        /* Rye Bread */
+        .bread {
+            position: absolute;
+            bottom: 150px;
+            left: 400px;
+            animation: bob 3s ease-in-out infinite;
+        }
+
+        .bread-loaf {
+            width: 70px;
+            height: 40px;
+            background: linear-gradient(135deg, #8B4513, #654321);
+            border-radius: 50% 50% 40% 40%;
+            position: relative;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .bread-lines {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 50px;
+            height: 2px;
+            background: rgba(139, 69, 19, 0.5);
+            border-radius: 50%;
+        }
+
+        .bread-lines::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            width: 50px;
+            height: 2px;
+            background: rgba(139, 69, 19, 0.5);
+            border-radius: 50%;
+        }
+
+        @keyframes bob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Singing Festival */
+        .music-note {
+            position: absolute;
+            top: 300px;
+            left: 250px;
+            font-size: 40px;
+            animation: music-float 4s ease-in-out infinite;
+        }
+
+        .note1 { left: 250px; animation-delay: 0s; }
+        .note2 { left: 300px; animation-delay: 0.5s; }
+        .note3 { left: 350px; animation-delay: 1s; }
+
+        @keyframes music-float {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            50% { 
+                transform: translateY(-30px) rotate(10deg);
+                opacity: 0.7;
+            }
+        }
+
+        /* Traditional Pattern */
+        .pattern {
+            position: absolute;
+            top: 350px;
+            right: 300px;
+            width: 60px;
+            height: 60px;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    #0072CE,
+                    #0072CE 5px,
+                    white 5px,
+                    white 10px,
+                    #000 10px,
+                    #000 15px
+                );
+            border: 3px solid #FFD700;
+            animation: rotate-pattern 8s linear infinite;
+        }
+
+        @keyframes rotate-pattern {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Kiiking (Estonian Swing) */
+        .kiiking {
+            position: absolute;
+            bottom: 100px;
+            right: 500px;
+        }
+
+        .swing-pole {
+            width: 5px;
+            height: 100px;
+            background: #654321;
+            position: relative;
+            left: 30px;
+        }
+
+        .swing-bar {
+            position: absolute;
+            top: 50px;
+            left: -20px;
+            width: 50px;
+            height: 5px;
+            background: #8B4513;
+            animation: swing 3s ease-in-out infinite;
+            transform-origin: center center;
+        }
+
+        .swing-person {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 15px;
+            background: #FF6347;
+            border-radius: 50%;
+        }
+
+        @keyframes swing {
+            0%, 100% { transform: rotate(-30deg); }
+            50% { transform: rotate(30deg); }
+        }
+
+        /* Viking Ship (Historical) */
+        .ship {
+            position: absolute;
+            bottom: 20px;
+            left: -200px;
+            animation: sail 25s linear infinite;
+        }
+
+        .ship-body {
+            width: 100px;
+            height: 30px;
+            background: #8B4513;
+            border-radius: 50% 20% 20% 50%;
+            position: relative;
+        }
+
+        .ship-mast {
+            position: absolute;
+            left: 40px;
+            bottom: 30px;
+            width: 3px;
+            height: 50px;
+            background: #654321;
+        }
+
+        .ship-sail {
+            position: absolute;
+            left: 5px;
+            top: 0;
+            width: 0;
+            height: 0;
+            border-top: 25px solid transparent;
+            border-bottom: 25px solid transparent;
+            border-right: 35px solid #F5F5F5;
+        }
+
+        @keyframes sail {
+            from { left: -200px; }
+            to { left: 110%; }
+        }
+
+        /* Sauna */
+        .sauna {
+            position: absolute;
+            bottom: 50px;
+            right: 150px;
+        }
+
+        .sauna-house {
+            width: 80px;
+            height: 60px;
+            background: linear-gradient(to bottom, #8B4513, #654321);
+            position: relative;
+        }
+
+        .sauna-roof {
+            position: absolute;
+            top: -30px;
+            left: -10px;
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 40px solid #DC143C;
+        }
+
+        .sauna-door {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 25px;
+            height: 35px;
+            background: #654321;
+            border: 2px solid #8B4513;
+        }
+
+        .sauna-steam {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .steam-puff {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 50%;
+            animation: rise 3s ease-out infinite;
+        }
+
+        .puff1 { animation-delay: 0s; left: -10px; }
+        .puff2 { animation-delay: 1s; left: 0; }
+        .puff3 { animation-delay: 2s; left: 10px; }
+
+        @keyframes rise {
+            0% { transform: translateY(0) scale(0.5); opacity: 0.8; }
+            100% { transform: translateY(-50px) scale(1.5); opacity: 0; }
+        }
+
+        /* Digital Symbols */
+        .digital {
+            position: absolute;
+            top: 200px;
+            left: 450px;
+            font-size: 30px;
+            animation: float-digital 3s ease-in-out infinite;
+        }
+
+        .wifi { left: 450px; animation-delay: 0s; }
+        .laptop { left: 500px; animation-delay: 1s; }
+
+        @keyframes float-digital {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Baltic Waves */
+        .waves {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(180deg, rgba(0,114,206,0.7) 0%, rgba(0,35,149,0.8) 100%);
+            animation: wave-motion 4s ease-in-out infinite;
+        }
+
+        @keyframes wave-motion {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-20px); }
+        }
+
+        /* Cornflower (National Flower) */
+        .cornflower {
+            position: absolute;
+            top: 280px;
+            right: 450px;
+            animation: flower-sway 3s ease-in-out infinite;
+        }
+
+        .flower-stem {
+            width: 3px;
+            height: 40px;
+            background: #228B22;
+            margin: 0 auto;
+        }
+
+        .flower-head {
+            width: 20px;
+            height: 20px;
+            background: #0072CE;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .petal {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #4A9CD6;
+            border-radius: 50%;
+        }
+
+        .p1 { top: -5px; left: 6px; }
+        .p2 { top: 6px; right: -5px; }
+        .p3 { bottom: -5px; left: 6px; }
+        .p4 { top: 6px; left: -5px; }
+
+        @keyframes flower-sway {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        /* ID Card (e-Estonia) */
+        .id-card {
+            position: absolute;
+            top: 320px;
+            left: 550px;
+            width: 70px;
+            height: 45px;
+            background: linear-gradient(135deg, #0072CE, #4A9CD6);
+            border-radius: 5px;
+            animation: card-flip 5s ease-in-out infinite;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .chip {
+            position: absolute;
+            top: 15px;
+            left: 10px;
+            width: 15px;
+            height: 12px;
+            background: #FFD700;
+            border-radius: 2px;
+        }
+
+        @keyframes card-flip {
+            0%, 100% { transform: rotateY(0deg); }
+            50% { transform: rotateY(180deg); }
+        }
+
+        /* Birds */
+        .bird {
+            position: absolute;
+            font-size: 25px;
+            animation: fly-bird 15s linear infinite;
+        }
+
+        .bird1 { top: 150px; animation-duration: 12s; }
+        .bird2 { top: 180px; animation-duration: 18s; animation-delay: 3s; }
+
+        @keyframes fly-bird {
+            from { left: -50px; }
+            to { left: 110%; }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">🇪🇪 EESTI 🇪🇪</h1>
+    <p class="subtitle">Republic of Estonia</p>
+    <p class="estonian-text">Tere tulemast Eestisse! 🌲💻</p>
+
+    <!-- Sun -->
+    <div class="sun"></div>
+
+    <!-- Estonian Flag -->
+    <div class="flag">
+        <div class="flag-stripe flag-blue"></div>
+        <div class="flag-stripe flag-black"></div>
+        <div class="flag-stripe flag-white"></div>
+    </div>
+
+    <!-- Tallinn Old Town -->
+    <div class="old-town">
+        <div class="city-wall"></div>
+        <div class="tower tower1">
+            <div class="tower-roof"></div>
+            <div class="tower-top"></div>
+            <div class="tower-window window1"></div>
+            <div class="tower-window window2"></div>
+        </div>
+        <div class="tower tower2">
+            <div class="tower-roof"></div>
+            <div class="tower-top"></div>
+            <div class="tower-window window1"></div>
+            <div class="tower-window window2"></div>
+        </div>
+        <div class="tower tower3">
+            <div class="tower-roof"></div>
+            <div class="tower-top"></div>
+            <div class="tower-window window1"></div>
+            <div class="tower-window window2"></div>
+        </div>
+    </div>
+
+    <!-- Sauna -->
+    <div class="sauna">
+        <div class="sauna-steam">
+            <div class="steam-puff puff1"></div>
+            <div class="steam-puff puff2"></div>
+            <div class="steam-puff puff3"></div>
+        </div>
+        <div class="sauna-roof"></div>
+        <div class="sauna-house">
+            <div class="sauna-door"></div>
+        </div>
+    </div>
+
+    <!-- Forest Trees -->
+    <div class="tree tree1">
+        <div class="tree-foliage"></div>
+        <div class="tree-trunk"></div>
+    </div>
+    <div class="tree tree2">
+        <div class="tree-foliage"></div>
+        <div class="tree-trunk"></div>
+    </div>
+    <div class="tree tree3">
+        <div class="tree-foliage"></div>
+        <div class="tree-trunk"></div>
+    </div>
+    <div class="tree tree4">
+        <div class="tree-foliage"></div>
+        <div class="tree-trunk"></div>
+    </div>
+
+    <!-- E-Estonia Symbol -->
+    <div class="e-estonia">📱</div>
+
+    <!-- Digital Symbols -->
+    <div class="digital wifi">📶</div>
+    <div class="digital laptop">💻</div>
+
+    <!-- ID Card -->
+    <div class="id-card">
+        <div class="chip"></div>
+    </div>
+
+    <!-- Stork -->
+    <div class="stork">
+        <div class="stork-body">
+            <div class="stork-head">
+                <div class="stork-beak"></div>
+            </div>
+            <div class="stork-wing"></div>
+        </div>
+    </div>
+
+    <!-- Rye Bread -->
+    <div class="bread">
+        <div class="bread-loaf">
+            <div class="bread-lines"></div>
+        </div>
+    </div>
+
+    <!-- Music Notes (Song Festival) -->
+    <div class="music-note note1">♪</div>
+    <div class="music-note note2">♫</div>
+    <div class="music-note note3">♪</div>
+
+    <!-- Traditional Pattern -->
+    <div class="pattern"></div>
+
+    <!-- Cornflower -->
+    <div class="cornflower">
+        <div class="flower-head">
+            <div class="petal p1"></div>
+            <div class="petal p2"></div>
+            <div class="petal p3"></div>
+            <div class="petal p4"></div>
+        </div>
+        <div class="flower-stem"></div>
+    </div>
+
+    <!-- Kiiking Swing -->
+    <div class="kiiking">
+        <div class="swing-pole"></div>
+        <div class="swing-bar">
+            <div class="swing-person"></div>
+        </div>
+    </div>
+
+    <!-- Viking Ship -->
+    <div class="ship">
+        <div class="ship-body">
+            <div class="ship-mast">
+                <div class="ship-sail"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Birds -->
+    <div class="bird bird1">🦅</div>
+    <div class="bird bird2">🦅</div>
+
+    <!-- Baltic Waves -->
+    <div class="waves"></div>
+</body>
+</html>

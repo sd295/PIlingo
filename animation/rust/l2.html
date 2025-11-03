@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pakistan Animation</title>
+<meta http-equiv="refresh" content="24; url=../../rust.html" />
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    background: linear-gradient(to top, #87ceeb 0%, #d0f0ff 70%);
+    font-family: sans-serif;
+  }
+
+  /* Rising Sun */
+  .sun {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, #FFD700, #FFA500);
+    border-radius: 50%;
+    top: 50%;
+    left: -100px;
+    animation: moveSun 5s linear forwards;
+  }
+
+  @keyframes moveSun {
+    0% { left: -100px; top: 50%; }
+    50% { left: 50%; top: 20%; }
+    100% { left: 110%; top: 50%; }
+  }
+
+  /* Mountains */
+  .mountain {
+    position: absolute;
+    bottom: 20%;
+    width: 0;
+    height: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-bottom: 150px solid #2E8B57;
+  }
+
+  .mountain:nth-child(1) { left: 5%; border-bottom-color: #3CB371; }
+  .mountain:nth-child(2) { left: 35%; border-bottom-color: #2E8B57; }
+  .mountain:nth-child(3) { left: 65%; border-bottom-color: #3CB371; }
+
+  /* Fields */
+  .field {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20%;
+    background: linear-gradient(to top, #228B22 0%, #32CD32 100%);
+  }
+
+  /* Clouds */
+  .cloud {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0.8;
+  }
+
+  .cloud::before, .cloud::after {
+    content: '';
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="sun"></div>
+
+<!-- Mountains -->
+<div class="mountain"></div>
+<div class="mountain"></div>
+<div class="mountain"></div>
+
+<!-- Fields -->
+<div class="field"></div>
+
+<!-- Clouds -->
+<script>
+  // Clouds
+  for(let i=0;i<5;i++){
+    const cloud = document.createElement('div');
+    cloud.classList.add('cloud');
+    const size = 60 + Math.random()*40;
+    cloud.style.width = size + 'px';
+    cloud.style.height = size/2 + 'px';
+    cloud.style.top = 10 + Math.random()*30 + '%';
+    cloud.style.left = -size + 'px';
+
+    const b = document.createElement('div');
+    b.style.width = size*0.6 + 'px';
+    b.style.height = size*0.6 + 'px';
+    b.style.top = '-'+size*0.3+'px';
+    b.style.left = size*0.1+'px';
+    b.style.background = '#fff';
+    b.style.borderRadius = '50%';
+    cloud.appendChild(b);
+
+    const a = document.createElement('div');
+    a.style.width = size*0.5 + 'px';
+    a.style.height = size*0.5 + 'px';
+    a.style.top = '-'+size*0.25+'px';
+    a.style.left = size*0.3+'px';
+    a.style.background = '#fff';
+    a.style.borderRadius = '50%';
+    cloud.appendChild(a);
+
+    document.body.appendChild(cloud);
+
+    cloud.animate([
+      {transform: 'translateX(0)'},
+      {transform: 'translateX(120vw)'}
+    ], {
+      duration: 5000 + Math.random()*2000,
+      iterations: 1,
+      easing: 'linear'
+    });
+  }
+</script>
+
+</body>
+</html>

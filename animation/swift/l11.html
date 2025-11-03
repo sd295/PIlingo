@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>France Animation</title>
+    <meta http-equiv="refresh" content="24; url=../../swift.html" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background: linear-gradient(to bottom, #87CEEB 0%, #B0E0E6 40%, #E6E6FA 70%, #D8BFD8 100%);
+            height: 100vh;
+            font-family: 'Georgia', serif;
+        }
+
+        /* Title */
+        .title {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3em;
+            color: #002395;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            z-index: 100;
+            animation: glow 3s ease-in-out infinite;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .subtitle {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.4em;
+            color: #ED2939;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            z-index: 100;
+            font-style: italic;
+        }
+
+        .french-text {
+            position: absolute;
+            top: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            z-index: 100;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 3px 3px 6px rgba(0,0,0,0.4); }
+            50% { text-shadow: 3px 3px 6px rgba(0,0,0,0.4), 0 0 30px rgba(0,35,149,0.5); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* French Flag */
+        .flag {
+            position: absolute;
+            top: 180px;
+            left: 50px;
+            width: 120px;
+            height: 80px;
+            animation: wave 3s ease-in-out infinite;
+            transform-origin: left center;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            display: flex;
+        }
+
+        .flag-stripe {
+            height: 100%;
+            width: 33.33%;
+        }
+
+        .blue { background: #002395; }
+        .white { background: white; }
+        .red { background: #ED2939; }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleX(1) skewY(0); }
+            50% { transform: scaleX(0.95) skewY(2deg); }
+        }
+
+        /* Sun */
+        .sun {
+            position: absolute;
+            top: 100px;
+            right: 120px;
+            width: 80px;
+            height: 80px;
+            background: #FFD700;
+            border-radius: 50%;
+            box-shadow: 0 0 50px #FFD700;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Eiffel Tower */
+        .eiffel-tower {
+            position: absolute;
+            bottom: 50px;
+            left: 150px;
+            z-index: 10;
+        }
+
+        .tower-base {
+            width: 0;
+            height: 0;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 200px solid #4A4A4A;
+            position: relative;
+        }
+
+        .tower-level {
+            position: absolute;
+            width: 120%;
+            height: 2px;
+            background: #6B6B6B;
+            left: -10%;
+        }
+
+        .t-level1 { bottom: 50px; }
+        .t-level2 { bottom: 100px; }
+        .t-level3 { bottom: 150px; }
+
+        .tower-top {
+            position: absolute;
+            top: -220px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 40px solid #4A4A4A;
+        }
+
+        .tower-antenna {
+            position: absolute;
+            top: -240px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 30px;
+            background: #4A4A4A;
+        }
+
+        .tower-light {
+            position: absolute;
+            top: -245px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background: #FFD700;
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; box-shadow: 0 0 15px #FFD700; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Arc de Triomphe */
+        .arc {
+            position: absolute;
+            bottom: 50px;
+            right: 200px;
+            z-index: 5;
+        }
+
+        .arc-body {
+            width: 100px;
+            height: 120px;
+            background: linear-gradient(to bottom, #D2B48C, #C4A777);
+            position: relative;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .arc-opening {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 70px;
+            background: #87CEEB;
+            border-radius: 50% 50% 0 0;
+        }
+
+        .arc-detail {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: #A0826D;
+        }
+
+        .detail1 { top: 20px; }
+        .detail2 { top: 100px; }
+
+        /* Bicycle with Baguettes */
+        .bicycle {
+            position: absolute;
+            bottom: 50px;
+            left: -200px;
+            animation: ride 20s linear infinite;
+        }
+
+        .bike-frame {
+            width: 80px;
+            height: 2px;
+            background: #000;
+            position: relative;
+            top: 20px;
+        }
+
+        .bike-frame::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 35px;
+            background: #000;
+            left: 10px;
+            bottom: 0;
+            transform: rotate(-60deg);
+            transform-origin: bottom;
+        }
+
+        .bike-frame::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 35px;
+            background: #000;
+            right: 10px;
+            bottom: 0;
+            transform: rotate(60deg);
+            transform-origin: bottom;
+        }
+
+        .bike-wheel {
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            border: 3px solid #000;
+            border-radius: 50%;
+            bottom: -18px;
+            animation: spin 1s linear infinite;
+        }
+
+        .wheel-front { left: 60px; }
+        .wheel-back { left: 0; }
+
+        .baguette {
+            position: absolute;
+            width: 80px;
+            height: 8px;
+            background: #DAA520;
+            border-radius: 4px;
+            top: -15px;
+            left: 20px;
+            transform: rotate(-30deg);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .baguette::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 10px,
+                rgba(139, 69, 19, 0.3) 10px,
+                rgba(139, 69, 19, 0.3) 12px
+            );
+        }
+
+        @keyframes ride {
+            from { left: -200px; }
+            to { left: 110%; }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Croissant */
+        .croissant {
+            position: absolute;
+            top: 250px;
+            left: 400px;
+            animation: float-croissant 3s ease-in-out infinite;
+        }
+
+        .croissant-body {
+            width: 60px;
+            height: 30px;
+            background: linear-gradient(135deg, #DAA520, #F4A460);
+            border-radius: 50% 50% 60% 40%;
+            position: relative;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .croissant-layer {
+            position: absolute;
+            top: 8px;
+            left: 10px;
+            width: 40px;
+            height: 3px;
+            background: rgba(139, 69, 19, 0.2);
+            border-radius: 50%;
+        }
+
+        @keyframes float-croissant {
+            0%, 100% { transform: translateY(0) rotate(-10deg); }
+            50% { transform: translateY(-15px) rotate(-5deg); }
+        }
+
+        /* Wine and Cheese */
+        .wine-bottle {
+            position: absolute;
+            bottom: 150px;
+            left: 450px;
+            animation: bob 3s ease-in-out infinite;
+        }
+
+        .bottle {
+            width: 25px;
+            height: 70px;
+            background: linear-gradient(to bottom, #654321 0%, #654321 15%, #4B0000 15%, #4B0000 100%);
+            border-radius: 3px 3px 8px 8px;
+            position: relative;
+        }
+
+        .wine-label {
+            position: absolute;
+            top: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 15px;
+            background: #F5DEB3;
+            font-size: 6px;
+            text-align: center;
+            line-height: 15px;
+        }
+
+        .cheese {
+            position: absolute;
+            bottom: 0;
+            left: 35px;
+            width: 0;
+            height: 0;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-bottom: 20px solid #FFD700;
+        }
+
+        .cheese-hole {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #DAA520;
+            border-radius: 50%;
+            bottom: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        @keyframes bob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Macaron */
+        .macaron {
+            position: absolute;
+            top: 300px;
+            right: 300px;
+            animation: rotate-macaron 8s linear infinite;
+        }
+
+        .macaron-top {
+            width: 40px;
+            height: 15px;
+            background: #FFB6C1;
+            border-radius: 50% 50% 0 0;
+            position: relative;
+        }
+
+        .macaron-filling {
+            width: 35px;
+            height: 8px;
+            background: white;
+            margin: 0 auto;
+        }
+
+        .macaron-bottom {
+            width: 40px;
+            height: 15px;
+            background: #FFB6C1;
+            border-radius: 0 0 50% 50%;
+        }
+
+        @keyframes rotate-macaron {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Mime */
+        .mime {
+            position: absolute;
+            bottom: 50px;
+            right: 400px;
+            animation: mime-walk 4s ease-in-out infinite;
+        }
+
+        .mime-head {
+            width: 30px;
+            height: 30px;
+            background: white;
+            border-radius: 50%;
+            position: relative;
+            border: 2px solid #000;
+        }
+
+        .mime-eye {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #000;
+            border-radius: 50%;
+            top: 10px;
+        }
+
+        .eye-left { left: 6px; }
+        .eye-right { right: 6px; }
+
+        .mime-mouth {
+            position: absolute;
+            width: 12px;
+            height: 6px;
+            border: 2px solid #000;
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .mime-beret {
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35px;
+            height: 10px;
+            background: #000;
+            border-radius: 50%;
+        }
+
+        .mime-body {
+            width: 25px;
+            height: 40px;
+            background: repeating-linear-gradient(
+                0deg,
+                #000,
+                #000 8px,
+                white 8px,
+                white 16px
+            );
+            margin: 0 auto;
+            border-radius: 5px;
+        }
+
+        @keyframes mime-walk {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(30px); }
+        }
+
+        /* Perfume Bottle */
+        .perfume {
+            position: absolute;
+            top: 350px;
+            left: 550px;
+            animation: sparkle 3s ease-in-out infinite;
+        }
+
+        .perfume-bottle {
+            width: 30px;
+            height: 50px;
+            background: linear-gradient(135deg, rgba(255,192,203,0.6), rgba(221,160,221,0.8));
+            border-radius: 5px;
+            position: relative;
+            box-shadow: 0 0 15px rgba(255,192,203,0.5);
+        }
+
+        .perfume-cap {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 12px;
+            background: #FFD700;
+            border-radius: 3px;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(255,192,203,0.5); }
+            50% { transform: scale(1.1); box-shadow: 0 0 25px rgba(255,192,203,0.8); }
+        }
+
+        /* Louvre Pyramid */
+        .pyramid {
+            position: absolute;
+            bottom: 50px;
+            left: 350px;
+            z-index: 3;
+        }
+
+        .pyramid-body {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 70px solid rgba(173, 216, 230, 0.6);
+            position: relative;
+        }
+
+        .pyramid-line {
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: rgba(255,255,255,0.5);
+            left: -50px;
+        }
+
+        .p-line1 { bottom: 20px; width: 70px; left: -35px; }
+        .p-line2 { bottom: 40px; width: 50px; left: -25px; }
+
+        /* Lavender */
+        .lavender {
+            position: absolute;
+            bottom: 50px;
+            right: 100px;
+        }
+
+        .lavender-stem {
+            width: 3px;
+            height: 60px;
+            background: #228B22;
+            position: relative;
+        }
+
+        .lavender-flower {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #967BB6;
+            border-radius: 50%;
+        }
+
+        .flower1 { top: 0; left: -2px; }
+        .flower2 { top: 8px; left: -2px; }
+        .flower3 { top: 16px; left: -2px; }
+        .flower4 { top: 24px; left: -2px; }
+
+        .lav1 { right: 100px; }
+        .lav2 { right: 115px; }
+        .lav3 { right: 130px; }
+
+        /* Poodle */
+        .poodle {
+            position: absolute;
+            bottom: 50px;
+            left: -150px;
+            animation: walk 25s linear infinite;
+        }
+
+        .poodle-body {
+            width: 40px;
+            height: 30px;
+            background: white;
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .poodle-head {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 25px;
+            height: 25px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .poodle-pom {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .pom1 { bottom: -8px; left: 5px; }
+        .pom2 { bottom: -8px; right: 5px; }
+
+        @keyframes walk {
+            from { left: -150px; }
+            to { left: 110%; }
+        }
+
+        /* Hot Air Balloon */
+        .balloon {
+            position: absolute;
+            top: 180px;
+            right: 50px;
+            animation: float-balloon 5s ease-in-out infinite;
+        }
+
+        .balloon-top {
+            width: 60px;
+            height: 70px;
+            background: linear-gradient(to bottom, #002395 0%, #002395 33%, white 33%, white 66%, #ED2939 66%, #ED2939 100%);
+            border-radius: 50% 50% 40% 40%;
+            position: relative;
+        }
+
+        .balloon-basket {
+            width: 30px;
+            height: 20px;
+            background: #8B4513;
+            margin: 0 auto;
+            border: 2px solid #654321;
+        }
+
+        .balloon-rope {
+            width: 2px;
+            height: 15px;
+            background: #654321;
+            margin: 0 auto;
+        }
+
+        @keyframes float-balloon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+        }
+
+        /* Café Table */
+        .cafe {
+            position: absolute;
+            bottom: 50px;
+            left: 580px;
+        }
+
+        .table {
+            width: 60px;
+            height: 5px;
+            background: #8B4513;
+            position: relative;
+        }
+
+        .table-leg {
+            position: absolute;
+            width: 3px;
+            height: 40px;
+            background: #654321;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .coffee-cup {
+            position: absolute;
+            top: -20px;
+            left: 15px;
+            width: 25px;
+            height: 20px;
+            background: white;
+            border-radius: 0 0 10px 10px;
+            border: 2px solid #333;
+        }
+
+        .cup-handle {
+            position: absolute;
+            right: -8px;
+            top: 5px;
+            width: 10px;
+            height: 12px;
+            border: 2px solid white;
+            border-left: none;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Ground */
+        .ground {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(to bottom, #C4A777, #A0826D);
+        }
+
+        /* Birds */
+        .bird {
+            position: absolute;
+            font-size: 20px;
+            animation: fly 12s linear infinite;
+        }
+
+        .bird1 { top: 160px; animation-duration: 15s; }
+        .bird2 { top: 200px; animation-duration: 18s; animation-delay: 3s; }
+
+        @keyframes fly {
+            from { left: -50px; }
+            to { left: 110%; }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">🇫🇷 LA FRANCE 🇫🇷</h1>
+    <p class="subtitle">Liberté, Égalité, Fraternité</p>
+    <p class="french-text">Bienvenue en France! 🥐🍷🗼</p>
+
+    <!-- Sun -->
+    <div class="sun"></div>
+
+    <!-- French Flag -->
+    <div class="flag">
+        <div class="flag-stripe blue"></div>
+        <div class="flag-stripe white"></div>
+        <div class="flag-stripe red"></div>
+    </div>
+
+    <!-- Eiffel Tower -->
+    <div class="eiffel-tower">
+        <div class="tower-antenna"></div>
+        <div class="tower-light"></div>
+        <div class="tower-top"></div>
+        <div class="tower-base">
+            <div class="tower-level t-level1"></div>
+            <div class="tower-level t-level2"></div>
+            <div class="tower-level t-level3"></div>
+        </div>
+    </div>
+
+    <!-- Louvre Pyramid -->
+    <div class="pyramid">
+        <div class="pyramid-body">
+            <div class="pyramid-line p-line1"></div>
+            <div class="pyramid-line p-line2"></div>
+        </div>
+    </div>
+
+    <!-- Arc de Triomphe -->
+    <div class="arc">
+        <div class="arc-body">
+            <div class="arc-opening"></div>
+            <div class="arc-detail detail1"></div>
+            <div class="arc-detail detail2"></div>
+        </div>
+    </div>
+
+    <!-- Café -->
+    <div class="cafe">
+        <div class="coffee-cup">
+            <div class="cup-handle"></div>
+        </div>
+        <div class="table">
+            <div class="table-leg"></div>
+        </div>
+    </div>
+
+    <!-- Bicycle with Baguettes -->
+    <div class="bicycle">
+        <div class="baguette"></div>
+        <div class="bike-frame"></div>
+        <div class="bike-wheel wheel-front"></div>
+        <div class="bike-wheel wheel-back"></div>
+    </div>
+
+    <!-- Poodle -->
+    <div class="poodle">
+        <div class="poodle-body">
+            <div class="poodle-head"></div>
+            <div class="poodle-pom pom1"></div>
+            <div class="poodle-pom pom2"></div>
+        </div>
+    </div>
+
+    <!-- Wine and Cheese -->
+    <div class="wine-bottle">
+        <div class="bottle">
+            <div class="wine-label">VIN</div>
+        </div>
+        <div class="cheese">
+            <div class="cheese-hole"></div>
+        </div>
+    </div>
+
+    <!-- Croissant -->
+    <div class="croissant">
+        <div class="croissant-body">
+            <div class="croissant-layer"></div>
+        </div>
+    </div>
+
+    <!-- Macaron -->
+    <div class="macaron">
+        <div class="macaron-top"></div>
+        <div class="macaron-filling"></div>
+        <div class="macaron-bottom"></div>
+    </div>
+
+    <!-- Mime -->
+    <div class="mime">
+        <div class="mime-head">
+            <div class="mime-beret"></div>
+            <div class="mime-eye eye-left"></div>
+            <div class="mime-eye eye-right"></div>
+            <div class="mime-mouth"></div>
+        </div>
+        <div class="mime-body"></div>
+    </div>
+
+    <!-- Perfume -->
+    <div class="perfume">
+        <div class="perfume-bottle">
+            <div class="perfume-cap"></div>
+        </div>
+    </div>
+
+    <!-- Hot Air Balloon -->
+    <div class="balloon">
+        <div class="balloon-top"></div>
+        <div class="balloon-rope"></div>
+        <div class="balloon-basket"></div>
+    </div>
+
+    <!-- Lavender -->
+    <div class="lavender lav1">
+        <div class="lavender-stem">
+            <div class="lavender-flower flower1"></div>
+            <div class="lavender-flower flower2"></div>
+            <div class="lavender-flower flower3"></div>
+            <div class="lavender-flower flower4"></div>
+        </div>
+    </div>
+    <div class="lavender lav2">
+        <div class="lavender-stem">
+            <div class="lavender-flower flower1"></div>
+            <div class="lavender-flower flower2"></div>
+            <div class="lavender-flower flower3"></div>
+            <div class="lavender-flower flower4"></div>
+        </div>
+    </div>
+    <div class="lavender lav3">
+        <div class="lavender-stem">
+            <div class="lavender-flower flower1"></div>
+            <div class="lavender-flower flower2"></div>
+            <div class="lavender-flower flower3"></div>
+            <div class="lavender-flower flower4"></div>
+        </div>
+    </div>
+
+    <!-- Birds -->
+    <div class="bird bird1">🕊️</div>
+    <div class="bird bird2">🕊️</div>
+
+    <!-- Ground -->
+    <div class="ground"></div>
+</body>
+</html>

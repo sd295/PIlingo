@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netherlands Animation</title>
+    <meta http-equiv="refresh" content="24; url=../../python.html" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background: linear-gradient(to bottom, #87CEEB 0%, #87CEEB 60%, #90EE90 60%, #228B22 100%);
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Title */
+        .title {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            z-index: 100;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .subtitle {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2em;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+
+        /* Sun */
+        .sun {
+            position: absolute;
+            top: 100px;
+            right: 100px;
+            width: 80px;
+            height: 80px;
+            background: #FFD700;
+            border-radius: 50%;
+            box-shadow: 0 0 50px #FFD700;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        /* Clouds */
+        .cloud {
+            position: absolute;
+            background: white;
+            border-radius: 100px;
+            opacity: 0.8;
+        }
+
+        .cloud::before,
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background: white;
+            border-radius: 100px;
+        }
+
+        .cloud1 {
+            width: 100px;
+            height: 40px;
+            top: 20%;
+            left: -100px;
+            animation: drift 20s linear infinite;
+        }
+
+        .cloud1::before {
+            width: 50px;
+            height: 50px;
+            top: -25px;
+            left: 10px;
+        }
+
+        .cloud1::after {
+            width: 60px;
+            height: 40px;
+            top: -15px;
+            right: 10px;
+        }
+
+        .cloud2 {
+            width: 80px;
+            height: 35px;
+            top: 30%;
+            left: -80px;
+            animation: drift 25s linear infinite;
+            animation-delay: 5s;
+        }
+
+        .cloud2::before {
+            width: 40px;
+            height: 40px;
+            top: -20px;
+            left: 15px;
+        }
+
+        .cloud2::after {
+            width: 50px;
+            height: 35px;
+            top: -10px;
+            right: 15px;
+        }
+
+        /* Windmill */
+        .windmill {
+            position: absolute;
+            bottom: 150px;
+            left: 200px;
+        }
+
+        .windmill-base {
+            width: 80px;
+            height: 150px;
+            background: linear-gradient(to bottom, #8B4513, #A0522D);
+            clip-path: polygon(30% 0%, 70% 0%, 90% 100%, 10% 100%);
+        }
+
+        .windmill-roof {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 40px solid #DC143C;
+        }
+
+        .windmill-blades {
+            position: absolute;
+            top: 10px;
+            left: 40px;
+            width: 10px;
+            height: 10px;
+            animation: spin 4s linear infinite;
+        }
+
+        .blade {
+            position: absolute;
+            width: 4px;
+            height: 60px;
+            background: #654321;
+            left: 3px;
+            transform-origin: center bottom;
+        }
+
+        .blade:nth-child(1) { transform: rotate(0deg); }
+        .blade:nth-child(2) { transform: rotate(90deg); }
+        .blade:nth-child(3) { transform: rotate(180deg); }
+        .blade:nth-child(4) { transform: rotate(270deg); }
+
+        /* Tulips */
+        .tulip {
+            position: absolute;
+            bottom: 50px;
+        }
+
+        .tulip-stem {
+            width: 4px;
+            height: 60px;
+            background: #228B22;
+            position: relative;
+        }
+
+        .tulip-flower {
+            position: absolute;
+            top: -20px;
+            left: -8px;
+            width: 20px;
+            height: 25px;
+            border-radius: 0 50% 50% 50%;
+            animation: sway 3s ease-in-out infinite;
+        }
+
+        .tulip1 {
+            left: 400px;
+        }
+        .tulip1 .tulip-flower {
+            background: #FF1493;
+            transform: rotate(45deg);
+        }
+
+        .tulip2 {
+            left: 430px;
+            animation-delay: 0.5s;
+        }
+        .tulip2 .tulip-flower {
+            background: #FFD700;
+            transform: rotate(45deg);
+        }
+
+        .tulip3 {
+            left: 460px;
+            animation-delay: 1s;
+        }
+        .tulip3 .tulip-flower {
+            background: #FF4500;
+            transform: rotate(45deg);
+        }
+
+        .tulip4 {
+            left: 490px;
+            animation-delay: 1.5s;
+        }
+        .tulip4 .tulip-flower {
+            background: #9370DB;
+            transform: rotate(45deg);
+        }
+
+        /* Bicycle */
+        .bicycle {
+            position: absolute;
+            bottom: 100px;
+            right: -200px;
+            animation: ride 15s linear infinite;
+        }
+
+        .wheel {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 3px solid #333;
+            border-radius: 50%;
+            bottom: 0;
+            animation: spin 1s linear infinite;
+        }
+
+        .wheel::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: #333;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+
+        .wheel::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: #333;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+        }
+
+        .front-wheel {
+            left: 60px;
+        }
+
+        .back-wheel {
+            left: 0;
+        }
+
+        .frame {
+            position: absolute;
+            width: 70px;
+            height: 2px;
+            background: #FF4500;
+            bottom: 20px;
+            left: 0;
+        }
+
+        .frame::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 30px;
+            background: #FF4500;
+            bottom: 0;
+            left: 0;
+            transform: rotate(-60deg);
+            transform-origin: bottom;
+        }
+
+        .frame::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 30px;
+            background: #FF4500;
+            bottom: 0;
+            right: 10px;
+            transform: rotate(60deg);
+            transform-origin: bottom;
+        }
+
+        .seat {
+            position: absolute;
+            width: 20px;
+            height: 5px;
+            background: #333;
+            bottom: 35px;
+            left: 5px;
+        }
+
+        .handlebar {
+            position: absolute;
+            width: 2px;
+            height: 20px;
+            background: #FF4500;
+            bottom: 30px;
+            left: 60px;
+        }
+
+        .handlebar::before {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 2px;
+            background: #333;
+            top: 0;
+            left: -7px;
+        }
+
+        /* Dutch Flag */
+        .flag {
+            position: absolute;
+            top: 150px;
+            left: 50px;
+            width: 120px;
+            height: 80px;
+            animation: wave 2s ease-in-out infinite;
+            transform-origin: left center;
+        }
+
+        .flag-stripe {
+            height: 33.33%;
+            width: 100%;
+        }
+
+        .red { background: #AE1C28; }
+        .white { background: white; }
+        .blue { background: #21468B; }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes drift {
+            from { left: -100px; }
+            to { left: 110%; }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(45deg) translateX(0); }
+            50% { transform: rotate(45deg) translateX(5px); }
+        }
+
+        @keyframes ride {
+            from { right: -200px; }
+            to { right: 110%; }
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleX(1); }
+            50% { transform: scaleX(0.95); }
+        }
+
+        /* Water Canal */
+        .canal {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(180deg, rgba(70,130,180,0.8) 0%, rgba(25,25,112,0.8) 100%);
+            animation: water 3s ease-in-out infinite;
+        }
+
+        @keyframes water {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">🇳🇱 Netherlands 🇳🇱</h1>
+    <p class="subtitle">Land of Windmills, Tulips & Bicycles</p>
+
+    <!-- Sun -->
+    <div class="sun"></div>
+
+    <!-- Clouds -->
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+
+    <!-- Dutch Flag -->
+    <div class="flag">
+        <div class="flag-stripe red"></div>
+        <div class="flag-stripe white"></div>
+        <div class="flag-stripe blue"></div>
+    </div>
+
+    <!-- Windmill -->
+    <div class="windmill">
+        <div class="windmill-base"></div>
+        <div class="windmill-roof"></div>
+        <div class="windmill-blades">
+            <div class="blade"></div>
+            <div class="blade"></div>
+            <div class="blade"></div>
+            <div class="blade"></div>
+        </div>
+    </div>
+
+    <!-- Tulips -->
+    <div class="tulip tulip1">
+        <div class="tulip-stem"></div>
+        <div class="tulip-flower"></div>
+    </div>
+    <div class="tulip tulip2">
+        <div class="tulip-stem"></div>
+        <div class="tulip-flower"></div>
+    </div>
+    <div class="tulip tulip3">
+        <div class="tulip-stem"></div>
+        <div class="tulip-flower"></div>
+    </div>
+    <div class="tulip tulip4">
+        <div class="tulip-stem"></div>
+        <div class="tulip-flower"></div>
+    </div>
+
+    <!-- Bicycle -->
+    <div class="bicycle">
+        <div class="wheel back-wheel"></div>
+        <div class="wheel front-wheel"></div>
+        <div class="frame"></div>
+        <div class="seat"></div>
+        <div class="handlebar"></div>
+    </div>
+
+    <!-- Water Canal -->
+    <div class="canal"></div>
+</body>
+</html>

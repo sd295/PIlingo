@@ -1,3 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Swedish Cities</title>
+    <style>
+        /* Reset some default styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #a2d5f2, #ffffff);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+            transition: background 0.5s;
+        }
+
+        .scene {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .scene.active {
+            display: flex;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #1e3d59;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .option-btn {
+            background-color: #1e3d59;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .option-btn:hover {
+            background-color: #16324a;
+            transform: scale(1.05);
+        }
+
+        img {
+            max-width: 80%;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .icon-animation {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: bounce 1s infinite alternate;
+        }
+
+        @keyframes bounce {
+            from {transform: translateY(0);}
+            to {transform: translateY(-15px);}
+        }
+    </style>
+</head>
 <body>
     <!-- INTRO -->
     <div id="scene-intro" class="scene active">
@@ -13,7 +109,7 @@
     <div id="scene-stockholm" class="scene">
         <h1>Stockholm</h1>
         <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Stockholm_Skyline_2020.jpg"
-             alt="Stockholm" style="max-width:80%; border-radius:10px; margin-bottom:1rem;">
+             alt="Stockholm">
         <p class="description">
             Sweden’s capital, built on 14 islands. Known for Gamla Stan (Old Town),
             modern design, and stunning waterfront views.
@@ -25,7 +121,7 @@
     <div id="scene-gothenburg" class="scene">
         <h1>Gothenburg (Göteborg)</h1>
         <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Magasingatan_G%C3%B6teborg_2020.jpg"
-             alt="Gothenburg" style="max-width:80%; border-radius:10px; margin-bottom:1rem;">
+             alt="Gothenburg">
         <p class="description">
             A friendly harbor city famous for seafood, cozy cafés,
             and the beautiful archipelago just offshore.
@@ -37,7 +133,7 @@
     <div id="scene-malmo" class="scene">
         <h1>Malmö</h1>
         <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Turning_Torso_2012.jpg"
-             alt="Malmö" style="max-width:80%; border-radius:10px; margin-bottom:1rem;">
+             alt="Malmö">
         <p class="description">
             A diverse, modern city known for the Turning Torso tower,
             green spaces, and the Öresund Bridge connecting to Denmark.
@@ -49,7 +145,7 @@
     <div id="scene-uppsala" class="scene">
         <h1>Uppsala</h1>
         <img src="https://upload.wikimedia.org/wikipedia/commons/5/52/Uppsala_domkyrka_2019.jpg"
-             alt="Uppsala" style="max-width:80%; border-radius:10px; margin-bottom:1rem;">
+             alt="Uppsala">
         <p class="description">
             A historic university city famous for Uppsala Cathedral,
             botanist Carl Linnaeus, and academic culture.
@@ -92,3 +188,4 @@
         });
     </script>
 </body>
+</html>

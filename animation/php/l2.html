@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UK Animation</title>
+<meta http-equiv="refresh" content="24; url=../../php.html" />
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    background: linear-gradient(to top, #87ceeb 0%, #f0f8ff 100%);
+    font-family: sans-serif;
+  }
+
+  /* Sun */
+  .sun {
+    position: absolute;
+    top: 10%;
+    left: -100px;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, #FFD700, #FFA500);
+    border-radius: 50%;
+    animation: moveSun 5s linear forwards;
+  }
+
+  @keyframes moveSun {
+    0% { left: -100px; top: 10%; }
+    50% { left: 50%; top: 5%; }
+    100% { left: 110%; top: 15%; }
+  }
+
+  /* Clouds */
+  .cloud {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0.8;
+  }
+
+  .cloud::before, .cloud::after {
+    content: '';
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+  }
+
+  /* Ground */
+  .ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 25%;
+    background: linear-gradient(to top, #228B22 0%, #32CD32 100%);
+  }
+
+  /* Big Ben */
+  .bigben {
+    position: absolute;
+    bottom: 25%;
+    left: 40%;
+    width: 40px;
+    height: 150px;
+    background: #DAA520;
+    border: 2px solid #8B4513;
+    border-radius: 4px;
+  }
+
+  .clock {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 24px;
+    background: white;
+    border-radius: 50%;
+    border: 2px solid #000;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="sun"></div>
+<div class="ground"></div>
+
+<!-- Big Ben -->
+<div class="bigben">
+  <div class="clock"></div>
+</div>
+
+<!-- Clouds -->
+<script>
+  // Create clouds
+  for(let i=0;i<5;i++){
+    const cloud = document.createElement('div');
+    cloud.classList.add('cloud');
+    const size = 60 + Math.random()*40;
+    cloud.style.width = size + 'px';
+    cloud.style.height = size/2 + 'px';
+    cloud.style.top = 20 + Math.random()*30 + '%';
+    cloud.style.left = -size + 'px';
+    document.body.appendChild(cloud);
+
+    const b = document.createElement('div');
+    b.style.width = size*0.6 + 'px';
+    b.style.height = size*0.6 + 'px';
+    b.style.top = '-'+size*0.3+'px';
+    b.style.left = size*0.1+'px';
+    b.style.background = '#fff';
+    b.style.borderRadius = '50%';
+    cloud.appendChild(b);
+
+    const a = document.createElement('div');
+    a.style.width = size*0.5 + 'px';
+    a.style.height = size*0.5 + 'px';
+    a.style.top = '-'+size*0.25+'px';
+    a.style.left = size*0.3+'px';
+    a.style.background = '#fff';
+    a.style.borderRadius = '50%';
+    cloud.appendChild(a);
+
+    // Animate clouds
+    cloud.animate([
+      {transform: 'translateX(0)'},
+      {transform: 'translateX(120vw)'}
+    ], {
+      duration: 5000 + Math.random()*2000,
+      iterations: 1,
+      easing: 'linear'
+    });
+  }
+</script>
+
+</body>
+</html>

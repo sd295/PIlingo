@@ -12,11 +12,6 @@ const lessonContent = {
       prompt: "True or False: Query parameters are accessed via the URL in Node.js.",
       options: ["True", "False"],
       correctAnswer: "True"
-    },
-    {
-      prompt: "Tip",
-      options: "You can filter your cities array using JavaScript's .filter() method based on query parameters.",
-      correctAnswer: "You can filter your cities array using JavaScript's .filter() method based on query parameters."
     }
   ],
 
