@@ -1,254 +1,398 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>A Day in Sweden - Animation</title>
-<meta http-equiv="refresh" content="40; url=../../js.html" />
-<style>
-  /* --- SETUP & VARIABLES --- */
-  :root {
-    --sky-dawn: #f5d07a;
-    --sky-day: #6db0d2;
-    --sky-dusk: #2e4372;
-    --sky-night: #0b1d3a;
-    --sun-color: #ffe066;
-    --moon-color: #f4f4f4;
-    --mountain-color: #415a77;
-    --tree-color: #0b3d0b;
-    --city-color: #0b1d2a;
-    --lake-color: #0077b6;
-    --animation-duration: 35s; /* Master duration for the whole cycle */
-  }
-
-  body {
-    margin: 0;
-    height: 100vh;
-    overflow: hidden;
-    background: linear-gradient(180deg, var(--sky-night), var(--sky-dusk), var(--sky-day), var(--sky-dawn), var(--tree-color));
-    background-size: 100% 400%; /* Stretched vertically */
-    animation: skyShift var(--animation-duration) ease-in-out infinite alternate;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-
-  @keyframes skyShift {
-    0% { background-position: 0% 0%; }   /* Night */
-    50% { background-position: 0% 50%; } /* Midday */
-    100% { background-position: 0% 100%; } /* Sunset/ground */
-  }
-
-  /* --- SUN & MOON --- */
-  .sun-moon-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 150vh; /* A huge arc */
-    height: 150vh;
-    animation: rotateArc var(--animation-duration) linear infinite;
-  }
-  .sun, .moon {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 50%;
-  }
-  .sun {
-    width: 80px;
-    height: 80px;
-    background: radial-gradient(circle, white, var(--sun-color));
-    box-shadow: 0 0 50px var(--sun-color);
-    animation: sunColor var(--animation-duration) ease-in-out infinite alternate;
-  }
-  .moon {
-    width: 60px;
-    height: 60px;
-    background: radial-gradient(circle, white, var(--moon-color));
-    box-shadow: 0 0 30px var(--moon-color);
-    opacity: 0;
-    animation: moonFade var(--animation-duration) ease-in-out infinite alternate;
-  }
-
-  @keyframes rotateArc { from { transform: rotate(0deg); } to { transform: rotate(180deg); } }
-  @keyframes sunColor {
-    0%, 100% { background-color: #f9c74f; box-shadow: 0 0 50px #f9c74f; } /* Sunrise/Sunset */
-    50% { background-color: #fffbeb; box-shadow: 0 0 80px #fffbeb; } /* Midday */
-  }
-  @keyframes moonFade {
-    0%, 15% { opacity: 1; } /* Visible at night */
-    35%, 100% { opacity: 0; } /* Invisible during day */
-  }
-  
-  /* --- STARS --- */
-  .stars {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    background: transparent;
-    box-shadow: 
-      -10vw 20vh 1px white, 80vw 30vh 2px white, 50vw 10vh 1px white,
-      15vw 80vh 1px white, 90vw 70vh 2px white, -30vw 50vh 1px white;
-    animation: moonFade var(--animation-duration) ease-in-out infinite alternate; /* Fades with the moon */
-  }
-
-  /* --- MOUNTAINS --- */
-  .mountain {
-    position: absolute;
-    bottom: 150px;
-    width: 600px;
-    height: 250px;
-    background: var(--mountain-color);
-    clip-path: polygon(0% 100%, 25% 40%, 40% 60%, 55% 20%, 75% 70%, 100% 100%);
-  }
-  .mountain.back { z-index: 1; left: 10%; opacity: 0.7; background: #283845; }
-  .mountain.front { z-index: 3; left: 40%; transform: scale(1.1); }
-
-  /* --- FOREST --- */
-  .forest-front {
-    position: absolute;
-    bottom: 120px;
-    width: 100%;
-    z-index: 5;
-  }
-  .tree {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    border-left: 30px solid transparent;
-    border-right: 30px solid transparent;
-    border-bottom: 90px solid var(--tree-color);
-    margin: 0 2%;
-  }
-  
-  /* --- LAKE & REFLECTION --- */
-  .lake {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 150px;
-    background: rgba(0,0,0,0.2);
-    z-index: 4;
-    overflow: hidden;
-  }
-  .lake-reflection {
-    position: absolute;
-    top: -250px; /* Aligns reflection with sky */
-    left: 0;
-    width: 100%;
-    height: 400%; /* Matches body's stretched size */
-    background: inherit; /* Inherits the body's gradient */
-    animation: inherit; /* Inherits the body's animation */
-    transform: scaleY(-1); /* Flips it upside down */
-  }
-
-  /* --- CITY --- */
-  .city {
-    position: absolute;
-    bottom: 150px;
-    left: 30%;
-    display: flex;
-    align-items: flex-end;
-    gap: 3px;
-    z-index: 2;
-  }
-  .building {
-    width: 15px;
-    background: var(--city-color);
-  }
-  .building .window {
-    width: 60%;
-    height: 5px;
-    margin: 3px auto;
-    background: #4a5568;
-    animation: lightUp var(--animation-duration) ease-in-out infinite alternate;
-  }
-
-  @keyframes lightUp {
-    0%, 30% { background: #f5d07a; box-shadow: 0 0 3px #f5d07a; } /* Lights on at night */
-    60%, 100% { background: #4a5568; box-shadow: none; } /* Off during day */
-  }
-
-  /* --- BIRDS with flapping animation --- */
-  .bird-flock {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    animation: flyAcross 15s linear infinite;
-    animation-delay: 5s; /* They appear during the day */
-  }
-  .bird {
-    position: absolute;
-  }
-  .bird::before, .bird::after {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 10px;
-    background: black;
-    border-radius: 50%;
-  }
-  .bird::before { animation: flap-left 0.3s infinite ease-in-out; }
-  .bird::after { left: 18px; animation: flap-right 0.3s infinite ease-in-out; }
-  
-  @keyframes flyAcross { from { left: -10%; } to { left: 110%; } }
-  @keyframes flap-left { 50% { transform: rotate(-20deg); } }
-  @keyframes flap-right { 50% { transform: rotate(20deg); } }
-  
-  /* --- TEXT --- */
-  .text {
-    position: absolute;
-    top: 5%;
-    width: 100%;
-    text-align: center;
-    font-size: 3rem;
-    font-weight: bold;
-    color: white;
-    text-shadow: 0 0 15px black;
-    z-index: 10;
-    animation: fadeText var(--animation-duration) ease-in-out infinite alternate;
-  }
-  @keyframes fadeText {
-    0%, 100% { opacity: 0; transform: translateY(20px); }
-    10%, 90% { opacity: 1; transform: translateY(0); }
-  }
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stockholm Winter Night</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #020408;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+        }
+        #ui {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 14px;
+            text-shadow: 0 0 5px rgba(0,0,0,0.5);
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
+    <div id="ui">SWEDEN: Stockholm Archipelago Night</div>
+    <canvas id="cityCanvas"></canvas>
 
-<!-- Elements are ordered by their Z-depth for clarity -->
-<div class="sun-moon-container">
-  <div class="sun"></div>
-  <div class="moon"></div>
-</div>
-<div class="stars"></div>
-<div class="text">A Day in Sweden 🇸🇪</div>
+<script>
+/**
+ * SWEDEN CITY SCENE (Stockholm Aesthetic)
+ * Features: Procedural Buildings, Water Reflections, Snow, Ferry
+ */
 
-<div class="mountain back"></div>
-<div class="city">
-  <div class="building" style="height:40px;"><div class="window"></div><div class="window"></div></div>
-  <div class="building" style="height:60px;"><div class="window"></div><div class="window"></div><div class="window"></div></div>
-  <div class="building" style="height:50px;"><div class="window"></div></div>
-</div>
-<div class="mountain front"></div>
+const canvas = document.getElementById('cityCanvas');
+const ctx = canvas.getContext('2d');
 
-<div class="bird-flock">
-  <div class="bird" style="top: 20%; left: 10%;"></div>
-  <div class="bird" style="top: 25%; left: 15%; animation-delay: 0.1s;"></div>
-  <div class="bird" style="top: 22%; left: 5%; animation-delay: 0.2s;"></div>
-</div>
+let w, h;
+let tick = 0;
 
-<div class="forest-front">
-  <div class="tree"></div>
-  <div class="tree" style="transform: scale(0.8);"></div>
-  <div class="tree" style="transform: scale(1.1);"></div>
-  <div class="tree"></div>
-</div>
+// --- PALETTES ---
+// Traditional Gamla Stan colors (Ochre, Red, Terracotta, Yellow)
+const BUILDING_COLORS = ['#C67D63', '#D99E73', '#E8C284', '#C45B4D', '#B86E4B', '#D6B566'];
+const ROOF_COLORS = ['#2A2A2A', '#3D4C53', '#2F3A25', '#693831']; // Black, Copper-green, Dark Red
+const SKY_GRADIENT = ['#050B14', '#0B1726', '#1B3A55', '#4A4E69']; // Deep Nordic Night
 
-<div class="lake">
-  <div class="lake-reflection"></div>
-</div>
+// --- RESIZE ---
+function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
 
+// --- UTILITIES ---
+const rand = (min, max) => Math.random() * (max - min) + min;
+const randInt = (min, max) => Math.floor(rand(min, max));
+const randItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
+// --- CLASSES ---
 
+class Snowflake {
+    constructor() {
+        this.init();
+    }
+    init() {
+        this.x = rand(0, w);
+        this.y = rand(-h, 0);
+        this.z = rand(0.5, 1.5); // Depth/Speed
+        this.size = rand(0.5, 2.5);
+        this.alpha = rand(0.4, 0.9);
+    }
+    update() {
+        this.y += this.z;
+        this.x += Math.sin(tick * 0.01 + this.z) * 0.5;
+        
+        if(this.y > h) this.init();
+    }
+    draw() {
+        ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size * (this.z * 0.7), 0, Math.PI*2);
+        ctx.fill();
+    }
+}
+
+class Window {
+    constructor(x, y, w, h) {
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.isOn = Math.random() > 0.4; // 60% chance to be on
+        this.flickerRate = rand(0.05, 0.2);
+        this.flickerOffset = rand(0, 100);
+    }
+    draw(bX, bY) {
+        if (!this.isOn) {
+            ctx.fillStyle = '#1a1a1a';
+            ctx.fillRect(bX + this.x, bY + this.y, this.w, this.h);
+            return;
+        }
+
+        // Warm Nordic Light
+        const flicker = Math.abs(Math.sin(tick * this.flickerRate + this.flickerOffset));
+        const alpha = 0.8 + (flicker * 0.2);
+        
+        ctx.fillStyle = `rgba(255, 220, 150, ${alpha})`;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = '#FFD700';
+        ctx.fillRect(bX + this.x, bY + this.y, this.w, this.h);
+        ctx.shadowBlur = 0;
+    }
+}
+
+class Building {
+    constructor(x, width) {
+        this.x = x;
+        this.w = width;
+        this.h = rand(h * 0.3, h * 0.6); // Tall buildings
+        this.y = h * 0.75; // Water line
+        this.color = randItem(BUILDING_COLORS);
+        this.roofColor = randItem(ROOF_COLORS);
+        this.roofType = randInt(0, 3); // 0: Flat, 1: Triangle, 2: Dome/Spire
+        
+        this.windows = [];
+        this.generateWindows();
+    }
+
+    generateWindows() {
+        const cols = Math.floor(this.w / 15);
+        const rows = Math.floor(this.h / 25);
+        const padX = (this.w - (cols * 8)) / (cols + 1);
+        
+        for(let r=1; r<rows-1; r++) {
+            for(let c=0; c<cols; c++) {
+                let wx = padX + c * (8 + padX);
+                let wy = 15 + r * 20;
+                this.windows.push(new Window(wx, wy, 8, 12));
+            }
+        }
+    }
+
+    draw() {
+        const topY = this.y - this.h;
+
+        // Main Body
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.x, topY, this.w, this.h);
+        
+        // Shading (Gradient for depth)
+        const grad = ctx.createLinearGradient(this.x, topY, this.x + this.w, topY);
+        grad.addColorStop(0, 'rgba(0,0,0,0.1)');
+        grad.addColorStop(0.5, 'rgba(0,0,0,0)');
+        grad.addColorStop(1, 'rgba(0,0,0,0.2)');
+        ctx.fillStyle = grad;
+        ctx.fillRect(this.x, topY, this.w, this.h);
+
+        // Roof
+        ctx.fillStyle = this.roofColor;
+        ctx.beginPath();
+        if (this.roofType === 1) { // Triangle
+            ctx.moveTo(this.x - 5, topY);
+            ctx.lineTo(this.x + this.w/2, topY - 40);
+            ctx.lineTo(this.x + this.w + 5, topY);
+        } else if (this.roofType === 2) { // Spire/Steep
+            ctx.moveTo(this.x, topY);
+            ctx.lineTo(this.x + this.w/2, topY - 70); // Tall spire
+            ctx.lineTo(this.x + this.w, topY);
+            // Spire stick
+            ctx.fillRect(this.x + this.w/2 - 1, topY - 90, 2, 20);
+        } else { // Mansard/Flatish
+            ctx.moveTo(this.x - 2, topY);
+            ctx.lineTo(this.x + 5, topY - 15);
+            ctx.lineTo(this.x + this.w - 5, topY - 15);
+            ctx.lineTo(this.x + this.w + 2, topY);
+        }
+        ctx.fill();
+
+        // Windows
+        this.windows.forEach(win => win.draw(this.x, topY));
+    }
+
+    drawReflection() {
+        const topY = this.y - this.h;
+        
+        ctx.save();
+        
+        // Create a wavering reflection effect
+        // We draw horizontal slices of the building shifted by sine waves
+        
+        const slices = 10; // Optimization: don't draw every pixel line
+        const sliceH = this.h / slices;
+
+        ctx.globalAlpha = 0.3;
+        
+        for(let i=0; i<slices; i++) {
+            const sy = topY + (i * sliceH); // Source Y
+            const dy = this.y + (this.h - (i * sliceH)) - sliceH; // Dest Y (Inverted)
+            
+            // Wave math
+            const wave = Math.sin((tick * 0.05) + (dy * 0.02)) * 5; 
+            
+            ctx.fillStyle = this.color;
+            // Draw main block reflection
+            ctx.fillRect(this.x + wave, dy, this.w, sliceH + 1);
+            
+            // Draw windows reflection (simplified)
+            if(i % 2 === 0) { // Only draw some windows for performance/blur effect
+                 ctx.fillStyle = 'rgba(255, 220, 150, 0.5)';
+                 // Just draw a generic light strip for windows in reflection
+                 if(Math.random() > 0.5) {
+                    ctx.fillRect(this.x + 10 + wave, dy + 5, this.w - 20, 5);
+                 }
+            }
+        }
+        
+        ctx.restore();
+    }
+}
+
+class Boat {
+    constructor() {
+        this.w = 120;
+        this.h = 30;
+        this.x = -150;
+        this.y = h * 0.85; // Closer to camera than buildings
+        this.speed = 1.2;
+    }
+
+    update() {
+        this.x += this.speed;
+        if(this.x > w + 150) {
+            this.x = -150;
+            this.y = rand(h * 0.8, h * 0.95);
+        }
+    }
+
+    draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+
+        // Bobbing
+        const bob = Math.sin(tick * 0.05) * 3;
+        
+        // Hull
+        ctx.fillStyle = '#FFFFFF';
+        ctx.beginPath();
+        ctx.moveTo(0, 0 + bob);
+        ctx.lineTo(20, 30 + bob);
+        ctx.lineTo(100, 30 + bob);
+        ctx.lineTo(120, 0 + bob);
+        ctx.fill();
+
+        // Stripe
+        ctx.fillStyle = '#005293'; // Swedish Blue
+        ctx.fillRect(10, 10 + bob, 100, 5);
+
+        // Cabin
+        ctx.fillStyle = '#DDD';
+        ctx.fillRect(30, -20 + bob, 70, 20);
+        
+        // Windows
+        ctx.fillStyle = '#FFD700'; // Lights on boat
+        for(let i=0; i<3; i++) {
+            ctx.fillRect(40 + (i*20), -15 + bob, 10, 10);
+        }
+
+        // Smoke
+        if(tick % 10 === 0) {
+            // Add global smoke particle here if desired, simplified for now
+        }
+
+        // Reflection of boat
+        ctx.globalAlpha = 0.2;
+        ctx.fillStyle = '#FFF';
+        ctx.beginPath();
+        ctx.moveTo(0, 40 + bob);
+        ctx.lineTo(20, 10 + bob);
+        ctx.lineTo(100, 10 + bob);
+        ctx.lineTo(120, 40 + bob);
+        ctx.fill();
+
+        ctx.restore();
+    }
+}
+
+// --- GENERATION ---
+
+const buildings = [];
+const snow = [];
+const boat = new Boat();
+
+function initWorld() {
+    let currentX = 0;
+    while(currentX < w) {
+        const bWidth = rand(40, 90);
+        // Overlap slightly to avoid gaps
+        buildings.push(new Building(currentX - 5, bWidth + 10));
+        currentX += bWidth;
+    }
+    
+    // Create snowflakes
+    for(let i=0; i<250; i++) {
+        snow.push(new Snowflake());
+    }
+}
+
+// --- DRAW FUNCTIONS ---
+
+function drawSky() {
+    const grad = ctx.createLinearGradient(0, 0, 0, h);
+    SKY_GRADIENT.forEach((color, index) => {
+        grad.addColorStop(index / (SKY_GRADIENT.length - 1), color);
+    });
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, w, h);
+    
+    // Moon
+    ctx.shadowBlur = 30;
+    ctx.shadowColor = '#FFF';
+    ctx.fillStyle = '#FFF';
+    ctx.beginPath();
+    ctx.arc(w * 0.8, h * 0.15, 30, 0, Math.PI*2);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+}
+
+function drawWater() {
+    // Base water color
+    const grad = ctx.createLinearGradient(0, h * 0.75, 0, h);
+    grad.addColorStop(0, '#05101a');
+    grad.addColorStop(1, '#000000');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, h * 0.75, w, h * 0.25);
+}
+
+function animate() {
+    ctx.clearRect(0, 0, w, h);
+    
+    drawSky();
+    
+    // Draw Reflections first (behind everything in water)
+    ctx.save();
+    // Mask reflections to water area
+    ctx.beginPath();
+    ctx.rect(0, h * 0.75, w, h * 0.25);
+    ctx.clip();
+    buildings.forEach(b => b.drawReflection());
+    ctx.restore();
+    
+    drawWater(); // Semi-transparent overlay for depth? 
+    // Actually, let's draw sparkles on water
+    ctx.fillStyle = `rgba(255, 255, 255, ${0.1 + Math.sin(tick*0.1)*0.05})`;
+    for(let i=0; i<20; i++) {
+        let rx = rand(0, w);
+        let ry = rand(h * 0.75, h);
+        ctx.fillRect(rx, ry, 2, 1);
+    }
+
+    // Draw Buildings
+    buildings.forEach(b => b.draw());
+    
+    // Draw Boat
+    boat.update();
+    boat.draw();
+
+    // Waterfront Stone Edge
+    ctx.fillStyle = '#111';
+    ctx.fillRect(0, h * 0.75 - 5, w, 10);
+
+    // Draw Snow
+    snow.forEach(s => {
+        s.update();
+        s.draw();
+    });
+    
+    // Overlay for "Blue Hour" tint
+    ctx.fillStyle = 'rgba(10, 20, 40, 0.15)';
+    ctx.fillRect(0, 0, w, h);
+
+    tick++;
+    requestAnimationFrame(animate);
+}
+
+// --- START ---
+initWorld();
+animate();
+
+</script>
 </body>
 </html>
