@@ -1,159 +1,415 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Japan Animation</title>
-<meta http-equiv="refresh" content="24; url=../../ruby.html" />
-<style>
-  body {
-    margin: 0;
-    overflow: hidden;
-    background: linear-gradient(to top, #ffdfba 0%, #87ceeb 70%);
-    font-family: sans-serif;
-  }
-
-  /* Rising Sun */
-  .sun {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    background: radial-gradient(circle, #FF4500, #FF6347);
-    border-radius: 50%;
-    top: 50%;
-    left: -100px;
-    animation: moveSun 5s linear forwards;
-  }
-
-  @keyframes moveSun {
-    0% { left: -100px; top: 50%; }
-    50% { left: 50%; top: 20%; }
-    100% { left: 110%; top: 50%; }
-  }
-
-  /* Mount Fuji */
-  .fuji {
-    position: absolute;
-    bottom: 20%;
-    left: 40%;
-    width: 0;
-    height: 0;
-    border-left: 100px solid transparent;
-    border-right: 100px solid transparent;
-    border-bottom: 100px solid #2E8B57;
-  }
-
-  .snowcap {
-    position: absolute;
-    top: -50px;
-    left: -50px;
-    width: 0;
-    height: 0;
-    border-left: 50px solid transparent;
-    border-right: 50px solid transparent;
-    border-bottom: 50px solid #fff;
-  }
-
-  .fuji .snowcap {
-    position: absolute;
-    top: -50px;
-    left: -50px;
-  }
-
-  /* Cherry Blossoms */
-  .blossom {
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    background: pink;
-    border-radius: 50%;
-    top: -20px;
-    left: 0;
-    opacity: 0.8;
-    animation: fall 5s linear forwards;
-  }
-
-  @keyframes fall {
-    0% { transform: translateY(0) translateX(0) rotate(0deg); }
-    100% { transform: translateY(90vh) translateX(30px) rotate(360deg); }
-  }
-
-  /* Clouds */
-  .cloud {
-    position: absolute;
-    background: #fff;
-    border-radius: 50%;
-    opacity: 0.8;
-  }
-  .cloud::before, .cloud::after {
-    content: '';
-    position: absolute;
-    background: #fff;
-    border-radius: 50%;
-  }
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japan: Mt Fuji & Sakura</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #2E1A47;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+        }
+        #ui {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            color: rgba(255, 255, 255, 0.8);
+            font-family: 'Noto Serif JP', serif; /* Fallback to serif */
+            font-size: 24px;
+            writing-mode: vertical-rl; /* Vertical text traditional style */
+            text-orientation: upright;
+            letter-spacing: 5px;
+            pointer-events: none;
+            text-shadow: 0 0 10px rgba(255, 100, 100, 0.5);
+        }
+    </style>
 </head>
 <body>
+    <div id="ui">日本 • 桜</div> <!-- Japan - Sakura -->
+    <canvas id="jpCanvas"></canvas>
 
-<div class="sun"></div>
-
-<!-- Mount Fuji -->
-<div class="fuji">
-  <div class="snowcap"></div>
-</div>
-
-<!-- Clouds -->
 <script>
-  // Clouds
-  for(let i=0;i<5;i++){
-    const cloud = document.createElement('div');
-    cloud.classList.add('cloud');
-    const size = 60 + Math.random()*40;
-    cloud.style.width = size + 'px';
-    cloud.style.height = size/2 + 'px';
-    cloud.style.top = 10 + Math.random()*30 + '%';
-    cloud.style.left = -size + 'px';
+/**
+ * JAPAN SCENE
+ * Features: Fractal Trees, Particle Petals, Water Reflection, Mt Fuji
+ */
 
-    const b = document.createElement('div');
-    b.style.width = size*0.6 + 'px';
-    b.style.height = size*0.6 + 'px';
-    b.style.top = '-'+size*0.3+'px';
-    b.style.left = size*0.1+'px';
-    b.style.background = '#fff';
-    b.style.borderRadius = '50%';
-    cloud.appendChild(b);
+const canvas = document.getElementById('jpCanvas');
+const ctx = canvas.getContext('2d');
 
-    const a = document.createElement('div');
-    a.style.width = size*0.5 + 'px';
-    a.style.height = size*0.5 + 'px';
-    a.style.top = '-'+size*0.25+'px';
-    a.style.left = size*0.3+'px';
-    a.style.background = '#fff';
-    a.style.borderRadius = '50%';
-    cloud.appendChild(a);
+let w, h;
+let tick = 0;
 
-    document.body.appendChild(cloud);
+// --- PALETTE ---
+const COLORS = {
+    skyTop: '#2c3e50',
+    skyMid: '#d53369', // Sunset Red
+    skyBot: '#daae51', // Sunset Gold
+    mountain: '#1a2530',
+    snow: '#fdfbfb',
+    torii: '#b22222', // Firebrick Red
+    toriiShadow: '#800000',
+    sakura: ['#ffb7b2', '#ffdac1', '#ff9aa2', '#ffd3e0']
+};
 
-    cloud.animate([
-      {transform: 'translateX(0)'},
-      {transform: 'translateX(120vw)'}
-    ], {
-      duration: 5000 + Math.random()*2000,
-      iterations: 1,
-      easing: 'linear'
+// --- RESIZE ---
+function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+// --- UTILS ---
+const rand = (min, max) => Math.random() * (max - min) + min;
+const degToRad = (deg) => deg * (Math.PI / 180);
+
+// --- CLASSES ---
+
+class Petal {
+    constructor() {
+        this.reset();
+    }
+    reset() {
+        this.x = rand(0, w);
+        this.y = rand(-h, 0);
+        this.size = rand(3, 6);
+        this.speedY = rand(1, 3);
+        this.speedX = rand(-1, 1);
+        this.rotation = rand(0, 360);
+        this.rotationSpeed = rand(-2, 2);
+        this.color = COLORS.sakura[Math.floor(rand(0, COLORS.sakura.length))];
+        this.swayAmp = rand(0.5, 2);
+        this.swayFreq = rand(0.01, 0.05);
+    }
+    update() {
+        this.y += this.speedY;
+        this.x += this.speedX + Math.sin(tick * this.swayFreq) * this.swayAmp;
+        this.rotation += this.rotationSpeed;
+
+        if (this.y > h) this.reset();
+    }
+    draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(degToRad(this.rotation));
+        ctx.fillStyle = this.color;
+        
+        // Draw Heart/Petal shape
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.bezierCurveTo(-this.size, -this.size, -this.size*1.5, 0, 0, this.size);
+        ctx.bezierCurveTo(this.size*1.5, 0, this.size, -this.size, 0, 0);
+        ctx.fill();
+        
+        ctx.restore();
+    }
+}
+
+// Fractal Tree Generator
+class Tree {
+    constructor(x, y, scale) {
+        this.x = x;
+        this.y = y;
+        this.scale = scale;
+        this.branches = [];
+        this.blossoms = [];
+        // Generate structure once on init to save performance
+        this.generate(0, 0, 90, 100 * scale, 10 * scale, 0);
+    }
+
+    generate(x, y, angle, len, width, depth) {
+        // End point
+        const endX = x + len * Math.cos(degToRad(angle));
+        const endY = y - len * Math.sin(degToRad(angle));
+
+        // Store branch segment relative to tree origin
+        this.branches.push({x, y, endX, endY, width, color: '#2d1810'});
+
+        if (depth < 9) { // Recursion limit
+            // Create blossoms at tips
+            if (depth > 6) {
+                if (Math.random() > 0.5) {
+                    this.blossoms.push({
+                        x: endX + rand(-10, 10), 
+                        y: endY + rand(-10, 10), 
+                        r: rand(2, 5),
+                        c: COLORS.sakura[Math.floor(rand(0, COLORS.sakura.length))]
+                    });
+                }
+            }
+            
+            // Recursive branches
+            const subAngle1 = angle + rand(15, 35);
+            const subAngle2 = angle - rand(15, 35);
+            const scale = 0.75;
+            
+            this.generate(endX, endY, subAngle1, len * scale, width * 0.7, depth + 1);
+            this.generate(endX, endY, subAngle2, len * scale, width * 0.7, depth + 1);
+        }
+    }
+
+    draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        
+        // Draw Wood
+        ctx.strokeStyle = '#2d1810';
+        ctx.lineCap = 'round';
+        
+        // Simple optimization: Draw branches
+        this.branches.forEach(b => {
+            ctx.lineWidth = b.width;
+            ctx.beginPath();
+            ctx.moveTo(b.x, b.y);
+            ctx.lineTo(b.endX, b.endY);
+            ctx.stroke();
+        });
+
+        // Draw Static Blossoms attached to tree
+        this.blossoms.forEach(b => {
+            ctx.fillStyle = b.c;
+            ctx.beginPath();
+            ctx.arc(b.x, b.y + Math.sin(tick * 0.05 + b.x)*2, b.r, 0, Math.PI*2);
+            ctx.fill();
+        });
+
+        ctx.restore();
+    }
+}
+
+// --- SCENE OBJECTS ---
+const petals = Array.from({length: 250}, () => new Petal());
+let trees = [];
+
+function initTrees() {
+    trees = [];
+    // Left Tree
+    trees.push(new Tree(0, h * 0.8, 1.2)); // Left
+    trees.push(new Tree(w, h * 0.9, 1.5)); // Right, larger
+}
+window.addEventListener('resize', () => { resize(); initTrees(); });
+initTrees();
+
+// --- DRAW FUNCTIONS ---
+
+function drawSky() {
+    const grad = ctx.createLinearGradient(0, 0, 0, h);
+    grad.addColorStop(0, COLORS.skyTop);
+    grad.addColorStop(0.5, COLORS.skyMid);
+    grad.addColorStop(1, COLORS.skyBot);
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, w, h);
+}
+
+function drawSun(yOffset) {
+    const cx = w / 2;
+    const cy = h * 0.4 + yOffset;
+    const rad = Math.min(w, h) * 0.15;
+
+    // Glow
+    const glow = ctx.createRadialGradient(cx, cy, rad * 0.8, cx, cy, rad * 2);
+    glow.addColorStop(0, 'rgba(255, 100, 100, 1)');
+    glow.addColorStop(1, 'rgba(255, 100, 100, 0)');
+    
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(cx, cy, rad * 2, 0, Math.PI*2);
+    ctx.fill();
+
+    // Sun Body
+    ctx.fillStyle = '#e74c3c';
+    ctx.beginPath();
+    ctx.arc(cx, cy, rad, 0, Math.PI*2);
+    ctx.fill();
+}
+
+function drawFuji(yBase, isReflection = false) {
+    const height = h * 0.5;
+    const peakY = yBase - height;
+    const width = w * 0.8;
+    const cx = w / 2;
+
+    ctx.save();
+    if(isReflection) {
+        ctx.translate(0, yBase * 2);
+        ctx.scale(1, -1);
+        ctx.globalAlpha = 0.3;
+        // Wave distortion for reflection
+        ctx.transform(1, 0, Math.sin(tick * 0.02) * 0.05, 1, 0, 0);
+    }
+
+    // Mountain Base
+    ctx.fillStyle = COLORS.mountain;
+    ctx.beginPath();
+    ctx.moveTo(0, yBase);
+    // Left slope (concave)
+    ctx.quadraticCurveTo(cx - width * 0.2, yBase, cx, peakY);
+    // Right slope
+    ctx.quadraticCurveTo(cx + width * 0.2, yBase, w, yBase);
+    ctx.lineTo(0, yBase);
+    ctx.fill();
+
+    // Snow Cap
+    ctx.fillStyle = COLORS.snow;
+    ctx.beginPath();
+    ctx.moveTo(cx, peakY);
+    // Jagged snow line
+    const snowLineY = peakY + height * 0.25;
+    ctx.lineTo(cx + width * 0.12, snowLineY);
+    
+    // Zig Zag bottom of snow
+    ctx.lineTo(cx + width * 0.08, snowLineY - 10);
+    ctx.lineTo(cx + width * 0.04, snowLineY + 5);
+    ctx.lineTo(cx, snowLineY - 5);
+    ctx.lineTo(cx - width * 0.04, snowLineY + 5);
+    ctx.lineTo(cx - width * 0.08, snowLineY - 10);
+    
+    ctx.lineTo(cx - width * 0.12, snowLineY);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.restore();
+}
+
+function drawTorii(x, y, scale, isReflection = false) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.scale(scale, scale);
+    
+    if(isReflection) {
+        ctx.scale(1, -1);
+        ctx.globalAlpha = 0.2;
+        // Add wave wobble
+        const wobble = Math.sin(tick * 0.03) * 5;
+        ctx.translate(wobble, 0);
+    }
+
+    // Draw order: Back legs, Lintels, Front Legs
+    
+    const legW = 15;
+    const legH = 200;
+    const topW = 200;
+
+    ctx.fillStyle = COLORS.torii;
+
+    // Top Lintel (Kasagi) - Curved
+    ctx.beginPath();
+    ctx.moveTo(-topW/2 - 20, -legH - 20);
+    ctx.quadraticCurveTo(0, -legH - 40, topW/2 + 20, -legH - 20); // Top curve
+    ctx.lineTo(topW/2 + 25, -legH - 5);
+    ctx.quadraticCurveTo(0, -legH - 25, -topW/2 - 25, -legH - 5); // Bottom curve
+    ctx.fill();
+    
+    // Black cap on top lintel
+    ctx.fillStyle = '#222';
+    ctx.fillRect(-topW/2 - 20, -legH - 20, topW + 40, 5);
+    ctx.fillStyle = COLORS.torii;
+
+    // Second Lintel (Nuki)
+    ctx.fillRect(-topW/2, -legH + 40, topW, 15);
+
+    // Vertical Wedge (Gakuzuka)
+    ctx.fillRect(-5, -legH + 5, 10, 35);
+
+    // Left Pillar
+    ctx.fillStyle = COLORS.torii;
+    ctx.fillRect(-topW/2 + 30, -legH, legW, legH);
+    // Base black
+    ctx.fillStyle = '#222';
+    ctx.fillRect(-topW/2 + 25, 0, legW + 10, 10);
+
+    // Right Pillar
+    ctx.fillStyle = COLORS.torii;
+    ctx.fillRect(topW/2 - 30 - legW, -legH, legW, legH);
+    // Base black
+    ctx.fillStyle = '#222';
+    ctx.fillRect(topW/2 - 35 - legW, 0, legW + 10, 10);
+
+    ctx.restore();
+}
+
+function drawWater(y) {
+    // Water base
+    const grad = ctx.createLinearGradient(0, y, 0, h);
+    grad.addColorStop(0, '#2c3e50');
+    grad.addColorStop(1, '#000000');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, y, w, h - y);
+
+    // Sparkles
+    ctx.fillStyle = 'rgba(255, 200, 200, 0.3)';
+    for(let i=0; i<10; i++) {
+        const sx = rand(0, w);
+        const sy = rand(y, h);
+        ctx.fillRect(sx, sy, rand(2, 50), 1);
+    }
+}
+
+// --- MAIN LOOP ---
+
+function animate() {
+    ctx.clearRect(0, 0, w, h);
+
+    const waterLevel = h * 0.75;
+
+    drawSky();
+
+    // Sun
+    drawSun(0);
+
+    // Background Mountain (Fuji)
+    drawFuji(waterLevel, false);
+
+    // --- REFLECTION LAYER ---
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(0, waterLevel, w, h - waterLevel);
+    ctx.clip();
+    
+    // Draw water background
+    drawWater(waterLevel);
+    
+    // Draw reflections
+    drawSun((h * 0.4) + (h*0.1)); // Fake sun reflection position
+    drawFuji(waterLevel, true);
+    drawTorii(w/2, waterLevel, 1, true); // Torii reflection
+    
+    ctx.restore();
+    // ------------------------
+
+    // Foreground Torii
+    drawTorii(w/2, waterLevel + 10, 1, false);
+
+    // Fractal Trees (Foreground sides)
+    trees.forEach(t => t.draw());
+
+    // Falling Petals (Global overlay)
+    petals.forEach(p => {
+        p.update();
+        p.draw();
     });
-  }
 
-  // Cherry blossoms falling
-  for(let i=0;i<10;i++){
-    const blossom = document.createElement('div');
-    blossom.classList.add('blossom');
-    blossom.style.left = Math.random()*100 + 'vw';
-    blossom.style.animationDelay = (i*0.3) + 's';
-    document.body.appendChild(blossom);
-  }
+    // Vignette
+    const vig = ctx.createRadialGradient(w/2, h/2, h/2, w/2, h/2, w);
+    vig.addColorStop(0, 'rgba(0,0,0,0)');
+    vig.addColorStop(1, 'rgba(50, 20, 20, 0.3)');
+    ctx.fillStyle = vig;
+    ctx.fillRect(0,0,w,h);
+
+    tick++;
+    requestAnimationFrame(animate);
+}
+
+animate();
+
 </script>
-
 </body>
 </html>
