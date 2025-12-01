@@ -3,899 +3,457 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>France Animation</title>
-    <meta http-equiv="refresh" content="24; url=../../swift.html" />
+    <title>Nuit à Paris</title>
+    <!-- Import Elegant Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Playfair+Display:ital,wght@1,400;1,700&display=swap" rel="stylesheet">
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --sky-top: #0f2027;
+            --sky-mid: #203a43;
+            --sky-bot: #2c5364;
+            --tower-color: #1a1a1a;
+            --light-gold: #ffd700;
+            --flag-blue: #0055A4;
+            --flag-white: #FFFFFF;
+            --flag-red: #EF4135;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            overflow: hidden;
-            background: linear-gradient(to bottom, #87CEEB 0%, #B0E0E6 40%, #E6E6FA 70%, #D8BFD8 100%);
             height: 100vh;
-            font-family: 'Georgia', serif;
+            width: 100vw;
+            overflow: hidden;
+            background: linear-gradient(to bottom, var(--sky-top), var(--sky-mid), var(--sky-bot));
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
         }
 
-        /* Title */
-        .title {
+        /* --- VIGNETTE & GRAIN OVERLAY --- */
+        .overlay {
             position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 3em;
-            color: #002395;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
-            z-index: 100;
-            animation: glow 3s ease-in-out infinite;
-            font-weight: bold;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, transparent 50%, rgba(0,0,0,0.6) 100%);
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        .text-container {
+            position: absolute;
+            top: 15%;
+            width: 100%;
+            text-align: center;
+            z-index: 900;
+            color: white;
+            opacity: 0;
+            animation: fadeIn 3s ease-out forwards 1s;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
             font-style: italic;
+            text-shadow: 0 0 20px rgba(255,255,255,0.2);
+            margin-bottom: 10px;
         }
 
         .subtitle {
+            font-size: 1.2rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.8);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- SCENE CONTAINER (PARALLAX) --- */
+        .scene {
             position: absolute;
-            top: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.4em;
-            color: #ED2939;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            z-index: 100;
-            font-style: italic;
-        }
-
-        .french-text {
-            position: absolute;
-            top: 120px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.5em;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
-            z-index: 100;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% { text-shadow: 3px 3px 6px rgba(0,0,0,0.4); }
-            50% { text-shadow: 3px 3px 6px rgba(0,0,0,0.4), 0 0 30px rgba(0,35,149,0.5); }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-10px); }
-        }
-
-        /* French Flag */
-        .flag {
-            position: absolute;
-            top: 180px;
-            left: 50px;
-            width: 120px;
-            height: 80px;
-            animation: wave 3s ease-in-out infinite;
-            transform-origin: left center;
-            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-            display: flex;
-        }
-
-        .flag-stripe {
+            bottom: 0;
+            width: 100%;
             height: 100%;
-            width: 33.33%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
         }
 
-        .blue { background: #002395; }
-        .white { background: white; }
-        .red { background: #ED2939; }
-
-        @keyframes wave {
-            0%, 100% { transform: scaleX(1) skewY(0); }
-            50% { transform: scaleX(0.95) skewY(2deg); }
-        }
-
-        /* Sun */
-        .sun {
+        /* --- MOON --- */
+        .moon {
             position: absolute;
             top: 100px;
-            right: 120px;
+            right: 15%;
             width: 80px;
             height: 80px;
-            background: #FFD700;
+            background: #fff;
             border-radius: 50%;
-            box-shadow: 0 0 50px #FFD700;
-            animation: pulse 4s ease-in-out infinite;
+            box-shadow: 0 0 60px rgba(255,255,255,0.6);
+            opacity: 0.9;
+            z-index: 1;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        /* Eiffel Tower */
-        .eiffel-tower {
+        /* --- STARS --- */
+        .stars {
             position: absolute;
-            bottom: 50px;
-            left: 150px;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0;
+        }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle var(--duration) ease-in-out infinite;
+            animation-delay: var(--delay);
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* --- CLOUDS --- */
+        .clouds {
+            position: absolute;
+            top: 0; width: 100%; height: 100%;
+            z-index: 2;
+        }
+        .cloud {
+            position: absolute;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50px;
+            filter: blur(20px);
+            animation: drift linear infinite;
+        }
+        @keyframes drift {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(100vw); }
+        }
+
+        /* --- EIFFEL TOWER --- */
+        .tower-container {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 600px;
             z-index: 10;
         }
 
-        .tower-base {
-            width: 0;
-            height: 0;
-            border-left: 60px solid transparent;
-            border-right: 60px solid transparent;
-            border-bottom: 200px solid #4A4A4A;
-            position: relative;
-        }
-
-        .tower-level {
-            position: absolute;
-            width: 120%;
-            height: 2px;
-            background: #6B6B6B;
-            left: -10%;
-        }
-
-        .t-level1 { bottom: 50px; }
-        .t-level2 { bottom: 100px; }
-        .t-level3 { bottom: 150px; }
-
-        .tower-top {
-            position: absolute;
-            top: -220px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            border-bottom: 40px solid #4A4A4A;
-        }
-
-        .tower-antenna {
-            position: absolute;
-            top: -240px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 3px;
-            height: 30px;
-            background: #4A4A4A;
-        }
-
-        .tower-light {
-            position: absolute;
-            top: -245px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 10px;
-            height: 10px;
-            background: #FFD700;
-            border-radius: 50%;
-            animation: blink 2s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; box-shadow: 0 0 15px #FFD700; }
-            50% { opacity: 0.3; }
-        }
-
-        /* Arc de Triomphe */
-        .arc {
-            position: absolute;
-            bottom: 50px;
-            right: 200px;
-            z-index: 5;
-        }
-
-        .arc-body {
-            width: 100px;
-            height: 120px;
-            background: linear-gradient(to bottom, #D2B48C, #C4A777);
-            position: relative;
-            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-        }
-
-        .arc-opening {
-            position: absolute;
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 70px;
-            background: #87CEEB;
-            border-radius: 50% 50% 0 0;
-        }
-
-        .arc-detail {
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            background: #A0826D;
-        }
-
-        .detail1 { top: 20px; }
-        .detail2 { top: 100px; }
-
-        /* Bicycle with Baguettes */
-        .bicycle {
-            position: absolute;
-            bottom: 50px;
-            left: -200px;
-            animation: ride 20s linear infinite;
-        }
-
-        .bike-frame {
-            width: 80px;
-            height: 2px;
-            background: #000;
-            position: relative;
-            top: 20px;
-        }
-
-        .bike-frame::before {
-            content: '';
-            position: absolute;
-            width: 2px;
-            height: 35px;
-            background: #000;
-            left: 10px;
-            bottom: 0;
-            transform: rotate(-60deg);
-            transform-origin: bottom;
-        }
-
-        .bike-frame::after {
-            content: '';
-            position: absolute;
-            width: 2px;
-            height: 35px;
-            background: #000;
-            right: 10px;
-            bottom: 0;
-            transform: rotate(60deg);
-            transform-origin: bottom;
-        }
-
-        .bike-wheel {
-            position: absolute;
-            width: 35px;
-            height: 35px;
-            border: 3px solid #000;
-            border-radius: 50%;
-            bottom: -18px;
-            animation: spin 1s linear infinite;
-        }
-
-        .wheel-front { left: 60px; }
-        .wheel-back { left: 0; }
-
-        .baguette {
-            position: absolute;
-            width: 80px;
-            height: 8px;
-            background: #DAA520;
-            border-radius: 4px;
-            top: -15px;
-            left: 20px;
-            transform: rotate(-30deg);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-        }
-
-        .baguette::before {
-            content: '';
-            position: absolute;
+        /* Using SVG for complexity and clean lines */
+        .tower-svg {
             width: 100%;
             height: 100%;
-            background: repeating-linear-gradient(
-                90deg,
-                transparent,
-                transparent 10px,
-                rgba(139, 69, 19, 0.3) 10px,
-                rgba(139, 69, 19, 0.3) 12px
-            );
+            fill: #121212;
+            filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
         }
 
-        @keyframes ride {
-            from { left: -200px; }
-            to { left: 110%; }
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* Croissant */
-        .croissant {
+        /* The Searchlight Beam */
+        .beam {
             position: absolute;
-            top: 250px;
-            left: 400px;
-            animation: float-croissant 3s ease-in-out infinite;
-        }
-
-        .croissant-body {
-            width: 60px;
-            height: 30px;
-            background: linear-gradient(135deg, #DAA520, #F4A460);
-            border-radius: 50% 50% 60% 40%;
-            position: relative;
-            box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
-        }
-
-        .croissant-layer {
-            position: absolute;
-            top: 8px;
-            left: 10px;
-            width: 40px;
-            height: 3px;
-            background: rgba(139, 69, 19, 0.2);
-            border-radius: 50%;
-        }
-
-        @keyframes float-croissant {
-            0%, 100% { transform: translateY(0) rotate(-10deg); }
-            50% { transform: translateY(-15px) rotate(-5deg); }
-        }
-
-        /* Wine and Cheese */
-        .wine-bottle {
-            position: absolute;
-            bottom: 150px;
-            left: 450px;
-            animation: bob 3s ease-in-out infinite;
-        }
-
-        .bottle {
-            width: 25px;
-            height: 70px;
-            background: linear-gradient(to bottom, #654321 0%, #654321 15%, #4B0000 15%, #4B0000 100%);
-            border-radius: 3px 3px 8px 8px;
-            position: relative;
-        }
-
-        .wine-label {
-            position: absolute;
-            top: 35px;
+            top: 5px; /* Adjust to tip of tower */
             left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 15px;
-            background: #F5DEB3;
-            font-size: 6px;
-            text-align: center;
-            line-height: 15px;
+            width: 4px;
+            height: 800px;
+            background: linear-gradient(to top, rgba(255,215,0,0.4), transparent);
+            transform-origin: top center;
+            animation: searchlight 8s ease-in-out infinite alternate;
+            z-index: 9;
+            pointer-events: none;
+            filter: blur(2px);
+        }
+        .beam::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -20px;
+            width: 40px;
+            height: 800px;
+            background: linear-gradient(to top, rgba(255,215,0,0.1), transparent);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
 
-        .cheese {
+        @keyframes searchlight {
+            from { transform: translateX(-50%) rotate(-45deg); }
+            to { transform: translateX(-50%) rotate(45deg); }
+        }
+
+        .sparkle {
+            position: absolute;
+            background: white;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            box-shadow: 0 0 5px white;
+            animation: sparkle-anim 2s infinite;
+        }
+        @keyframes sparkle-anim {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* --- CITY SKYLINE (Background Layers) --- */
+        .skyline-back {
             position: absolute;
             bottom: 0;
-            left: 35px;
-            width: 0;
-            height: 0;
-            border-left: 25px solid transparent;
-            border-right: 25px solid transparent;
-            border-bottom: 20px solid #FFD700;
+            width: 100%;
+            height: 200px;
+            background: #152630;
+            clip-path: polygon(0% 100%, 10% 70%, 15% 85%, 25% 60%, 35% 80%, 45% 75%, 50% 90%, 60% 65%, 75% 80%, 85% 60%, 100% 100%);
+            z-index: 5;
+            opacity: 0.8;
         }
 
-        .cheese-hole {
+        .skyline-front {
             position: absolute;
-            width: 6px;
-            height: 6px;
-            background: #DAA520;
-            border-radius: 50%;
-            bottom: 3px;
-            left: 50%;
-            transform: translateX(-50%);
+            bottom: 0;
+            width: 110%; /* slightly wider for parallax feel */
+            left: -5%;
+            height: 150px;
+            background: #081116;
+            clip-path: polygon(0% 100%, 5% 80%, 15% 90%, 22% 70%, 30% 85%, 40% 75%, 55% 95%, 65% 70%, 80% 85%, 90% 75%, 100% 100%);
+            z-index: 20;
         }
 
-        @keyframes bob {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* Macaron */
-        .macaron {
+        /* --- HOT AIR BALLOON --- */
+        .balloon-wrapper {
             position: absolute;
-            top: 300px;
-            right: 300px;
-            animation: rotate-macaron 8s linear infinite;
+            top: 20%;
+            left: 20%;
+            z-index: 6;
+            animation: floatBalloon 15s ease-in-out infinite alternate;
         }
 
-        .macaron-top {
-            width: 40px;
-            height: 15px;
-            background: #FFB6C1;
-            border-radius: 50% 50% 0 0;
-            position: relative;
+        .balloon-svg {
+            width: 60px;
+            height: auto;
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.3));
         }
 
-        .macaron-filling {
-            width: 35px;
-            height: 8px;
-            background: white;
-            margin: 0 auto;
+        @keyframes floatBalloon {
+            0% { transform: translateY(0) translateX(0); }
+            100% { transform: translateY(-30px) translateX(20px); }
         }
 
-        .macaron-bottom {
-            width: 40px;
-            height: 15px;
-            background: #FFB6C1;
-            border-radius: 0 0 50% 50%;
+        /* --- BICYCLE ANIMATION --- */
+        .cyclist {
+            position: absolute;
+            bottom: 20px;
+            left: -100px;
+            z-index: 30;
+            animation: cycleRide 20s linear infinite;
+        }
+        
+        /* A detailed CSS/SVG bicycle */
+        .bike-group {
+            width: 100px;
+        }
+        
+        .wheel {
+            transform-origin: center;
+            animation: spinWheel 2s linear infinite;
         }
 
-        @keyframes rotate-macaron {
-            from { transform: rotate(0deg); }
+        @keyframes cycleRide {
+            0% { transform: translateX(-150px); }
+            100% { transform: translateX(110vw); }
+        }
+
+        @keyframes spinWheel {
             to { transform: rotate(360deg); }
         }
 
-        /* Mime */
-        .mime {
+        /* --- FRENCH FLAG (Subtle ribbon style) --- */
+        .ribbon {
             position: absolute;
-            bottom: 50px;
-            right: 400px;
-            animation: mime-walk 4s ease-in-out infinite;
-        }
-
-        .mime-head {
-            width: 30px;
-            height: 30px;
-            background: white;
-            border-radius: 50%;
-            position: relative;
-            border: 2px solid #000;
-        }
-
-        .mime-eye {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: #000;
-            border-radius: 50%;
-            top: 10px;
-        }
-
-        .eye-left { left: 6px; }
-        .eye-right { right: 6px; }
-
-        .mime-mouth {
-            position: absolute;
-            width: 12px;
-            height: 6px;
-            border: 2px solid #000;
-            border-top: none;
-            border-radius: 0 0 12px 12px;
-            bottom: 6px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .mime-beret {
-            position: absolute;
-            top: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 35px;
-            height: 10px;
-            background: #000;
-            border-radius: 50%;
-        }
-
-        .mime-body {
-            width: 25px;
-            height: 40px;
-            background: repeating-linear-gradient(
-                0deg,
-                #000,
-                #000 8px,
-                white 8px,
-                white 16px
-            );
-            margin: 0 auto;
-            border-radius: 5px;
-        }
-
-        @keyframes mime-walk {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(30px); }
-        }
-
-        /* Perfume Bottle */
-        .perfume {
-            position: absolute;
-            top: 350px;
-            left: 550px;
-            animation: sparkle 3s ease-in-out infinite;
-        }
-
-        .perfume-bottle {
-            width: 30px;
-            height: 50px;
-            background: linear-gradient(135deg, rgba(255,192,203,0.6), rgba(221,160,221,0.8));
-            border-radius: 5px;
-            position: relative;
-            box-shadow: 0 0 15px rgba(255,192,203,0.5);
-        }
-
-        .perfume-cap {
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 12px;
-            background: #FFD700;
-            border-radius: 3px;
-        }
-
-        @keyframes sparkle {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(255,192,203,0.5); }
-            50% { transform: scale(1.1); box-shadow: 0 0 25px rgba(255,192,203,0.8); }
-        }
-
-        /* Louvre Pyramid */
-        .pyramid {
-            position: absolute;
-            bottom: 50px;
-            left: 350px;
-            z-index: 3;
-        }
-
-        .pyramid-body {
-            width: 0;
-            height: 0;
-            border-left: 50px solid transparent;
-            border-right: 50px solid transparent;
-            border-bottom: 70px solid rgba(173, 216, 230, 0.6);
-            position: relative;
-        }
-
-        .pyramid-line {
-            position: absolute;
-            width: 100%;
-            height: 1px;
-            background: rgba(255,255,255,0.5);
-            left: -50px;
-        }
-
-        .p-line1 { bottom: 20px; width: 70px; left: -35px; }
-        .p-line2 { bottom: 40px; width: 50px; left: -25px; }
-
-        /* Lavender */
-        .lavender {
-            position: absolute;
-            bottom: 50px;
-            right: 100px;
-        }
-
-        .lavender-stem {
-            width: 3px;
-            height: 60px;
-            background: #228B22;
-            position: relative;
-        }
-
-        .lavender-flower {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: #967BB6;
-            border-radius: 50%;
-        }
-
-        .flower1 { top: 0; left: -2px; }
-        .flower2 { top: 8px; left: -2px; }
-        .flower3 { top: 16px; left: -2px; }
-        .flower4 { top: 24px; left: -2px; }
-
-        .lav1 { right: 100px; }
-        .lav2 { right: 115px; }
-        .lav3 { right: 130px; }
-
-        /* Poodle */
-        .poodle {
-            position: absolute;
-            bottom: 50px;
-            left: -150px;
-            animation: walk 25s linear infinite;
-        }
-
-        .poodle-body {
-            width: 40px;
-            height: 30px;
-            background: white;
-            border-radius: 50%;
-            position: relative;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        .poodle-head {
-            position: absolute;
-            top: -15px;
-            left: -15px;
-            width: 25px;
-            height: 25px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        .poodle-pom {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: white;
-            border-radius: 50%;
-        }
-
-        .pom1 { bottom: -8px; left: 5px; }
-        .pom2 { bottom: -8px; right: 5px; }
-
-        @keyframes walk {
-            from { left: -150px; }
-            to { left: 110%; }
-        }
-
-        /* Hot Air Balloon */
-        .balloon {
-            position: absolute;
-            top: 180px;
+            bottom: 40px;
             right: 50px;
-            animation: float-balloon 5s ease-in-out infinite;
-        }
-
-        .balloon-top {
-            width: 60px;
-            height: 70px;
-            background: linear-gradient(to bottom, #002395 0%, #002395 33%, white 33%, white 66%, #ED2939 66%, #ED2939 100%);
-            border-radius: 50% 50% 40% 40%;
-            position: relative;
-        }
-
-        .balloon-basket {
-            width: 30px;
-            height: 20px;
-            background: #8B4513;
-            margin: 0 auto;
-            border: 2px solid #654321;
-        }
-
-        .balloon-rope {
-            width: 2px;
-            height: 15px;
-            background: #654321;
-            margin: 0 auto;
-        }
-
-        @keyframes float-balloon {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-30px); }
-        }
-
-        /* Café Table */
-        .cafe {
-            position: absolute;
-            bottom: 50px;
-            left: 580px;
-        }
-
-        .table {
-            width: 60px;
-            height: 5px;
-            background: #8B4513;
-            position: relative;
-        }
-
-        .table-leg {
-            position: absolute;
-            width: 3px;
+            width: 150px;
             height: 40px;
-            background: #654321;
-            bottom: -40px;
-            left: 50%;
-            transform: translateX(-50%);
+            display: flex;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transform: skew(-10deg) rotate(-5deg);
+            z-index: 30;
+            animation: floatFlag 4s ease-in-out infinite;
+        }
+        .ribbon div { flex: 1; height: 100%; }
+        .r-blue { background: var(--flag-blue); }
+        .r-white { background: var(--flag-white); }
+        .r-red { background: var(--flag-red); }
+
+        @keyframes floatFlag {
+            0%, 100% { transform: skew(-10deg) rotate(-5deg) translateY(0); }
+            50% { transform: skew(-10deg) rotate(-5deg) translateY(-10px); }
         }
 
-        .coffee-cup {
-            position: absolute;
-            top: -20px;
-            left: 15px;
-            width: 25px;
-            height: 20px;
-            background: white;
-            border-radius: 0 0 10px 10px;
-            border: 2px solid #333;
-        }
-
-        .cup-handle {
-            position: absolute;
-            right: -8px;
-            top: 5px;
-            width: 10px;
-            height: 12px;
-            border: 2px solid white;
-            border-left: none;
-            border-radius: 0 8px 8px 0;
-        }
-
-        /* Ground */
+        /* --- GROUND --- */
         .ground {
             position: absolute;
             bottom: 0;
-            left: 0;
             width: 100%;
-            height: 50px;
-            background: linear-gradient(to bottom, #C4A777, #A0826D);
+            height: 20px;
+            background: #050a0e;
+            z-index: 25;
         }
 
-        /* Birds */
-        .bird {
-            position: absolute;
-            font-size: 20px;
-            animation: fly 12s linear infinite;
-        }
-
-        .bird1 { top: 160px; animation-duration: 15s; }
-        .bird2 { top: 200px; animation-duration: 18s; animation-delay: 3s; }
-
-        @keyframes fly {
-            from { left: -50px; }
-            to { left: 110%; }
-        }
     </style>
 </head>
 <body>
-    <h1 class="title">🇫🇷 LA FRANCE 🇫🇷</h1>
-    <p class="subtitle">Liberté, Égalité, Fraternité</p>
-    <p class="french-text">Bienvenue en France! 🥐🍷🗼</p>
 
-    <!-- Sun -->
-    <div class="sun"></div>
+    <!-- Overlay Effects -->
+    <div class="overlay"></div>
 
-    <!-- French Flag -->
-    <div class="flag">
-        <div class="flag-stripe blue"></div>
-        <div class="flag-stripe white"></div>
-        <div class="flag-stripe red"></div>
+    <!-- Text -->
+    <div class="text-container">
+        <h1>La France</h1>
+        <div class="subtitle">Elegance in the Night</div>
     </div>
 
-    <!-- Eiffel Tower -->
-    <div class="eiffel-tower">
-        <div class="tower-antenna"></div>
-        <div class="tower-light"></div>
-        <div class="tower-top"></div>
-        <div class="tower-base">
-            <div class="tower-level t-level1"></div>
-            <div class="tower-level t-level2"></div>
-            <div class="tower-level t-level3"></div>
+    <!-- Environment -->
+    <div class="moon"></div>
+    <div class="stars" id="starContainer"></div>
+    
+    <div class="clouds">
+        <div class="cloud" style="width: 200px; height: 60px; top: 10%; left: -20%; animation-duration: 40s;"></div>
+        <div class="cloud" style="width: 300px; height: 80px; top: 30%; left: -40%; animation-duration: 60s;"></div>
+    </div>
+
+    <!-- Scene -->
+    <div class="scene">
+        
+        <!-- Background City -->
+        <div class="skyline-back"></div>
+
+        <!-- Hot Air Balloon (SVG) -->
+        <div class="balloon-wrapper">
+            <svg class="balloon-svg" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+                <!-- Balloon -->
+                <path d="M50 5 C 20 5, 5 30, 5 55 C 5 75, 20 90, 35 95 L 35 105 L 65 105 L 65 95 C 80 90, 95 75, 95 55 C 95 30, 80 5, 50 5" fill="#EF4135"/>
+                <path d="M50 5 C 40 5, 30 30, 30 55 C 30 80, 40 95, 50 95 C 60 95, 70 80, 70 55 C 70 30, 60 5, 50 5" fill="#FFFFFF" opacity="0.9"/>
+                <path d="M50 5 C 48 5, 45 30, 45 55 C 45 80, 48 95, 50 95 C 52 95, 55 80, 55 55 C 55 30, 52 5, 50 5" fill="#0055A4"/>
+                <!-- Basket -->
+                <rect x="38" y="108" width="24" height="12" rx="2" fill="#5D4037" />
+                <!-- Ropes -->
+                <line x1="35" y1="95" x2="40" y2="108" stroke="#3E2723" stroke-width="1"/>
+                <line x1="65" y1="95" x2="60" y2="108" stroke="#3E2723" stroke-width="1"/>
+            </svg>
         </div>
-    </div>
 
-    <!-- Louvre Pyramid -->
-    <div class="pyramid">
-        <div class="pyramid-body">
-            <div class="pyramid-line p-line1"></div>
-            <div class="pyramid-line p-line2"></div>
+        <!-- Eiffel Tower Complex -->
+        <div class="tower-container">
+            <div class="beam"></div>
+            <!-- Hand-coded stylized SVG Eiffel Tower -->
+            <svg class="tower-svg" viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg">
+                <!-- Base Arches -->
+                <path d="M60 400 Q100 350 140 400 L160 400 L130 250 L70 250 L40 400 Z" fill="#121212"/>
+                <!-- Mid Section -->
+                <path d="M75 250 L125 250 L115 150 L85 150 Z" fill="#121212"/>
+                <!-- Top Section -->
+                <path d="M88 150 L112 150 L105 50 L95 50 Z" fill="#121212"/>
+                <!-- Antenna -->
+                <line x1="100" y1="50" x2="100" y2="20" stroke="#121212" stroke-width="2"/>
+                <!-- Platform Details (Gold Lights) -->
+                <rect x="70" y="248" width="60" height="4" fill="#FFD700"/>
+                <rect x="85" y="148" width="30" height="3" fill="#FFD700"/>
+                <!-- Cross Hatching details (using stroke) -->
+                <path d="M70 250 L130 250 M75 220 L125 220" stroke="#2c2c2c" stroke-width="1"/>
+            </svg>
+            
+            <!-- Sparkles on Tower -->
+            <div class="sparkle" style="top: 250px; left: 100px; animation-delay: 0s;"></div>
+            <div class="sparkle" style="top: 150px; left: 180px; animation-delay: 1s;"></div>
+            <div class="sparkle" style="top: 50px; left: 200px; animation-delay: 0.5s;"></div>
+            <div class="sparkle" style="top: 300px; left: 250px; animation-delay: 1.5s;"></div>
         </div>
-    </div>
 
-    <!-- Arc de Triomphe -->
-    <div class="arc">
-        <div class="arc-body">
-            <div class="arc-opening"></div>
-            <div class="arc-detail detail1"></div>
-            <div class="arc-detail detail2"></div>
+        <!-- Foreground City -->
+        <div class="skyline-front"></div>
+
+        <!-- Cyclist (SVG) -->
+        <div class="cyclist">
+            <svg class="bike-group" viewBox="0 0 100 60" width="80px">
+                <!-- Wheels -->
+                <g class="wheel" style="transform-origin: 20px 45px;">
+                    <circle cx="20" cy="45" r="14" fill="none" stroke="#fff" stroke-width="2"/>
+                    <line x1="20" y1="45" x2="20" y2="31" stroke="#fff" stroke-width="1"/>
+                    <line x1="20" y1="45" x2="20" y2="59" stroke="#fff" stroke-width="1"/>
+                    <line x1="20" y1="45" x2="34" y2="45" stroke="#fff" stroke-width="1"/>
+                    <line x1="20" y1="45" x2="6" y2="45" stroke="#fff" stroke-width="1"/>
+                </g>
+                <g class="wheel" style="transform-origin: 80px 45px;">
+                    <circle cx="80" cy="45" r="14" fill="none" stroke="#fff" stroke-width="2"/>
+                    <line x1="80" y1="45" x2="80" y2="31" stroke="#fff" stroke-width="1"/>
+                    <line x1="80" y1="45" x2="80" y2="59" stroke="#fff" stroke-width="1"/>
+                    <line x1="80" y1="45" x2="94" y2="45" stroke="#fff" stroke-width="1"/>
+                    <line x1="80" y1="45" x2="66" y2="45" stroke="#fff" stroke-width="1"/>
+                </g>
+                <!-- Frame -->
+                <path d="M20 45 L40 15 L75 15 L80 45 L40 45 L20 45" fill="none" stroke="#EF4135" stroke-width="2" stroke-linejoin="round"/>
+                <!-- Handlebars & Seat -->
+                <path d="M75 15 L70 5 M70 5 L80 5" fill="none" stroke="#fff" stroke-width="2"/>
+                <path d="M40 15 L35 10 L45 10" fill="none" stroke="#fff" stroke-width="2"/>
+                <!-- Baguette in basket area -->
+                 <path d="M82 6 L95 0" stroke="#FFD700" stroke-width="4" stroke-linecap="round"/>
+            </svg>
         </div>
-    </div>
 
-    <!-- Café -->
-    <div class="cafe">
-        <div class="coffee-cup">
-            <div class="cup-handle"></div>
+        <!-- Flag Ribbon -->
+        <div class="ribbon">
+            <div class="r-blue"></div>
+            <div class="r-white"></div>
+            <div class="r-red"></div>
         </div>
-        <div class="table">
-            <div class="table-leg"></div>
-        </div>
+
+        <!-- Ground -->
+        <div class="ground"></div>
+
     </div>
 
-    <!-- Bicycle with Baguettes -->
-    <div class="bicycle">
-        <div class="baguette"></div>
-        <div class="bike-frame"></div>
-        <div class="bike-wheel wheel-front"></div>
-        <div class="bike-wheel wheel-back"></div>
-    </div>
+    <script>
+        // Generate Stars Dynamically
+        const starContainer = document.getElementById('starContainer');
+        const starCount = 100;
 
-    <!-- Poodle -->
-    <div class="poodle">
-        <div class="poodle-body">
-            <div class="poodle-head"></div>
-            <div class="poodle-pom pom1"></div>
-            <div class="poodle-pom pom2"></div>
-        </div>
-    </div>
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            
+            // Random positions
+            const x = Math.random() * 100;
+            const y = Math.random() * 70; // Keep stars in upper 70%
+            const size = Math.random() * 2 + 1; // Size between 1px and 3px
+            const duration = Math.random() * 3 + 2; // Twinkle duration
+            const delay = Math.random() * 5;
 
-    <!-- Wine and Cheese -->
-    <div class="wine-bottle">
-        <div class="bottle">
-            <div class="wine-label">VIN</div>
-        </div>
-        <div class="cheese">
-            <div class="cheese-hole"></div>
-        </div>
-    </div>
+            star.style.left = `${x}%`;
+            star.style.top = `${y}%`;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.setProperty('--duration', `${duration}s`);
+            star.style.setProperty('--delay', `${delay}s`);
 
-    <!-- Croissant -->
-    <div class="croissant">
-        <div class="croissant-body">
-            <div class="croissant-layer"></div>
-        </div>
-    </div>
+            starContainer.appendChild(star);
+        }
 
-    <!-- Macaron -->
-    <div class="macaron">
-        <div class="macaron-top"></div>
-        <div class="macaron-filling"></div>
-        <div class="macaron-bottom"></div>
-    </div>
+        // Simple Parallax Effect on Mouse Move
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
 
-    <!-- Mime -->
-    <div class="mime">
-        <div class="mime-head">
-            <div class="mime-beret"></div>
-            <div class="mime-eye eye-left"></div>
-            <div class="mime-eye eye-right"></div>
-            <div class="mime-mouth"></div>
-        </div>
-        <div class="mime-body"></div>
-    </div>
+            const backCity = document.querySelector('.skyline-back');
+            const frontCity = document.querySelector('.skyline-front');
+            const tower = document.querySelector('.tower-container');
+            const balloon = document.querySelector('.balloon-wrapper');
 
-    <!-- Perfume -->
-    <div class="perfume">
-        <div class="perfume-bottle">
-            <div class="perfume-cap"></div>
-        </div>
-    </div>
-
-    <!-- Hot Air Balloon -->
-    <div class="balloon">
-        <div class="balloon-top"></div>
-        <div class="balloon-rope"></div>
-        <div class="balloon-basket"></div>
-    </div>
-
-    <!-- Lavender -->
-    <div class="lavender lav1">
-        <div class="lavender-stem">
-            <div class="lavender-flower flower1"></div>
-            <div class="lavender-flower flower2"></div>
-            <div class="lavender-flower flower3"></div>
-            <div class="lavender-flower flower4"></div>
-        </div>
-    </div>
-    <div class="lavender lav2">
-        <div class="lavender-stem">
-            <div class="lavender-flower flower1"></div>
-            <div class="lavender-flower flower2"></div>
-            <div class="lavender-flower flower3"></div>
-            <div class="lavender-flower flower4"></div>
-        </div>
-    </div>
-    <div class="lavender lav3">
-        <div class="lavender-stem">
-            <div class="lavender-flower flower1"></div>
-            <div class="lavender-flower flower2"></div>
-            <div class="lavender-flower flower3"></div>
-            <div class="lavender-flower flower4"></div>
-        </div>
-    </div>
-
-    <!-- Birds -->
-    <div class="bird bird1">🕊️</div>
-    <div class="bird bird2">🕊️</div>
-
-    <!-- Ground -->
-    <div class="ground"></div>
+            // Move elements slightly based on mouse position
+            backCity.style.transform = `translateX(${mouseX * 10}px)`;
+            frontCity.style.transform = `translateX(${mouseX * -20}px)`;
+            tower.style.transform = `translateX(calc(-50% + ${mouseX * -10}px))`; // Keep centered relative
+            balloon.style.transform = `translate(${mouseX * 30}px, ${mouseY * 30}px)`;
+        });
+    </script>
 </body>
 </html>
