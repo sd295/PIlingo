@@ -3,278 +3,469 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Animation of France</title>
+<title>Parisian Golden Hour</title>
 <meta http-equiv="refresh" content="24; url=../../swift.html" />
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lato:wght@300&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --bg-gradient: linear-gradient(to bottom, #FF7E5F, #FEB47B, #F6E6BC);
+    --sun-color: #FFD700;
+    --building-color: #2C3E50;
+    --road-color: #34495E;
+    --car-body: #E74C3C;
+    --car-roof: #BDC3C7;
+    --glass: rgba(255, 255, 255, 0.3);
+  }
+
   body {
-    background: linear-gradient(to bottom, #87CEEB 0%, #F0E68C 100%);
+    margin: 0;
     overflow: hidden;
+    height: 100vh;
+    background: var(--bg-gradient);
+    font-family: 'Lato', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-    font-family: 'Arial', sans-serif;
   }
 
+  /* --- TYPOGRAPHY --- */
+  .title {
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    text-align: center;
+    color: #2C3E50;
+    z-index: 100;
+    opacity: 0.8;
+  }
+  
+  .title h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 4rem;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.4);
+  }
+
+  /* --- SCENE CONTAINER --- */
   .scene {
     position: relative;
-    width: 800px;
-    height: 600px;
-    background-color: #f0f8ff;
-  }
-
-  .paris-skyline {
-    position: absolute;
-    bottom: 100px;
     width: 100%;
-    height: 300px;
+    height: 100%;
+    max-width: 1200px;
+    overflow: hidden;
+    box-shadow: 0 0 50px rgba(0,0,0,0.2);
   }
 
-  .eiffel-tower {
+  /* --- SUN & CLOUDS --- */
+  .sun {
     position: absolute;
-    bottom: 0;
+    bottom: 30%;
     left: 50%;
     transform: translateX(-50%);
-    width: 120px;
-    height: 350px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255,215,0,0.8) 0%, rgba(255,215,0,0) 70%);
+    border-radius: 50%;
+    z-index: 0;
   }
 
-  .tower-base {
+  .cloud {
     position: absolute;
-    bottom: 0;
-    left: 10px;
-    width: 100px;
-    height: 20px;
-    background-color: #8B4513;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50px;
+    animation: float linear infinite;
+    z-index: 1;
   }
 
-  .tower-legs {
+  .c1 { top: 10%; width: 200px; height: 60px; left: -200px; animation-duration: 35s; }
+  .c2 { top: 20%; width: 120px; height: 40px; left: -120px; animation-duration: 25s; animation-delay: 5s; }
+  .c3 { top: 15%; width: 160px; height: 50px; left: -160px; animation-duration: 40s; animation-delay: 10s; }
+
+  @keyframes float {
+    to { transform: translateX(120vw); }
+  }
+
+  /* --- BACKGROUND BUILDINGS --- */
+  .skyline {
     position: absolute;
-    bottom: 20px;
+    bottom: 150px;
     width: 100%;
-    height: 100px;
-  }
-
-  .leg {
-    position: absolute;
-    bottom: 0;
-    width: 15px;
-    height: 100px;
-    background-color: #A0522D;
-  }
-
-  .leg1 { left: 20px; transform: skewX(-15deg); }
-  .leg2 { right: 20px; transform: skewX(15deg); }
-
-  .tower-middle {
-    position: absolute;
-    bottom: 120px;
-    left: 30px;
-    width: 60px;
     height: 150px;
-    background-color: #A0522D;
+    background-color: #2c3e50;
+    /* Creating buildings using clip-path for sharp geometric shapes */
+    clip-path: polygon(
+      0% 100%, 0% 40%, 5% 40%, 5% 20%, 10% 20%, 10% 50%, 
+      15% 30%, 20% 60%, 25% 20%, 30% 20%, 30% 50%, 
+      40% 10%, 50% 10%, 60% 50%, 
+      65% 20%, 70% 20%, 75% 60%, 
+      80% 30%, 85% 50%, 90% 20%, 95% 40%, 100% 40%, 100% 100%
+    );
+    z-index: 2;
+    opacity: 0.8;
   }
 
-  .tower-top {
+  /* --- EIFFEL TOWER (SVG for detail) --- */
+  .eiffel-wrapper {
     position: absolute;
-    bottom: 270px;
-    left: 45px;
-    width: 30px;
-    height: 80px;
-    background-color: #8B4513;
+    bottom: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: auto;
+    z-index: 3;
+    filter: drop-shadow(0 0 5px rgba(0,0,0,0.3));
+  }
+  
+  .tower-svg {
+    fill: #34495E;
+    stroke: #2C3E50;
+    stroke-width: 1;
   }
 
-  .louvre-pyramid {
+  /* --- LOUVRE PYRAMID --- */
+  .pyramid {
     position: absolute;
-    bottom: 0;
-    left: 100px;
+    bottom: 150px;
+    right: 15%;
     width: 0;
     height: 0;
-    border-left: 75px solid transparent;
-    border-right: 75px solid transparent;
-    border-bottom: 100px solid rgba(173, 216, 230, 0.7);
+    border-left: 80px solid transparent;
+    border-right: 80px solid transparent;
+    border-bottom: 100px solid rgba(135, 206, 250, 0.4); /* Glassy look */
+    z-index: 4;
+    backdrop-filter: blur(2px);
+  }
+  
+  .pyramid::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -80px;
+    width: 160px;
+    height: 100px;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(255,255,255,0.3) 10px,
+      rgba(255,255,255,0.3) 11px
+    );
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  }
+
+  /* --- ROAD & GROUND --- */
+  .ground-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 150px;
+    z-index: 10;
+  }
+
+  .sidewalk-back {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 20px;
+    background: #95a5a6;
+    border-top: 2px solid #7f8c8d;
   }
 
   .road {
     position: absolute;
-    bottom: 0;
+    top: 20px;
     width: 100%;
     height: 100px;
-    background-color: #696969;
+    background: #34495E;
   }
-  
-  .sidewalk {
+
+  .road-line {
     position: absolute;
-    bottom: 100px;
+    top: 50%;
     width: 100%;
-    height: 20px;
-    background-color: #D2B48C;
+    height: 4px;
+    background: repeating-linear-gradient(90deg, #FFF, #FFF 40px, transparent 40px, transparent 80px);
   }
 
-  .citroen-2cv {
+  /* --- CITROEN 2CV (Complex CSS Shapes) --- */
+  .car-container {
     position: absolute;
-    bottom: 80px;
-    left: -200px;
-    width: 150px;
-    height: 80px;
-    animation: drive-across 14s linear infinite;
+    bottom: 50px;
+    left: -300px;
+    animation: drive 12s linear infinite;
+    z-index: 20;
   }
 
-  .car-body {
-    width: 140px;
+  /* The Suspension Bounce */
+  .car-bounce {
+    animation: bounce 0.5s ease-in-out infinite alternate;
+  }
+
+  .citroen-body {
+    position: relative;
+    width: 160px;
     height: 60px;
-    background-color: #4682B4;
-    border-radius: 30px 30px 0 0;
+    background: var(--car-body);
+    border-radius: 40% 60% 10% 10% / 80% 80% 20% 20%;
+    box-shadow: inset -5px -5px 10px rgba(0,0,0,0.2);
   }
-  
-  .car-roof {
-    width: 80px;
+
+  .citroen-roof {
+    position: absolute;
+    top: -25px;
+    left: 25px;
+    width: 90px;
     height: 50px;
-    background-color: #F5F5DC;
-    position: absolute;
-    top: -10px;
-    left: 30px;
-    border-radius: 20px 20px 0 0;
+    background: var(--car-roof);
+    border-radius: 50% 50% 0 0 / 60% 60% 0 0;
+    z-index: -1;
   }
 
-  .car-window {
-    width: 30px;
+  .window-back, .window-front {
+    position: absolute;
+    top: -15px;
+    width: 35px;
     height: 25px;
-    background-color: #ADD8E6;
-    position: absolute;
-    top: 0;
-    left: 35px;
+    background: #D5F5E3;
+    border: 2px solid #555;
+    border-radius: 5px 5px 0 0;
   }
+  .window-back { left: 30px; }
+  .window-front { left: 70px; border-bottom-right-radius: 20px; }
 
-  .car-wheel {
+  .fender {
     position: absolute;
     bottom: -10px;
-    width: 30px;
+    width: 50px;
     height: 30px;
-    background-color: #333;
+    background: #333;
+    border-radius: 50% 50% 0 0;
+    z-index: 2;
+  }
+  .fender-rear { left: 10px; }
+  .fender-front { right: 15px; }
+
+  .wheel {
+    position: absolute;
+    bottom: -15px;
+    width: 36px;
+    height: 36px;
+    background: #222;
     border-radius: 50%;
+    border: 3px solid #eee;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: spin 1s linear infinite;
   }
   
-  .wheel-front { right: 10px; }
-  .wheel-rear { left: 10px; }
-
-  @keyframes drive-across {
-    from { left: -200px; }
-    to { left: 100%; }
+  .wheel::after {
+    content: '';
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: silver;
+    border: 1px dashed #555;
   }
 
+  .w-rear { left: 17px; }
+  .w-front { right: 22px; }
+
+  @keyframes drive {
+    0% { left: -300px; }
+    100% { left: 110%; }
+  }
+  
+  @keyframes bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(2px); }
+  }
+
+  @keyframes spin {
+    100% { transform: rotate(360deg); }
+  }
+
+  /* --- CAFE FOREGROUND --- */
   .cafe-scene {
     position: absolute;
-    bottom: 120px;
+    bottom: 0;
     right: 50px;
+    z-index: 50;
+    filter: drop-shadow(-5px 5px 10px rgba(0,0,0,0.3));
   }
 
-  .cafe-table {
-    width: 120px;
-    height: 5px;
-    background-color: #8B4513;
+  .table-top {
     position: absolute;
-    bottom: 30px;
+    bottom: 70px;
+    right: 0;
+    width: 100px;
+    height: 10px;
+    background: #fff;
+    border-radius: 5px;
+    border: 1px solid #ccc;
   }
 
   .table-leg {
-    width: 5px;
-    height: 30px;
-    background-color: #8B4513;
     position: absolute;
     bottom: 0;
-    left: 57.5px;
+    right: 45px;
+    width: 10px;
+    height: 70px;
+    background: #222;
   }
   
-  .croissant {
+  .table-base {
     position: absolute;
-    bottom: 35px;
-    left: 10px;
-    width: 40px;
-    height: 20px;
-    background-color: #D2691E;
-    border-radius: 50% / 100% 100% 0 0;
-    transform: rotate(-15deg);
+    bottom: 0;
+    right: 25px;
+    width: 50px;
+    height: 5px;
+    background: #222;
+    border-radius: 5px 5px 0 0;
   }
 
-  .coffee-cup {
+  /* --- DETAILED FOOD --- */
+  .plate {
     position: absolute;
-    bottom: 35px;
-    right: 10px;
-    width: 30px;
-    height: 25px;
-    background-color: white;
-    border: 2px solid #696969;
+    bottom: 80px;
+    right: 40px;
+    width: 50px;
+    height: 5px;
+    background: #eee;
     border-radius: 0 0 10px 10px;
   }
-  
-  .coffee {
-    width: 100%;
-    height: 10px;
-    background-color: #6F4E37;
+
+  .croissant {
+    position: absolute;
+    bottom: 83px;
+    right: 45px;
+    width: 30px;
+    height: 15px;
+    background: linear-gradient(to right, #D35400, #E67E22);
+    border-radius: 50%;
+    box-shadow: inset 2px 2px 0 rgba(255,255,255,0.2);
+    transform: rotate(-10deg);
+  }
+  .croissant::before {
+    content: '';
+    position: absolute;
+    top: -2px; left: 5px;
+    width: 20px; height: 15px;
+    border-top: 2px solid #A04000;
+    border-radius: 50%;
+  }
+
+  .cup {
+    position: absolute;
+    bottom: 80px;
+    right: 15px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  }
+  .cup::after {
+    content: '';
+    position: absolute;
+    top: 5px; right: -6px;
+    width: 8px; height: 10px;
+    border: 2px solid #fff;
+    border-radius: 0 10px 10px 0;
   }
 
   .steam {
     position: absolute;
-    bottom: 60px;
+    bottom: 100px;
     right: 20px;
-    width: 2px;
-    height: 15px;
-    background-color: #D3D3D3;
+    width: 6px;
+    height: 6px;
+    background: #fff;
     border-radius: 50%;
     opacity: 0;
-    animation: steam-rise 3s ease-out infinite;
+    filter: blur(2px);
+    animation: steam 2s infinite ease-out;
   }
+  .s2 { animation-delay: 0.5s; right: 25px; }
+  .s3 { animation-delay: 1.0s; right: 15px; }
 
-  .steam2 { animation-delay: 1.5s; right: 30px; }
-
-  @keyframes steam-rise {
-    0% { transform: translateY(0); opacity: 0; }
-    50% { opacity: 0.8; }
-    100% { transform: translateY(-20px); opacity: 0; }
+  @keyframes steam {
+    0% { transform: translateY(0) scale(1); opacity: 0.6; }
+    100% { transform: translateY(-30px) scale(2); opacity: 0; }
   }
 
 </style>
 </head>
 <body>
 
+<div class="title">
+    <h1>Parisian Sunset</h1>
+</div>
+
 <div class="scene">
-  <div class="paris-skyline">
-    <div class="eiffel-tower">
-      <div class="tower-base"></div>
-      <div class="tower-legs">
-        <div class="leg leg1"></div>
-        <div class="leg leg2"></div>
-      </div>
-      <div class="tower-middle"></div>
-      <div class="tower-top"></div>
-    </div>
-    <div class="louvre-pyramid"></div>
-  </div>
   
-  <div class="road"></div>
-  <div class="sidewalk"></div>
-
-  <div class="citroen-2cv">
-    <div class="car-roof">
-      <div class="car-window"></div>
-    </div>
-    <div class="car-body"></div>
-    <div class="car-wheel wheel-rear"></div>
-    <div class="car-wheel wheel-front"></div>
+  <!-- Environment -->
+  <div class="sun"></div>
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+  
+  <!-- Background Architecture -->
+  <div class="skyline"></div>
+  
+  <!-- SVG Eiffel Tower -->
+  <div class="eiffel-wrapper">
+    <svg class="tower-svg" viewBox="0 0 100 250" xmlns="http://www.w3.org/2000/svg">
+      <path d="M35,250 L65,250 L60,150 L40,150 Z" /> <!-- Base -->
+      <path d="M40,150 L60,150 L55,80 L45,80 Z" />   <!-- Mid -->
+      <path d="M45,80 L55,80 L50,10 Z" />            <!-- Top -->
+      <line x1="50" y1="10" x2="50" y2="0" stroke="currentColor" /> <!-- Antenna -->
+      <!-- Cross Beams -->
+      <line x1="38" y1="200" x2="62" y2="200" stroke="white" stroke-width="1"/>
+      <line x1="42" y1="120" x2="58" y2="120" stroke="white" stroke-width="1"/>
+      <path d="M35,250 Q50,220 65,250" fill="transparent" stroke="white" stroke-width="2"/>
+    </svg>
   </div>
 
+  <!-- Louvre Glass Pyramid -->
+  <div class="pyramid"></div>
+
+  <!-- Ground -->
+  <div class="ground-container">
+    <div class="sidewalk-back"></div>
+    <div class="road">
+        <div class="road-line"></div>
+    </div>
+  </div>
+
+  <!-- Animated Citroen 2CV -->
+  <div class="car-container">
+    <div class="car-bounce">
+        <div class="citroen-roof"></div>
+        <div class="window-back"></div>
+        <div class="window-front"></div>
+        <div class="citroen-body"></div>
+        <div class="fender fender-rear"></div>
+        <div class="fender fender-front"></div>
+        <div class="wheel w-rear"></div>
+        <div class="wheel w-front"></div>
+    </div>
+  </div>
+
+  <!-- Foreground Café -->
   <div class="cafe-scene">
-    <div class="cafe-table"></div>
-    <div class="table-leg"></div>
+    <div class="steam s1"></div>
+    <div class="steam s2"></div>
+    <div class="steam s3"></div>
+    <div class="plate"></div>
     <div class="croissant"></div>
-    <div class="coffee-cup">
-      <div class="coffee"></div>
-    </div>
-    <div class="steam steam1"></div>
-    <div class="steam steam2"></div>
+    <div class="cup"></div>
+    <div class="table-top"></div>
+    <div class="table-leg"></div>
+    <div class="table-base"></div>
   </div>
+
 </div>
 
 </body>

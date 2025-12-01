@@ -3,119 +3,322 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>France Animation</title>
+<title>Dawn in France</title>
 <meta http-equiv="refresh" content="24; url=../../swift.html" />
 <style>
+  :root {
+    --lavender-dark: #6A5ACD;
+    --lavender-light: #9370DB;
+    --stem: #556B2F;
+  }
+
   body {
     margin: 0;
     overflow: hidden;
-    background: linear-gradient(to top, #87ceeb 0%, #f0f8ff 70%);
-    font-family: sans-serif;
+    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    /* Sky Gradient Animation */
+    background: linear-gradient(to bottom, #020111 0%, #191621 100%);
+    animation: skyChange 24s ease-out forwards;
   }
 
-  /* Sun */
+  @keyframes skyChange {
+    0% { background: linear-gradient(to bottom, #0d0f2b, #3c2a4d); }
+    30% { background: linear-gradient(to bottom, #4b1d3f, #c7695a); } /* Sunrise */
+    60% { background: linear-gradient(to bottom, #FF8C00, #F7DB59); } /* Golden Hour */
+    100% { background: linear-gradient(to bottom, #87CEEB, #E0F6FF); } /* Day */
+  }
+
+  /* --- SUN --- */
   .sun {
     position: absolute;
-    width: 80px;
-    height: 80px;
-    background: radial-gradient(circle, #FFD700, #FFA500);
+    width: 150px;
+    height: 150px;
+    background: #FF4500;
     border-radius: 50%;
-    top: 10%;
-    left: -100px;
-    animation: moveSun 5s linear forwards;
+    top: 60%;
+    left: 45%;
+    transform: translate(-50%, 50%);
+    box-shadow: 0 0 40px #FF4500, 0 0 80px #FF8C00;
+    animation: sunRise 24s ease-out forwards;
+    z-index: 1;
   }
 
-  @keyframes moveSun {
-    0% { left: -100px; top: 10%; }
-    50% { left: 50%; top: 5%; }
-    100% { left: 110%; top: 10%; }
+  @keyframes sunRise {
+    0% { top: 60%; background: #FF4500; opacity: 0; transform: scale(0.8) translate(-50%, 0); }
+    20% { opacity: 1; }
+    100% { top: 10%; background: #FFD700; box-shadow: 0 0 60px #FFD700; transform: scale(1) translate(-50%, 0); }
   }
 
-  /* Ground */
-  .ground {
+  /* --- MOUNTAINS (Parallax Background) --- */
+  .mountain {
+    position: absolute;
+    bottom: 35%;
+    width: 100%;
+    z-index: 2;
+  }
+
+  .mount-1 {
+    height: 200px;
+    background: #2a2236;
+    border-radius: 100% 100% 0 0;
+    width: 60%;
+    left: -10%;
+    animation: lightingM1 24s forwards;
+  }
+
+  .mount-2 {
+    height: 150px;
+    background: #332b40;
+    border-radius: 100% 100% 0 0;
+    width: 60%;
+    right: -10%;
+    animation: lightingM2 24s forwards;
+  }
+
+  /* Subtle lighting change on mountains */
+  @keyframes lightingM1 {
+    100% { background: #556B2F; } /* Dark Green */
+  }
+  @keyframes lightingM2 {
+    100% { background: #6B8E23; } /* Light Green */
+  }
+
+  /* --- DISTANT EIFFEL TOWER --- */
+  .eiffel-silhouette {
+    position: absolute;
+    bottom: 35%; /* Sitting on horizon */
+    left: 48%;
+    width: 0;
+    height: 0;
+    /* Create shape via borders */
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 150px solid #1a1521; /* Start Dark */
+    z-index: 3;
+    animation: towerLight 24s forwards;
+  }
+  
+  .eiffel-silhouette::after {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: -25px;
+    width: 50px;
+    height: 2px;
+    background: #1a1521;
+    animation: towerLightColor 24s forwards;
+  }
+  
+  /* Tower detail lines */
+  .eiffel-top {
+    position: absolute;
+    bottom: 148px;
+    left: -4px;
+    width: 8px;
+    height: 40px;
+    background: #1a1521;
+    animation: towerLightColor 24s forwards;
+  }
+
+  @keyframes towerLight {
+    100% { border-bottom-color: #5d4037; }
+  }
+  @keyframes towerLightColor {
+    100% { background: #5d4037; }
+  }
+
+  /* --- LAVENDER FIELDS (Foreground) --- */
+  .field {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 30%;
-    background: linear-gradient(to top, #228B22 0%, #32CD32 100%);
+    height: 40%; /* 40% of screen */
+    background: linear-gradient(to bottom, #2d3436 0%, #000 100%); /* Initial dark */
+    z-index: 5;
+    overflow: hidden;
+    animation: fieldLight 24s forwards;
   }
 
-  /* Eiffel Tower */
-  .eiffel {
-    position: absolute;
-    bottom: 30%;
-    left: 45%;
-    width: 20px;
-    height: 120px;
-    background: #8B4513;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 100px solid #8B4513;
-    border-radius: 2px;
+  @keyframes fieldLight {
+    0% { background: linear-gradient(to bottom, #191420 0%, #100d14 100%); }
+    50% { background: linear-gradient(to bottom, #4b3d60 0%, #2d2636 100%); }
+    100% { background: linear-gradient(to bottom, #556B2F 0%, #2e4716 100%); }
   }
 
-  /* Clouds */
-  .cloud {
+  /* The wavy rows of flowers */
+  .row {
     position: absolute;
-    background: #fff;
-    border-radius: 50%;
-    opacity: 0.8;
+    bottom: -50px;
+    width: 120%;
+    left: -10%;
+    height: 200px;
+    border-radius: 50% 50% 0 0;
+    transform-origin: bottom center;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
   }
-  .cloud::before, .cloud::after {
+
+  /* Individual Lavender Stems (Generated by Script, Styled Here) */
+  .stem {
+    width: 4px;
+    background: var(--stem);
+    border-radius: 4px;
+    position: relative;
+    transform-origin: bottom;
+    animation: sway 3s ease-in-out infinite alternate;
+  }
+  
+  .flower-bud {
+    position: absolute;
+    top: -20px;
+    left: -3px;
+    width: 10px;
+    height: 30px;
+    background: var(--lavender-dark);
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(106, 90, 205, 0.5);
+    opacity: 0.6; /* Starts dark */
+    animation: budBloom 24s forwards;
+  }
+  
+  .flower-bud::after {
     content: '';
     position: absolute;
-    background: #fff;
+    top: -5px;
+    left: 2px;
+    width: 6px;
+    height: 10px;
+    background: var(--lavender-light);
     border-radius: 50%;
   }
+
+  @keyframes sway {
+    from { transform: rotate(-5deg); }
+    to { transform: rotate(5deg); }
+  }
+  
+  @keyframes budBloom {
+    0% { filter: brightness(0.2); opacity: 0.4; }
+    50% { filter: brightness(0.8); opacity: 0.8; }
+    100% { filter: brightness(1.2); opacity: 1; background: #9370DB; }
+  }
+
+  /* --- BIRDS --- */
+  .bird-container {
+    position: absolute;
+    top: 20%;
+    left: -100px;
+    animation: flyOver 20s linear forwards;
+    animation-delay: 5s;
+    z-index: 10;
+    opacity: 0.8;
+  }
+
+  .bird {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M10 50 Q 30 30 50 50 Q 70 30 90 50' stroke='black' stroke-width='4' fill='none'/%3E%3C/svg%3E");
+    width: 40px;
+    height: 20px;
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: wingFlap 0.5s infinite alternate;
+  }
+  
+  .bird:nth-child(2) { top: 20px; left: -30px; animation-delay: 0.1s; transform: scale(0.8); }
+  .bird:nth-child(3) { top: -20px; left: -40px; animation-delay: 0.2s; transform: scale(0.9); }
+
+  @keyframes flyOver {
+    0% { transform: translate(0, 0) rotate(5deg); }
+    100% { transform: translate(120vw, -10vh) rotate(0deg); }
+  }
+
+  @keyframes wingFlap {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-5px); }
+  }
+
+  /* --- MIST / FOG --- */
+  .mist {
+    position: absolute;
+    bottom: 30%;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to top, rgba(255,255,255,0.4), transparent);
+    z-index: 4;
+    filter: blur(20px);
+    opacity: 0.6;
+    animation: mistFade 20s forwards;
+  }
+  @keyframes mistFade {
+    0% { opacity: 0.8; transform: translateX(-10%); }
+    100% { opacity: 0.2; transform: translateX(10%); }
+  }
+
 </style>
 </head>
 <body>
 
-<div class="sun"></div>
-<div class="ground"></div>
+  <!-- Background Elements -->
+  <div class="sun"></div>
+  <div class="mountain mount-1"></div>
+  <div class="mountain mount-2"></div>
+  
+  <!-- Silhouette Tower -->
+  <div class="eiffel-silhouette">
+      <div class="eiffel-top"></div>
+  </div>
 
-<!-- Eiffel Tower -->
-<div class="eiffel"></div>
+  <!-- Atmospheric Effects -->
+  <div class="mist"></div>
 
-<!-- Clouds -->
+  <!-- Birds -->
+  <div class="bird-container">
+    <div class="bird"></div>
+    <div class="bird"></div>
+    <div class="bird"></div>
+  </div>
+
+  <!-- Foreground: Generated JS -->
+  <div class="field" id="lavenderField"></div>
+
 <script>
-  for(let i=0;i<5;i++){
-    const cloud = document.createElement('div');
-    cloud.classList.add('cloud');
-    const size = 60 + Math.random()*40;
-    cloud.style.width = size + 'px';
-    cloud.style.height = size/2 + 'px';
-    cloud.style.top = 10 + Math.random()*30 + '%';
-    cloud.style.left = -size + 'px';
+  // Script to generate a dense, organic lavender field
+  const field = document.getElementById('lavenderField');
+  const numStems = 150;
 
-    const b = document.createElement('div');
-    b.style.width = size*0.6 + 'px';
-    b.style.height = size*0.6 + 'px';
-    b.style.top = '-'+size*0.3+'px';
-    b.style.left = size*0.1+'px';
-    b.style.background = '#fff';
-    b.style.borderRadius = '50%';
-    cloud.appendChild(b);
+  for (let i = 0; i < numStems; i++) {
+    const stem = document.createElement('div');
+    stem.classList.add('stem');
+    
+    // Random height variations for natural look
+    const height = Math.random() * 80 + 60; // 60px to 140px
+    stem.style.height = height + 'px';
+    
+    // Position randomly across the width, focusing more on density
+    // We create a parallax feeling by scaling things at the bottom
+    stem.style.position = 'absolute';
+    
+    // Random Left Position
+    stem.style.left = Math.random() * 100 + '%';
+    
+    // Depth perception: 
+    // Stems closer to bottom of screen (z-index higher) are larger and lower down
+    const depth = Math.random(); 
+    stem.style.bottom = (depth * 50) - 20 + 'px'; // -20 to 30px from bottom
+    stem.style.zIndex = Math.floor(depth * 100);
+    
+    // Stagger animations so they don't sway in perfect unison
+    stem.style.animationDelay = (Math.random() * 2) + 's';
+    stem.style.animationDuration = (Math.random() * 2 + 3) + 's'; // 3s to 5s
 
-    const a = document.createElement('div');
-    a.style.width = size*0.5 + 'px';
-    a.style.height = size*0.5 + 'px';
-    a.style.top = '-'+size*0.25+'px';
-    a.style.left = size*0.3+'px';
-    a.style.background = '#fff';
-    a.style.borderRadius = '50%';
-    cloud.appendChild(a);
+    // Add flower bud
+    const bud = document.createElement('div');
+    bud.classList.add('flower-bud');
+    stem.appendChild(bud);
 
-    document.body.appendChild(cloud);
-
-    cloud.animate([
-      {transform: 'translateX(0)'},
-      {transform: 'translateX(120vw)'}
-    ], {
-      duration: 5000 + Math.random()*2000,
-      iterations: 1,
-      easing: 'linear'
-    });
+    field.appendChild(stem);
   }
 </script>
 
