@@ -15,6 +15,7 @@
     <title>Documentation | PLI 7 API v7.22</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
+        /* v1.1.2 - Updated for v7.22 */
         :root {
             --bg-body: #000000;
             --bg-panel: #09090b;
@@ -36,6 +37,7 @@
             line-height: 1.6;
         }
 
+        /* ================= SIDEBAR NAVIGATION ================= */
         .sidebar {
             width: 280px;
             height: 100vh;
@@ -54,6 +56,7 @@
         .nav-link { display: block; color: var(--text-muted); text-decoration: none; font-size: 14px; margin-bottom: 8px; transition: color 0.2s; }
         .nav-link:hover { color: var(--text-main); }
 
+        /* ================= MAIN CONTENT ================= */
         .main {
             margin-left: 280px;
             padding: 80px 60px;
@@ -65,6 +68,7 @@
         h3 { font-size: 18px; font-weight: 600; margin-top: 40px; color: var(--text-main); }
         p { color: var(--text-muted); font-size: 16px; margin: 20px 0; }
 
+        /* ================= CODE BLOCKS ================= */
         pre {
             background: var(--code-bg);
             border: 1px solid var(--border-color);
@@ -77,6 +81,7 @@
         code { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #d4d4d8; line-height: 1.6; }
         p code, td code { background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px; font-size: 13px; color: #a78bfa; }
         
+        /* ================= TABLES ================= */
         .table-wrap { overflow-x: auto; margin: 30px 0; border: 1px solid var(--border-color); border-radius: 12px; }
         table { width: 100%; border-collapse: collapse; background: var(--bg-panel); }
         th { text-align: left; font-size: 11px; text-transform: uppercase; color: var(--text-muted); padding: 12px 20px; border-bottom: 1px solid var(--border-color); background: rgba(255,255,255,0.02); }
@@ -84,8 +89,13 @@
         td strong { color: var(--text-main); }
         .type { color: var(--accent-color); font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; }
 
+        /* ================= BADGES & LISTS ================= */
         .method { background: rgba(124, 58, 237, 0.1); color: var(--accent-color); padding: 4px 8px; border-radius: 6px; font-weight: 800; font-size: 11px; margin-right: 10px; border: 1px solid rgba(124, 58, 237, 0.2); }
-        
+        ul { padding-left: 20px; color: var(--text-muted); line-height: 1.8; }
+        li { margin-bottom: 10px; }
+        li strong { color: var(--text-main); }
+
+        /* ================= RESPONSIVE ================= */
         @media (max-width: 850px) {
             .sidebar { display: none; }
             .main { margin-left: 0; padding: 40px 20px; }
@@ -110,70 +120,139 @@
 
         <div class="nav-group">
             <div class="nav-title">Resources</div>
+            <a href="#sources" class="nav-link">Data Sources</a>
+            <a href="#research" class="nav-link">Research Protocol</a>
             <a href="#annotations" class="nav-link">Annotations & Tags</a>
-            <a href="#complex-rendering" class="nav-link">PowerPoint & Excel</a>
         </div>
     </nav>
 
     <main class="main">
         <section id="intro">
             <h1>API Documentation <span style="font-size: 14px; vertical-align: middle; opacity: 0.5;">v7.22</span></h1>
-            <p>Programmatic access to the PLI 7 hybrid engine. Optimized for real-time research, image generation, and complex document rendering.</p>
+            <p>The PLI 7 API provides programmatic access to a hybrid AI engine trained exclusively by <strong>Seridarivus</strong>. Integrate real-time research, verified media retrieval, and advanced UI reasoning into your own apps.</p>
         </section>
 
         <section id="auth">
             <h2>Authentication</h2>
-            <p>Include your API key in the request header:</p>
+            <p>Access to the API is controlled via API Keys. All requests must include the <code>x-api-key</code> HTTP header.</p>
             <pre><code>x-api-key: pli7_your_secret_key_here</code></pre>
+            <p style="font-size: 13px;"><em>Note: You can manage and revoke your keys in the PLI Studio (<a href="https://plistudio.net">https://plistudio.net</a>) dashboard settings.</em></p>
         </section>
 
-        <section id="annotations">
-            <h2>Core Tag Guide</h2>
+        <section id="chat">
+            <h2>Chat / Reasoning</h2>
+            <p><span class="method">POST</span> <code>https://api.plistudio.net/v1/chat</code></p>
+            <p>Sends a prompt to the AI and triggers a sequence of research tasks based on your selected sources.</p>
+
             <div class="table-wrap">
                 <table>
                     <thead>
-                        <tr><th>Tag</th><th>Purpose</th><th>Implementation</th></tr>
+                        <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td class="type">&lt;cite name="X" url="Y"/&gt;</td><td><strong>Citation</strong></td><td>Render as clickable superscript link.</td></tr>
-                        <tr><td class="type">&lt;plii4&gt;...&lt;/plii4&gt;</td><td><strong>Image Gen</strong></td><td>Pass inner prompt to image model. Hide text from user.</td></tr>
-                        <tr><td class="type">&lt;nIMG&lt;&gt;&gt;</td><td><strong>Suppressor</strong></td><td>Hide tag and disable stock image retrieval.</td></tr>
-                        <tr><td class="type">&lt;map&gt;...&lt;/map&gt;</td><td><strong>Maps</strong></td><td>Render interactive map for the location.</td></tr>
+                        <tr><td>message</td><td class="type">string</td><td>Required. The user query or instruction.</td></tr>
+                        <tr><td>sources</td><td class="type">array</td><td>Optional. List of sources to search (e.g., <code>["web", "wiki", "youtube", "pexels"]</code>).</td></tr>
+                        <tr><td>context</td><td class="type">object</td><td>Optional. Metadata like <code>localTime</code> for temporal reasoning.</td></tr>
                     </tbody>
                 </table>
             </div>
+
+            <h3>Example Payload</h3>
+            <pre><code>{
+  "message": "Explain the current status of the James Webb Telescope",
+  "sources":["web", "wiki"],
+  "context": { "localTime": "2026-04-26 11:57 PM" }
+}</code></pre>
         </section>
 
-        <section id="complex-rendering">
-            <h2>PowerPoint & Excel Rendering</h2>
-            <p>PLI 7 can generate structured data for presentations and spreadsheets. These require specific "Large Scale" UI components.</p>
-
-            <h3>1. PowerPoint (<code class="type">&lt;pptx&gt;</code>)</h3>
-            <p>When this tag is present, the frontend should render a <strong>Full-Width Slide Deck</strong>.</p>
-            <pre><code>&lt;pptx&gt;
-[Slide 1]
-Title: Q4 Financial Report
-Content: - Revenue up 15% \n - New market entry
-[Slide 2]
-Title: User Growth
-Content: - 2M new active users
-&lt;/pptx&gt;</code></pre>
-            <p><strong>Note:</strong> Presentations should be displayed in a prominent, large container with slide navigation controls.</p>
-
-            <h3>2. Excel (<code class="type">&lt;excel&gt;</code>)</h3>
-            <p>Used for tabular data analysis. Render this inside an <strong>Interactive Data Grid</strong> at the end of the response.</p>
-            <pre><code>&lt;excel&gt;
-Month, Revenue, Growth
-Jan, 12000, 2%
-Feb, 15000, 5%
-&lt;/excel&gt;</code></pre>
+        <section id="sources">
+            <h2>Available Data Sources</h2>
+            <p>When sending a request, use the <code>sources</code> array to enable specific research modules.</p>
+            <ul>
+                <li><strong>wiki</strong>: Fetches encyclopedic context and historical data.</li>
+                <li><strong>web</strong>: Scans the live internet for recent news and specific data points.</li>
+                <li><strong>youtube</strong>: Identifies relevant video content and documentaries.</li>
+                <li><strong>pexels</strong>: Retrieves high-resolution stock photography.</li>
+            </ul>
         </section>
 
-        <section id="formatting">
-            <h2>Standard Formatting</h2>
-            <p>PLI 7 uses standard Markdown for text. <strong>STRICT CONSTRAINT:</strong> The engine never uses acute accents (é, á, ó).</p>
+        <section id="research">
+            <h2>Research & Citations</h2>
+            <p>If a query requires data, PLI 7 uses an internal search tool and provides explicit citations for transparency.</p>
+            <h3>Citation Format</h3>
+            <p>The AI will inject a <code>&lt;cite&gt;</code> tag immediately following the information it supports.</p>
+            <pre><code>&lt;cite name="Source Name" url="https://link.com"/&gt;</code></pre>
+            <p><strong>Frontend Action:</strong> Parse this tag as a clickable superscript or a bibliographic link. Do not display the raw tag to the user.</p>
+        </section>
+
+        <section id="annotations">
+            <h2>Parsing Annotations & Tags</h2>
+            <p>The PLI 7 API returns a rich, proprietary syntax designed to trigger dynamic UI components. You must parse these tags on your frontend to render the hybrid experience.</p>
+
+            <h3>Example: Image Generation Output</h3>
+            <p>When a user asks the AI to generate or draw an image, the API returns a response containing a high-fidelity prompt inside <code>&lt;plii4&gt;</code> tags.</p>
+            <pre><code>{
+    "answer": "I have visualized the dragon in its alien environment for you. &lt;nIMG&lt;&gt;&gt;\n\n&lt;plii4&gt;A majestic dragon soaring through a vibrant, alien sky. The dragon's scales shimmer with iridescent hues of emerald, sapphire, and amethyst, reflecting the light of two large, ringed moons hanging in the celestial expanse. Its wings, vast and membranous, are patterned with intricate, bioluminescent veins that pulse with a soft, golden glow. Below, a surreal landscape unfolds: crystalline trees with glowing foliage reach towards the heavens, their branches adorned with delicate, bell-shaped flowers that chime in an unseen breeze. Rivers of liquid silver flow through valleys carpeted with phosphorescent moss, illuminating the twilight world. In the distance, jagged, obsidian mountains pierce the horizon, their peaks wreathed in swirling nebulae of violet and cyan. The overall atmosphere is one of mystical wonder and untamed, alien beauty.&lt;/plii4&gt;",
+    "media":[],
+    "sources_used":["web"],
+    "timestamp": "2026-04-26T23:57:08.691Z"
+}</code></pre>
+
+            <h3>Tag Reference Guide</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tag / Notation</th>
+                            <th>Purpose</th>
+                            <th>How to handle it</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="type">&lt;cite name="..." url="..."/&gt;</td>
+                            <td><strong>Research Citation</strong></td>
+                            <td>Render as a clickable link or superscript (e.g., [Source Name]).</td>
+                        </tr>
+                        <tr>
+                            <td class="type">&lt;plii4&gt;...&lt;/plii4&gt;</td>
+                            <td><strong>Image Generation</strong></td>
+                            <td>Contains a ~350-word descriptive prompt. Hide this text and pass it to your image generation pipeline (e.g., PLII4.2U model).</td>
+                        </tr>
+                        <tr>
+                            <td class="type">&lt;nIMG&lt;&gt;&gt;</td>
+                            <td><strong>Media Suppressor</strong></td>
+                            <td>Present when AI generates a custom visual. <strong>Remove this tag and hide external stock images/Pexels from the UI.</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="type">&lt;map&gt;Location&lt;/map&gt;</td>
+                            <td><strong>Geolocation Trigger</strong></td>
+                            <td>Render a button that opens Google Maps or an embedded map iframe for the specified location.</td>
+                        </tr>
+                        <tr>
+                            <td class="type">&lt;diagram&gt;...&lt;/diagram&gt;</td>
+                            <td><strong>Visual Engine</strong></td>
+                            <td>Contains Mermaid syntax. Pass to a Mermaid.js renderer to display flowcharts/graphs.</td>
+                        </tr>
+                        <tr>
+                            <td class="type">&lt;stp&gt;...&lt;/stp&gt;</td>
+                            <td><strong>Live UI Sandbox</strong></td>
+                            <td>Contains raw HTML/CSS/JS. Render inside a sandboxed <code>&lt;iframe&gt;</code>.</td>
+                        </tr>
+                        <tr>
+                            <td class="type">&lt;/Keyword/&gt;</td>
+                            <td><strong>Visual Media Focus</strong></td>
+                            <td>Highlights the primary visual subject. Use for keyword bolding or media fetching.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Handling Standard Formatting</h3>
+            <p>PLI 7 uses standard Markdown for basic text. You should parse <code>**bold**</code>, <code>*italics*</code>, and <code>*</code> bullets. <br><br><strong>STRICT CONSTRAINT:</strong> The engine will never use acute accents (é, á, ó) in text or code.</p>
         </section>
     </main>
 
 </body>
-</html> 
+</html>
+    
