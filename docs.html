@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LR56ZFEXSP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-LR56ZFEXSP');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation | PLI 7 API v7.22</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #000000;
+            --bg-panel: #09090b;
+            --accent-color: #7c3aed;
+            --accent-gradient: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+            --border-color: #27272a;
+            --text-main: #ededed;
+            --text-muted: #a1a1aa;
+            --code-bg: #111113;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0; padding: 0;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            line-height: 1.6;
+        }
+
+        .sidebar {
+            width: 280px;
+            height: 100vh;
+            position: fixed;
+            border-right: 1px solid var(--border-color);
+            padding: 40px 20px;
+            background: var(--bg-panel);
+            overflow-y: auto;
+        }
+
+        .logo { font-weight: 800; font-size: 18px; color: var(--accent-color); margin-bottom: 40px; display: block; text-decoration: none; letter-spacing: -0.5px; }
+        .logo span { color: var(--text-main); }
+        
+        .nav-group { margin-bottom: 30px; }
+        .nav-title { font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 12px; }
+        .nav-link { display: block; color: var(--text-muted); text-decoration: none; font-size: 14px; margin-bottom: 8px; transition: color 0.2s; }
+        .nav-link:hover { color: var(--text-main); }
+
+        .main {
+            margin-left: 280px;
+            padding: 80px 60px;
+            max-width: 1000px;
+        }
+
+        h1 { font-size: 38px; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 10px; }
+        h2 { font-size: 24px; font-weight: 700; margin-top: 60px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; letter-spacing: -0.5px; }
+        h3 { font-size: 18px; font-weight: 600; margin-top: 40px; color: var(--text-main); }
+        p { color: var(--text-muted); font-size: 16px; margin: 20px 0; }
+
+        pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border-color);
+            padding: 24px;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 24px 0;
+            position: relative;
+        }
+        code { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #d4d4d8; line-height: 1.6; }
+        p code, td code { background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px; font-size: 13px; color: #a78bfa; }
+        
+        .table-wrap { overflow-x: auto; margin: 30px 0; border: 1px solid var(--border-color); border-radius: 12px; }
+        table { width: 100%; border-collapse: collapse; background: var(--bg-panel); }
+        th { text-align: left; font-size: 11px; text-transform: uppercase; color: var(--text-muted); padding: 12px 20px; border-bottom: 1px solid var(--border-color); background: rgba(255,255,255,0.02); }
+        td { padding: 18px 20px; font-size: 14px; border-bottom: 1px solid var(--border-color); color: var(--text-muted); }
+        td strong { color: var(--text-main); }
+        .type { color: var(--accent-color); font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; }
+
+        .method { background: rgba(124, 58, 237, 0.1); color: var(--accent-color); padding: 4px 8px; border-radius: 6px; font-weight: 800; font-size: 11px; margin-right: 10px; border: 1px solid rgba(124, 58, 237, 0.2); }
+        
+        @media (max-width: 850px) {
+            .sidebar { display: none; }
+            .main { margin-left: 0; padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <a href="#" class="logo">PLI<span>STUDIO</span></a>
+        
+        <div class="nav-group">
+            <div class="nav-title">Quickstart</div>
+            <a href="#intro" class="nav-link">Introduction</a>
+            <a href="#auth" class="nav-link">Authentication</a>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-title">Endpoints</div>
+            <a href="#chat" class="nav-link">POST Chat</a>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-title">Resources</div>
+            <a href="#annotations" class="nav-link">Annotations & Tags</a>
+            <a href="#complex-rendering" class="nav-link">PowerPoint & Excel</a>
+        </div>
+    </nav>
+
+    <main class="main">
+        <section id="intro">
+            <h1>API Documentation <span style="font-size: 14px; vertical-align: middle; opacity: 0.5;">v7.22</span></h1>
+            <p>Programmatic access to the PLI 7 hybrid engine. Optimized for real-time research, image generation, and complex document rendering.</p>
+        </section>
+
+        <section id="auth">
+            <h2>Authentication</h2>
+            <p>Include your API key in the request header:</p>
+            <pre><code>x-api-key: pli7_your_secret_key_here</code></pre>
+        </section>
+
+        <section id="annotations">
+            <h2>Core Tag Guide</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Tag</th><th>Purpose</th><th>Implementation</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="type">&lt;cite name="X" url="Y"/&gt;</td><td><strong>Citation</strong></td><td>Render as clickable superscript link.</td></tr>
+                        <tr><td class="type">&lt;plii4&gt;...&lt;/plii4&gt;</td><td><strong>Image Gen</strong></td><td>Pass inner prompt to image model. Hide text from user.</td></tr>
+                        <tr><td class="type">&lt;nIMG&lt;&gt;&gt;</td><td><strong>Suppressor</strong></td><td>Hide tag and disable stock image retrieval.</td></tr>
+                        <tr><td class="type">&lt;map&gt;...&lt;/map&gt;</td><td><strong>Maps</strong></td><td>Render interactive map for the location.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="complex-rendering">
+            <h2>PowerPoint & Excel Rendering</h2>
+            <p>PLI 7 can generate structured data for presentations and spreadsheets. These require specific "Large Scale" UI components.</p>
+
+            <h3>1. PowerPoint (<code class="type">&lt;pptx&gt;</code>)</h3>
+            <p>When this tag is present, the frontend should render a <strong>Full-Width Slide Deck</strong>.</p>
+            <pre><code>&lt;pptx&gt;
+[Slide 1]
+Title: Q4 Financial Report
+Content: - Revenue up 15% \n - New market entry
+[Slide 2]
+Title: User Growth
+Content: - 2M new active users
+&lt;/pptx&gt;</code></pre>
+            <p><strong>Note:</strong> Presentations should be displayed in a prominent, large container with slide navigation controls.</p>
+
+            <h3>2. Excel (<code class="type">&lt;excel&gt;</code>)</h3>
+            <p>Used for tabular data analysis. Render this inside an <strong>Interactive Data Grid</strong> at the end of the response.</p>
+            <pre><code>&lt;excel&gt;
+Month, Revenue, Growth
+Jan, 12000, 2%
+Feb, 15000, 5%
+&lt;/excel&gt;</code></pre>
+        </section>
+
+        <section id="formatting">
+            <h2>Standard Formatting</h2>
+            <p>PLI 7 uses standard Markdown for text. <strong>STRICT CONSTRAINT:</strong> The engine never uses acute accents (é, á, ó).</p>
+        </section>
+    </main>
+
+</body>
+</html> 
